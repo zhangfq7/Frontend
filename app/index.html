@@ -64,19 +64,19 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a ng-class="{true:'active'}[tab === 'dashboard']" href="#/dashboard">
+              <a ng-class="{true:'active'}[tab === 'dashboard']" ui-sref="dashboard">
                 <span class="glyphicon glyphicon-picture"></span>
                 <span>租户管理</span>
               </a>
             </li>
             <li>
-              <a ng-class="{true:'active'}[tab === 'dataModel']" href="#/dataModel">
+              <a ng-class="{true:'active'}[tab === 'dataModel']" ui-sref="dataModel">
                 <span class="glyphicon glyphicon-list"></span>
                 <span>角色管理</span>
               </a>
             </li>
             <li>
-              <a ng-class="{true:'active'}[tab === 'setting']" href="#/setting">
+              <a ng-class="{true:'active'}[tab === 'setting']" ui-sref="setting">
                 <span class="glyphicon glyphicon-cog"></span>
                 <span>服务管理</span>
               </a>
@@ -98,7 +98,7 @@
   <!--</ul>-->
   <!--</div>-->
   <div class="col-lg-10 col-lg-offset-1">
-    <div ng-view=""></div>
+    <div ui-view></div>
   </div>
 </div>
 
@@ -142,6 +142,7 @@
 <script src="bower_components/bootstrap-application-wizard/dist/bootstrap-wizard.js"></script>
 <script src="bower_components/chart.js/dist/Chart.js"></script>
 <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -151,6 +152,8 @@
 <script src="bower_components/mermaid/dist/mermaid.js"></script>
 <script src="build-scripts/app.js"></script>
 <script src="build-scripts/directive/tokenfield.js"></script>
+<script src="build-scripts/directive/route.js"></script>
+<script src="build-scripts/directive/resource.js"></script>
 <script src="build-scripts/controllers/main.js"></script>
 <script src="build-scripts/controllers/dashboard.js"></script>
 <script src="build-scripts/controllers/dataModel.js"></script>
