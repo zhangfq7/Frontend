@@ -1,0 +1,499 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  margin-bottom: 10px;
+  /* Make the masthead heading the same height as the navigation */
+}
+
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+/* Custom css*/
+.sidebar {
+  background-color: #f5f5f5;
+  border-top: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  padding: 20px;
+}
+
+.panel {
+  margin-top: 10px;
+}
+
+.panel-oc {
+  border-color: #FFFFFF;
+}
+
+.panel-oc > .panel-heading {
+  color: #fff;
+  background-image: linear-gradient(to bottom, #f68b3e, #F68b3e);
+}
+
+.navbar-oc {
+  background-image: linear-gradient(to bottom, #555555, #333333);
+  height: 40px;
+  margin-bottom: 0px;
+}
+
+.navbar-oc .navbar-nav > li > a {
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: normal;
+  text-shadow: 0 1px 0 #555555;
+}
+
+.navbar-oc .navbar-nav > li > a:hover {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.navbar-oc .navbar-nav > li > a:focus,
+.navbar-oc .navbar-nav > li > a.active {
+  background-color: #FFFFFF;
+  color: #555555;
+}
+
+.navbar-header .brand {
+  color: #ffffff;
+  font-size: 16px;
+  text-shadow: 0 1px 0 #555555;
+}
+
+/* 3rd party css*/
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+ul[dnd-list],
+ul[dnd-list] > li {
+  position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+ul[dnd-list] {
+  min-height: 42px;
+  padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+ul[dnd-list] .dndDraggingSource {
+  display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+ul[dnd-list] .dndPlaceholder {
+  display: block;
+  background-color: #ddd;
+  min-height: 42px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+ul[dnd-list] li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+}
+
+/**
+ * Show selected elements in green
+ */
+ul[dnd-list] li.selected {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+.wizard-card-container {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.handle {
+  cursor: move;
+}
+
+.flash {
+  -webkit-animation-name: flash;
+  animation-name: flash;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+}
+
+a.choose,
+a.choose:hover,
+a.list-group-item:focus,
+ul#actions > li > a:hover,
+ul#quick > li > a:hover {
+  background-color: #999999;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+i.danger {
+  color: red;
+}
+
+i.success {
+  color: green;
+}
+
+i.warning {
+  color: orange;
+}
+
+ul#actions > li.disabled > a:hover {
+  background-color: #999999;
+  color: #777777;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+g div {
+  color: black;
+  font-size: 14px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+input.ng-invalid.ng-touched,
+div.ng-invalid.ng-touched div.tokenfield,
+div.ng-invalid.ng-touched.ui-select-container span.ui-select-toggle {
+  border: 1px solid red;
+}
+
+#mainFrame input.ng-invalid.ng-touched + span.input-group-btn button {
+  border: 1px solid red;
+  color: red;
+}
+
+span.redtip,
+div.ng-invalid.ng-touched.ui-select-container i.caret.pull-right {
+  color: red;
+}
+
+.popover-content {
+  width: 200px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+ul.ui-autocomplete {
+  width: 112px !important;
+  z-index: 1100 !important;
+}
+
+table a {
+  cursor: pointer;
+}
+
+.ribbon {
+  background-color: #a00;
+  box-shadow: 0 0 10px #888;
+  left: -4.6em;
+  moz-box-shadow: 0 0 10px #888;
+  moz-transform: rotate(-45deg);
+  ms-transform: rotate(-45deg);
+  o-transform: rotate(-45deg);
+  overflow: hidden;
+  position: absolute;
+  top: 46px;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  webkit-box-shadow: 0 0 10px #888;
+  webkit-transform: rotate(-45deg);
+  white-space: nowrap;
+  width: 19em;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.ribbon a {
+  border: 1px solid #faa;
+  color: #fff;
+  display: block;
+  font: bold 81.25% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 1px 0;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0 5px #444;
+  pointer-events: none;
+}
+
+.cep {
+  background-color: #a00;
+  box-shadow: 0 0 10px #888;
+  color: #FFF;
+}
+
+.affix {
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.affix + .container-fluid {
+  padding-top: 70px;
+}
+
+.navbar-brand.logo {
+  padding: 10px 15px;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon {
+  left: 0px;
+}
+
+.right-addon .glyphicon {
+  right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+  padding-left: 30px;
+}
+
+.right-addon input {
+  padding-right: 30px;
+}
+
+.icon-2x {
+  font-size: 2em;
+}
+
+.version-slider {
+  width: 100%;
+  height: 69px;
+  margin: 5px 0;
+}
+
+.version-slider .icon-chevron-box.disabled {
+  cursor: not-allowed;
+}
+
+.version-slider .icon-chevron-box {
+  margin-top: 15px;
+  width: 4%;
+  cursor: pointer;
+  margin-right: .3em;
+}
+
+.version-slider .flow-element .version-box {
+  position: relative;
+  height: 90%;
+}
+
+.version-slider .flow-element {
+  height: 69px;
+  width: 21.2%;
+  max-width: 163px;
+}
+
+.version-slider .icon-chevron-box, .version-slider .icon-chevron-box {
+  color: #d2d9dd;
+}
+
+.version-slider .flow-element .version-box .box {
+  cursor: pointer;
+  width: 92%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #d2d9dd;
+  font-size: 11px;
+  outline: none;
+}
+
+.version-slider .flow-element .version-box .box:hover, .version-slider .flow-element .version-box .box.active {
+  background-color: #e6f1f6;
+}
+
+.version-slider .flow-element .version-box .box .top-label {
+  min-width: 20px;
+  padding: 2px 2px;
+}
+
+.version-slider .flow-element .version-box .box.displayed .content {
+  color: #444444;
+}
+
+.version-slider .flow-element .version-box .box .content {
+  max-width: 97% !important;
+}
+
+.version-slider .flow-element .version-box .box .author, .version-slider .flow-element .version-box .box .content {
+  padding: 0 2px;
+  text-align: center;
+  color: #555555;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.version-slider .flow-element .version-box .box .stack-label {
+  margin-right: 6px;
+  text-align: right;
+  line-height: 11px;
+}
+
+.version-slider .flow-element .version-box .box .current-label {
+  text-align: center;
+  padding: 2px 5px;
+  margin-top: -4px;
+}
+
+.version-slider .icon-chevron-box .glyphicon-chevron-left:hover, .version-slider .icon-chevron-box .glyphicon-chevron-right:hover {
+  color: #808080;
+}
+
+.version-slider .icon-chevron-box.disabled {
+  cursor: not-allowed;
+}
+
+.version-slider .icon-chevron-box {
+  outline: none;
+}
+
+.abn-tree i {
+  margin-right: 5px;
+  outline: none;
+}
+
+.modal-dialog {
+  margin-top: 90px;
+}
+
+.ta-root {
+  outline: none;
+}
+
+.ta-editor.form-control.editor-height, .ta-scroll-window.form-control.editor-height {
+  height: 100px;
+  min-height: 100px;
+  overflow: hidden;
+  font-family: inherit;
+  font-size: 100%;
+}
+
+.form-control.editor-height > .ta-bind {
+  min-height: 100px;
+}
+
+.form-control.editor-height .placeholder-text::before {
+  color: #999999;
+}
