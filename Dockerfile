@@ -19,7 +19,7 @@ RUN apk add --update nginx nodejs git nodejs-npm && \
     npm install && \
     bower install
 
-EXPOSE 80
+EXPOSE 9000
 
 #ENTRYPOINT ["nginx", "-g", "daemon off;"]
 CMD ["gulp", "serve"]
