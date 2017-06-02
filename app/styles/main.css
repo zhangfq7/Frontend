@@ -1,3 +1,90 @@
+@charset "UTF-8";
+/**************角色管理**************/
+ul, li {
+  list-style: none;
+}
+
+.role_mange_list {
+  width: 1320px;
+  margin: 0px auto;
+}
+
+.role_mange_list li {
+  width: 298px;
+  height: 236px;
+  border-radius: 4px;
+  background: #f00;
+  position: relative;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 23px;
+}
+
+.role_block_tu {
+  width: 62px;
+  height: 60px;
+  background: #ccc;
+  margin-bottom: 20px;
+}
+
+.role_block_one {
+  position: absolute;
+  width: 88px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  margin-left: -44px;
+  margin-top: -50px;
+}
+
+.role_li:nth-child(4n) {
+  margin-right: 0px;
+}
+
+.role_block_h {
+  background: rgba(0, 0, 0, 0.9);
+  width: 298px;
+  height: 236px;
+  position: absolute;
+  z-index: 2;
+  padding: 40px;
+  bottom: -13px;
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+
+.role_mange_list li:hover .role_block_h {
+  bottom: 0;
+  opacity: 1;
+}
+
+.role_block_h h3 {
+  font-weight: normal;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+
+.role_block_detail {
+  margin-top: 65px;
+  color: #fff;
+  font-size: 14px;
+  text-align: justify;
+}
+
+@media (min-width: 1800px) {
+  .role_mange_list {
+    width: 1648px;
+    margin: 0px auto;
+  }
+  .role_li:nth-child(4n) {
+    margin-right: 20px;
+  }
+  .role_li:nth-child(5n) {
+    margin-right: 0px;
+  }
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -96,30 +183,50 @@ body {
   background-image: linear-gradient(to bottom, #f68b3e, #F68b3e);
 }
 
+/****************头部********************/
 .navbar-oc {
-  background-image: linear-gradient(to bottom, #555555, #333333);
-  height: 40px;
+  background: #535353;
+  height: 54px;
   margin-bottom: 0px;
+  border-radius: 0;
 }
 
 .navbar-oc .navbar-nav > li > a {
-  color: #aaaaaa;
+  color: #bababa;
   font-size: 14px;
   font-weight: normal;
   text-shadow: 0 1px 0 #555555;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .navbar-oc .navbar-nav > li > a:hover {
-  color: #ffffff;
-  background-color: transparent;
+  color: #f7f7f7;
+  background-color: #414141;
 }
 
 .navbar-oc .navbar-nav > li > a:focus,
 .navbar-oc .navbar-nav > li > a.active {
-  background-color: #FFFFFF;
-  color: #555555;
+  background-color: #414141;
+  color: #f7f7f7;
 }
 
+.btn-default {
+  background: none;
+  color: #d5d5d5;
+  border: 0;
+  padding: 8px 12px;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+  background: none;
+  color: #d5d5d5;
+  border: 0;
+}
+
+/****************头部********************/
 .navbar-header .brand {
   color: #ffffff;
   font-size: 16px;
@@ -335,6 +442,11 @@ table a {
 
 .affix + .container-fluid {
   padding-top: 70px;
+}
+
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .navbar-brand.logo {
