@@ -17,10 +17,7 @@ RUN apk add --update nginx nodejs git && \
     echo '{ "allow_root": true }' > /root/.bowerrc && \
     git config --global url."https://".insteadOf git:// && \
     npm install && \
-    bower install && \
-    npm uninstall -g bower && \
-    #apk del nodejs git --purge && \
-    rm -rf bower_components node_modules app /var/cache/apk/* /tmp/*
+    bower install
 
 EXPOSE 80
 
