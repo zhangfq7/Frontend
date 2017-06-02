@@ -216,11 +216,11 @@ gulp.task('html', function () {
 
 gulp.task('images', function () {
   return gulp.src(yeoman.app + '/images/**/*')
-    .pipe($.cache($.imagemin({
+    .pipe($.imagemin({
       optimizationLevel: 5,
       progressive: true,
       interlaced: true
-    })))
+    }))
     .pipe(gulp.dest(yeoman.dist + '/images'));
 });
 
@@ -255,6 +255,16 @@ gulp.task('copy:fonts', function () {
 
 gulp.task('build', ['clean:dist', 'clean:server', 'clean:client'], function (cb) {
   runSequence(['config', 'lib', 'images', 'favicon', 'copy:extras', 'copy:fonts', 'client:rename', 'pageNotFound'], cb);
+});
+
+gulp.task('war', ['build'], () => {
+  return gulp.src([yeoman.dist + "/**"])
+    .pipe($.war({
+      welcome: 'index.html',
+      displayName: 'OCManagerWeb'
+    }))
+    .pipe($.zip('OCManagerWeb.war'))
+    .pipe(gulp.dest("."));
 });
 
 gulp.task('default', ['build']);
