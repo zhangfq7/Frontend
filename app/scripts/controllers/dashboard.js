@@ -53,14 +53,10 @@ angular.module('basic')
         text: "Parent 5"
       }
     ];
-    function getTree() {
-      // Some logic to retrieve, or generate tree structure
-      return data;
-    }
-
-    $('#tree').treeview({data: getTree()});
-    $('#tree').on('nodeSelected', function(event, data) {
-        console.log('event',event);
-        console.log('data',data);
-    });
+    $scope.labels3 = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+    $scope.series3 = ['Series A', 'Series B'];
+    $scope.data3 = [
+      [65, 59, 80, 81, 56, 55, 40],
+      [28, 48, 40, 19, 86, 27, 90]
+    ];
   }]);
