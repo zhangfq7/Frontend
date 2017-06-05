@@ -49,7 +49,7 @@ let lintScripts = lazypipe()
 
 let styles = lazypipe()
   .pipe($.sass, {
-    outputStyle: 'expanded',
+    outputStyle: 'compressed',
     precision: 10
   })
   .pipe($.autoprefixer, 'last 1 version')
