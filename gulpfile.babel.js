@@ -8,6 +8,7 @@ let lazypipe = require('lazypipe');
 let rimraf = require('rimraf');
 let wiredep = require('wiredep').stream;
 let runSequence = require('run-sequence');
+let concat = require('gulp-concat');
 
 let yeoman = {
   app: require('./bower.json').appPath || 'app',
@@ -42,7 +43,7 @@ let paths = {
 ////////////////////////
 // Reusable pipelines //
 ////////////////////////
-
+//语法检测
 let lintScripts = lazypipe()
   .pipe($.jshint, '.jshintrc')
   .pipe($.jshint.reporter, 'jshint-stylish');
@@ -55,6 +56,11 @@ let styles = lazypipe()
   .pipe($.autoprefixer, 'last 1 version')
   .pipe(gulp.dest, 'app/styles');
 
+  let concatjs = lazypipe()
+  .pipe(concat,'all.js')
+  .pipe(gulp.dest, yeoman.app + '/build-scripts');
+
+
 let es6ClientScript = lazypipe()
   .pipe($.babel, {
     presets: ['es2015']
@@ -65,6 +71,7 @@ let es6ServerScript = lazypipe()
   .pipe($.babel, {
     presets: ['es2015']
   })
+  //.pipe($.uglify())
   .pipe(gulp.dest, 'build-server');
 
 ///////////
@@ -90,7 +97,16 @@ gulp.task('start:client', ['start:server'], function () {
   openURL("http://localhost:9000","chrome");
 });
 
-gulp.task('start:server', ['styles', 'es6:frontend', 'es6:server', 'bower'], function(cb) {
+gulp.task('js-concat',function(){
+  gulp.src(paths.scripts)
+    .pipe(concatjs());
+});
+//gulp.task('js-min',['js-concat'],function(){
+//  gulp.src(yeoman.app + '/build-scripts/all.js')
+//    .pipe($.uglify())
+//    .pipe(gulp.dest(yeoman.app + '/build-scripts'));
+//});
+gulp.task('start:server', ['styles','js-concat','es6:server', 'es6:frontend' , 'bower'], function(cb) {
   let started = false;
   return $.nodemon({
     script: 'build-server/app.js',
@@ -118,6 +134,7 @@ gulp.task('watch', function () {
     .pipe($.plumber())
     .pipe(lintScripts())
     .pipe(es6ClientScript())
+    .pipe(concatjs())
     .pipe($.livereload());
 
   $.watch(paths.serverScripts)
@@ -131,6 +148,7 @@ gulp.task('watch', function () {
 
   gulp.watch('bower.json', ['bower']);
   gulp.watch('./app/sass/*.scss', ['styles']);
+  gulp.watch('./app/scripts/**/*.js', ['js-concat']);
 });
 
 gulp.task('serve', function (cb) {
@@ -177,6 +195,7 @@ gulp.task('es6:server', () => {
   return gulp.src(paths.serverScripts)
     .pipe(es6ServerScript());
 });
+
 
 gulp.task('client:build', ['html', 'styles', 'es6:frontend', 'es6:server'], function () {
   let jsFilter = $.filter('**/*.js');
