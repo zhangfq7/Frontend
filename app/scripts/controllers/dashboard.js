@@ -5,7 +5,7 @@
  */
 angular.module('basic')
   .controller('DashboardCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
-    //$rootScope.tab = "dashboard";
+    $rootScope.tab = "dashboard";
     //$scope.labels1 = ["Download Sales", "In-Store Sales", "Mail-Order Sales", "Tele Sales", "Corporate Sales"];
     //$scope.data1 = [300, 500, 100, 40, 120];
     //$scope.labels2 = ["January", "February", "March", "April", "May", "June", "July"];
@@ -78,6 +78,7 @@ angular.module('basic')
       // Some logic to retrieve, or generate tree structure
       return data;
     }
+
     $scope.grid = {
       page: 1,
       size: 12,
