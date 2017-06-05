@@ -14,6 +14,7 @@ let yeoman = {
   dist: 'dist'
 };
 
+
 let paths = {
   scripts: [yeoman.app + '/scripts/**/*.js'],
   buildScriptsDest: yeoman.app + '/build-scripts',
@@ -48,7 +49,7 @@ let lintScripts = lazypipe()
 
 let styles = lazypipe()
   .pipe($.sass, {
-    outputStyle: 'expanded',
+    outputStyle: 'compressed',
     precision: 10
   })
   .pipe($.autoprefixer, 'last 1 version')
