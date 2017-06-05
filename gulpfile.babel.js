@@ -14,6 +14,7 @@ let yeoman = {
   dist: 'dist'
 };
 
+
 let paths = {
   scripts: [yeoman.app + '/scripts/**/*.js'],
   buildScriptsDest: yeoman.app + '/build-scripts',
