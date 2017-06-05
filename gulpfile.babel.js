@@ -129,6 +129,7 @@ gulp.task('watch', function () {
     .pipe($.livereload());
 
   gulp.watch('bower.json', ['bower']);
+  gulp.watch('./app/sass/*.scss', ['styles']);
 });
 
 gulp.task('serve', function (cb) {

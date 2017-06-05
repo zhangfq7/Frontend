@@ -15,7 +15,7 @@ angular
     'ngCookies',
     'ngMessages',
     'ngResource',
-    'ngRoute',
+    'ui.router',
     'ngSanitize',
     'ngTouch',
     'pascalprecht.translate',
@@ -31,36 +31,26 @@ angular
     'cfp.hotkeys',
     'ui.bootstrap.datetimepicker',
     'angularMoment',
-    'chart.js'
-  ])
-  .config(function ($routeProvider) {
+    'chart.js',
+    'basic.router',
+    'basic.resource'
+  ]).constant('GLOBAL', {
+  size: 10,
+  host: './oapi/v1',
+  host_k8s: './api/v1',
+  host_repos: './v1/repos',
+  host_registry: './registry/api',
+  host_lapi: './lapi',
+  host_saas: './saas/v1',
+  host_payment: './payment/v1',
+  host_integration: './integration/v1',
+  host_hawkular: './hawkular/metrics',
+  host_wss: './ws/oapi/v1',
+  host_repo: './repos',
+  host_authorize: './authorize',
+  host_wss_k8s: './ws/api/v1',
+  login_uri: '/login',
+  signin_uri: '/signin',
+})
 
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/dashboard', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl'
-      })
-      .when('/dataModel', {
-        templateUrl: 'views/dataModel.html',
-        controller: 'DataModelCtrl'
-      })
-      .when('/operation', {
-        templateUrl: 'views/operation.html',
-        controller: 'OperationCtrl'
-      })
-      .when('/library', {
-        templateUrl: 'views/library.html',
-        controller: 'LibraryCtrl'
-      })
-      .when('/setting', {
-        templateUrl: 'views/main.html',
-        controller: 'SettingCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+
