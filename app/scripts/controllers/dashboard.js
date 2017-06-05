@@ -53,11 +53,36 @@ angular.module('basic')
         text: "Parent 5"
       }
     ];
+    $scope.testlist = [{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },{
+      text: "Parent 3"
+    },];
     function getTree() {
       // Some logic to retrieve, or generate tree structure
       return data;
     }
-
+    $scope.grid = {
+      page: 1,
+      size: 12,
+      total:20
+    };
     $('#tree').treeview({data: getTree()});
     $('#tree').on('nodeSelected', function(event, data) {
       console.log('event',event);
