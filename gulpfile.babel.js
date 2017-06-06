@@ -8,11 +8,15 @@ let lazypipe = require('lazypipe');
 let rimraf = require('rimraf');
 let wiredep = require('wiredep').stream;
 let runSequence = require('run-sequence');
+let concat = require('gulp-concat');
+let uglify = require('gulp-uglify');
+let pump = require('pump');
 
 let yeoman = {
   app: require('./bower.json').appPath || 'app',
   dist: 'dist'
 };
+
 
 let paths = {
   scripts: [yeoman.app + '/scripts/**/*.js'],
@@ -41,18 +45,23 @@ let paths = {
 ////////////////////////
 // Reusable pipelines //
 ////////////////////////
-
+//语法检测
 let lintScripts = lazypipe()
   .pipe($.jshint, '.jshintrc')
   .pipe($.jshint.reporter, 'jshint-stylish');
 
 let styles = lazypipe()
   .pipe($.sass, {
-    outputStyle: 'expanded',
+    outputStyle: 'compressed',
     precision: 10
   })
   .pipe($.autoprefixer, 'last 1 version')
   .pipe(gulp.dest, 'app/styles');
+
+  let concatjs = lazypipe()
+  .pipe(concat,'all.js')
+  .pipe(gulp.dest, yeoman.app + '/build-scripts');
+
 
 let es6ClientScript = lazypipe()
   .pipe($.babel, {
@@ -64,6 +73,7 @@ let es6ServerScript = lazypipe()
   .pipe($.babel, {
     presets: ['es2015']
   })
+  //.pipe($.uglify())
   .pipe(gulp.dest, 'build-server');
 
 ///////////
@@ -89,7 +99,26 @@ gulp.task('start:client', ['start:server'], function () {
   openURL("http://localhost:9000","chrome");
 });
 
-gulp.task('start:server', ['styles', 'es6:frontend', 'es6:server', 'bower'], function(cb) {
+gulp.task('js-concat',function(){
+  gulp.src(paths.scripts)
+    .pipe(concatjs());
+});
+gulp.task('js-min',['js-concat'],function(){
+  gulp.src(paths.buildScriptsDest+'/all.js')
+    .pipe($.rename({suffix: '.min'}))
+    .pipe($.uglify())
+    .pipe(gulp.dest(paths.buildScriptsDest))
+});
+//gulp.task('js-min',['js-concat'], function (cb) {
+//  pump([
+//      gulp.src(paths.buildScriptsDest+'/all.js'),
+//      uglify(),
+//      gulp.dest(paths.buildScriptsDest + '/js')
+//    ],
+//    cb
+//  );
+//});
+gulp.task('start:server', ['styles','es6:server', 'es6:frontend' ,'js-min', 'bower'], function(cb) {
   let started = false;
   return $.nodemon({
     script: 'build-server/app.js',
@@ -117,6 +146,7 @@ gulp.task('watch', function () {
     .pipe($.plumber())
     .pipe(lintScripts())
     .pipe(es6ClientScript())
+    .pipe(concatjs())
     .pipe($.livereload());
 
   $.watch(paths.serverScripts)
@@ -130,6 +160,7 @@ gulp.task('watch', function () {
 
   gulp.watch('bower.json', ['bower']);
   gulp.watch('./app/sass/*.scss', ['styles']);
+  gulp.watch('./app/scripts/**/*.js', ['js-min']);
 });
 
 gulp.task('serve', function (cb) {
@@ -177,9 +208,10 @@ gulp.task('es6:server', () => {
     .pipe(es6ServerScript());
 });
 
+
 gulp.task('client:build', ['html', 'styles', 'es6:frontend', 'es6:server'], function () {
-  let jsFilter = $.filter('**/*.js');
-  let cssFilter = $.filter('**/*.css');
+  let jsFilter = $.filter('**/*.min.js');
+  let cssFilter = $.filter('**/*.min.css');
 
   return gulp.src(paths.views.main)
     .pipe($.useref({
