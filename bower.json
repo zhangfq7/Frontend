@@ -47,6 +47,15 @@
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
       ]
+    },
+    "angular": {
+      "main": "angular.min.js"
+    },
+    "jquery-ui": {
+      "main": "jquery-ui.min.js"
+    },
+    "angular-ui-router": {
+      "main": "release/angular-ui-router.min.js"
     }
   },
   "resolutions": {
