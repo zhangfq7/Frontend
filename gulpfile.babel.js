@@ -9,6 +9,8 @@ let rimraf = require('rimraf');
 let wiredep = require('wiredep').stream;
 let runSequence = require('run-sequence');
 let concat = require('gulp-concat');
+let uglify = require('gulp-uglify');
+let pump = require('pump');
 
 let yeoman = {
   app: require('./bower.json').appPath || 'app',
@@ -101,12 +103,21 @@ gulp.task('js-concat',function(){
   gulp.src(paths.scripts)
     .pipe(concatjs());
 });
-//gulp.task('js-min',['js-concat'],function(){
-//  gulp.src(yeoman.app + '/build-scripts/all.js')
-//    .pipe($.uglify())
-//    .pipe(gulp.dest(yeoman.app + '/build-scripts'));
+gulp.task('js-min',['js-concat'],function(){
+  gulp.src(paths.buildScriptsDest+'/all.js')
+    .pipe($.uglify())
+    .pipe(gulp.dest(yeoman.app + '/script'))
+});
+//gulp.task('js-min',['js-concat'], function (cb) {
+//  pump([
+//      gulp.src(paths.buildScriptsDest+'/all.js'),
+//      uglify(),
+//      gulp.dest(paths.buildScriptsDest + '/js')
+//    ],
+//    cb
+//  );
 //});
-gulp.task('start:server', ['styles','js-concat','es6:server', 'es6:frontend' , 'bower'], function(cb) {
+gulp.task('start:server', ['styles','es6:server', 'es6:frontend' ,'js-min', 'bower'], function(cb) {
   let started = false;
   return $.nodemon({
     script: 'build-server/app.js',
@@ -198,8 +209,8 @@ gulp.task('es6:server', () => {
 
 
 gulp.task('client:build', ['html', 'styles', 'es6:frontend', 'es6:server'], function () {
-  let jsFilter = $.filter('**/*.js');
-  let cssFilter = $.filter('**/*.css');
+  let jsFilter = $.filter('**/*.min.js');
+  let cssFilter = $.filter('**/*.min.css');
 
   return gulp.src(paths.views.main)
     .pipe($.useref({
