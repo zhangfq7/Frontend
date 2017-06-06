@@ -9,8 +9,8 @@ let rimraf = require('rimraf');
 let wiredep = require('wiredep').stream;
 let runSequence = require('run-sequence');
 let concat = require('gulp-concat');
-let uglify = require('gulp-uglify');
-let pump = require('pump');
+//let uglify = require('gulp-uglify');
+//let pump = require('pump');
 
 let yeoman = {
   app: require('./bower.json').appPath || 'app',
