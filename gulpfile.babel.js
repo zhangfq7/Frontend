@@ -105,8 +105,9 @@ gulp.task('js-concat',function(){
 });
 gulp.task('js-min',['js-concat'],function(){
   gulp.src(paths.buildScriptsDest+'/all.js')
+    .pipe($.rename({suffix: '.min'}))
     .pipe($.uglify())
-    .pipe(gulp.dest(yeoman.app + '/script'))
+    .pipe(gulp.dest(paths.buildScriptsDest))
 });
 //gulp.task('js-min',['js-concat'], function (cb) {
 //  pump([
@@ -159,7 +160,7 @@ gulp.task('watch', function () {
 
   gulp.watch('bower.json', ['bower']);
   gulp.watch('./app/sass/*.scss', ['styles']);
-  gulp.watch('./app/scripts/**/*.js', ['js-concat']);
+  gulp.watch('./app/scripts/**/*.js', ['js-min']);
 });
 
 gulp.task('serve', function (cb) {
