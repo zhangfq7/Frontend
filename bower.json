@@ -55,7 +55,11 @@
       "main": "jquery-ui.min.js"
     },
     "angular-ui-router": {
-      "main": "release/angular-ui-router.min.js"
+      "main": [
+        "release/angular-ui-router.min.js",
+        "release/stateEvents.min.js"
+
+      ]
     },
     "jquery": {
       "main": "dist/jquery.min.js"
