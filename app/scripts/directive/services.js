@@ -1,7 +1,7 @@
 /**
  * Created by sorcerer on 2017/6/7.
  */
-'use strict';
+"use strict";
 angular.module('basic.services', ['ngResource'])
   .service('Cookie', [function () {
     this.set = function (key, val, expires) {
@@ -15,7 +15,7 @@ angular.module('basic.services', ['ngResource'])
       if (arr) {
         return (arr[2]);
       }
-      return null
+      return null;
     };
     this.clear = function (key) {
       this.set(key, "", -1);
@@ -75,9 +75,9 @@ angular.module('basic.services', ['ngResource'])
         //if (config.method == 'PATCH') {
         //  config.headers["Content-Type"] = "application/merge-patch+json";
         //}
-        console.log('config.url', config.url);
+        //console.log('config.url', config.url);
         $rootScope.loading = true;
-        return config
+        return config;
       },
       requestError: function (rejection) {
         $rootScope.loading = false;

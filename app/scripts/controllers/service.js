@@ -5,5 +5,5 @@
  */
 angular.module('basic')
   .controller('ServiceCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
-    $rootScope.tab = "service";
+    //$rootScope.tab = "service";
   }]);
