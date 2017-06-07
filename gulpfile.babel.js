@@ -121,10 +121,6 @@ gulp.task('watch', function () {
     .pipe(lintScripts())
     .pipe(es6ServerScript());
 
-  $.watch(paths.test)
-    .pipe($.plumber())
-    .pipe($.livereload());
-
   gulp.watch('bower.json', ['bower']);
   gulp.watch('./app/sass/*.scss', ['styles']);
 });
