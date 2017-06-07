@@ -4,7 +4,7 @@
  * Main Controller
  */
 angular.module('basic')
-  .controller('MainCtrl', function () {
+  .controller('ConsoleCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
