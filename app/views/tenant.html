@@ -1,48 +1,66 @@
-<div class="row dashboard" style="margin:0;padding:0">
+<div class="row nav-tenant" style="margin:0;padding:0">
     <div id="tree" class="col-md-3">
     </div>
    <div class="col-md-9">
-        <uib-tabset class="tab-default">
-           <uib-tab index="1" >
-                <uib-tab-heading >
-                  基本信息
-                </uib-tab-heading>
-                <div class="tab-con">1111</div>
-           </uib-tab>
-          <uib-tab index="2" >
-            <uib-tab-heading >
-              资源报告
-            </uib-tab-heading>
-            <div class="tab-con">222</div>
-          </uib-tab>
-          <uib-tab index="3" >
-            <uib-tab-heading >
-              用户列表
-            </uib-tab-heading>
-            <div class="row tab-con">
-              <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="item in testlist">
-                <div class="thumbnail">
-                  <div class="thumb-content">
-                    <div class="thumb-slide">
-                      <div class="thumb-op">
-                        <div class="userinfo">用户描述</div>
-                        <div class="bottom-btn">
-                          <span class="update-btn">修改</span>
-                          <span class="del-btn">删除</span>
-                        </div>
-                      </div>
-                      <div class="user-power">
-                             <div class="user-img">
-                               <span></span>
-                             </div>
-                             <p class="user-name">用户1</p>
-                             <p class="user-vip">租户管理员</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="">
+          <table class="table table-striped">
+            <tr>
+              <td>用户名</td>
+              <td>用户角色</td>
+              <td>用户描述</td>
+              <td>操作</td>
+            </tr>
+          </table>
+          <table class="table tenantcon">
+            <tr ng-repeat="item in testlist">
+              <td>用户名</td>
+              <td>用户角色</td>
+              <td>用户描述</td>
+              <td>操作</td>
+            </tr>
+          </table>
+        </div>
+        <!--<uib-tabset class="tab-default">-->
+           <!--<uib-tab index="1" >-->
+                <!--<uib-tab-heading >-->
+                  <!--基本信息-->
+                <!--</uib-tab-heading>-->
+                <!--<div class="tab-con">1111</div>-->
+           <!--</uib-tab>-->
+          <!--<uib-tab index="2" >-->
+            <!--<uib-tab-heading >-->
+              <!--资源报告-->
+            <!--</uib-tab-heading>-->
+            <!--<div class="tab-con">222</div>-->
+          <!--</uib-tab>-->
+          <!--<uib-tab index="3" >-->
+            <!--<uib-tab-heading >-->
+              <!--用户列表-->
+            <!--</uib-tab-heading>-->
+            <!--<div class="row tab-con">-->
+              <!--<div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="item in testlist">-->
+                <!--<div class="thumbnail">-->
+                  <!--<div class="thumb-content">-->
+                    <!--<div class="thumb-slide">-->
+                      <!--<div class="thumb-op">-->
+                        <!--<div class="userinfo">用户描述</div>-->
+                        <!--<div class="bottom-btn">-->
+                          <!--<span class="update-btn">修改</span>-->
+                          <!--<span class="del-btn">删除</span>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="user-power">-->
+                             <!--<div class="user-img">-->
+                               <!--<span></span>-->
+                             <!--</div>-->
+                             <!--<p class="user-name">用户1</p>-->
+                             <!--<p class="user-vip">租户管理员</p>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
             <div class="page-style">
               <uib-pagination
                 ng-model="grid.page"
@@ -58,41 +76,9 @@
                 last-text="末页">
               </uib-pagination>
             </div>
-          </uib-tab>
-        </uib-tabset>
+          <!--</uib-tab>-->
+        <!--</uib-tabset>-->
+
    </div>
 
-  <!--<div class="row">-->
-    <!--<div class="col-md-6">-->
-      <!--<div class="panel panel-default">-->
-        <!--<div class="panel-heading">报表一</div>-->
-        <!--<div class="panel-body">-->
-          <!--<canvas class="chart chart-bar" chart-data="data3" chart-labels="labels3" chart-series="series3" height="200">-->
-          <!--</canvas>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-6">-->
-      <!--<div class="panel panel-default">-->
-        <!--<div class="panel-heading">报表二</div>-->
-        <!--<div class="panel-body">-->
-          <!--<canvas class="chart chart-line" chart-data="data2" chart-labels="labels2" chart-series="series2"-->
-                  <!--chart-options="{legend:{display:true}}" height="200">-->
-          <!--</canvas>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-6">-->
-      <!--<div class="panel panel-default">-->
-        <!--<div class="panel-heading">报表三</div>-->
-        <!--<div class="panel-body">-->
-          <!--<canvas class="chart chart-pie" chart-data="data1" chart-labels="labels1"-->
-                  <!--chart-options="{legend:{display:true}}" height="200">-->
-          <!--</canvas>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
 </div>

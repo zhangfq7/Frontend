@@ -8,16 +8,14 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="bower_components/bootstrap-sidebar/dist/css/sidebar.css" />
   <link rel="stylesheet" href="bower_components/isteven-angular-multiselect/isteven-multi-select.css" />
-  <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.css" />
-  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
-  <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css" />
   <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
-  <link rel="stylesheet" href="bower_components/angular-hotkeys/build/hotkeys.css" />
-  <link rel="stylesheet" href="bower_components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css" />
-  <link rel="stylesheet" href="bower_components/bootstrap-application-wizard/dist/bootstrap-wizard.css" />
+  <link rel="stylesheet" href="bower_components/angular-hotkeys/build/hotkeys.min.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css" />
   <link rel="stylesheet" href="bower_components/bootstrap-treeview/dist/bootstrap-treeview.min.css" />
   <!-- endbower -->
   <!-- endbuild -->
@@ -25,6 +23,8 @@
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="bower_components/mermaid/dist/mermaid.dark.css"/>
   <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css"/>
+
+
   <!-- endbuild -->
 </head>
 <body ng-app="basic">
@@ -46,36 +46,37 @@
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-aria/angular-aria.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-messages/angular-messages.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/angular-touch/angular-touch.min.js"></script>
 <script src="bower_components/bootstrap-sidebar/dist/js/sidebar.js"></script>
-<script src="bower_components/angular-translate/angular-translate.js"></script>
-<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="bower_components/isteven-angular-multiselect/isteven-multi-select.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
-<script src="bower_components/spin.js/spin.js"></script>
-<script src="bower_components/angular-spinner/angular-spinner.js"></script>
-<script src="bower_components/angular-ui-select/dist/select.js"></script>
-<script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
-<script src="bower_components/angular-hotkeys/build/hotkeys.js"></script>
-<script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
-<script src="bower_components/moment/moment.js"></script>
-<script src="bower_components/angular-moment/angular-moment.js"></script>
-<script src="bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
-<script src="bower_components/bootstrap-application-wizard/dist/bootstrap-wizard.js"></script>
-<script src="bower_components/chart.js/dist/Chart.js"></script>
-<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
+<script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
+<script src="bower_components/spin.js/spin.min.js"></script>
+<script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
+<script src="bower_components/angular-ui-select/dist/select.min.js"></script>
+<script src="bower_components/angular-toggle-switch/angular-toggle-switch.min.js"></script>
+<script src="bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
+<script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/angular-moment/angular-moment.min.js"></script>
+<script src="bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.min.js"></script>
+<script src="bower_components/bootstrap-application-wizard/dist/bootstrap-wizard.min.js"></script>
+<script src="bower_components/chart.js/dist/chart.min.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
 <!-- endbower -->
