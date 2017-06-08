@@ -5,29 +5,29 @@
 
 angular.module('basic.router', ['ui.router'])
   .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/home/dashboard");
+    $urlRouterProvider.otherwise("/console/tenant");
     $stateProvider
     //home
-      .state('home', {
-        url: '/home',
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+      .state('console', {
+        url: '/console',
+        templateUrl: 'views/console.html',
+        controller: 'ConsoleCtrl',
         abstract: true
 
-      }).state('home.dashboard', {
-        url: '/dashboard',
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl',
+      }).state('console.tenant', {
+        url: '/tenant',
+        templateUrl: 'views/tenant.html',
+        controller: 'TenantCtrl',
 
-      }).state('home.dataModel', {
-        url: '/dataModel',
-        templateUrl: 'views/dataModel.html',
-        controller: 'DataModelCtrl',
+      }).state('console.role', {
+        url: '/role',
+        templateUrl: 'views/role.html',
+        controller: 'RoleCtrl',
 
-      }).state('home.setting', {
-        url: '/setting',
-        templateUrl: 'views/setting.html',
-        controller: 'SettingCtrl',
+      }).state('console.service', {
+        url: '/service',
+        templateUrl: 'views/service.html',
+        controller: 'ServiceCtrl',
 
       });
 

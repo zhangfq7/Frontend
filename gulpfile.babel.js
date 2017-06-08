@@ -8,11 +8,13 @@ let lazypipe = require('lazypipe');
 let rimraf = require('rimraf');
 let wiredep = require('wiredep').stream;
 let runSequence = require('run-sequence');
+let Server = require('karma').Server;
 
 let yeoman = {
   app: require('./bower.json').appPath || 'app',
   dist: 'dist'
 };
+
 
 let paths = {
   scripts: [yeoman.app + '/scripts/**/*.js'],
@@ -20,18 +22,6 @@ let paths = {
   buildScripts : [yeoman.app + '/build-scripts/**/*.js'],
   serverScripts: ['server/**/*.js'],
   styles: [yeoman.app + '/sass/**/*.scss'],
-  test: ['test/spec/**/*.js'],
-  testRequire: [
-    yeoman.app + '/bower_components/angular/angular.js',
-    yeoman.app + '/bower_components/angular-mocks/angular-mocks.js',
-    yeoman.app + '/bower_components/angular-resource/angular-resource.js',
-    yeoman.app + '/bower_components/angular-cookies/angular-cookies.js',
-    yeoman.app + '/bower_components/angular-sanitize/angular-sanitize.js',
-    yeoman.app + '/bower_components/angular-route/angular-route.js',
-    'test/mock/**/*.js',
-    'test/spec/**/*.js'
-  ],
-  karma: 'karma.conf.js',
   views: {
     main: yeoman.app + '/index.html',
     files: [yeoman.app + '/views/**/*.html']
@@ -48,7 +38,7 @@ let lintScripts = lazypipe()
 
 let styles = lazypipe()
   .pipe($.sass, {
-    outputStyle: 'expanded',
+    outputStyle: 'compressed',
     precision: 10
   })
   .pipe($.autoprefixer, 'last 1 version')
@@ -102,6 +92,13 @@ gulp.task('start:server', ['styles', 'es6:frontend', 'es6:server', 'bower'], fun
   });
 });
 
+gulp.task('test', function (cb) {
+  return new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, cb).start();
+});
+
 gulp.task('watch', function () {
   $.livereload.listen();
   $.watch(paths.styles)
@@ -123,10 +120,6 @@ gulp.task('watch', function () {
     .pipe($.plumber())
     .pipe(lintScripts())
     .pipe(es6ServerScript());
-
-  $.watch(paths.test)
-    .pipe($.plumber())
-    .pipe($.livereload());
 
   gulp.watch('bower.json', ['bower']);
   gulp.watch('./app/sass/*.scss', ['styles']);
