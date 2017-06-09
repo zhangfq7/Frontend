@@ -141,12 +141,6 @@
     "bootstrap-application-wizard": {
       "main": "dist/bootstrap-wizard.min.js"
     },
-    "chart.js": {
-      "main": "dist/chart.min.js"
-    },
-    "angular-chart.js": {
-      "main": "dist/angular-chart.min.js"
-    },
     "bootstrap-treeview": {
       "main": [
         "dist/bootstrap-treeview.min.js",
