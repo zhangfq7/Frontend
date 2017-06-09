@@ -50,7 +50,6 @@ module.exports = function(config) {
       'app/bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
       'app/bower_components/mermaid/dist/mermaid.js',
       'app/build-scripts/**/*.js',
-      'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
