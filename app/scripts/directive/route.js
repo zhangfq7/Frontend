@@ -5,16 +5,33 @@
 
 angular.module('basic.router', ['ui.router'])
   .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/console/tenant");
+    $urlRouterProvider.otherwise("/home");
     $stateProvider
     //home
       .state('console', {
         url: '/console',
         templateUrl: 'views/console.html',
         controller: 'ConsoleCtrl',
-        abstract: true
+        abstract: true,
+        resolve:{
+          test: ['$http', function($http){
+            return 1;
+          }]
+        }
 
-      }).state('console.tenant', {
+      })
+      .state('home', {
+        url: '/home',
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl',
+        resolve:{
+          dev: ['$http', function($http){
+            return 1;
+          }]
+        }
+
+      })
+      .state('console.tenant', {
         url: '/tenant',
         templateUrl: 'views/tenant.html',
         controller: 'TenantCtrl',

@@ -69,15 +69,16 @@ angular.module('basic', [
       }
     ]);
   }])
-  .run(['$rootScope', '$state', function ($rootScope, $state) {
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+  .run(['$rootScope', '$state', function ($rootScope) {
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
       console.log('toState.name', toState.name);
+      $rootScope.tab = toState.name;
     });
 
-    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-      //更新header标题
-
-    });
+    //$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+    //  //更新header标题
+    //
+    //});
   }]);
 
 

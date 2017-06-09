@@ -1,8 +1,10 @@
 /**
  * Created by sorcerer on 2017/6/7.
  */
+"use strict";
 angular.module('basic.controller', [])
-  .controller('AppCtrl', ['$rootScope', '$state', '$log', 'AUTH_EVENTS', 'Cookie', function ($rootScope, $state, $log, AUTH_EVENTS, Cookie) {
+  .controller('AppCtrl', ['$rootScope', '$state', '$log', 'AUTH_EVENTS',
+    function ($rootScope, $state, $log, AUTH_EVENTS) {
     //console相关全局变量
     $rootScope.console = {};
 

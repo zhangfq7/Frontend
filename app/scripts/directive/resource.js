@@ -5,6 +5,6 @@ angular.module('basic.resource', ['ngResource'])
       create: {method: 'POST'}
     });
     return User;
-  }])
+  }]);
 
 
