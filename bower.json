@@ -57,7 +57,6 @@
       "main": [
         "release/angular-ui-router.min.js",
         "release/stateEvents.min.js"
-
       ]
     },
     "jquery": {
