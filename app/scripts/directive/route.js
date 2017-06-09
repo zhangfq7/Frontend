@@ -12,9 +12,15 @@ angular.module('basic.router', ['ui.router'])
         url: '/console',
         templateUrl: 'views/console.html',
         controller: 'ConsoleCtrl',
-        abstract: true
+        abstract: true,
+        resolve:{
+          test: ['$http', function($http){
+            return 1;
+          }]
+        }
 
-      }).state('console.tenant', {
+      })
+      .state('console.tenant', {
         url: '/tenant',
         templateUrl: 'views/tenant.html',
         controller: 'TenantCtrl',
@@ -28,6 +34,11 @@ angular.module('basic.router', ['ui.router'])
         url: '/service',
         templateUrl: 'views/service.html',
         controller: 'ServiceCtrl',
+
+      }).state('console.user', {
+        url: '/user',
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl',
 
       });
 
