@@ -1,6 +1,13 @@
 <div class="row nav-tenant" style="margin:0;padding:0">
-    <div id="tree" class="col-md-3" style="height: 100%; background: #ebebe9;">
-    </div>
+    <!--<div id="tree" class="col-md-3" style="height: 100%; background: #ebebe9;">-->
+    <!--</div>-->
+  <div  treecontrol class="col-md-3 tree-light"
+       tree-model="dataForTheTree"
+       options="treeOptions"
+       on-selection="showSelected(node)"
+       selected-node="node1">
+    {{node.name}}
+  </div>
    <div class="col-md-9">
 
         <uib-tabset class="tab-default">
@@ -12,9 +19,34 @@
            </uib-tab>
           <uib-tab index="4"  ng-show="true">
             <uib-tab-heading >
-             服务列表
+              服务列表
             </uib-tab-heading>
-            <div class="tab-con">服务列表</div>
+            <ul class="tenant-serve-list">
+              <li class="row">
+                <div class="col-md-1"><img src="" alt=""></div>
+                <div class="col-md-2"><span>服务名</span>&nbsp;&nbsp;HDFS</div>
+                <div class="col-md-4"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
+                <div class="col-md-2">配额&nbsp;:&nbsp;20TB</div>
+                <div class="col-md-2">文件数&nbsp;:&nbsp;1000</div>
+                <div class="col-md-1"><a href="#">访问信息</a></div>
+              </li>
+              <li>2</li>
+            </ul>
+            <div class="page-style">
+              <uib-pagination
+                ng-model="grid.page"
+                total-items="grid.total"
+                items-per-page="grid.size"
+                class="pagination-sm"
+                boundary-links="true"
+                max-size="12"
+                rotate="true"
+                previous-text="上一页"
+                next-text="下一页"
+                first-text="首页"
+                last-text="末页">
+              </uib-pagination>
+            </div>
           </uib-tab>
           <uib-tab index="2" >
             <uib-tab-heading >
@@ -59,8 +91,7 @@
                 last-text="末页">
               </uib-pagination>
             </div>
-          <!--</uib-tab>-->
-        <!--</uib-tabset>-->
+
 
    </div>
 

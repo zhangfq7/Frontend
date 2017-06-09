@@ -36,6 +36,7 @@ angular.module('basic', [
   'basic.resource',
   'basic.services',
   'basic.controller',
+  'treeControl',
 ]).constant('GLOBAL', {
     size: 10,
     host: './oapi/v1',

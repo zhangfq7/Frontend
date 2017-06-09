@@ -1,107 +1,7 @@
-//.dashboard{
-  //.thumbnail {
-  //  overflow: hidden;
-  //  border: 1px solid #c9c9c9;
-  //  border-radius: 2px;
-  //  background: #eaebef;
-  //  padding: 0;
-  //}
-  //.tab-con{
-  //  padding-top: 15px;
-  //}
-  //.thumbnail {
-  //  .thumb-content {
-  //    overflow: hidden;
-  //    position: relative;
-  //    height: 160px;
-  //    .thumb-slide {
-  //      position: absolute;
-  //      bottom: 0;
-  //      transition: bottom 0.3s;
-  //      text-align: center;
-  //      height: 320px;
-  //      width: 100%;
-  //      .thumb-op {
-  //        background: #5a6378;
-  //        color: #fff;
-  //        padding: 10px;
-  //        text-align: left;
-  //        height: 160px;
-  //        font-size: 12px;
-  //        .userinfo{
-  //          width: 100%;
-  //          height: 100px;
-  //          overflow: hidden;
-  //
-  //        }
-  //        .bottom-btn{
-  //          height: 100%;
-  //          height: 30px;
-  //          text-align: center;
-  //        }
-  //        .update-btn{
-  //          border: 1px solid #fff;
-  //          display: inline-block;
-  //          width: 50px;
-  //          height: 30px;
-  //          line-height: 30px;
-  //          text-align: center;
-  //          border-radius: 2px;
-  //          margin-right: 15px;
-  //          cursor: pointer;
-  //        }
-  //        .del-btn{
-  //          border: 1px solid #f00;
-  //          color: #f00;
-  //          display: inline-block;
-  //          width: 50px;
-  //          height: 30px;
-  //          line-height: 30px;
-  //          text-align: center;
-  //          border-radius: 2px;
-  //          cursor: pointer;
-  //        }
-  //      }
-  //    }
-  //    .thumb-slide:hover {
-  //      bottom: -160px;
-  //    }
-  //  }
-  //}
-  //.user-power{
-  //  width: 100%;
-  //  height: 160px;
-  //  text-align: center;
-  //  .user-img{
-  //    width: 100%;
-  //    height: 60px;
-  //    text-align: center;
-  //    margin-top:15px;
-  //    span{
-  //      display: inline-block;
-  //      width: 60px;
-  //      height: 60px;
-  //      border-radius: 30px;
-  //      background: lightskyblue;
-  //    }
-  //  }
-  //p{
-  //  overflow: hidden;
-  //}
-  //.user-name{
-  //  margin-top:15px;
-  //}
-  //.user-vip{
-  //  font-size: 12px;
-  //  color: #666;
-  //}
-  //}
-  //.page-style{
-  //  width: 100%;
-  //  //height: 40px;
-  //}
-//}
-  .nav-tenant{
+ .nav-tenant{
+   :focus{
+     outline : none;
+   }
     padding: 0;
     margin: 0;
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
@@ -109,6 +9,89 @@
     }
     .tenantcon > tbody > tr:nth-child(2n) > td, .tenantcon > tbody > tr:nth-child(2n) > th {
       background-color: #f9f9f9;
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+      border-top:none;
+      border-bottom:2px solid #ce1515 ;
+      outline : none;
+    }
+    .nav>li>a:hover{
+      background: none;
+      border-left-color:#fff;
+      border-top-color:#fff;
+    }
+    .nav-tabs>li>a{
+      border-right:1px solid #eaeaea;
+      padding:10px 40px;
+      outline : none;
+      font-size: 16px;
+      color:#333;
+      margin-right:0;
+    }
+    .tree-light{
+      background: #ebebe9;
+      font-size: 16px;
+      padding:0;
+        li{
+          position: relative;
+          i{
+            position: absolute;
+            top:18px;
+            left:0;
+            z-index: 100;
+            width: 20px;
+            height: 20px;
+          }
+          div{
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding-left:60px
+          }
+          div.tree-selected{
+            background: #fff;
+            font-weight:normal;
+          }
+          padding:0;
+          line-height: 50px;
+          ul{
+            font-size: 14px;
+            background: #f3f3f2;
+          }
+        }
+
+    }
+
+    .tenant-serve-list{
+      padding:0;
+      li{
+        overflow: hidden;
+        width: 100%;
+        height: 60px;
+        background: #f7f7f7;
+        margin-top:30px;
+        div{
+          height: 100%;
+          line-height: 60px;
+          padding:0;
+          a{
+            padding:5px 15px;
+            border-radius: 14px;
+            color: #c256fc;
+          }
+          a:hover{
+            background: #c256fc;
+            color:#fff;
+          }
+        }
+      }
+      li div:nth-child(1){
+         img {
+           width: 60px;
+           height: 60px;
+           background: red;
+         }
+      }
     }
 
   }
