@@ -99,6 +99,20 @@ gulp.task('test', function (cb) {
   }, cb).start();
 });
 
+gulp.task('webdriver-update', function(cb){
+  $.protractor.webdriver_update({
+    webdriverManagerArgs: ['--ignore_ssl']
+  },cb);
+});
+
+gulp.task('e2e', ['webdriver-update', 'serve'], function(cb) {
+  gulp.src([]).pipe($.protractor.protractor({
+    configFile: "protractor.conf.js",
+  })).on('error', function(e) {
+    throw e;
+  }).on('end', cb);
+});
+
 gulp.task('watch', function () {
   $.livereload.listen();
   $.watch(paths.styles)
