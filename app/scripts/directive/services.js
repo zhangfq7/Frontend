@@ -97,4 +97,22 @@ angular.module('basic.services', ['ngResource'])
         return $q.reject(response);
       }
     };
-  }]);
+  }]).service('Confirm', ['$uibModal', function ($uibModal) {
+  this.open = function (title, txt, tip, tp, iscf, nonstop) {
+    return $uibModal.open({
+      templateUrl: 'views/tpl/confirm.html',
+      size: 'default',
+      controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+        $scope.configmap = [{n:'a'},{n:'b'},{n:'c'},{n:'d'}]
+        //$scope.nonstop = nonstop;
+        $scope.ok = function () {
+          $uibModalInstance.close(true);
+        };
+        $scope.cancel = function () {
+          $uibModalInstance.dismiss();
+        };
+      }]
+    }).result;
+  };
+}])
+

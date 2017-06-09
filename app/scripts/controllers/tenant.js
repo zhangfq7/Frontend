@@ -4,7 +4,7 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
+  .controller('TenantCtrl',['$rootScope', '$scope','Confirm', function ($rootScope, $scope,Confirm) {
     $rootScope.tab = "tenant";
     //$scope.labels1 = ["Download Sales", "In-Store Sales", "Mail-Order Sales", "Tele Sales", "Corporate Sales"];
     //$scope.data1 = [300, 500, 100, 40, 120];
@@ -39,18 +39,6 @@ angular.module('basic')
             text: "Child 2"
           }
         ]
-      },
-      {
-        text: "Parent 2"
-      },
-      {
-        text: "Parent 3"
-      },
-      {
-        text: "Parent 4"
-      },
-      {
-        text: "Parent 5"
       }
     ];
     $scope.testlist = [{
@@ -84,9 +72,14 @@ angular.module('basic')
       size: 12,
       total:20
     };
-    $('#tree').treeview({data: getTree()});
+    $('#tree').treeview({
+      data: getTree(),
+      icon: "glyphicon glyphicon-stop",
+      selectedIcon: "glyphicon glyphicon-stop"
+    });
     $('#tree').on('nodeSelected', function(event, data) {
       console.log('event',event);
       console.log('data',data);
     });
+    Confirm.open();
   }]);
