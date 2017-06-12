@@ -60,5 +60,5 @@ angular.module('basic')
       total:20
     };
     Confirm.open();
-    newconfirm.open('111', { "name" : "项目一", "age" : "32", "children" :'fdsfs' });
+    //newconfirm.open('111', { "name" : "项目一", "age" : "32", "children" :'fdsfs' });
   }]);

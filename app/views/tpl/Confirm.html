@@ -1,4 +1,4 @@
-<div class="modal-header" style="padding:10px 15px;">
+<div class="modal-header" style="padding:15px 15px;background: #f2f2f1;">
   <h5 class="modal-title">
     <!--<span class="icon20 icon20-{{tp}}"></span>-->
     111
@@ -7,15 +7,9 @@
     </a>
   </h5>
 </div>
-<div class="modal-body confirm-con" style="padding:40px 20px;">
-    <div class="con-wrop">
-        <span>用户中心</span><input type="text">
-        <div class="error_block_tit ng-hide" ng-show="container.namerr.rexed">
-            <p>错误提示</p>
-        </div>
-    </div>
-    <div class="con-wrop">
-      <span>用户源</span>
+<div class="modal-body confirm-con" style="padding:30px 20px 30px 20px;background: #fafafa;">
+    <div class="con-wrop" style="margin-top:0px;">
+      <label>选择用户</label>
       <div class="confirm-select">
         <div uib-dropdown on-toggle="toggled(open)">
           <a href="javascript:void(0);" class="" uib-dropdown-toggle>
@@ -33,19 +27,31 @@
       </div>
     </div>
     <div class="con-wrop">
-      <span>电子邮箱</span><input type="text">
-      <div class="error_block_tit ng-hide" ng-show="container.namerr.rexed">
-        <p>错误提示</p>
+      <label>选择角色</label>
+      <div class="confirm-select">
+        <div uib-dropdown on-toggle="toggled(open)">
+          <a href="javascript:void(0);" class="" uib-dropdown-toggle>
+            <span class="select-title" title="111">11111</span>
+            <b class="ser_bg_btn"></b>
+          </a>
+          <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
+            <li class="zx_active" ng-repeat="item in configmap" ng-click="">
+              <a href="javascript:void(0);">
+                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.n}}">{{item.n}}</span>
+              </a></li>
+          </ul>
+
+        </div>
       </div>
     </div>
-  <div class="con-wrop">
-    <span>用户描述</span><textarea rows="3" cols="20">
-          用户描述用户描述用户描述用户描述
-    </textarea>
-  </div>
+    <div class="con-wrop">
+      <label>描述信息</label>
+      <textarea rows="3" cols="20">
+            用户描述用户描述用户描述用户描述
+      </textarea>
+    </div>
 </div>
 <div class="modal-footer"   style="text-align: right">
-  <div class="btn-newst" ng-click="cancel()" style="margin:0;">取消</div>
-  <di class="btn-newst" ng-click="ok()" style="margin:0;">确认</di>
+  <span class="btn-newst" ng-click="ok()">确认</span>
 </div>
 
