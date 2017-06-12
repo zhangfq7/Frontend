@@ -4,8 +4,9 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
-    $rootScope.tab = "tenant";
+  .controller('TenantCtrl',['$rootScope', '$scope','test', function ($rootScope, $scope,test) {
+    console.log('test', test);
+    //$rootScope.tab = "tenant";
     //$scope.labels1 = ["Download Sales", "In-Store Sales", "Mail-Order Sales", "Tele Sales", "Corporate Sales"];
     //$scope.data1 = [300, 500, 100, 40, 120];
     //$scope.labels2 = ["January", "February", "March", "April", "May", "June", "July"];
@@ -41,7 +42,24 @@ angular.module('basic')
         ]
       },
       {
-        text: "Parent 2"
+        text: "Node 1",
+        expandIcon: 'glyphicon glyphicon-chevron-right',
+        collapseIcon: 'glyphicon glyphicon-chevron-down',
+        nodeIcon: 'glyphicon glyphicon-bookmark',
+        color: "#000000",
+        backColor: "#FFFFFF",
+        href: "#node-1",
+        selectable: true,
+        state: {
+          checked: true,
+          //disabled: true,
+          expanded: true,
+          selected: true
+        },
+        tags: ['available'],
+        nodes: [
+
+        ]
       },
       {
         text: "Parent 3"
@@ -84,7 +102,65 @@ angular.module('basic')
       size: 12,
       total:20
     };
-    $('#tree').treeview({data: getTree()});
+    //$('#tree').treeview({data: getTree()});
+    var defaultData = [
+      {
+        text: 'Parent 1',
+        href: '#parent1',
+        tags: ['4'],
+        nodes: [
+          {
+            text: 'Child 1',
+            href: '#child1',
+            tags: ['2'],
+            nodes: [
+              {
+                text: 'Grandchild 1',
+                href: '#grandchild1',
+                tags: ['0']
+              },
+              {
+                text: 'Grandchild 2',
+                href: '#grandchild2',
+                tags: ['0']
+              }
+            ]
+          },
+          {
+            text: 'Child 2',
+            href: '#child2',
+            tags: ['0']
+          }
+        ]
+      },
+      {
+        text: 'Parent 2',
+        href: '#parent2',
+        tags: ['0']
+      },
+      {
+        text: 'Parent 3',
+        href: '#parent3',
+        tags: ['0']
+      },
+      {
+        text: 'Parent 4',
+        href: '#parent4',
+        tags: ['0']
+      },
+      {
+        text: 'Parent 5',
+        href: '#parent5'  ,
+        tags: ['0']
+      }
+    ];
+    $('#tree').treeview({
+      color: "#428bca",
+      expandIcon: 'a b',
+      collapseIcon: 'a c',
+      nodeIcon: '',
+      data: defaultData
+    });
     $('#tree').on('nodeSelected', function(event, data) {
       console.log('event',event);
       console.log('data',data);

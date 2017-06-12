@@ -34,3 +34,8 @@ module.exports = {
 Use `gulp serve` to start express server.
 
 Use `gulp` to build static dist directory.
+
+## Test
+
+Use `gulp test` to run karma+jasmine tests.
+Use `gulp e2e` to run protractor tests.
