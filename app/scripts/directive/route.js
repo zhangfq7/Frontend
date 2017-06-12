@@ -5,7 +5,7 @@
 
 angular.module('basic.router', ['ui.router'])
   .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/home");
+    $urlRouterProvider.otherwise("/home/platform");
     $stateProvider
     //home
       .state('console', {
@@ -24,11 +24,18 @@ angular.module('basic.router', ['ui.router'])
         url: '/home',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
-        resolve:{
-          dev: ['$http', function($http){
-            return 1;
-          }]
-        }
+        abstract: true,
+      })
+      .state('home.platform', {
+        url: '/platform',
+        templateUrl: 'views/platform.html',
+        controller: 'PlatformCtrl',
+
+      })
+      .state('home.permission', {
+        url: '/permission',
+        templateUrl: 'views/permission.html',
+        controller: 'PermissionCtrl',
 
       })
       .state('console.tenant', {
