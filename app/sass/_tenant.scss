@@ -4,12 +4,6 @@
    }
     padding: 0;
     margin: 0;
-    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
-      border-top:none;
-    }
-    .tenantcon > tbody > tr:nth-child(2n) > td, .tenantcon > tbody > tr:nth-child(2n) > th {
-      background-color: #f9f9f9;
-    }
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
       border-top:none;
       border-bottom:2px solid #ce1515 ;
@@ -87,6 +81,9 @@
             background: #c256fc;
             color:#fff;
           }
+        }
+        span{
+          color: #999;
         }
       }
       li:hover{
