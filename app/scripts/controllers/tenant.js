@@ -4,7 +4,7 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl',['$rootScope', '$scope','Confirm', function ($rootScope, $scope,Confirm) {
+  .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm', function ($rootScope, $scope,Confirm,newconfirm) {
     $rootScope.tab = "tenant";
     $scope.treeOptions = {
       nodeChildren: "children",
@@ -59,5 +59,6 @@ angular.module('basic')
       size: 12,
       total:20
     };
-    //Confirm.open();
+    Confirm.open();
+    newconfirm.open('111', { "name" : "项目一", "age" : "32", "children" :'fdsfs' });
   }]);

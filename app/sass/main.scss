@@ -3,6 +3,21 @@
 @import "role";
 @import "service";
 @import "tenant";
+.modal-dialog{
+  .well-log{
+    background: none !important;
+    border: none;
+  }
+    .modal-close {
+      float: right;
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      background: url(../images/closenew2.png) no-repeat center;
+    }
+
+}
+
 .page-style{
   text-align: right;
   a{
@@ -12,9 +27,26 @@
   }
   .pagination-sm>li:first-child>a, .pagination-sm>li:first-child>span{
     border-radius: 14px;
+    border-color: #c256fc;
+    color: #c256fc;
   }
-  .pagination-sm>li:last-child>a, .pagination-sm>li:last-child>span{
+  .pagination-sm>li:last-child>a, .pagination-sm>li:last-child>span {
     border-radius: 14px;
+    border-color: #c256fc;
+    color: #c256fc;
+  }
+  .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{
+    background-color:#c256fc;
+    border-color: #c256fc;
+    color: #fff;
+  }
+  .pagination>li>a, .pagination>li>span{
+    color: #c256fc;
+  }
+  .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
+    background-color:#c256fc;
+    border-color: #c256fc;
+    color: #fff;
   }
 }
 .browsehappy {
