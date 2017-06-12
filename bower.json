@@ -152,6 +152,13 @@
     },
     "mermaid": {
       "main": "dist/mermaid.min.js"
+    },
+    "angular-tree-control": {
+      "main": [
+        "angular-tree-control.js",
+        "css/tree-control.css",
+        "css/tree-control-attribute.css"
+      ]
     }
   },
   "resolutions": {

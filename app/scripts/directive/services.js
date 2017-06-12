@@ -114,5 +114,22 @@ angular.module('basic.services', ['ngResource'])
       }]
     }).result;
   };
+}]).service('newconfirm', ['$uibModal', function ($uibModal) {
+  this.open = function (title, con) {
+    return $uibModal.open({
+      backdrop: 'static',
+      templateUrl: 'views/tpl/newconfirm.html',
+      size: 'default modal-lg',
+      controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+        $scope.title = title;
+
+        $scope.con = con;
+
+        $scope.cancel = function () {
+          $uibModalInstance.dismiss();
+        };
+      }]
+    }).result;
+  };
 }])
 

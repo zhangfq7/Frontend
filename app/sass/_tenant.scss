@@ -27,7 +27,11 @@
       font-size: 16px;
       color:#333;
       margin-right:0;
+      border-radius: 0;
     }
+   .nav-tabs>li:nth-child(1)>a{
+     border-left:0 ;
+   }
     .tree-light{
       background: #ebebe9;
       font-size: 16px;
@@ -84,6 +88,10 @@
             color:#fff;
           }
         }
+      }
+      li:hover{
+        box-shadow: 0px 0px 4px 2px #ccc;
+        border-radius: 4px;
       }
       li div:nth-child(1){
          img {
