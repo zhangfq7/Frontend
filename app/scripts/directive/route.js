@@ -46,6 +46,11 @@ angular.module('basic.router', ['ui.router'])
         templateUrl: 'views/service.html',
         controller: 'ServiceCtrl',
 
+      }).state('console.user', {
+        url: '/user',
+        templateUrl: 'views/user.html',
+        controller: 'UserCtrl',
+
       });
 
 

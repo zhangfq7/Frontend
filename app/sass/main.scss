@@ -1,8 +1,8 @@
 // bower:scss
 // endbower
-@import "role";
 @import "service";
 @import "tenant";
+@import "user";
 .modal-dialog{
   .well-log{
     background: none !important;
@@ -74,7 +74,7 @@ body {
 /* Custom page header */
 .header {
   //border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
+  margin-bottom:0px!important;
 
   /* Make the masthead heading the same height as the navigation */
   h3 {
@@ -157,37 +157,42 @@ body {
 }
 /****************头部********************/
 .navbar-oc {
-  background:#535353;
-  height: 54px;
+  background:#f2f2f1;
+  height: 80px;
   margin-bottom: 0px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;
 }
 
 .navbar-oc .navbar-nav > li > a{
-  color: #bababa;
-  font-size: 14px;
+  color: #333;
+  font-size: 16px;
   font-weight: normal;
-  text-shadow: 0 1px 0 #555555;padding-top:16px;padding-bottom:16px;padding-left:30px;padding-right:30px;
+  padding-top:30px;padding-bottom:30px;padding-left:20px;padding-right:20px;
 }
 
 .navbar-oc .navbar-nav > li > a:hover {
-  color:#f7f7f7;
-  background-color:#414141;
+  color:#ce1515;
+  background:none;
 }
 
 .navbar-oc .navbar-nav > li > a:focus,
 .navbar-oc .navbar-nav > li > a.active{
-  background-color: #414141;
-  color: #f7f7f7;
+  color: #ce1515;
+  background:none;
 }
 .btn-default{background:none;color:#d5d5d5;border:0;padding:8px 12px;}
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default{
   background:none;color:#d5d5d5;border:0;
 }
+
+.navbar-form{border-left:1px solid #dfdfdf;margin:0;padding-top:28px;padding-bottom:26px;margin-left:40px;padding-left:30px;margin-top:1px;margin-bottom:1px;}
+
+.set_text_ellipsis{white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow: hidden;}
+.console_name p{margin-bottom:0;font-size:16px;color:#333;display:block;width:100px;}
 /****************头部********************/
 .navbar-header .brand{
-  color: #ffffff;
+  color: #666;
   font-size: 16px;
-  text-shadow: 0 1px 0 #555555;
+
 }
 
 /* 3rd party css*/
@@ -403,7 +408,7 @@ table a{
 .container-fluid{padding-left:0;padding-right:0;}
 
 .navbar-brand.logo {
-  padding: 10px 15px;
+  padding: 20px 15px;height:auto;overflow:hidden;
 }
 
 /* enable absolute positioning */
