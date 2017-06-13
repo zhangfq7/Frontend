@@ -97,7 +97,8 @@ angular.module('basic.services', ['ngResource'])
         return $q.reject(response);
       }
     };
-  }]).service('Confirm', ['$uibModal', function ($uibModal) {
+  }])
+  .service('Confirm', ['$uibModal', function ($uibModal) {
   this.open = function (userList,roleList,nameobj) {
     return $uibModal.open({
       templateUrl: 'views/tpl/confirm.html',
@@ -125,11 +126,30 @@ angular.module('basic.services', ['ngResource'])
       }]
     }).result;
   };
-}]).service('newconfirm', ['$uibModal', function ($uibModal) {
+}])
+  .service('newconfirm', ['$uibModal', function ($uibModal) {
   this.open = function (datacon) {
     return $uibModal.open({
       backdrop: 'static',
       templateUrl: 'views/tpl/newconfirm.html',
+      size: 'default modal-lg',
+      controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+        $scope.con =datacon;
+
+        $scope.cancel = function () {
+          $uibModalInstance.dismiss();
+        };
+      }]
+    }).result;
+  };
+}])
+ .service('adduser', ['$uibModal', function ($uibModal) {
+  this.open = function (datacon) {
+    return $uibModal.open({
+      backdrop: 'static',
+      templateUrl: 'views/tpl/adduser.html',
       size: 'default modal-lg',
       controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 

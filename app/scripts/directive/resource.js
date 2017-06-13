@@ -10,5 +10,15 @@ angular.module('basic.resource', ['ngResource'])
     });
     return service;
   }])
+  .factory('user', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var user = $resource(GLOBAL.host + '/user', {}, {
+    });
+    return user;
+  }])
+.factory('tenant', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenant = $resource(GLOBAL.host + '/tenant', {}, {
+    });
+    return tenant;
+  }])
 
 

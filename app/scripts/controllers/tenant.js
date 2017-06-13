@@ -4,7 +4,7 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm', function ($rootScope, $scope,Confirm,newconfirm) {
+  .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm','tenant', function ($rootScope, $scope,Confirm,newconfirm,tenant) {
     $rootScope.tab = "tenant";
     $scope.treeOptions = {
       nodeChildren: "children",
@@ -71,5 +71,11 @@ angular.module('basic')
     $scope.updataUser = function(){
       Confirm.open([{n:'a'},{n:'b'},{n:'c'},{n:'d'}],[{n:'2'},{n:'3'},{n:'4'},{n:'5'}],{oldUser:'olduser',oldRole:'oldRole',description:"lalalalla"})
     }
+    tenant.query(function (data) {
+      console.log('data', data);
+      $scope.users=data;
+    }, function (err) {
+      console.log('err', err);
+    })
 
   }]);

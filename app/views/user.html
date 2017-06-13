@@ -4,115 +4,14 @@
   <div class="set_ser_btn">
     <p>添加用户</p></div>
   <ul class="role_mange_list">
-    <li class="role_li">
+    <li class="role_li" ng-repeat="item in users">
       <div class="role_block">
         <div class="set_top">
-          <img src="images/user_manage.png" class="set_top_tu">
+          <img src="images/user_manage.png"  class="set_top_tu">
         </div>
         <div class="set_bt">
-          <p>用户1</p>
-          <p>用户描述</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">用户来源</p>
-          <p class="serv_detail">中信云用户中心</p>
-        </div>
-        <div class="h_set"></div>
-        <p class="servie_change">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/user_manage.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>用户1</p>
-          <p>用户描述</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">用户来源</p>
-          <p class="serv_detail">中信云用户中心</p>
-        </div>
-        <div class="h_set"></div>
-        <p class="servie_change">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/user_manage.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>用户1</p>
-          <p>用户描述</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">用户来源</p>
-          <p class="serv_detail">中信云用户中心</p>
-        </div>
-        <div class="h_set"></div>
-        <p class="servie_change">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/user_manage.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>用户1</p>
-          <p>用户描述</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">用户来源</p>
-          <p class="serv_detail">中信云用户中心</p>
-        </div>
-        <div class="h_set"></div>
-        <p class="servie_change">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/user_manage.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>用户1</p>
-          <p>用户描述</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">用户来源</p>
-          <p class="serv_detail">中信云用户中心</p>
-        </div>
-        <div class="h_set"></div>
-        <p class="servie_change">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <div class="set_top_tu"></div>
-          <img src="images/user_manage.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>用户1</p>
-          <p>用户描述</p>
+          <p>{{item.username}}</p>
+          <p>{{item.description}}</p>
         </div>
       </div>
       <div class="role_block_h" >
