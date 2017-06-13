@@ -7,6 +7,11 @@
  * Controller of the operation
  */
 angular.module('basic')
-  .controller('PlatformCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
+  .controller('PlatformCtrl',['$rootScope', '$scope','role', function ($rootScope, $scope,role) {
     //$rootScope.tab = "service";
+    role.query(function (data) {
+      console.log('data', data);
+    }, function (err) {
+      console.log('err', err);
+    })
   }]);

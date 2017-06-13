@@ -39,7 +39,7 @@ angular.module('basic', [
   'treeControl',
 ]).constant('GLOBAL', {
     size: 10,
-    host: './oapi/v1',
+    host: './ocmanager/v1/api',
     host_k8s: './api/v1',
     host_repos: './v1/repos',
     host_registry: './registry/api',
