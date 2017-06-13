@@ -1,3 +1,5 @@
+/*****************统一管控平台******************/
+.home_page .role_mange_list li{cursor:pointer;}
 /**************角色管理、服务管理**************/
 .set_mange{padding-left:30px;padding-right:30px;background:#fafafa;height:auto;overflow:hidden;padding-top:40px;}
 .set_ser_btn p{background:#ff304a;display:inline-block;color:#fff;font-size:20px;width:200px;height:50px;line-height:50px;
@@ -7,11 +9,11 @@ ul,li{list-style:none;}
 .role_mange_list li{width:300px;height:340px;background:#fff;position:relative;
   float:left;margin-right:28px;margin-bottom:30px;-webkit-transition:all 0.2s linear; -moz-transition:all 0.2s linear;transition:all 0.2s linear;}
 .set_top{height:200px;background:#fff;position:relative;margin-bottom:30px;}
-.set_top_tu{width:200px;height:100px;background:#f0f0f0;position:absolute;top:50%;left:50%;margin-left:-100px;margin-top:-50px;}
+.set_top_tu{width:146px;height:146px;position:absolute;top:50%;left:50%;margin-left:-72px;margin-top:-72px;}
 .set_bt{height:102px;margin:0 auto;padding-left:20px;padding-right:20px;}
 .set_bt p{font-size:14px;text-align:center;}
 .set_bt p:nth-child(1){font-size:16px;color:#333;margin-top:6px;}
-.set_bt p:nth-child(2){color:#999;font-size:14px;text-align:justify;}
+.set_bt p:nth-child(2){color:#999;font-size:14px;}
 .role_block_one{position:absolute;width:88px;height:100px;left:50%;top:50%;margin-left:-44px;margin-top:-50px;}
 .role_li:nth-child(4n){margin-right:0px;}
 .role_block_h{background:rgba(255,255,255,0.8);width:300px;height:340px;position:absolute;z-index:2;padding:40px;top:-24px;opacity:0;
@@ -26,7 +28,7 @@ ul,li{list-style:none;}
 .servie_change{background:#c256fc;width:90px;height:30px;-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;
 font-size:14px;text-align:center;line-height:30px;margin:0 auto;color:#fff;cursor:pointer;}
 .role_block_detail{margin-top:65px;color:#fff;font-size:14px;text-align:justify;}
-
+.h_set{height:130px;clear:both;overflow:hidden;}
 @media (min-width: 1800px) {
   .role_mange_list li{margin-right:84px;}
   .role_mange_list li:nth-child(4n){margin-right:84px;}

@@ -1,7 +1,7 @@
 <div class="modal-header" style="padding:15px 15px;background: #f2f2f1;">
   <h5 class="modal-title">
     <!--<span class="icon20 icon20-{{tp}}"></span>-->
-    111
+    用户授权
     <a ng-click="cancel()" href="javascript:;" class="modal-close" style="margin-top:4px;">
       <!--<i class="fa fa-times-circle pull-right"></i>-->
     </a>
@@ -13,11 +13,11 @@
       <div class="confirm-select">
         <div uib-dropdown on-toggle="toggled(open)">
           <a href="javascript:void(0);" class="" uib-dropdown-toggle>
-            <span class="select-title" title="111">11111</span>
+            <span class="select-title" title={{newUser|| userList[0]['n']}}>{{newUser || userList[0]['n']}}</span>
             <b class="ser_bg_btn"></b>
           </a>
           <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
-            <li class="zx_active" ng-repeat="item in configmap" ng-click="">
+            <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.n)">
               <a href="javascript:void(0);">
                 <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.n}}">{{item.n}}</span>
               </a></li>
@@ -31,11 +31,11 @@
       <div class="confirm-select">
         <div uib-dropdown on-toggle="toggled(open)">
           <a href="javascript:void(0);" class="" uib-dropdown-toggle>
-            <span class="select-title" title="111">11111</span>
+            <span class="select-title" title={{newRole|| roleList[0]['n']}}>{{newRole || roleList[0]['n']}}</span>
             <b class="ser_bg_btn"></b>
           </a>
           <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
-            <li class="zx_active" ng-repeat="item in configmap" ng-click="">
+            <li class="zx_active" ng-repeat="item in roleList" ng-click="changeRole(item.n)">
               <a href="javascript:void(0);">
                 <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.n}}">{{item.n}}</span>
               </a></li>
@@ -47,7 +47,7 @@
     <div class="con-wrop">
       <label>描述信息</label>
       <textarea rows="3" cols="20">
-            用户描述用户描述用户描述用户描述
+            {{description}}
       </textarea>
     </div>
 </div>

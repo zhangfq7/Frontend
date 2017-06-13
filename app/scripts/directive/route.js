@@ -43,22 +43,25 @@ angular.module('basic.router', ['ui.router'])
         templateUrl: 'views/tenant.html',
         controller: 'TenantCtrl',
 
-      }).state('console.role', {
-        url: '/role',
-        templateUrl: 'views/role.html',
-        controller: 'RoleCtrl',
+      })
+      .state('console.role', {
+      url: '/role',
+      templateUrl: 'views/role.html',
+      controller: 'RoleCtrl',
 
-      }).state('console.service', {
-        url: '/service',
-        templateUrl: 'views/service.html',
-        controller: 'ServiceCtrl',
+    })
+      .state('console.service', {
+      url: '/service',
+      templateUrl: 'views/service.html',
+      controller: 'ServiceCtrl',
 
-      }).state('console.user', {
-        url: '/user',
-        templateUrl: 'views/user.html',
-        controller: 'UserCtrl',
+    })
+      .state('console.user', {
+      url: '/user',
+      templateUrl: 'views/user.html',
+      controller: 'UserCtrl',
 
-      });
+    });
 
 
   }]);
