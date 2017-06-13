@@ -6,6 +6,8 @@
 angular.module('basic')
   .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm', 'delconfirm',function ($rootScope, $scope,Confirm,newconfirm,delconfirm) {
     $rootScope.tab = "tenant";
+    var thisheight = $(window).height()-80;
+    $('.tree-light').height(thisheight);
     $scope.treeOptions = {
       nodeChildren: "children",
       dirSelectable: true,
@@ -81,14 +83,17 @@ angular.module('basic')
         $scope.grid.showCompany = true;
         $scope.grid.showProject = false;
         $scope.grid.showChildnode = false;
+        $('.nav-tabs>li').eq(0).addClass('active').siblings.removeClass('active');
       }else if(node.name == '中信银行'){
         $scope.grid.showCompany = false;
         $scope.grid.showProject = true;
         $scope.grid.showChildnode = false;
+        $('.nav-tabs>li').eq(1).addClass('active').siblings.removeClass('active');
       }else{
         $scope.grid.showCompany = false;
         $scope.grid.showProject = false;
         $scope.grid.showChildnode = true;
+        $('.nav-tabs>li').eq(2).addClass('active').siblings.removeClass('active');
       }
     }
     // 删除用户
