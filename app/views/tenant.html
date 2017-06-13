@@ -11,13 +11,49 @@
    <div class="col-md-10">
 
         <uib-tabset class="tab-default">
-           <uib-tab index="1" >
+          <uib-tab index="5"  ng-show="grid.showCompany">
+            <uib-tab-heading >
+              子公司列表
+            </uib-tab-heading>
+            <div class="row project-list">
+                <div class="col-md-3">
+                    <div>
+                      <img src="../images/role_company.png" alt="">
+                      <p>中信</p>
+                    </div>
+                </div>
+                <div class="col-md-3"><div>2</div></div>
+                <div class="col-md-3"><div>3</div></div>
+                <div class="col-md-3"><div>4</div></div>
+                <div class="col-md-3"><div>5</div></div>
+                <div class="col-md-3"><div>6</div></div>
+            </div>
+          </uib-tab>
+          <uib-tab index="6"  ng-show="grid.showProject">
+            <uib-tab-heading >
+              项目列表
+            </uib-tab-heading>
+            <div class="row project-list">
+              <div class="col-md-3">
+                <div>
+                  <img src="../images/oc.png" alt="">
+                  <p>中信</p>
+                </div>
+              </div>
+              <div class="col-md-3"><div>2</div></div>
+              <div class="col-md-3"><div>3</div></div>
+              <div class="col-md-3"><div>4</div></div>
+              <div class="col-md-3"><div>5</div></div>
+              <div class="col-md-3"><div>6</div></div>
+            </div>
+          </uib-tab>
+           <uib-tab index="1"  ng-show="grid.showChildnode">
                 <uib-tab-heading >
                   基本信息
                 </uib-tab-heading>
                 <div class="tab-con">1111</div>
            </uib-tab>
-          <uib-tab index="4"  ng-show="true">
+          <uib-tab index="4"  ng-show="grid.showChildnode">
             <uib-tab-heading >
               服务列表
             </uib-tab-heading>
@@ -65,7 +101,7 @@
                 <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;用户1</div>
                 <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;项目管理员</div>
                 <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;用户描述用户描述</div>
-                <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#">删除</a></div>
+                <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(name)">删除</a></div>
 
               </li>
               <li>2</li>

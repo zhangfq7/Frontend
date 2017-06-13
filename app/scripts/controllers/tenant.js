@@ -4,7 +4,7 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm','tenant', function ($rootScope, $scope,Confirm,newconfirm,tenant) {
+  .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm','tenant','delconfirm', function ($rootScope, $scope,Confirm,newconfirm,tenant,delconfirm) {
     $rootScope.tab = "tenant";
     $scope.treeOptions = {
       nodeChildren: "children",
@@ -58,6 +58,9 @@ angular.module('basic')
       page: 1,
       size: 12,
       total:20,
+      showCompany:true,//展示子公司列表
+      showProject:false,//展示子项目列表
+      showChildnode:false,//展示子项目列表
     };
     ///访问信息
     $scope.checkInfo = function(){
@@ -77,5 +80,26 @@ angular.module('basic')
     }, function (err) {
       console.log('err', err);
     })
+    // 左侧导航切换
+    $scope.showSelected = function(node){
+      console.log(node);
+      if(node.name == '中信集团'){
+        $scope.grid.showCompany = true;
+        $scope.grid.showProject = false;
+        $scope.grid.showChildnode = false;
+      }else if(node.name == '中信银行'){
+        $scope.grid.showCompany = false;
+        $scope.grid.showProject = true;
+        $scope.grid.showChildnode = false;
+      }else{
+        $scope.grid.showCompany = false;
+        $scope.grid.showProject = false;
+        $scope.grid.showChildnode = true;
+      }
+    }
+    // 删除用户
+    $scope.delUser = function(name){
+      delconfirm.open('用户','lalala')
+    }
 
   }]);

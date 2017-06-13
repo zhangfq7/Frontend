@@ -132,7 +132,7 @@ angular.module('basic.services', ['ngResource'])
     return $uibModal.open({
       backdrop: 'static',
       templateUrl: 'views/tpl/newconfirm.html',
-      size: 'default modal-lg',
+      size: 'default',
       controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
@@ -141,20 +141,23 @@ angular.module('basic.services', ['ngResource'])
         $scope.cancel = function () {
           $uibModalInstance.dismiss();
         };
+        $scope.ok = function () {
+          $uibModalInstance.close(true);
+        };
       }]
     }).result;
   };
-}])
- .service('adduser', ['$uibModal', function ($uibModal) {
-  this.open = function (datacon) {
+}]).service('delconfirm', ['$uibModal', function ($uibModal) {
+  this.open = function (title,name) {
     return $uibModal.open({
       backdrop: 'static',
-      templateUrl: 'views/tpl/adduser.html',
-      size: 'default modal-lg',
+      templateUrl: 'views/tpl/delConfirm.html',
+      size: 'default',
       controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-        $scope.con =datacon;
+        $scope.title =title;
+        $scope.name =name;
 
         $scope.cancel = function () {
           $uibModalInstance.dismiss();
@@ -163,4 +166,138 @@ angular.module('basic.services', ['ngResource'])
     }).result;
   };
 }])
+  //用户管理 -  添加用户
+  .service('user_Confirm', ['$uibModal', function ($uibModal) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/user_Confirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
+
+          $scope.con =datacon;
+
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }])
+  //用户管理 -  修改
+  .service('user_change_Confirm', ['$uibModal', function ($uibModal) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/user_change_Confirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+          $scope.con =datacon;
+
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }])
+//用户管理 -  删除
+  .service('user_del_Confirm', ['$uibModal', function ($uibModal) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/user_del_Confirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+          $scope.con =datacon;
+
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }])
+
+//服务管理 -  添加
+  .service('service_Confirm', ['$uibModal', function ($uibModal) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/service_Confirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+          $scope.con =datacon;
+
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }])
+
+//服务管理 -  修改
+  .service('service_change_Confirm', ['$uibModal', function ($uibModal) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/service_change_Confirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+          $scope.con =datacon;
+
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }])
+
+//服务管理 -  删除
+  .service('service_del_Confirm', ['$uibModal', function ($uibModal) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/service_del_Confirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+          $scope.con =datacon;
+
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }])

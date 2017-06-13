@@ -4,6 +4,7 @@
 @import "service";
 @import "tenant";
 @import "user";
+.set_top_tu{width:146px;height:146px;position:absolute;top:50%;left:50%;margin-left:-72px;margin-top:-72px;}
 .modal-dialog{
   .well-log{
     background: none !important;
@@ -697,3 +698,5 @@ table a{
   }
 }
 /*错误提示*/
+.block_close{background:url(../images/closenew2.png) no-repeat center;width:15px;height:15px;display:block;position:absolute;right:10px;top:10px;
+cursor:pointer;padding:14px;}

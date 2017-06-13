@@ -2,7 +2,7 @@
 <div class="service_page">
 <div class="set_mange">
   <div class="set_ser_btn">
-    <p>添加服务</p></div>
+    <p ng-click="addservice()">添加服务</p></div>
   <ul class="role_mange_list">
     <li class="role_li" ng-repeat="item in serves">
       <div class="role_block">
@@ -15,6 +15,7 @@
         </div>
       </div>
       <div class="role_block_h" >
+        <span class="block_close" ng-click="delservice()"></span>
         <div class="service_one">
           <p class="serv_tit">服务来源</p>
           <p class="serv_detail">OCDP：HBase</p>
@@ -24,7 +25,7 @@
           <p class="serv_detail">{{item.servicename}}</p>
         </div>
 
-        <p class="servie_change">修改</p>
+        <p class="servie_change" ng-click="changeservice()">修改</p>
       </div>
     </li>
 
