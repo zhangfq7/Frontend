@@ -98,16 +98,27 @@ angular.module('basic.services', ['ngResource'])
       }
     };
   }]).service('Confirm', ['$uibModal', function ($uibModal) {
-  this.open = function (title, txt, tip, tp, iscf, nonstop) {
+  this.open = function (userList,roleList,nameobj) {
     return $uibModal.open({
       templateUrl: 'views/tpl/confirm.html',
       size: 'default',
       controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-        $scope.configmap = [{n:'a'},{n:'b'},{n:'c'},{n:'d'}]
-        //$scope.nonstop = nonstop;
+        $scope.userList = userList ;
+        $scope.roleList = roleList;
+        $scope.newUser = nameobj.oldUser;
+        $scope.newRole = nameobj.oldRole;
+        $scope.description = nameobj.description;
         $scope.ok = function () {
           $uibModalInstance.close(true);
         };
+        // 选择用户
+        $scope.changeUser = function(name){
+          $scope.newUser = name;
+        }
+        // 选择角色
+        $scope.changeRole = function(name){
+          $scope.newRole = name;
+        }
         $scope.cancel = function () {
           $uibModalInstance.dismiss();
         };
@@ -115,15 +126,15 @@ angular.module('basic.services', ['ngResource'])
     }).result;
   };
 }]).service('newconfirm', ['$uibModal', function ($uibModal) {
-  this.open = function (title, con) {
+  this.open = function (datacon) {
     return $uibModal.open({
       backdrop: 'static',
       templateUrl: 'views/tpl/newconfirm.html',
       size: 'default modal-lg',
       controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-        $scope.title = title;
 
-        $scope.con = con;
+
+        $scope.con =datacon;
 
         $scope.cancel = function () {
           $uibModalInstance.dismiss();

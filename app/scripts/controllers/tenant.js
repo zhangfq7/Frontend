@@ -57,8 +57,19 @@ angular.module('basic')
     $scope.grid = {
       page: 1,
       size: 12,
-      total:20
+      total:20,
     };
-    Confirm.open();
-    //newconfirm.open('111', { "name" : "项目一", "age" : "32", "children" :'fdsfs' });
+    ///访问信息
+    $scope.checkInfo = function(){
+      newconfirm.open();
+    }
+    //用户授权
+    $scope.userAuthorize = function(){
+      Confirm.open([{n:'a'},{n:'b'},{n:'c'},{n:'d'}],[{n:'2'},{n:'3'},{n:'4'},{n:'5'}],{oldUser:'',oldRole:'',description:''})
+    }
+    //修改用户授权
+    $scope.updataUser = function(){
+      Confirm.open([{n:'a'},{n:'b'},{n:'c'},{n:'d'}],[{n:'2'},{n:'3'},{n:'4'},{n:'5'}],{oldUser:'olduser',oldRole:'oldRole',description:"lalalalla"})
+    }
+
   }]);
