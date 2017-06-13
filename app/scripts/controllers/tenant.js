@@ -6,6 +6,8 @@
 angular.module('basic')
   .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm', 'delconfirm',function ($rootScope, $scope,Confirm,newconfirm,delconfirm) {
     $rootScope.tab = "tenant";
+    var thisheight = $(window).height()-80;
+    $('.tree-light').height(thisheight);
     $scope.treeOptions = {
       nodeChildren: "children",
       dirSelectable: true,
