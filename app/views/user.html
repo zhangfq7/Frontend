@@ -2,7 +2,7 @@
 <div class="user_page">
 <div class="set_mange">
   <div class="set_ser_btn">
-    <p>添加用户</p></div>
+    <p ng-click="adduser()">添加用户</p></div>
   <ul class="role_mange_list">
     <li class="role_li">
       <div class="role_block">
@@ -15,12 +15,13 @@
         </div>
       </div>
       <div class="role_block_h" >
+        <span class="block_close" ng-click="deluser()"></span>
         <div class="service_one">
           <p class="serv_tit">用户来源</p>
           <p class="serv_detail">中信云用户中心</p>
         </div>
         <div class="h_set"></div>
-        <p class="servie_change">修改</p>
+        <p class="servie_change" ng-click="changeuser()">修改</p>
       </div>
     </li>
 
@@ -40,7 +41,7 @@
           <p class="serv_detail">中信云用户中心</p>
         </div>
         <div class="h_set"></div>
-        <p class="servie_change">修改</p>
+        <p class="servie_change" ng-click="changeuser()">修改</p>
       </div>
     </li>
 
@@ -60,7 +61,7 @@
           <p class="serv_detail">中信云用户中心</p>
         </div>
         <div class="h_set"></div>
-        <p class="servie_change">修改</p>
+        <p class="servie_change" ng-click="changeuser()">修改</p>
       </div>
     </li>
 
@@ -80,7 +81,7 @@
           <p class="serv_detail">中信云用户中心</p>
         </div>
         <div class="h_set"></div>
-        <p class="servie_change">修改</p>
+        <p class="servie_change" ng-click="changeuser()">修改</p>
       </div>
     </li>
 
@@ -100,7 +101,7 @@
           <p class="serv_detail">中信云用户中心</p>
         </div>
         <div class="h_set"></div>
-        <p class="servie_change">修改</p>
+        <p class="servie_change" ng-click="changeuser()">修改</p>
       </div>
     </li>
 
@@ -121,7 +122,7 @@
           <p class="serv_detail">中信云用户中心</p>
         </div>
         <div class="h_set"></div>
-        <p class="servie_change">修改</p>
+        <p class="servie_change" ng-click="changeuser()">修改</p>
       </div>
     </li>
   </ul>
