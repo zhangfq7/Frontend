@@ -130,11 +130,29 @@ angular.module('basic.services', ['ngResource'])
     return $uibModal.open({
       backdrop: 'static',
       templateUrl: 'views/tpl/newconfirm.html',
-      size: 'default modal-lg',
+      size: 'default',
       controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
         $scope.con =datacon;
+
+        $scope.cancel = function () {
+          $uibModalInstance.dismiss();
+        };
+      }]
+    }).result;
+  };
+}]).service('delconfirm', ['$uibModal', function ($uibModal) {
+  this.open = function (title,name) {
+    return $uibModal.open({
+      backdrop: 'static',
+      templateUrl: 'views/tpl/delConfirm.html',
+      size: 'default',
+      controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+        $scope.title =title;
+        $scope.name =name;
 
         $scope.cancel = function () {
           $uibModalInstance.dismiss();
