@@ -16,7 +16,7 @@ ul,li{list-style:none;}
 .set_bt p:nth-child(2){color:#999;font-size:14px;}
 .role_block_one{position:absolute;width:88px;height:100px;left:50%;top:50%;margin-left:-44px;margin-top:-50px;}
 .role_li:nth-child(4n){margin-right:0px;}
-.role_block_h{background:rgba(255,255,255,0.8);width:300px;height:340px;position:absolute;z-index:2;padding:40px;top:-24px;opacity:0;
+.role_block_h{background:rgba(255,255,255,0.9);width:300px;height:340px;position:absolute;z-index:2;padding:40px;top:-24px;opacity:0;
   -webkit-transition:all 0.2s linear; -moz-transition:all 0.2s linear;transition:all 0.2s linear;
   -webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;padding-top:60px;padding-bottom:60px;}
 .role_mange_list li:hover{-webkit-box-shadow: -1px 2px 9px #dedede;}
@@ -35,4 +35,12 @@ font-size:14px;text-align:center;line-height:30px;margin:0 auto;color:#fff;curso
   .role_mange_list li:nth-child(5n){margin-right:0px;}
 }
 /**************角色管理、服务管理**************/
+
+/*****************无权限页面******************/
+.power_detail{width:310px;margin:0px auto;}
+.power_detail p{text-align:center;}
+.power_detail .tit_one{font-size:16px;color:#333;margin-top:120px;}
+.power_detail .tit_two{font-size:12px;color:#999;margin-top:20px;margin-bottom:30px;}
+.power_btn{display:block;width:94px;height:30px;line-height:30px;background:#c256fc;-webkit-border-radius:23px;-moz-border-radius:23px;
+  border-radius:23px;text-align:center;margin:0 auto;color:#fff;cursor:pointer;}
 
