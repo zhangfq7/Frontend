@@ -39,31 +39,29 @@ angular.module('basic')
       //  ];
       //console.log('tree', tree);
       $scope.dataForTheTree = [];
-      $scope.treemap={};
+      $scope.treemap = {};
 
-      angular.forEach(tree, function (item,i) {
-        $scope.treemap[item.id]=item
-        $scope.treemap[item.id].children=[];
+      angular.forEach(tree, function (item, i) {
+        $scope.treemap[item.id] = item
+        $scope.treemap[item.id].children = [];
       })
       //console.log('$scope.treemap', $scope.treemap);
-      angular.forEach(tree, function (item,i) {
+      angular.forEach(tree, function (item, i) {
         if (item.parentId) {
           //console.log('$scope.treemap[item.parentId]', $scope.treemap[item.parentId]);
           if ($scope.treemap[item.parentId]) {
             $scope.treemap[item.parentId].children.push(item)
-          }else {
+          } else {
             delete $scope.treemap[item.id].parentId
             $scope.dataForTheTree.push($scope.treemap[item.id])
           }
-        }else {
+        } else {
           $scope.dataForTheTree.push($scope.treemap[item.id])
         }
       })
 
 
       console.log('$scope.treemap', $scope.sidebar);
-
-
 
 
       //console.log('$scope.sidebar', $scope.sidebar);
@@ -121,26 +119,31 @@ angular.module('basic')
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
-        console.log(node);
-        if (!node.parentId) {
+        //console.log(node);
+        if (node.children.length > 0) {
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(0).show().siblings().hide();
-        } else if (node.name == '中信银行') {
-          $scope.grid.showCompany = false;
-          $scope.grid.showProject = true;
-          $scope.grid.showChildnode = false;
-          $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
-          $('.right-content>li').eq(1).show().siblings().hide();
-        } else {
+        }else {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = true;
           $('.right-nav>li').eq(2).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(2).show().siblings().hide();
         }
+        //if (!node.parentId) {
+        //
+        //} else if (node.name == '中信银行') {
+        //  $scope.grid.showCompany = false;
+        //  $scope.grid.showProject = true;
+        //  $scope.grid.showChildnode = false;
+        //  $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+        //  $('.right-content>li').eq(1).show().siblings().hide();
+        //} else {
+        //
+        //}
       }
       //右侧tabel切换
       $(function () {
