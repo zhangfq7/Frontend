@@ -1,7 +1,8 @@
-<div class="modal-header" style="padding:15px 15px;background: #f2f2f1;">
+<div class="modal-header" style="padding:14px 14px;background: #f2f2f1;border-bottom:0;">
   <h5 class="modal-title">
     <!--<span class="icon20 icon20-{{tp}}"></span>-->
-    用户授权
+
+    <span class="modal_name">用户授权</span>
     <a ng-click="cancel()" href="javascript:;" class="modal-close" style="margin-top:4px;">
       <!--<i class="fa fa-times-circle pull-right"></i>-->
     </a>
@@ -46,7 +47,7 @@
     </div>
     <div class="con-wrop">
       <label>描述信息</label>
-      <textarea rows="3" cols="20">
+      <textarea class="modal_textarea" maxlength="20">
             {{description}}
       </textarea>
     </div>
