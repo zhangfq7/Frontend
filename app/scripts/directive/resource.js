@@ -12,6 +12,9 @@ angular.module('basic.resource', ['ngResource'])
   }])
   .factory('user', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var user = $resource(GLOBAL.host + '/user', {}, {
+      create: {method: 'POST'},
+      updata: {method: 'PUT'},
+      delete: {method: "DELETE"}
     });
     return user;
   }])

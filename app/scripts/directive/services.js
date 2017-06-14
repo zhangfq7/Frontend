@@ -99,73 +99,73 @@ angular.module('basic.services', ['ngResource'])
     };
   }])
   .service('Confirm', ['$uibModal', function ($uibModal) {
-  this.open = function (userList,roleList,nameobj) {
-    return $uibModal.open({
-      templateUrl: 'views/tpl/confirm.html',
-      size: 'default',
-      controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-        $scope.userList = userList ;
-        $scope.roleList = roleList;
-        $scope.newUser = nameobj.oldUser;
-        $scope.newRole = nameobj.oldRole;
-        $scope.description = nameobj.description;
-        $scope.ok = function () {
-          $uibModalInstance.close(true);
-        };
-        // 选择用户
-        $scope.changeUser = function(name){
-          $scope.newUser = name;
-        }
-        // 选择角色
-        $scope.changeRole = function(name){
-          $scope.newRole = name;
-        }
-        $scope.cancel = function () {
-          $uibModalInstance.dismiss();
-        };
-      }]
-    }).result;
-  };
-}])
+    this.open = function (userList, roleList, nameobj) {
+      return $uibModal.open({
+        templateUrl: 'views/tpl/confirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+          $scope.userList = userList;
+          $scope.roleList = roleList;
+          $scope.newUser = nameobj.oldUser;
+          $scope.newRole = nameobj.oldRole;
+          $scope.description = nameobj.description;
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+          // 选择用户
+          $scope.changeUser = function (name) {
+            $scope.newUser = name;
+          }
+          // 选择角色
+          $scope.changeRole = function (name) {
+            $scope.newRole = name;
+          }
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+        }]
+      }).result;
+    };
+  }])
   .service('newconfirm', ['$uibModal', function ($uibModal) {
-  this.open = function (datacon) {
-    return $uibModal.open({
-      backdrop: 'static',
-      templateUrl: 'views/tpl/newconfirm.html',
-      size: 'default',
-      controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/newconfirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-        $scope.con =datacon;
+          $scope.con = datacon;
 
-        $scope.cancel = function () {
-          $uibModalInstance.dismiss();
-        };
-        $scope.ok = function () {
-          $uibModalInstance.close(true);
-        };
-      }]
-    }).result;
-  };
-}]).service('delconfirm', ['$uibModal', function ($uibModal) {
-  this.open = function (title,name) {
-    return $uibModal.open({
-      backdrop: 'static',
-      templateUrl: 'views/tpl/delConfirm.html',
-      size: 'default',
-      controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }]).service('delconfirm', ['$uibModal', function ($uibModal) {
+    this.open = function (title, name) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/delConfirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-        $scope.title =title;
-        $scope.name =name;
+          $scope.title = title;
+          $scope.name = name;
 
-        $scope.cancel = function () {
-          $uibModalInstance.dismiss();
-        };
-      }]
-    }).result;
-  };
-}])
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+        }]
+      }).result;
+    };
+  }])
   //用户管理 -  添加用户
   .service('user_Confirm', ['$uibModal', function ($uibModal) {
     this.open = function (datacon) {
@@ -173,16 +173,56 @@ angular.module('basic.services', ['ngResource'])
         backdrop: 'static',
         templateUrl: 'views/tpl/user_Confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+        controller: ['$scope', '$uibModalInstance', 'user', function ($scope, $uibModalInstance, user) {
+          $scope.input = {
+            username: '',
+            email: '',
+            description: ''
+          }
+          $scope.error = {
+            namenull: false,
+            emailnull: false
+          }
+          $scope.con = datacon;
+          $scope.$watch('input', function (n, o) {
+            if (n === o) {
+              return
+            }
+            if (n.username && n.username.length > 0) {
+              console.log('n', n);
+              $scope.error.namenull = false
+            }
+            if (n.email && n.email.length > 0) {
+              //console.log('n', n);
+              $scope.error.emailnull = false
+            }
 
-
-          $scope.con =datacon;
-
+          }, true)
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
+
           $scope.ok = function () {
-            $uibModalInstance.close(true);
+            if ($scope.input.username === '' && $scope.input.email === '') {
+              $scope.error.namenull = true;
+              $scope.error.emailnull = true;
+              return
+            }
+            if ($scope.input.username === '') {
+              $scope.error.namenull = true;
+              return
+            }
+            if ($scope.input.email === '') {
+              $scope.error.emailnull = true;
+              return
+            }
+            //console.log('$scope.input', $scope.input);
+            user.create($scope.input, function (data) {
+              $uibModalInstance.close(true);
+            }, function (err) {
+
+            })
+
           };
         }]
       }).result;
@@ -198,7 +238,7 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-          $scope.con =datacon;
+          $scope.con = datacon;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
@@ -210,7 +250,7 @@ angular.module('basic.services', ['ngResource'])
       }).result;
     };
   }])
-//用户管理 -  删除
+  //用户管理 -  删除
   .service('user_del_Confirm', ['$uibModal', function ($uibModal) {
     this.open = function (datacon) {
       return $uibModal.open({
@@ -220,7 +260,7 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-          $scope.con =datacon;
+          $scope.con = datacon;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
@@ -233,7 +273,7 @@ angular.module('basic.services', ['ngResource'])
     };
   }])
 
-//服务管理 -  添加
+  //服务管理 -  添加
   .service('service_Confirm', ['$uibModal', function ($uibModal) {
     this.open = function (datacon) {
       return $uibModal.open({
@@ -243,7 +283,7 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-          $scope.con =datacon;
+          $scope.con = datacon;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
@@ -256,7 +296,7 @@ angular.module('basic.services', ['ngResource'])
     };
   }])
 
-//服务管理 -  修改
+  //服务管理 -  修改
   .service('service_change_Confirm', ['$uibModal', function ($uibModal) {
     this.open = function (datacon) {
       return $uibModal.open({
@@ -266,7 +306,7 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-          $scope.con =datacon;
+          $scope.con = datacon;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
@@ -279,7 +319,7 @@ angular.module('basic.services', ['ngResource'])
     };
   }])
 
-//服务管理 -  删除
+  //服务管理 -  删除
   .service('service_del_Confirm', ['$uibModal', function ($uibModal) {
     this.open = function (datacon) {
       return $uibModal.open({
@@ -289,7 +329,7 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
 
-          $scope.con =datacon;
+          $scope.con = datacon;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
