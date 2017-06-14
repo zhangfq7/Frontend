@@ -7,6 +7,7 @@
      overflow: hidden;
      margin:0;
      padding:0;
+     padding-bottom:10px;
      >div{
        height: 160px;
        margin-top:30px;
@@ -27,7 +28,7 @@
          }
        }
        >div:hover{
-         box-shadow: 0px 0px 4px 2px #ccc;
+         box-shadow: 0px 0px 4px 2px #dedede;
          border-radius: 4px;
        }
 
@@ -36,45 +37,9 @@
        //padding-left:0;
      }
    }
-   .user-authorize{
-     margin-top:30px;
-     span{
-       width: 200px;
-       height: 50px;
-       line-height:50px;
-       color: #fff;
-       text-align: center;
-       background: #c256fc;
-       display: inline-block;
-       border-radius: 24px;
-       font-size: 20px;
-       cursor: pointer;
-     }
-   }
+
     padding: 0;
     margin: 0;
-    .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
-      border-top:none;
-      border-bottom:2px solid #ce1515 ;
-      outline : none;
-    }
-    .nav>li>a:hover{
-      background: none;
-      border-left-color:#fff;
-      border-top-color:#fff;
-    }
-    .nav-tabs>li>a{
-      border-right:1px solid #eaeaea;
-      padding:10px 40px;
-      outline : none;
-      font-size: 16px;
-      color:#333;
-      margin-right:0;
-      border-radius: 0;
-    }
-   .nav-tabs>li:nth-child(1)>a{
-     border-left:0 ;
-   }
     .tree-light{
       background: #ebebe9;
       font-size: 16px;
@@ -114,44 +79,103 @@
 
     }
 
-    .tenant-serve-list{
-      padding:0;
-      li{
-        overflow: hidden;
-        width: 100%;
-        height: 60px;
-        background: #f7f7f7;
-        margin-top:30px;
-        div{
-          height: 100%;
-          line-height: 60px;
-          padding:0;
-          a{
-            padding:5px 15px;
-            border-radius: 14px;
-            color: #c256fc;
-          }
-          a:hover{
-            background: #c256fc;
-            color:#fff;
-          }
-        }
-        span{
-          color: #999;
-        }
-      }
-      li:hover{
-        box-shadow: 0px 0px 4px 2px #ccc;
-        border-radius: 4px;
-      }
-      li div:nth-child(1){
-         img {
-           width: 60px;
-           height: 60px;
-           background: red;
+
+   .right-nav{
+     width: 100%;
+     overflow: hidden;
+     margin:0;
+     padding:0;
+     margin-top:30px;
+     li{
+       width: 140px;
+       height: 50px;
+       text-align: center;
+       font-size: 16px;
+       padding-bottom:10px;
+       float: left;
+       border-bottom: 1px solid #eaeaea;
+       cursor: pointer;
+       span{
+         display: inline-block;
+         width: 100%;
+         height: 40px;
+         line-height: 40px;
+         border-right: 1px solid #eaeaea;
+       }
+     }
+     li.active{
+       border-bottom:2px solid #ce1515 ;
+     }
+
+   }
+   .right-content{
+     padding:0;
+     margin:0;
+     width: 100%;
+     height: auto;
+     >li{
+       width: 100%;
+       height:auto;
+       display: none;
+       .user-authorize{
+         margin-top:30px;
+         span{
+           width: 200px;
+           height: 50px;
+           line-height:50px;
+           color: #fff;
+           text-align: center;
+           background: #c256fc;
+           display: inline-block;
+           border-radius: 24px;
+           font-size: 20px;
+           cursor: pointer;
          }
-      }
-    }
+       }
+       .tenant-serve-list{
+         padding:0;
+         li{
+           overflow: hidden;
+           width: 100%;
+           height: 60px;
+           background: #f7f7f7;
+           margin-top:30px;
+           div{
+             height: 100%;
+             line-height: 60px;
+             padding:0;
+             a{
+               padding:5px 15px;
+               border-radius: 14px;
+               color: #c256fc;
+             }
+             a:hover{
+               background: #c256fc;
+               color:#fff;
+             }
+           }
+           span{
+             color: #999;
+           }
+         }
+         li:hover{
+           box-shadow: 0px 0px 4px 2px #dedede;
+           border-radius: 4px;
+         }
+         li div:nth-child(1){
+           img {
+             width: 60px;
+             height: 60px;
+             background: red;
+           }
+         }
+       }
+     }
+     >li.showcon{
+       display: block;
+     }
+   }
 
   }
+
 
