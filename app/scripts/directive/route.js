@@ -14,8 +14,8 @@ angular.module('basic.router', ['ui.router'])
         controller: 'ConsoleCtrl',
         abstract: true,
         resolve:{
-          test: ['$http', function($http){
-            return 1;
+          tree: ['tenant', function(tenant){
+            return tenant.query().$promise;
           }]
         }
 
