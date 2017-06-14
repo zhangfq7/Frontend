@@ -52,6 +52,7 @@ angular.module('basic')
           if ($scope.treemap[item.parentId]) {
             $scope.treemap[item.parentId].children.push(item)
           }else {
+            delete $scope.treemap[item.id].parentId
             $scope.dataForTheTree.push($scope.treemap[item.id])
           }
         }else {
@@ -121,7 +122,7 @@ angular.module('basic')
       // 左侧导航切换
       $scope.showSelected = function (node) {
         console.log(node);
-        if (node.name == '中信集团') {
+        if (!node.parentId) {
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
