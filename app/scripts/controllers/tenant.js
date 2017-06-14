@@ -88,19 +88,31 @@ angular.module('basic')
         $scope.grid.showCompany = true;
         $scope.grid.showProject = false;
         $scope.grid.showChildnode = false;
-        $('.nav-tabs>li').eq(0).addClass('active').siblings.removeClass('active');
+        $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
+        $('.right-content>li').eq(0).show().siblings().hide();
       }else if(node.name == '中信银行'){
         $scope.grid.showCompany = false;
         $scope.grid.showProject = true;
         $scope.grid.showChildnode = false;
-        $('.nav-tabs>li').eq(1).addClass('active').siblings.removeClass('active');
+        $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+        $('.right-content>li').eq(1).show().siblings().hide();
       }else{
         $scope.grid.showCompany = false;
         $scope.grid.showProject = false;
         $scope.grid.showChildnode = true;
-        $('.nav-tabs>li').eq(2).addClass('active').siblings.removeClass('active');
+        $('.right-nav>li').eq(2).addClass('active').siblings().removeClass('active');
+        $('.right-content>li').eq(2).show().siblings().hide();
       }
     }
+    //右侧tabel切换
+    $(function(){
+      $('.right-nav>li').click(function(){
+        console.log( $(this).index())
+        var idx = $(this).index();
+        $('.right-nav>li').eq(idx).addClass('active').siblings().removeClass('active');
+        $('.right-content>li').eq(idx).show().siblings().hide();
+      })
+    })
     // 删除用户
     $scope.delUser = function(name){
       delconfirm.open('用户','lalala')

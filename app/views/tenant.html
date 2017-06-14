@@ -9,120 +9,94 @@
     {{node.name}}
   </div>
    <div class="col-md-10">
+     <ul class="right-nav">
+       <li  class="active" ng-show="grid.showCompany" ng-click="changeCon()"><span>子公司列表</span></li>
+       <li ng-show="grid.showProject" ng-click="changeCon()"><span>项目列表</span></li>
+       <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>基本信息</span></li>
+       <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>服务列表</span></li>
+       <li ng-click="changeCon()"><span>资源报告</span></li>
+       <li ng-click="changeCon()"><span>用户列表</span></li>
+     </ul>
+     <ol class="right-content">
+       <li class="showcon">
+         <div class="row project-list">
+             <div class="col-md-3">
+               <div>
+                 <img src="../images/role_company.png" alt="">
+                 <p>中信</p>
+               </div>
+             </div>
+         </div>
+       </li>
+       <li>
+         <div class="row project-list">
+           <div class="col-md-3">
+             <div>
+               <img src="../images/role_company.png" alt="">
+               <p>中信</p>
+             </div>
+           </div>
+         </div>
+       </li>
+       <li>基本信息</li>
+       <li>
+         <ul class="tenant-serve-list">
+           <li class="row">
+             <div class="col-md-1"><img src="" alt=""></div>
+             <div class="col-md-2"><span>服务名</span>&nbsp;&nbsp;HDFS</div>
+             <div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
+             <div class="col-md-2">配额&nbsp;:&nbsp;20TB</div>
+             <div class="col-md-2">文件数&nbsp;:&nbsp;1000</div>
+             <div class="col-md-2"><a ng-click="checkInfo()" href="#">访问信息</a></div>
+           </li>
+         </ul>
+         <div class="page-style">
+           <uib-pagination
+             ng-model="grid.page"
+             total-items="grid.total"
+             items-per-page="grid.size"
+             class="pagination-sm"
+             boundary-links="true"
+             max-size="12"
+             rotate="true"
+             previous-text="上一页"
+             next-text="下一页"
+             first-text="首页"
+             last-text="末页">
+           </uib-pagination>
+         </div>
+       </li>
+       <li>资源报告</li>
+       <li>
+         <div class="user-authorize"><span ng-click="userAuthorize()">用户授权</span></div>
+         <ul class="tenant-serve-list">
+           <li class="row">
+             <div class="col-md-1"><img src="" alt=""></div>
+             <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;用户1</div>
+             <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;项目管理员</div>
+             <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;用户描述用户描述</div>
+             <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(name)">删除</a></div>
 
-        <uib-tabset class="tab-default">
-          <uib-tab index="5" ng-show="grid.showCompany">
-            <uib-tab-heading >
-              子公司列表
-            </uib-tab-heading>
-            <div class="row project-list">
-                <div class="col-md-3">
-                    <div>
-                      <img src="../images/role_company.png" alt="">
-                      <p>中信</p>
-                    </div>
-                </div>
-                <div class="col-md-3"><div>2</div></div>
-                <div class="col-md-3"><div>3</div></div>
-                <div class="col-md-3"><div>4</div></div>
-                <div class="col-md-3"><div>5</div></div>
-                <div class="col-md-3"><div>6</div></div>
-            </div>
-          </uib-tab>
-          <uib-tab index="6"  ng-show="grid.showProject">
-            <uib-tab-heading >
-              项目列表
-            </uib-tab-heading>
-            <div class="row project-list">
-              <div class="col-md-3">
-                <div>
-                  <img src="../images/oc.png" alt="">
-                  <p>中信</p>
-                </div>
-              </div>
-              <div class="col-md-3"><div>2</div></div>
-              <div class="col-md-3"><div>3</div></div>
-              <div class="col-md-3"><div>4</div></div>
-              <div class="col-md-3"><div>5</div></div>
-              <div class="col-md-3"><div>6</div></div>
-            </div>
-          </uib-tab>
-           <uib-tab index="1"  ng-show="grid.showChildnode">
-                <uib-tab-heading >
-                  基本信息
-                </uib-tab-heading>
-                <div class="tab-con">1111</div>
-           </uib-tab>
-          <uib-tab index="4"  ng-show="grid.showChildnode">
-            <uib-tab-heading >
-              服务列表
-            </uib-tab-heading>
-            <ul class="tenant-serve-list">
-              <li class="row">
-                <div class="col-md-1"><img src="" alt=""></div>
-                <div class="col-md-2"><span>服务名</span>&nbsp;&nbsp;HDFS</div>
-                <div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
-                <div class="col-md-2">配额&nbsp;:&nbsp;20TB</div>
-                <div class="col-md-2">文件数&nbsp;:&nbsp;1000</div>
-                <div class="col-md-2"><a ng-click="checkInfo()" href="#">访问信息</a></div>
-              </li>
-              <li>2</li>
-            </ul>
-            <div class="page-style">
-              <uib-pagination
-                ng-model="grid.page"
-                total-items="grid.total"
-                items-per-page="grid.size"
-                class="pagination-sm"
-                boundary-links="true"
-                max-size="12"
-                rotate="true"
-                previous-text="上一页"
-                next-text="下一页"
-                first-text="首页"
-                last-text="末页">
-              </uib-pagination>
-            </div>
-          </uib-tab>
-          <uib-tab index="2" >
-            <uib-tab-heading >
-              资源报告
-            </uib-tab-heading>
-            <div class="tab-con">资源报告</div>
-          </uib-tab>
-          <uib-tab index="3" >
-            <uib-tab-heading >
-              用户列表
-            </uib-tab-heading>
-            <div class="user-authorize"><span ng-click="userAuthorize()">用户授权</span></div>
-            <ul class="tenant-serve-list">
-              <li class="row">
-                <div class="col-md-1"><img src="" alt=""></div>
-                <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;用户1</div>
-                <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;项目管理员</div>
-                <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;用户描述用户描述</div>
-                <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(name)">删除</a></div>
-
-              </li>
-              <li>2</li>
-            </ul>
-            <div class="page-style">
-              <uib-pagination
-                ng-model="grid.page"
-                total-items="grid.total"
-                items-per-page="grid.size"
-                class="pagination-sm"
-                boundary-links="true"
-                max-size="12"
-                rotate="true"
-                previous-text="上一页"
-                next-text="下一页"
-                first-text="首页"
-                last-text="末页">
-              </uib-pagination>
-            </div>
-
-
+           </li>
+           <li>2</li>
+         </ul>
+         <div class="page-style">
+           <uib-pagination
+             ng-model="grid.page"
+             total-items="grid.total"
+             items-per-page="grid.size"
+             class="pagination-sm"
+             boundary-links="true"
+             max-size="12"
+             rotate="true"
+             previous-text="上一页"
+             next-text="下一页"
+             first-text="首页"
+             last-text="末页">
+           </uib-pagination>
+         </div>
+       </li>
+     </ol>
    </div>
 
 </div>
