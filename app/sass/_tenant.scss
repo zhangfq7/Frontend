@@ -79,13 +79,20 @@
 
     }
 
-
+  .right-top{
+    height: 50px;
+    line-height: 50px;
+    background: #f7f7f7;
+    padding-left: 30px;
+    font-size: 16px;
+  }
    .right-nav{
      width: 100%;
      overflow: hidden;
      margin:0;
      padding:0;
      margin-top:30px;
+     padding-left:30px;
      li{
        width: 140px;
        height: 50px;
@@ -109,7 +116,7 @@
 
    }
    .right-content{
-     padding:0;
+     padding:0px 30px;
      margin:0;
      width: 100%;
      height: auto;
@@ -168,6 +175,20 @@
              height: 60px;
              background: red;
            }
+         }
+       }
+       .resource-wrop{
+         width: 100%;
+         height:auto;
+         background: #f7f7f7;
+         padding:20px;
+         .resource-top{
+           height: 20px;
+           line-height:20px;
+           padding-bottom: 20px;
+            .check-btn{
+
+            }
          }
        }
      }

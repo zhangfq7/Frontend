@@ -8,7 +8,8 @@
        selected-node="node1">
     {{node.name}}
   </div>
-   <div class="col-md-10">
+   <div class="col-md-10" style="margin:0;padding:0;">
+     <div class="right-top">{{grid.roleTitle}}</div>
      <ul class="right-nav">
        <li  class="active" ng-show="grid.showCompany" ng-click="changeCon()"><span>子公司列表</span></li>
        <li ng-show="grid.showProject" ng-click="changeCon()"><span>项目列表</span></li>
@@ -66,7 +67,14 @@
            </uib-pagination>
          </div>
        </li>
-       <li>资源报告</li>
+       <li>
+          <div class="resource-wrop">
+              <div class="row resource-top">
+                 <div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce计算资源配置</div>
+                 <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn class="check-btn"></sapn></div>
+              </div>
+          </div>
+       </li>
        <li>
          <div class="user-authorize"><span ng-click="userAuthorize()">用户授权</span></div>
          <ul class="tenant-serve-list">
