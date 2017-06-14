@@ -114,4 +114,49 @@ angular.module('basic')
     $scope.delUser = function(name){
       delconfirm.open('用户','lalala')
     }
+    //资源状态  tp, dec, percent, quota, color
+    $scope.chartConfig = {
+      options: {
+        title: {
+          text: ''
+        },
+        tooltip: {
+          enabled: false
+        },
+        credits: {
+          enabled: false
+        },
+        subtitle: {
+          text: '222',
+          style: {
+            lineHeight: '20px'
+          },
+          align: 'center',
+          verticalAlign: 'middle',
+          x: 0,
+          y: -10
+
+        }
+      },
+      series: [{
+        type: 'pie',
+        colors: ['#f6a540', '#c6c6c6'],
+        data: [
+          ['已用', percent],
+          ['未使用', 100 - percent]
+        ],
+        dataLabels: {
+          enabled: false
+        },
+        innerSize: '88%'
+      }],
+      size: {
+        height: 200,
+        width: 200
+      },
+
+      func: function (chart) {
+        //setup some logic for the chart
+      }
+    };
   }]);
