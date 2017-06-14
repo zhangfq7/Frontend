@@ -39,7 +39,7 @@ angular.module('basic', [
   'treeControl',
 ]).constant('GLOBAL', {
     size: 10,
-    host: './oapi/v1',
+    host: './ocmanager/v1/api',
     host_k8s: './api/v1',
     host_repos: './v1/repos',
     host_registry: './registry/api',
@@ -71,8 +71,9 @@ angular.module('basic', [
   }])
   .run(['$rootScope', '$state', function ($rootScope) {
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-      console.log('toState.name', toState.name);
+
       $rootScope.tab = toState.name;
+      console.log('$rootScope.tab', $rootScope.tab);
     });
 
     //$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {

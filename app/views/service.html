@@ -4,14 +4,14 @@
   <div class="set_ser_btn">
     <p ng-click="addservice()">添加服务</p></div>
   <ul class="role_mange_list">
-    <li class="role_li">
+    <li class="role_li" ng-repeat="item in serves">
       <div class="role_block">
           <div class="set_top">
-            <img src="images/s_HBase.png" class="set_top_tu">
+            <img src="images/{{item.servicename}}.png" onerror="javascript:this.src='images/hdfs.png' " class="set_top_tu">
           </div>
         <div class="set_bt">
-          <p>HBase</p>
-          <p>提供 HBase 服务</p>
+          <p>{{item.servicename}}</p>
+          <p>{{item.description}}</p>
         </div>
       </div>
       <div class="role_block_h" >
@@ -22,203 +22,7 @@
         </div>
         <div class="service_one service_two">
           <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">HBase</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/s_HIVE.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>Hive</p>
-          <p>提供 Hive 数据库服务</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">OCDP：Hive</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">Hive</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/s_HDFS.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>HDFS</p>
-          <p>提供 HDFS 文件存储服务</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">OCDP：HDFS</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">HDFS</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/s_MapReduce.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>MapReduce</p>
-          <p>提供 MapReduce 分布式计算服务能力</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">OCDP：MapReduce</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">YARN</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <img src="images/s_Spark.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>Spark</p>
-          <p>提供 Spark 计算服务能力</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">OCDP：Spark</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">Spark</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <div class="set_top_tu"></div>
-          <img src="images/home_mongo.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>MongoDB</p>
-          <p>提供 MongoDB 数据库服务</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">MongoDB</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">MongoDB</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <div class="set_top_tu"></div>
-          <img src="images/s_MySQL.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>MySQL</p>
-          <p>提供 MySQL 数据库服务</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">MySQL</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">R-DBMS</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <div class="set_top_tu"></div>
-          <img src="images/s_ORACLE.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>Oracle</p>
-          <p>提供 Oracle 数据库服务</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">Oracle</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">R-DBMS</p>
-        </div>
-
-        <p class="servie_change" ng-click="changeservice()">修改</p>
-      </div>
-    </li>
-
-    <li class="role_li">
-      <div class="role_block">
-        <div class="set_top">
-          <div class="set_top_tu"></div>
-          <img src="images/home_genplum.png" class="set_top_tu">
-        </div>
-        <div class="set_bt">
-          <p>GreenPlum</p>
-          <p>提供 GreenPlum 数据库服务</p>
-        </div>
-      </div>
-      <div class="role_block_h" >
-        <div class="service_one">
-          <p class="serv_tit">服务来源</p>
-          <p class="serv_detail">GreenPlum</p>
-        </div>
-        <div class="service_one service_two">
-          <p class="serv_tit">服务类型</p>
-          <p class="serv_detail">GreenPlum</p>
+          <p class="serv_detail">{{item.servicename}}</p>
         </div>
 
         <p class="servie_change" ng-click="changeservice()">修改</p>

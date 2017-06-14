@@ -14,8 +14,8 @@ if (env === 'dev') {
   app.use(require('connect-livereload')());
   app.use("/fonts", express.static("app/bower_components/bootstrap/fonts"));
 }
-app.use('/signin', proxy('/signin', {target: 'http://mobile-bj.app-dacp.dataos.io', changeOrigin: true}));
-app.use('/oapi/', proxy('/oapi/', {target: 'https://10.1.130.134:8443', changeOrigin: true, secure: false}));
+app.use('/ocmanager', proxy({target: 'http://10.1.236.113:9090', changeOrigin: true}));
+app.use('/oapi/', proxy({target: 'https://10.1.130.134:8443', changeOrigin: true, secure: false}));
 
 app.use(express.static(config[env].dist));
 app.use(favicon(path.join(__dirname, '../', config[env].dist, '/favicon.ico')));

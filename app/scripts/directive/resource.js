@@ -1,10 +1,24 @@
 'use strict';
 angular.module('basic.resource', ['ngResource'])
-  .factory('User', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var User = $resource(GLOBAL.host + '/users/:name', {name: '@name', region: '@region'}, {
-      create: {method: 'POST'}
+  .factory('role', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var role = $resource(GLOBAL.host + '/role', {}, {
     });
-    return User;
-  }]);
+    return role;
+  }])
+  .factory('service', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var service = $resource(GLOBAL.host + '/service', {}, {
+    });
+    return service;
+  }])
+  .factory('user', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var user = $resource(GLOBAL.host + '/user', {}, {
+    });
+    return user;
+  }])
+.factory('tenant', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenant = $resource(GLOBAL.host + '/tenant', {}, {
+    });
+    return tenant;
+  }])
 
 

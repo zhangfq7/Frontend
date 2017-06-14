@@ -4,8 +4,7 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm', 'delconfirm',function ($rootScope, $scope,Confirm,newconfirm,delconfirm) {
-    $rootScope.tab = "tenant";
+  .controller('TenantCtrl',['$rootScope', '$scope','Confirm','newconfirm','tenant','delconfirm', function ($rootScope, $scope,Confirm,newconfirm,tenant,delconfirm) {
     var thisheight = $(window).height()-80;
     $('.tree-light').height(thisheight);
     $scope.treeOptions = {
@@ -76,6 +75,12 @@ angular.module('basic')
     $scope.updataUser = function(){
       Confirm.open([{n:'a'},{n:'b'},{n:'c'},{n:'d'}],[{n:'2'},{n:'3'},{n:'4'},{n:'5'}],{oldUser:'olduser',oldRole:'oldRole',description:"lalalalla"})
     }
+    tenant.query(function (data) {
+      console.log('data', data);
+      $scope.users=data;
+    }, function (err) {
+      console.log('err', err);
+    })
     // 左侧导航切换
     $scope.showSelected = function(node){
       console.log(node);
@@ -112,4 +117,5 @@ angular.module('basic')
     $scope.delUser = function(name){
       delconfirm.open('用户','lalala')
     }
+
   }]);
