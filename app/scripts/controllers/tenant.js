@@ -126,7 +126,13 @@ angular.module('basic')
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(0).show().siblings().hide();
-        }else {
+        }else if(node.children.length > 0&&node.parentId){
+            $scope.grid.showCompany = false;
+            $scope.grid.showProject = true;
+            $scope.grid.showChildnode = false;
+            $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+            $('.right-content>li').eq(1).show().siblings().hide();
+        } else {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = true;
