@@ -71,8 +71,9 @@ angular.module('basic', [
   }])
   .run(['$rootScope', '$state', function ($rootScope) {
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-      console.log('toState.name', toState.name);
+
       $rootScope.tab = toState.name;
+      console.log('$rootScope.tab', $rootScope.tab);
     });
 
     //$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
