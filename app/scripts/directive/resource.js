@@ -15,10 +15,15 @@ angular.module('basic.resource', ['ngResource'])
     });
     return user;
   }])
-.factory('tenant', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var tenant = $resource(GLOBAL.host + '/tenant', {}, {
+  .factory('tenant', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenant = $resource(GLOBAL.host + '/tenant/:id', {id:'@id'}, {
     });
     return tenant;
+  }])
+  .factory('tenantchild', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenantchild = $resource(GLOBAL.host + '/tenant/:id/children', {id:'@id'}, {
+    });
+    return tenantchild;
   }])
 
 
