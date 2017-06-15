@@ -121,20 +121,21 @@ angular.module('basic')
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
-        $scope.grid.roleTitle = node.name;
-        console.log(node);
-        if (node.name == '中信集团') {
+        //console.log(node);
+        $scope.grid.showChildnode = false;
+        if (node.children.length > 0&&node.parentId) {
+          $scope.grid.showCompany = false;
+          $scope.grid.showProject = true;
+          $scope.grid.roleTitle = node.name;
+          $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+          $('.right-content>li').eq(1).show().siblings().hide();
+
+        }else if(node.children.length > 0){
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(0).show().siblings().hide();
-        } else if (node.name == '中信银行') {
-          $scope.grid.showCompany = false;
-          $scope.grid.showProject = true;
-          $scope.grid.showChildnode = false;
-          $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
-          $('.right-content>li').eq(1).show().siblings().hide();
         } else {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
@@ -142,6 +143,17 @@ angular.module('basic')
           $('.right-nav>li').eq(2).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(2).show().siblings().hide();
         }
+        //if (!node.parentId) {
+        //
+        //} else if (node.name == '中信银行') {
+        //  $scope.grid.showCompany = false;
+        //  $scope.grid.showProject = true;
+        //  $scope.grid.showChildnode = false;
+        //  $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+        //  $('.right-content>li').eq(1).show().siblings().hide();
+        //} else {
+        //
+        //}
       }
       //右侧tabel切换
       $(function () {
