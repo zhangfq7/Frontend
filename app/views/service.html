@@ -1,0 +1,34 @@
+<!--服务管理页面-->
+<div class="service_page">
+<div class="set_mange">
+  <div class="set_ser_btn">
+    <p ng-click="addservice()">添加服务</p></div>
+  <ul class="role_mange_list">
+    <li class="role_li" ng-repeat="item in serves">
+      <div class="role_block">
+          <div class="set_top">
+            <img src="images/{{item.servicename}}.png" onerror="javascript:this.src='images/pic_nor.png' " class="set_top_tu">
+          </div>
+        <div class="set_bt">
+          <p>{{item.servicename}}</p>
+          <p>{{item.description}}</p>
+        </div>
+      </div>
+      <div class="role_block_h" >
+        <span class="block_close" ng-click="delservice()"></span>
+        <div class="service_one">
+          <p class="serv_tit">服务来源</p>
+          <p class="serv_detail">OCDP：HBase</p>
+        </div>
+        <div class="service_one service_two">
+          <p class="serv_tit">服务类型</p>
+          <p class="serv_detail">{{item.servicename}}</p>
+        </div>
+
+        <p class="servie_change" ng-click="changeservice()">修改</p>
+      </div>
+    </li>
+
+  </ul>
+</div>
+</div>

@@ -4,8 +4,8 @@
  * Controller of the dataModel
  */
 angular.module('basic')
-  .controller('DataModelCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
-    $rootScope.tab = "dataModel";
+  .controller('RoleCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
+    //$rootScope.tab = "role";
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
