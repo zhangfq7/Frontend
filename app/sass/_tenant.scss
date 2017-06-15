@@ -178,4 +178,36 @@
 
   }
 
+ .nav-tenant{
+   .right-content{
+     >li{
+       .basic_block{
+         height:auto;border:1px solid #f0f0f0;margin-top:30px;
+         >li{
+           height:48px;margin-top:0;background:#fff;
+            overflow:inherit;display:table-row;
+           >div{
+             line-height:48px;
+           }
+           >div:nth-child(1){
+             display:table-cell;vertical-align:middle;text-align:center;width:14%;
+             border-bottom:1px solid #f0f0f0;text-align:left;text-indent:20px;color:#999;
+           }
+           >div:nth-child(2){
+             display:table-cell;width:86%;padding:10px;line-height:24px;text-align:justify;
+             border-bottom:1px solid #f0f0f0;
+           }
+         }
+         >li:last-child{
+           border-bottom:0;
+         }
+        >li:hover{
+          box-shadow:none;
+        }
+       }
+     }
+   }
+ }
+
+
 
