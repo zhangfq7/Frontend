@@ -96,6 +96,7 @@ angular.module('basic')
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
+        roleTitle:tree[1].name
       };
       ///访问信息
       $scope.checkInfo = function () {
@@ -120,6 +121,7 @@ angular.module('basic')
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
+        $scope.grid.roleTitle = node.name;
         console.log(node);
         if (node.name == '中信集团') {
           $scope.grid.showCompany = true;
