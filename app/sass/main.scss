@@ -621,7 +621,7 @@ table a{
       width: 475px;
       min-height: 120px;
       border-color:#eaeaea;
-      color:#333;padding:10px;font-size:14px;
+      color:#333;padding:10px;font-size:14px;word-break:break-all;
     }
     .error_block_tit p{
       margin:5px;
@@ -698,6 +698,7 @@ table a{
 }
 input,textarea{outline:none;}
 textarea{resize:none;}
+:focus{ outline: 0; }
 /*错误提示*/
 .block_close{background:url(../images/closenew2.png) no-repeat center;width:15px;height:15px;display:block;position:absolute;right:10px;top:10px;
 cursor:pointer;padding:14px;}
@@ -714,6 +715,8 @@ cursor:pointer;padding:14px;}
 .confirm-select .service_drop{border-radius:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;top:27px;border:1px solid #eaeaea;border-top:0;
 margin:0;padding:0;}
 .dropdown-menu>li>a{padding:8px 9px;}
+/*输入框获取焦点*/
+input:focus,textarea:focus{border-color: #c9c9c9!important;}
 
 
 
