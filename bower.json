@@ -34,7 +34,8 @@
     "angular-ui-router": "^1.0.3",
     "bootstrap-treeview": "^1.2.0",
     "angular-tree-control": "^0.2.28",
-    "highcharts-ng": "^1.1.0"
+    "highcharts": "^4.2.3",
+    "highcharts-ng": "^0.0.11"
   },
   "devDependencies": {
     "angular-mocks": "1.4.5"
@@ -164,12 +165,17 @@
     "angular-chart.js": {
       "main": "dist/angular-chart.min.js"
     },
+    "highcharts": {
+      "main": [
+        "highcharts.js"
+      ]
+    },
     "highcharts-ng": {
       "main": [
-        "dist/highcharts-ng.min.js",
-        "dist/highcharts-ng.css"
+        "dist/highcharts-ng.js"
       ]
     }
+
   },
   "resolutions": {
     "angular": "1.4.5",

@@ -129,7 +129,7 @@ angular.module('basic')
         subtitle: {
           text: '222',
           style: {
-            lineHeight: '20px'
+            lineHeight: '12px'
           },
           align: 'center',
           verticalAlign: 'middle',
@@ -142,8 +142,8 @@ angular.module('basic')
         type: 'pie',
         colors: ['#f6a540', '#c6c6c6'],
         data: [
-          ['已用', percent],
-          ['未使用', 100 - percent]
+          ['已用', 10],
+          ['未使用', 100 - 10]
         ],
         dataLabels: {
           enabled: false
