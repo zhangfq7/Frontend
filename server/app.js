@@ -11,7 +11,7 @@ let app = express();
 let env = config.env || 'dev';
 
 if (env === 'dev') {
-  app.use(require('connect-livereload')());
+  //app.use(require('connect-livereload')());
   app.use("/fonts", express.static("app/bower_components/bootstrap/fonts"));
 }
 app.use('/ocmanager', proxy({target: 'http://10.1.236.113:9090', changeOrigin: true}));
