@@ -183,28 +183,60 @@
         background: #f7f7f7;
         padding:20px;
         .resource-top{
-          height: 30px;
+          //height: 30px;
           line-height:30px;
-          margin-bottom:20px;
+          //margin-bottom:20px;
           >div{
             height: 30px;
             .check-btn{
               display: inline-block;
               width: 28px;
               height: 28px;
-              background: #000;
-              border-radius: 15px;
+              background:url("../images/listpic1.png");
+              -webkit-background-size:28px;
+              background-size:28px;
               cursor: pointer;
+              transform: rotate(0deg);
+              -ms-transform: rotate(0deg);             /* IE 9 */
+              -webkit-transform: rotate(0deg);      /* Safari and Chrome */
+              -o-transform: rotate(0deg);              /* Opera */
+              -moz-transform: rotate(0deg);         /* Firefox */
+            }
+            .rotate{
+              display: inline-block;
+              width: 28px;
+              height: 28px;
+              background:url("../images/listpic1.png");
+              -webkit-background-size:28px;
+              background-size:28px;
+              cursor: pointer;
+              transform: rotate(-90deg);
+              -ms-transform: rotate(-90deg);             /* IE 9 */
+              -webkit-transform: rotate(-90deg);      /* Safari and Chrome */
+              -o-transform: rotate(-90deg);              /* Opera */
+              -moz-transform: rotate(-90deg);         /* Firefox */
             }
           }
 
         }
         .resource-list{
           background: #fff;
+          margin-top:25px;
           .list-con{
             width: 100%;
             border-top:1px solid #f7f7f7;
             padding:20px;
+            .chart-title{
+              padding-left:30px;
+              color: #999;
+            }
+            .run-num{
+              font-size: 40px;
+              color: #ff304a;
+              height: 150px;
+              line-height:150px;
+              padding-right:30px;
+            }
           }
         }
       }
