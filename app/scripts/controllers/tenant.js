@@ -115,48 +115,32 @@ angular.module('basic')
       delconfirm.open('用户','lalala')
     }
     //资源状态  tp, dec, percent, quota, color
-    $scope.chartConfig = {
+    $scope.charts = {
       options: {
-        title: {
-          text: ''
+        chart: {
+          type: 'line',
+          zoomType: 'x'
         },
         tooltip: {
-          enabled: false
+          xDateFormat: '%Y-%m-%d %H:%M:%S',
+          valueDecimals: 2
         },
-        credits: {
-          enabled: false
-        },
-        subtitle: {
-          text: '222',
-          style: {
-            lineHeight: '12px'
+        xAxis: {
+          type: 'datetime',
+          dateTimeLabelFormats: {
+            hour: '%H:%M'
           },
-          align: 'center',
-          verticalAlign: 'middle',
-          x: 0,
-          y: -10
-
+          minRange: 1000, // 不能放大超过1s
+          minTickInterval: 1000 // 放大间隔最小为1s
         }
       },
-      series: [{
-        type: 'pie',
-        colors: ['#f6a540', '#c6c6c6'],
-        data: [
-          ['已用', 10],
-          ['未使用', 100 - 10]
-        ],
-        dataLabels: {
-          enabled: false
-        },
-        innerSize: '88%'
-      }],
-      size: {
-        height: 200,
-        width: 200
+      series: {
+        data: [100.0, 99.0, 100.0, 98.039216, 100.0, 99.0, 100.0, 100.0, 100.0, 100.0, 97.087379, 99.0, 99.009901, 100.0, 99.0, 100.0, 99.009901, 100.0, 100.0, 98.039216, 100.0, 100.0, 100.0, 99.009901, 99.009901, 100.0, 99.009901, 100.0, 99.0, 100.0, 100.0, 99.0, 100.0, 99.009901, 100.0, 99.0, 99.0, 99.009901, 99.009901, 100.0, 100.0, 99.009901, 100.0, 99.009901, 100.0, 99.0, 98.039216, 100.0, 99.0, 100.0, 99.0, 100.0, 100.0, 100.0, 100.0, 100.0, 99.0, 100.0, 100.0],
+        name: '192.168.17.136'
       },
-
-      func: function (chart) {
-        //setup some logic for the chart
+      title: {
+        text: null
       }
-    };
+    }
+
   }]);
