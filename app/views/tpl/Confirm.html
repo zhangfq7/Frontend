@@ -14,13 +14,13 @@
       <div class="confirm-select">
         <div uib-dropdown on-toggle="toggled(open)">
           <a href="javascript:void(0);" class="" uib-dropdown-toggle>
-            <span class="select-title" title={{newUser|| userList[0]['n']}}>{{newUser || userList[0]['n']}}</span>
+            <span class="select-title" title={{newUser|| userList[0]['userName']}}>{{newUser || userList[0]['userName']}}</span>
             <b class="ser_bg_btn"></b>
           </a>
           <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
-            <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.n)">
+            <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.userName)">
               <a href="javascript:void(0);">
-                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.n}}">{{item.n}}</span>
+                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.userName}}">{{item.userName}}</span>
               </a></li>
           </ul>
 
@@ -32,13 +32,13 @@
       <div class="confirm-select">
         <div uib-dropdown on-toggle="toggled(open)">
           <a href="javascript:void(0);" class="" uib-dropdown-toggle>
-            <span class="select-title" title={{newRole|| roleList[0]['n']}}>{{newRole || roleList[0]['n']}}</span>
+            <span class="select-title" title={{newRole|| roleList[0]['userName']}}>{{newRole || roleList[0]['userName']}}</span>
             <b class="ser_bg_btn"></b>
           </a>
           <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
-            <li class="zx_active" ng-repeat="item in roleList" ng-click="changeRole(item.n)">
+            <li class="zx_active" ng-repeat="item in roleList" ng-click="changeRole(item.userName)">
               <a href="javascript:void(0);">
-                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.n}}">{{item.n}}</span>
+                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.userName}}">{{item.userName}}</span>
               </a></li>
           </ul>
 
