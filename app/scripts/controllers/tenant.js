@@ -45,7 +45,7 @@ angular.module('basic')
         $scope.treemap[item.id] = item
         $scope.treemap[item.id].children = [];
       })
-      //console.log('$scope.treemap', $scope.treemap);
+      console.log('$scope.treemap', $scope.treemap);
       angular.forEach(tree, function (item, i) {
         if (item.parentId) {
           //console.log('$scope.treemap[item.parentId]', $scope.treemap[item.parentId]);
@@ -61,7 +61,7 @@ angular.module('basic')
       })
 
 
-      console.log('$scope.treemap', $scope.dataForTheTree[0].id);
+      console.log('$scope.treemap', $scope.dataForTheTree);
       tenantuser.query({id:$scope.dataForTheTree[1].id}, function (users) {
         console.log('user', users);
         $scope.users=users
