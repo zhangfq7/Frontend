@@ -1,117 +1,167 @@
-<div class="row nav-tenant" style="margin:0;padding:0;margin-top:-40px;background:#fff;">
-    <!--<div id="tree" class="col-md-3" style="height: 100%; background: #ebebe9;">-->
-    <!--</div>-->
+<div class="row nav-tenant" style="margin:0;padding:0">
+  <!--<div id="tree" class="col-md-3" style="height: 100%; background: #ebebe9;">-->
+  <!--</div>-->
   <div  treecontrol class="col-md-2 tree-light"
-       tree-model="dataForTheTree"
-       options="treeOptions"
-       on-selection="showSelected(node)"
-       selected-node="node1">
+        tree-model="dataForTheTree"
+        options="treeOptions"
+        on-selection="showSelected(node)"
+        selected-node="node1">
     {{node.name}}
   </div>
-   <div class="col-md-10">
-     <ul class="right-nav">
-       <li  class="active" ng-show="grid.showCompany" ng-click="changeCon()"><span>子公司列表</span></li>
-       <li ng-show="grid.showProject" ng-click="changeCon()"><span>项目列表</span></li>
-       <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>基本信息</span></li>
-       <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>服务列表</span></li>
-       <li ng-click="changeCon()"><span>资源报告</span></li>
-       <li ng-click="changeCon()"><span>用户列表</span></li>
-     </ul>
-     <ol class="right-content">
-       <li class="showcon">
-         <div class="row project-list">
-             <div class="col-md-3">
-               <div>
-                 <img src="../images/role_company.png" alt="">
-                 <p>中信</p>
-               </div>
-             </div>
-         </div>
-       </li>
-       <li>
-         <div class="row project-list">
-           <div class="col-md-3">
-             <div>
-               <img src="../images/role_company.png" alt="">
-               <p>中信</p>
-             </div>
-           </div>
-         </div>
-       </li>
-       <li>
-         <ul class="tenant-serve-list basic_block">
-            <li>
-              <div>租户名称</div>
-              <div>中信银行，项目1</div>
-            </li>
-           <li>
-             <div>租户描述</div>
-             <div>信息部，运营中心</div>
-           </li>
-           <li>
-             <div>租户其他信息</div>
-             <div>中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1</div>
-           </li>
-         </ul>
-       </li>
-       <li>
-         <ul class="tenant-serve-list">
-           <li class="row">
-             <div class="col-md-1"><img src="" alt=""></div>
-             <div class="col-md-2"><span>服务名</span>&nbsp;&nbsp;HDFS</div>
-             <div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
-             <div class="col-md-2">配额&nbsp;:&nbsp;20TB</div>
-             <div class="col-md-2">文件数&nbsp;:&nbsp;1000</div>
-             <div class="col-md-2"><a ng-click="checkInfo()" href="#">访问信息</a></div>
-           </li>
-         </ul>
-         <div class="page-style">
-           <uib-pagination
-             ng-model="grid.page"
-             total-items="grid.total"
-             items-per-page="grid.size"
-             class="pagination-sm"
-             boundary-links="true"
-             max-size="12"
-             rotate="true"
-             previous-text="上一页"
-             next-text="下一页"
-             first-text="首页"
-             last-text="末页">
-           </uib-pagination>
-         </div>
-       </li>
-       <li>资源报告</li>
-       <li>
-         <div class="user-authorize"><span ng-click="userAuthorize()">用户授权</span></div>
-         <ul class="tenant-serve-list">
-           <li class="row">
-             <div class="col-md-1"><img src="" alt=""></div>
-             <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;用户1</div>
-             <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;项目管理员</div>
-             <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;用户描述用户描述</div>
-             <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(name)">删除</a></div>
 
-           </li>
-           <li>2</li>
-         </ul>
-         <div class="page-style">
-           <uib-pagination
-             ng-model="grid.page"
-             total-items="grid.total"
-             items-per-page="grid.size"
-             class="pagination-sm"
-             boundary-links="true"
-             max-size="12"
-             rotate="true"
-             previous-text="上一页"
-             next-text="下一页"
-             first-text="首页"
-             last-text="末页">
-           </uib-pagination>
-         </div>
-       </li>
-     </ol>
-   </div>
+  <div class="col-md-10" style="margin:0;padding:0;">
+    <div class="right-top">{{grid.roleTitle}}</div>
+    <ul class="right-nav">
+      <li  class="active" ng-show="grid.showCompany" ng-click="changeCon()"><span>子公司列表</span></li>
+      <li ng-show="grid.showProject" ng-click="changeCon()"><span>项目列表</span></li>
+      <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>基本信息</span></li>
+      <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>服务列表</span></li>
+      <li ng-click="changeCon()"><span>资源报告</span></li>
+      <li ng-click="changeCon()"><span>用户列表</span></li>
+    </ul>
+    <ol class="right-content">
+      <li class="showcon">
+        <div class="row project-list">
+          <div class="col-md-3">
+            <div>
+              <img src="../images/role_company.png" alt="">
+              <p>中信</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="row project-list">
+          <div class="col-md-3">
+            <div>
+              <img src="../images/role_company.png" alt="">
+              <p>中信</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>基本信息</li>
+      <li>
+        <ul class="tenant-serve-list">
+          <li class="row">
+            <div class="col-md-1"><img src="" alt=""></div>
+            <div class="col-md-2"><span>服务名</span>&nbsp;&nbsp;HDFS</div>
+            <div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
+            <div class="col-md-2">配额&nbsp;:&nbsp;20TB</div>
+            <div class="col-md-2">文件数&nbsp;:&nbsp;1000</div>
+            <div class="col-md-2"><a ng-click="checkInfo()" href="#">访问信息</a></div>
+          </li>
+        </ul>
+        <div class="page-style">
+          <uib-pagination
+            ng-model="grid.page"
+            total-items="grid.total"
+            items-per-page="grid.size"
+            class="pagination-sm"
+            boundary-links="true"
+            max-size="12"
+            rotate="true"
+            previous-text="上一页"
+            next-text="下一页"
+            first-text="首页"
+            last-text="末页">
+          </uib-pagination>
+        </div>
+      </li>
+      <li>
+        <div class="resource-wrop"  ng-repeat="(timeIndex,item) in testlist">
+              <div >
+                <div class="row resource-top">
+                  <div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce计算资源配置{{item[timeIndex]['m']}}</div>
+                  <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}" ng-click="toggle($index)"></sapn></div>
+                </div>
+                <div class="resource-list" ng-repeat="arr in item" ng-if="item.isshow">
+                      <div ng-if="arr['m']== 'a'">
+                        <div class="row resource-top" style="padding:20px;">
+                          <div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce服务实例{{arr.m}}{{timeIndex}}</div>
+                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="test(timeIndex,$index)"></sapn></div>
+                        </div>
+                        <div class="list-con" ng-if="arr.isshow">
+                          <div class="row">
+                            <div class="col-md-5">
+                              <highchart config="charts"></highchart>
+                              <div class="chart-title">分配计算容量{{arr}}</div>
+                            </div>
+                            <div class="col-md-3">
+                              <highchart config="charts"></highchart>
+                              <div class="chart-title">已使用计算容量</div>
+                            </div>
+                            <div class="col-md-4" style="text-align: right">
+                              <div class="run-num">15</div>
+                              <div class="chart-title">正在运行作业数</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!---->
+                      <div ng-if="arr['m']== 'b'">
+                        <div class="row resource-top" style="padding:20px;">
+                          <div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce服务实例1</div>
+                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="test(timeIndex,$index)"></sapn></div>
+                        </div>
+                        <div class="list-con" ng-if="arr.isshow">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <highchart config="charts"></highchart>
+                              <div class="chart-title">分配计算容量</div>
+                            </div>
+                            <div class="col-md-3">
+                              <highchart config="charts"></highchart>
+                              <div class="chart-title">已使用计算容量</div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="run-num" style="text-align: center">15</div>
+                              <div class="chart-title" style="padding: 0">正在运行作业数</div>
+                            </div>
+                            <div class="col-md-3" style="text-align: right">
+                              <div class="run-num">15</div>
+                              <div class="chart-title">正在运行作业数</div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <!---->
+                </div>
+              </div>
+        </div>
+      </li>
+      <li>
+        <div class="user-authorize"><span ng-click="userAuthorize()">用户授权</span></div>
+        <ul class="tenant-serve-list">
+          <li class="row">
+            <div class="col-md-1"><img src="" alt=""></div>
+            <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;用户1</div>
+            <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;项目管理员</div>
+            <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;用户描述用户描述</div>
+            <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(name)">删除</a></div>
+
+          </li>
+          <li>2</li>
+        </ul>
+        <div class="page-style">
+          <uib-pagination
+            ng-model="grid.page"
+            total-items="grid.total"
+            items-per-page="grid.size"
+            class="pagination-sm"
+            boundary-links="true"
+            max-size="12"
+            rotate="true"
+            previous-text="上一页"
+            next-text="下一页"
+            first-text="首页"
+            last-text="末页">
+          </uib-pagination>
+        </div>
+      </li>
+    </ol>
+  </div>
 
 </div>
