@@ -26,7 +26,10 @@ angular.module('basic')
       user_change_Confirm.open();
     };
 //用户管理-删除
-    $scope.deluser = function () {
-      user_del_Confirm.open();
+    $scope.deluser = function (name,id) {
+
+      user_del_Confirm.open(name,id).then(function () {
+        loaduser()
+      })
     };
   }]);

@@ -38,7 +38,7 @@
     <div class="confirm-select modal_select" ng-class="{modal_select_red:error.emailnull}">
       <input type="text" class="modal_input" ng-model="input.email">
     </div>
-    <div class="error_block_tit" ng-show="error.emailnull">
+    <div class="error_block_tit" ng-if="error.emailnull">
       <p style="margin:0;">邮箱不能为空</p>
     </div>
   </div>

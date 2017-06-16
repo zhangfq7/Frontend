@@ -11,7 +11,7 @@ angular.module('basic.resource', ['ngResource'])
     return service;
   }])
   .factory('user', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var user = $resource(GLOBAL.host + '/user', {}, {
+    var user = $resource(GLOBAL.host + '/user/:id', {id:'@id'}, {
       create: {method: 'POST'},
       updata: {method: 'PUT'},
       delete: {method: "DELETE"}
@@ -27,6 +27,17 @@ angular.module('basic.resource', ['ngResource'])
     var tenantchild = $resource(GLOBAL.host + '/tenant/:id/children', {id:'@id'}, {
     });
     return tenantchild;
+  }])
+  .factory('tenantuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenantuser = $resource(GLOBAL.host + '/tenant/:id/users', {id:'@id'}, {
+    });
+    return tenantuser;
+  }])
+///ocmanager/v1/api/tenant／{id}/service/instances
+  .factory('tenantbsi', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenantbsi = $resource(GLOBAL.host + '/tenant/:id/service/instances', {id:'@id'}, {
+    });
+    return tenantbsi;
   }])
 
 

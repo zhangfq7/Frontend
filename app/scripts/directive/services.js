@@ -252,21 +252,28 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  删除
   .service('user_del_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (datacon) {
+    this.open = function (name,id) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_del_Confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+        controller: ['$scope', '$uibModalInstance','user', function ($scope, $uibModalInstance,user) {
 
 
-          $scope.con = datacon;
+          $scope.con = name;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
-            $uibModalInstance.close(true);
+            console.log('id', id);
+            user.delete({id:id}, function (data) {
+
+              $uibModalInstance.close(true);
+            }, function (err) {
+
+            })
+
           };
         }]
       }).result;

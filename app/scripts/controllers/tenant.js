@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree','tenantuser','tenantbsi',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree,tenantuser,tenantbsi) {
       var thisheight = $(window).height() - 80;
       $('.tree-light').height(thisheight);
       $scope.treeOptions = {
@@ -22,22 +22,6 @@ angular.module('basic')
           labelSelected: "a8"
         }
       }
-      //$scope.dataForTheTree =
-      //  [
-      //    {
-      //      "name": "中信集团", "children": [{
-      //      "name": "中信银行", "children": [
-      //        {"name": "项目一", "age": "32", "children": []},
-      //        {"name": "项目二", "age": "34", "children": []},
-      //        {"name": "项目三", "age": "34", "children": []}
-      //      ]
-      //    }
-      //    ]
-      //    },
-      //    {"name": "Albert", "age": "33", "children": []},
-      //    {"name": "Ron", "age": "29", "children": []}
-      //  ];
-      //console.log('tree', tree);
       $scope.dataForTheTree = [];
       $scope.treemap = {};
 
@@ -61,32 +45,29 @@ angular.module('basic')
       })
 
 
-      console.log('$scope.treemap', $scope.sidebar);
+      console.log('$scope.treemap', $scope.dataForTheTree[0].id);
+      tenantuser.query({id:$scope.dataForTheTree[1].id}, function (users) {
+        console.log('user', users);
+        $scope.users=users
+      }, function (err) {
 
+      })
+      tenantbsi.query({id:$scope.dataForTheTree[1].id}, function (bsis) {
+        $scope.bsis=bsis
+        console.log('bsi', bsis);
+      }, function (err) {
+
+       })
+      tenantchild.query({id:$scope.dataForTheTree[1].id}, function (childrens) {
+        console.log('child', childrens);
+        $scope.childrens =childrens
+      }, function (err) {
+
+      })
 
       //console.log('$scope.sidebar', $scope.sidebar);
 
-      $scope.testlist = [{
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      }, {
-        text: "Parent 3"
-      },];
+
 
       $scope.grid = {
         page: 1,
@@ -119,8 +100,27 @@ angular.module('basic')
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
-        //console.log(node);
+        console.log(node);
+        tenantuser.query({id:node.id}, function (users) {
+          console.log('user', users);
+          $scope.users=users
+        }, function (err) {
+
+        })
+        tenantbsi.query({id:node.id}, function (bsis) {
+          $scope.bsis=bsis
+          console.log('bsi', bsis);
+        }, function (err) {
+
+        })
+        tenantchild.query({id:node.id}, function (childrens) {
+          console.log('child', childrens);
+          $scope.childrens =childrens
+        }, function (err) {
+
+        })
         if (node.children.length > 0&&node.parentId) {
+
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
@@ -133,6 +133,7 @@ angular.module('basic')
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(0).show().siblings().hide();
+
         } else {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
