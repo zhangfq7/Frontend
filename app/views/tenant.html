@@ -5,7 +5,8 @@
         tree-model="dataForTheTree"
         options="treeOptions"
         on-selection="showSelected(node)"
-        selected-node="node1" style="margin-top:-2px;">
+        selected-node="node1"
+        style="margin-top:-2px;">
     {{node.name}}
   </div>
 
@@ -59,7 +60,7 @@
       </li>
       <li>
         <ul class="tenant-serve-list">
-          <li class="row" ng-repeat="bsi in bsis">
+          <li class="row" ng-repeat="bsi in bsisitem">
             <div class="col-md-1"><img src="" alt=""></div>
             <div class="col-md-2"><span>服务名</span>&nbsp;&nbsp;{{bsi.instanceName}}</div>
             <div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
@@ -70,9 +71,9 @@
         </ul>
         <div class="page-style">
           <uib-pagination
-            ng-model="grid.page"
-            total-items="grid.total"
-            items-per-page="grid.size"
+            ng-model="grid.bsipage"
+            total-items="grid.bsitotal"
+            items-per-page="grid.bsisize"
             class="pagination-sm"
             boundary-links="true"
             max-size="12"
@@ -151,21 +152,20 @@
       <li>
         <div class="user-authorize"><span ng-click="userAuthorize()">用户授权</span></div>
         <ul class="tenant-serve-list">
-          <li class="row">
+          <li class="row" ng-repeat="item in useritem">
             <div class="col-md-1"><img src="" alt=""></div>
-            <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;用户1</div>
-            <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;项目管理员</div>
-            <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;用户描述用户描述</div>
-            <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(name)">删除</a></div>
+            <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;{{item.userName}}</div>
+            <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;{{item.userName}}</div>
+            <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;{{item.userDescription}}</div>
+            <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(item.userId)">删除</a></div>
 
           </li>
-          <li>2</li>
         </ul>
         <div class="page-style">
           <uib-pagination
-            ng-model="grid.page"
-            total-items="grid.total"
-            items-per-page="grid.size"
+            ng-model="grid.userpage"
+            total-items="grid.usertotal"
+            items-per-page="grid.usersize"
             class="pagination-sm"
             boundary-links="true"
             max-size="12"

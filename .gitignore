@@ -19,4 +19,5 @@ log/
 users.dat
 .tmp/
 OCManagerWeb.war
+.DS_Store
 
