@@ -137,7 +137,7 @@ angular.module('basic')
 
         })
         if (node.children.length > 0&&node.parentId) {
-
+          node.nb='h'
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
@@ -145,6 +145,7 @@ angular.module('basic')
           $('.right-content>li').eq(1).show().siblings().hide();
 
         }else if(node.children.length > 0){
+          node.nb='z'
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
@@ -152,6 +153,7 @@ angular.module('basic')
           $('.right-content>li').eq(0).show().siblings().hide();
 
         } else {
+          node.nb='l'
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = true;
