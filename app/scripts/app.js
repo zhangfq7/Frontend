@@ -37,6 +37,7 @@ angular.module('basic', [
   'basic.services',
   'basic.controller',
   'treeControl',
+  'highcharts-ng',
 ]).constant('GLOBAL', {
     size: 10,
     host: './ocmanager/v1/api',

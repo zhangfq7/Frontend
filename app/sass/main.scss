@@ -5,6 +5,7 @@
 @import "tenant";
 @import "user";
 .set_top_tu{width:146px;height:146px;position:absolute;top:50%;left:50%;margin-left:-72px;margin-top:-72px;}
+body{font-family:"微软雅黑",Helvetica;}
 .modal-dialog{
   .well-log{
     background: none !important;
@@ -62,7 +63,7 @@
   padding:0;
 }
 body {
-  padding: 0;
+  padding: 0;background:#fafafa;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -621,7 +622,7 @@ table a{
       width: 475px;
       min-height: 120px;
       border-color:#eaeaea;
-      color:#333;padding:10px;font-size:14px;word-break:break-all;
+      color:#333;padding:10px;font-size:14px;word-break:break-all;border:1px solid #eaeaea;
     }
     .error_block_tit p{
       margin:5px;
@@ -634,12 +635,12 @@ table a{
 
 }
 /*错误提示*/
-.error_block_tit{display:inline-block;text-align:left;background:#ee6461;text-align:center;color:#fff;font-size:12px;-webkit-transition:all .3s;
+.error_block_tit{display:inline-block;text-align:left;background:#ff304a;text-align:center;color:#fff;font-size:12px;-webkit-transition:all .3s;
   -moz-transition:all .3s;transition:all .3s;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;position:relative;padding:6px 12px 6px;margin-left:10px;
   -webkit-animation:rotateZ 1.5s;-moz-animation:rotateZ 1.5s;animation:rotateZ 1.5s;top:-2px;
   -webkit-animation-iteration-count:0.3;-moz-animation-iteration-count:0.3;animation-iteration-count:0.3;}
 
-.error_block_tit p:before{position:absolute;content:"";width: 0;height: 0; border-top: 6px solid transparent; border-right: 6px solid #ee6461;border-bottom: 6px solid transparent;left:-5px;margin-top:3px;}
+.error_block_tit p:before{position:absolute;content:"";width: 0;height: 0; border-top: 6px solid transparent; border-right: 6px solid #ff304a;border-bottom: 6px solid transparent;left:-5px;margin-top:3px;}
 @keyframes rotateZ {
   0%, 100% {
     -webkit-transform: translateX(0);
@@ -699,6 +700,9 @@ table a{
 input,textarea{outline:none;}
 textarea{resize:none;}
 :focus{ outline: 0; }
+a:focus{ outline: 0; }
+.modal{overflow:hidden;}
+
 /*错误提示*/
 .block_close{background:url(../images/closenew2.png) no-repeat center;width:15px;height:15px;display:block;position:absolute;right:10px;top:10px;
 cursor:pointer;padding:14px;}
