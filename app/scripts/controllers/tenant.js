@@ -96,6 +96,7 @@ angular.module('basic')
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
+        roleTitle:tree[1].name
       };
       ///访问信息
       $scope.checkInfo = function () {
@@ -120,19 +121,21 @@ angular.module('basic')
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
-        console.log(node);
-        if (node.name == '中信集团') {
+        //console.log(node);
+        $scope.grid.showChildnode = false;
+        if (node.children.length > 0&&node.parentId) {
+          $scope.grid.showCompany = false;
+          $scope.grid.showProject = true;
+          $scope.grid.roleTitle = node.name;
+          $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+          $('.right-content>li').eq(1).show().siblings().hide();
+
+        }else if(node.children.length > 0){
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(0).show().siblings().hide();
-        } else if (node.name == '中信银行') {
-          $scope.grid.showCompany = false;
-          $scope.grid.showProject = true;
-          $scope.grid.showChildnode = false;
-          $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
-          $('.right-content>li').eq(1).show().siblings().hide();
         } else {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
@@ -140,6 +143,17 @@ angular.module('basic')
           $('.right-nav>li').eq(2).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(2).show().siblings().hide();
         }
+        //if (!node.parentId) {
+        //
+        //} else if (node.name == '中信银行') {
+        //  $scope.grid.showCompany = false;
+        //  $scope.grid.showProject = true;
+        //  $scope.grid.showChildnode = false;
+        //  $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+        //  $('.right-content>li').eq(1).show().siblings().hide();
+        //} else {
+        //
+        //}
       }
       //右侧tabel切换
       $(function () {
@@ -154,5 +168,68 @@ angular.module('basic')
       $scope.delUser = function (name) {
         delconfirm.open('用户', 'lalala')
       }
+      var subTitle =
+          '<span style="color:#ff304a; font-size:16px;">' + "20%"+ '</span>'
+        ;
+      $scope.charts = {
+        options: {
+          title: {
+            text: ''
+          },
+          tooltip: {
+            enabled: false
+          },
+          credits: {
+            enabled: false
+          },
+          subtitle: {
+            text: subTitle,
+            style: {
+              lineHeight: '20px'
+            },
+            align: 'center',
+            verticalAlign: 'middle',
+            x: 0,
+            y: 5
 
+          }
+        },
+        series: [{
+          type: 'pie',
+          colors: ['#c6c6c6', '#ff304a'],
+          data: [
+            ['已用', 50],
+            ['未使用', 100-50]
+          ],
+          dataLabels: {
+            enabled: false
+          },
+          innerSize: '80%'
+        }],
+        size: {
+          height: 150,
+          width: 150
+        },
+
+        func: function (chart) {
+          //setup some logic for the chart
+        }
+      }
+      $scope.testlist= [[{m: 'a'}],[{m: 'b'},{m: 'c'}]]
+      $scope.test = function(pIdx,idx){
+        console.log(pIdx);
+        console.log(idx);
+        if($scope.testlist[pIdx][idx].isshow){
+          $scope.testlist[pIdx][idx].isshow = false;
+        }else{
+          $scope.testlist[pIdx][idx].isshow =true;
+        }
+      }
+      $scope.toggle = function(idx){
+        if($scope.testlist[idx].isshow){
+          $scope.testlist[idx].isshow = false;
+        }else{
+          $scope.testlist[idx].isshow =true;
+        }
+      }
     }]);
