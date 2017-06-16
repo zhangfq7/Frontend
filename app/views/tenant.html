@@ -1,15 +1,15 @@
-<div class="row nav-tenant" style="margin:0;padding:0">
+<div class="row nav-tenant" style="margin:0;padding:0;margin-top:-40px;background:#fff;">
   <!--<div id="tree" class="col-md-3" style="height: 100%; background: #ebebe9;">-->
   <!--</div>-->
   <div  treecontrol class="col-md-2 tree-light"
         tree-model="dataForTheTree"
         options="treeOptions"
         on-selection="showSelected(node)"
-        selected-node="node1">
+        selected-node="node1" style="margin-top:-2px;">
     {{node.name}}
   </div>
 
-  <div class="col-md-10" style="margin:0;padding:0;">
+  <div class="col-md-10" style="margin:0;padding:0;margin-top:-2px;">
     <div class="right-top">{{grid.roleTitle}}</div>
     <ul class="right-nav">
       <li  class="active" ng-show="grid.showCompany" ng-click="changeCon()"><span>子公司列表</span></li>
@@ -40,7 +40,23 @@
           </div>
         </div>
       </li>
-      <li>基本信息</li>
+      <li>
+        <ul class="tenant-serve-list basic_block">
+          <li>
+              <div>租户名称</div>
+              <div>中信银行，项目1</div>
+          </li>
+          <li>
+              <div>租户描述</div>
+              <div>信息部，运营中心</div>
+          </li>
+          <li>
+            <div>租户其他信息</div>
+            <div>中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1中信银行，项目1</div>
+          </li>
+         </ul>
+
+      </li>
       <li>
         <ul class="tenant-serve-list">
           <li class="row" ng-repeat="bsi in bsis">
