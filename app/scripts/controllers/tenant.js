@@ -74,7 +74,7 @@ angular.module('basic')
         if ($scope.users.length) {
           $scope.useritem = $scope.users.slice(skip, skip + $scope.grid.usersize);
         }else {
-          $scope.bsis=[];
+          $scope.useritem=[];
         }
       };
       $scope.$watch('grid.bsipage', function (newVal, oldVal) {
@@ -214,8 +214,8 @@ angular.module('basic')
         })
       })
       // 删除用户
-      $scope.delUser = function (name) {
-        delconfirm.open('用户', 'lalala')
+      $scope.delUser = function (roleId,userId) {
+        delconfirm.open('用户', roleId,userId)
       }
       var subTitle =
           '<span style="color:#ff304a; font-size:16px;">' + "20%"+ '</span>'

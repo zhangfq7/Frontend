@@ -148,19 +148,24 @@ angular.module('basic.services', ['ngResource'])
       }).result;
     };
   }]).service('delconfirm', ['$uibModal', function ($uibModal) {
-    this.open = function (title, name) {
+    this.open = function (title,roleId, userId) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/delConfirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+        controller: ['$scope', '$uibModalInstance','deltenantuser', function ($scope, $uibModalInstance,deltenantuser) {
 
 
           $scope.title = title;
-          $scope.name = name;
+          $scope.userId = userId;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            deltenantuser.delete({id:roleId,userId:roleId},{}, function (res) {
+              $uibModalInstance.dismiss();
+            })
           };
         }]
       }).result;
