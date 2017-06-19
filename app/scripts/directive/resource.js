@@ -30,6 +30,11 @@ angular.module('basic.resource', ['ngResource'])
   }])
   .factory('tenantuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var tenantuser = $resource(GLOBAL.host + '/tenant/:id/users', {id:'@id'}, {
+    });
+    return tenantuser;
+  }])
+  .factory('deltenantuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenantuser = $resource(GLOBAL.host + '/tenant/:id//user/:userId/role/assignment', {id:'@id',userId:"@userId"}, {
       delete: {method: "DELETE"}
     });
     return tenantuser;
