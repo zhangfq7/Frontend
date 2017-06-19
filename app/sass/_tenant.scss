@@ -54,6 +54,11 @@
         width: 20px;
         height: 20px;
       }
+      i.tree-branch-head{
+        -webkit-background-size:20px!important;
+        background-size:20px!important;
+        background-position: 0px -2px!important;
+      }
       div{
         display: block;
         width: 100%;

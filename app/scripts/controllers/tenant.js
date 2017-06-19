@@ -157,6 +157,11 @@ angular.module('basic')
         showChildnode: false,//展示子项目列表
         roleTitle:tree[1].name
       };
+      $scope.roleDemoList=['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
+        'a1149421-524a-11e7-9dbb-fa163ed7d0ae',
+        'a12a84d0-524a-11e7-9dbb-fa163ed7d0ae',
+        'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
+      ]
 
       ///访问信息
       $scope.checkInfo = function () {
@@ -164,7 +169,7 @@ angular.module('basic')
       }
       //用户授权
       $scope.userAuthorize = function () {
-        Confirm.open($scope.users,$scope.users, {
+        Confirm.open($scope.users,$scope.roleDemoList, {
           oldUser: '',
           oldRole: '',
           description: '',
@@ -173,9 +178,9 @@ angular.module('basic')
       }
       //修改用户授权
       $scope.updataUser = function (item) {
-        Confirm.open($scope.users,$scope.users, {
+        Confirm.open($scope.users,$scope.roleDemoList, {
           oldUser: item.userName,
-          oldRole:  item.userName,
+          oldRole:  item.roleId,
           description: item.userDescription,
           isAdd:false
         })
