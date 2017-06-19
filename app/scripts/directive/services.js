@@ -109,6 +109,7 @@ angular.module('basic.services', ['ngResource'])
           $scope.newUser = nameobj.oldUser;
           $scope.newRole = nameobj.oldRole;
           $scope.description = nameobj.description;
+          $scope.isAdd = nameobj.isAdd;
           $scope.ok = function () {
             $uibModalInstance.close(true);
           };
@@ -163,7 +164,7 @@ angular.module('basic.services', ['ngResource'])
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
-            deltenantuser.delete({id:roleId,userId:roleId},{}, function (res) {
+            deltenantuser.delete({id:roleId,userId:userId},{}, function (res) {
               $uibModalInstance.dismiss();
             })
           };

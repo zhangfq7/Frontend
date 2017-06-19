@@ -8,6 +8,7 @@ angular.module('basic')
     function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree,tenantuser,tenantbsi) {
       var thisheight = $(window).height() - 80;
       $('.tree-light').height(thisheight);
+      $scope.nodeId = tree[0].id;
       $scope.treeOptions = {
         nodeChildren: "children",
         dirSelectable: true,
@@ -163,7 +164,8 @@ angular.module('basic')
         Confirm.open($scope.users,$scope.users, {
           oldUser: '',
           oldRole: '',
-          description: ''
+          description: '',
+          isAdd:true
         })
       }
       //修改用户授权
@@ -171,15 +173,17 @@ angular.module('basic')
         Confirm.open($scope.users,$scope.users, {
           oldUser: item.userName,
           oldRole:  item.userName,
-          description: item.userDescription
+          description: item.userDescription,
+          isAdd:false
         })
       }
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
-        console.log('1111',node);
         $scope.grid.roleTitle = node.name;
+        $scope.nodeId = node.id;
         getUserInfo(node.id);
+        console.log('1111',$scope.nodeId);
         if (node.children.length > 0&&node.parentId) {
 
           $scope.grid.showCompany = false;
@@ -214,8 +218,8 @@ angular.module('basic')
         })
       })
       // 删除用户
-      $scope.delUser = function (roleId,userId) {
-        delconfirm.open('用户', roleId,userId)
+      $scope.delUser = function (userId) {
+        delconfirm.open('用户', $scope.nodeId,userId)
       }
       var subTitle =
           '<span style="color:#ff304a; font-size:16px;">' + "20%"+ '</span>'
