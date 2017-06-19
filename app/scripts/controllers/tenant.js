@@ -74,7 +74,7 @@ angular.module('basic')
         if ($scope.users.length) {
           $scope.useritem = $scope.users.slice(skip, skip + $scope.grid.usersize);
         }else {
-          $scope.bsis=[];
+          $scope.useritem=[];
         }
       };
       $scope.$watch('grid.bsipage', function (newVal, oldVal) {
@@ -163,18 +163,18 @@ angular.module('basic')
       }
       //用户授权
       $scope.userAuthorize = function () {
-        Confirm.open([{n: 'a'}, {n: 'b'}, {n: 'c'}, {n: 'd'}], [{n: '2'}, {n: '3'}, {n: '4'}, {n: '5'}], {
+        Confirm.open($scope.users,$scope.users, {
           oldUser: '',
           oldRole: '',
           description: ''
         })
       }
       //修改用户授权
-      $scope.updataUser = function () {
-        Confirm.open([{n: 'a'}, {n: 'b'}, {n: 'c'}, {n: 'd'}], [{n: '2'}, {n: '3'}, {n: '4'}, {n: '5'}], {
-          oldUser: 'olduser',
-          oldRole: 'oldRole',
-          description: "lalalalla"
+      $scope.updataUser = function (item) {
+        Confirm.open($scope.users,$scope.users, {
+          oldUser: item.userName,
+          oldRole:  item.userName,
+          description: item.userDescription
         })
       }
 
@@ -217,8 +217,8 @@ angular.module('basic')
         })
       })
       // 删除用户
-      $scope.delUser = function (name) {
-        delconfirm.open('用户', 'lalala')
+      $scope.delUser = function (roleId,userId) {
+        delconfirm.open('用户', roleId,userId)
       }
       var subTitle =
           '<span style="color:#ff304a; font-size:16px;">' + "20%"+ '</span>'

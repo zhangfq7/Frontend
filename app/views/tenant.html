@@ -69,7 +69,7 @@
             <div class="col-md-2"><a ng-click="checkInfo()" href="#">访问信息</a></div>
           </li>
         </ul>
-        <div class="page-style">
+        <div class="page-style" ng-if="grid.bsitotal>0">
           <uib-pagination
             ng-model="grid.bsipage"
             total-items="grid.bsitotal"
@@ -150,18 +150,18 @@
         </div>
       </li>
       <li>
-        <div class="user-authorize"><span ng-click="userAuthorize()">用户授权</span></div>
+        <div class="user-authorize" ng-if="useritem.length>0"><span ng-click="userAuthorize()">用户授权</span></div>
         <ul class="tenant-serve-list">
           <li class="row" ng-repeat="item in useritem">
             <div class="col-md-1"><img src="" alt=""></div>
             <div class="col-md-2"><span>用户名</span>&nbsp;&nbsp;{{item.userName}}</div>
             <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;{{item.userName}}</div>
             <div class="col-md-4"><span>用户描述</span>&nbsp;:&nbsp;{{item.userDescription}}</div>
-            <div class="col-md-2"><a href="#" ng-click="updataUser('xiugai')">修改</a><a href="#" ng-click="delUser(item.userId)">删除</a></div>
+            <div class="col-md-2"><a href="#" ng-click="updataUser(item)">修改</a><a href="#" ng-click="delUser(item.roleId,item.userId)">删除</a></div>
 
           </li>
         </ul>
-        <div class="page-style">
+        <div class="page-style" ng-if="grid.usertotal>0">
           <uib-pagination
             ng-model="grid.userpage"
             total-items="grid.usertotal"
