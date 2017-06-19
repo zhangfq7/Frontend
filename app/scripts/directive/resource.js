@@ -39,6 +39,13 @@ angular.module('basic.resource', ['ngResource'])
     });
     return tenantuser;
   }])
+  .factory('cGtenantuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var tenantuser = $resource(GLOBAL.host + '/tenant/{id}/user/role/assignment', {id:'@id',userId:"@userId"}, {
+      post: {method: "POST"},
+      put: {method: "put"}
+    });
+    return tenantuser;
+  }])
 ///ocmanager/v1/api/tenant／{id}/service/instances
   .factory('tenantbsi', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var tenantbsi = $resource(GLOBAL.host + '/tenant/:id/service/instances', {id:'@id'}, {
