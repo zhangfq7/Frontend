@@ -294,16 +294,85 @@ angular.module('basic.services', ['ngResource'])
         templateUrl: 'views/tpl/service_Confirm.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+          $scope.input = {
+            servicename: '',
+            serviceuser:'',
+            servicepassword:'',
+            serviceurl:''
 
+          }
+          $scope.error = {
+            servicenamenull: false,
+            serviceusernull:false,
+            servicepasswordnull:false,
+            serviceurlnull:false
+          }
 
           $scope.con = datacon;
+          $scope.$watch('input', function (n, o) {
+            if (n === o) {
+              return
+            }
+            if (n.servicename && n.servicename.length > 0) {
+              console.log('n', n);
+              $scope.error.servicenamenull = false
+            }
+            if (n.serviceuser && n.serviceuser.length > 0) {
+              console.log('n', n);
+              $scope.error.serviceusernull = false
+            }
+            if (n.servicepassword && n.servicepassword.length > 0) {
+              console.log('n', n);
+              $scope.error.servicepasswordnull = false
+            }
+            if (n.serviceurl && n.serviceurl.length > 0) {
+              console.log('n', n);
+              $scope.error.serviceurlnull = false
+            }
+
+          }, true)
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
+            if ($scope.input.servicename === '' && $scope.input.serviceuser === '' && $scope.input.servicepassword === '' && $scope.input.serviceurl === '') {
+              $scope.error.servicenamenull = true;
+              $scope.error.serviceusernull = true;
+              $scope.error.servicepasswordnull = true;
+              $scope.error.serviceurlnull = true;
+              return
+            }
+            if ($scope.input.servicename === '') {
+              $scope.error.servicenamenull = true;
+              return
+            }
+            if ($scope.input.serviceuser === '') {
+              $scope.error.serviceusernull = true;
+              return
+            }
+            if ($scope.input.servicepassword === '') {
+              $scope.error.servicepasswordnull = true;
+              return
+            }
+            if ($scope.input.serviceurl === '') {
+              $scope.error.serviceurlnull = true;
+              return
+            }
             $uibModalInstance.close(true);
+
+
+
+
+
           };
+
+
+
+
+
+
+
         }]
       }).result;
     };
