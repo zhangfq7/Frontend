@@ -41,11 +41,12 @@ angular.module('basic')
       $scope.dataForTheTree = [];
       $scope.treemap = {};
 
+
       angular.forEach(tree, function (item, i) {
         $scope.treemap[item.id] = item
         $scope.treemap[item.id].children = [];
       })
-      console.log('$scope.treemap', $scope.treemap);
+      //console.log('$scope.treemap', $scope.treemap);
       angular.forEach(tree, function (item, i) {
         if (item.parentId) {
           //console.log('$scope.treemap[item.parentId]', $scope.treemap[item.parentId]);
@@ -60,40 +61,99 @@ angular.module('basic')
         }
       })
 
+      var refresh = function(page) {
+        var skip = (page - 1) * $scope.grid.bsisize;
+        if ($scope.bsis.length) {
+          $scope.bsisitem = $scope.bsis.slice(skip, skip + $scope.grid.bsisize);
+        }else {
+          $scope.bsisitem=[];
+        }
+      };
+      var refreshuser = function(page) {
+        var skip = (page - 1) * $scope.grid.usersize;
+        if ($scope.users.length) {
+          $scope.useritem = $scope.users.slice(skip, skip + $scope.grid.usersize);
+        }else {
+          $scope.bsis=[];
+        }
+      };
+      $scope.$watch('grid.bsipage', function (newVal, oldVal) {
+        if (newVal != oldVal) {
+          refresh(newVal);
+        }
+      });
+      $scope.$watch('grid.userpage', function (newVal, oldVal) {
+        if (newVal != oldVal) {
+          refreshuser(newVal);
+        }
+      });
+      /////获取租户信息
+      var getUserInfo = function(id){
+        tenantuser.query({id:id}, function (users) {
+          console.log('user', users);
+          $scope.users=users;
+          $scope.grid.usertotal = $scope.users.length;
+          refreshuser(1)
+        }, function (err) {
 
-      console.log('$scope.treemap', $scope.dataForTheTree);
-      tenantuser.query({id:$scope.dataForTheTree[1].id}, function (users) {
-        console.log('user', users);
-        $scope.users=users
-      }, function (err) {
+        });
+        tenantbsi.query({id:id}, function (bsis) {
+          //$scope.bsis=bsis
+          $scope.bsis=[
+            {
+              "id": "e45783a5-5240-11e7-8905-fa163efdbea8",
+              "instanceName": "1111",
+              "serviceTypeId": "",
+              "serviceTypeName": "ETCD",
+              "tenantId": "zhaoyim"
+            },{
+              "id": "e45783a5-5240-11e7-8905-fa163efdbea8",
+              "instanceName": "2222",
+              "serviceTypeId": "",
+              "serviceTypeName": "ETCD",
+              "tenantId": "zhaoyim"
+            },{
+              "id": "e45783a5-5240-11e7-8905-fa163efdbea8",
+              "instanceName": "3333",
+              "serviceTypeId": "",
+              "serviceTypeName": "ETCD",
+              "tenantId": "zhaoyim"
+            }
+          ]
+          $scope.grid.bsitotal = $scope.bsis.length;
+          refresh(1);
 
-      })
-      tenantbsi.query({id:$scope.dataForTheTree[1].id}, function (bsis) {
-        $scope.bsis=bsis
-        console.log('bsi', bsis);
-      }, function (err) {
+          console.log('bsi', bsis);
+        }, function (err) {
 
-       })
-      tenantchild.query({id:$scope.dataForTheTree[1].id}, function (childrens) {
-        console.log('child', childrens);
-        $scope.childrens =childrens
-      }, function (err) {
+        })
+        tenantchild.query({id:id}, function (childrens) {
+          console.log('child', childrens);
+          $scope.childrens =childrens
+        }, function (err) {
 
-      })
+        })
+      }
+      //console.log('$scope.treemap', $scope.dataForTheTree[0].id);
+      //getUserInfo($scope.dataForTheTree[0].id);
 
       //console.log('$scope.sidebar', $scope.sidebar);
 
 
 
       $scope.grid = {
-        page: 1,
-        size: 12,
-        total: 20,
+        userpage: 1,
+        usersize: 1,
+        usertotal: 0,
+        bsipage: 1,
+        bsisize: 1,
+        bsitotal:0,
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
         roleTitle:tree[1].name
       };
+
       ///访问信息
       $scope.checkInfo = function () {
         newconfirm.open();
@@ -117,27 +177,11 @@ angular.module('basic')
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
-        console.log(node);
-        tenantuser.query({id:node.id}, function (users) {
-          console.log('user', users);
-          $scope.users=users
-        }, function (err) {
-
-        })
-        tenantbsi.query({id:node.id}, function (bsis) {
-          $scope.bsis=bsis
-          console.log('bsi', bsis);
-        }, function (err) {
-
-        })
-        tenantchild.query({id:node.id}, function (childrens) {
-          console.log('child', childrens);
-          $scope.childrens =childrens
-        }, function (err) {
-
-        })
+        console.log('1111',node);
+        $scope.grid.roleTitle = node.name;
+        getUserInfo(node.id);
         if (node.children.length > 0&&node.parentId) {
-          node.nb='h'
+
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
@@ -145,7 +189,6 @@ angular.module('basic')
           $('.right-content>li').eq(1).show().siblings().hide();
 
         }else if(node.children.length > 0){
-          node.nb='z'
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
@@ -153,7 +196,6 @@ angular.module('basic')
           $('.right-content>li').eq(0).show().siblings().hide();
 
         } else {
-          node.nb='l'
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = true;
@@ -161,6 +203,7 @@ angular.module('basic')
           $('.right-content>li').eq(2).show().siblings().hide();
         }
       }
+      $scope.showSelected($scope.dataForTheTree[0]);
       //右侧tabel切换
       $(function () {
         $('.right-nav>li').click(function () {
