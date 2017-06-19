@@ -23,7 +23,7 @@ angular.module('basic')
       et:null,
       auto:null,
       page: 1,
-      size: 4,
+      size: 20,
     };
 
 
