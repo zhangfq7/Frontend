@@ -1,5 +1,5 @@
 "use strict";
-angular.module('basic.filter', ['angular'])
+angular.module('basic.filter', [])
   .filter('phaseFilter', [function() {
     return function(phase) {
       if (phase == "a10170cb-524a-11e7-9dbb-fa163ed7d0ae") {

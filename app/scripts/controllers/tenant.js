@@ -171,9 +171,11 @@ angular.module('basic')
       $scope.userAuthorize = function () {
         Confirm.open($scope.users,$scope.roleDemoList, {
           oldUser: '',
-          oldRole: '',
+          oldRole: $scope.roleDemoList[0],
+          oldUserId :$scope.users[0].userId,
           description: '',
-          isAdd:true
+          isAdd:true,
+          nodeId:$scope.nodeId
         })
       }
       //修改用户授权
@@ -181,8 +183,10 @@ angular.module('basic')
         Confirm.open($scope.users,$scope.roleDemoList, {
           oldUser: item.userName,
           oldRole:  item.roleId,
+          oldUserId :item.userId,
           description: item.userDescription,
-          isAdd:false
+          isAdd:false,
+          nodeId:$scope.nodeId
         })
       }
 

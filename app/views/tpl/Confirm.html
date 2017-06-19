@@ -18,7 +18,7 @@
             <b class="ser_bg_btn"></b>
           </a>
           <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
-            <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.userName)">
+            <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.userName,item.userId)">
               <a href="javascript:void(0);">
                 <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.userName}}">{{item.userName}}</span>
               </a></li>
@@ -35,13 +35,13 @@
       <div class="confirm-select">
         <div uib-dropdown on-toggle="toggled(open)">
           <a href="javascript:void(0);" class="" uib-dropdown-toggle>
-            <span class="select-title" title={{newRole|| roleList[0]['userName']}}>{{newRole || roleList[0]['userName']}}</span>
+            <span class="select-title" title={{newRole|| roleList[0] | phaseFilter}}>{{newRole || roleList[0] | phaseFilter}}</span>
             <b class="ser_bg_btn"></b>
           </a>
           <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
-            <li class="zx_active" ng-repeat="item in roleList" ng-click="changeRole(item.userName)">
+            <li class="zx_active" ng-repeat="item in roleList" ng-click="changeRole(item)">
               <a href="javascript:void(0);">
-                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item}}">{{item}}</span>
+                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item | phaseFilter}}">{{item | phaseFilter}}</span>
               </a></li>
           </ul>
 

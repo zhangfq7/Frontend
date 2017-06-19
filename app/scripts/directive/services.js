@@ -103,23 +103,41 @@ angular.module('basic.services', ['ngResource'])
       return $uibModal.open({
         templateUrl: 'views/tpl/confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+        controller: ['$scope', '$uibModalInstance','cGtenantuser', function ($scope, $uibModalInstance,cGtenantuser) {
           $scope.userList = userList;
           $scope.roleList = roleList;
           $scope.newUser = nameobj.oldUser;
           $scope.newRole = nameobj.oldRole;
+          $scope.newUserId = nameobj.oldUserId;
           $scope.description = nameobj.description;
           $scope.isAdd = nameobj.isAdd;
+
           $scope.ok = function () {
+            if($scope.isAdd){
+              cGtenantuser.post({id:nameobj.nodeId},{
+                "userId": $scope.newUserId,
+                "roleId": $scope.newRole
+              }, function (res) {
+                $uibModalInstance.dismiss();
+              })
+            }else{
+              cGtenantuser.put({id:nameobj.nodeId},{
+                "userId": $scope.newUserId,
+                "roleId": $scope.newRole
+              }, function (res) {
+                $uibModalInstance.dismiss();
+              })
+            }
             $uibModalInstance.close(true);
           };
           // 选择用户
-          $scope.changeUser = function (name) {
+          $scope.changeUser = function (name,id) {
             $scope.newUser = name;
+            $scope.newUserId = id;
           }
           // 选择角色
-          $scope.changeRole = function (name) {
-            $scope.newRole = name;
+          $scope.changeRole = function (id) {
+            $scope.newRole = id;
           }
           $scope.cancel = function () {
             $uibModalInstance.dismiss();

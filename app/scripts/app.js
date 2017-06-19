@@ -36,7 +36,7 @@ angular.module('basic', [
   'basic.resource',
   'basic.services',
   'basic.controller',
-  //'basic.filter',
+  'basic.filter',
   'treeControl',
   'highcharts-ng',
 ]).constant('GLOBAL', {
