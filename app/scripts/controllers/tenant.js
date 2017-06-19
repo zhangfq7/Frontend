@@ -89,6 +89,9 @@ angular.module('basic')
       });
       /////获取租户信息
       var getUserInfo = function(id){
+        $scope.users=[];
+        $scope.bsis=[];
+        $scope.childrens=[];
         tenantuser.query({id:id}, function (users) {
           console.log('user', users);
           $scope.users=users;

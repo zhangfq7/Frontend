@@ -42,3 +42,4 @@ angular.module('basic.resource', ['ngResource'])
   }])
 
 
+
