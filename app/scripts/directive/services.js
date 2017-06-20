@@ -103,7 +103,7 @@ angular.module('basic.services', ['ngResource'])
       return $uibModal.open({
         templateUrl: 'views/tpl/confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance','cGtenantuser', function ($scope, $uibModalInstance,cGtenantuser) {
+        controller: ['$scope', '$uibModalInstance', 'cGtenantuser', function ($scope, $uibModalInstance, cGtenantuser) {
           $scope.userList = userList;
           $scope.roleList = roleList;
           $scope.newUser = nameobj.oldUser;
@@ -113,15 +113,15 @@ angular.module('basic.services', ['ngResource'])
           $scope.isAdd = nameobj.isAdd;
 
           $scope.ok = function () {
-            if($scope.isAdd){
-              cGtenantuser.post({id:nameobj.nodeId},{
+            if ($scope.isAdd) {
+              cGtenantuser.put({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
                 $uibModalInstance.dismiss();
               })
-            }else{
-              cGtenantuser.put({id:nameobj.nodeId},{
+            } else {
+              cGtenantuser.put({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
@@ -131,7 +131,7 @@ angular.module('basic.services', ['ngResource'])
             $uibModalInstance.close(true);
           };
           // 选择用户
-          $scope.changeUser = function (name,id) {
+          $scope.changeUser = function (name, id) {
             $scope.newUser = name;
             $scope.newUserId = id;
           }
@@ -167,12 +167,12 @@ angular.module('basic.services', ['ngResource'])
       }).result;
     };
   }]).service('delconfirm', ['$uibModal', function ($uibModal) {
-    this.open = function (title,roleId, userId) {
+    this.open = function (title, roleId, userId) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/delConfirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance','deltenantuser', function ($scope, $uibModalInstance,deltenantuser) {
+        controller: ['$scope', '$uibModalInstance', 'deltenantuser', function ($scope, $uibModalInstance, deltenantuser) {
 
 
           $scope.title = title;
@@ -182,7 +182,7 @@ angular.module('basic.services', ['ngResource'])
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
-            deltenantuser.delete({id:roleId,userId:userId},{}, function (res) {
+            deltenantuser.delete({id: roleId, userId: userId}, {}, function (res) {
               $uibModalInstance.dismiss();
             })
           };
@@ -276,12 +276,12 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  删除
   .service('user_del_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (name,id) {
+    this.open = function (name, id) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_del_Confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance','user', function ($scope, $uibModalInstance,user) {
+        controller: ['$scope', '$uibModalInstance', 'user', function ($scope, $uibModalInstance, user) {
 
 
           $scope.con = name;
@@ -291,7 +291,7 @@ angular.module('basic.services', ['ngResource'])
           };
           $scope.ok = function () {
             console.log('id', id);
-            user.delete({id:id}, function (data) {
+            user.delete({id: id}, function (data) {
 
               $uibModalInstance.close(true);
             }, function (err) {
@@ -311,21 +311,34 @@ angular.module('basic.services', ['ngResource'])
         backdrop: 'static',
         templateUrl: 'views/tpl/service_Confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+        controller: ['$scope', '$uibModalInstance', 'broker', function ($scope, $uibModalInstance, broker) {
           $scope.input = {
             servicename: '',
-            serviceuser:'',
-            servicepassword:'',
-            serviceurl:''
+            serviceuser: '',
+            servicepassword: '',
+            serviceurl: ''
 
           }
           $scope.error = {
             servicenamenull: false,
-            serviceusernull:false,
-            servicepasswordnull:false,
-            serviceurlnull:false
+            serviceusernull: false,
+            servicepasswordnull: false,
+            serviceurlnull: false
           }
-
+          $scope.serve = {
+            "kind":"ServiceBroker",
+            "apiVersion":"v1",
+            "metadata":
+            {
+              "name":"ndfs"
+            },
+            "spec":
+            {
+              "url":"http://localhost:9900",
+              "username":"test",
+              "password":"test"
+            }
+          }
           $scope.con = datacon;
           $scope.$watch('input', function (n, o) {
             if (n === o) {
@@ -354,13 +367,7 @@ angular.module('basic.services', ['ngResource'])
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
-            if ($scope.input.servicename === '' && $scope.input.serviceuser === '' && $scope.input.servicepassword === '' && $scope.input.serviceurl === '') {
-              $scope.error.servicenamenull = true;
-              $scope.error.serviceusernull = true;
-              $scope.error.servicepasswordnull = true;
-              $scope.error.serviceurlnull = true;
-              return
-            }
+
             if ($scope.input.servicename === '') {
               $scope.error.servicenamenull = true;
               return
@@ -377,18 +384,18 @@ angular.module('basic.services', ['ngResource'])
               $scope.error.serviceurlnull = true;
               return
             }
-            $uibModalInstance.close(true);
-
-
+            $scope.serve.metadata.name=$scope.input.servicename;
+            $scope.serve.spec.url=$scope.input.serviceurl;
+            $scope.serve.spec.username=$scope.input.serviceuser;
+            $scope.serve.spec.password=$scope.input.servicepassword;
+            broker.create($scope.serve, function (data) {
+              console.log('sdata', data);
+              $uibModalInstance.close(true);
+            })
 
 
 
           };
-
-
-
-
-
 
 
         }]

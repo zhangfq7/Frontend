@@ -10,6 +10,23 @@ angular.module('basic.resource', ['ngResource'])
     });
     return service;
   }])
+///ocmanager/v1/api/service
+  .factory('service', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var service = $resource(GLOBAL.host + '/service', {
+
+    }, {
+      create: {method: 'POST'}
+    });
+    return service;
+  }])
+  .factory('broker', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var broker = $resource(GLOBAL.host + 'service/broker', {
+
+    }, {
+      create: {method: 'POST'}
+    });
+    return broker;
+  }])
   .factory('user', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var user = $resource(GLOBAL.host + '/user/:id', {id:'@id'}, {
       create: {method: 'POST'},
@@ -40,7 +57,7 @@ angular.module('basic.resource', ['ngResource'])
     return tenantuser;
   }])
   .factory('cGtenantuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var tenantuser = $resource(GLOBAL.host + '/tenant/{id}/user/role/assignment', {id:'@id',userId:"@userId"}, {
+    var tenantuser = $resource(GLOBAL.host + '/tenant/:id/user/role/assignment', {id:'@id'}, {
       post: {method: "POST"},
       put: {method: "put"}
     });
