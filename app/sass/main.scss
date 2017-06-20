@@ -4,6 +4,9 @@
 @import "service";
 @import "tenant";
 @import "user";
+//卡片标题颜色、textarea字体颜色
+$titcolor:#333 !default;//定义全局变量
+$smbg:#c256fc!default;
 .set_top_tu{width:146px;height:146px;position:absolute;top:50%;left:50%;margin-left:-72px;margin-top:-72px;}
 body{font-family:"微软雅黑",Helvetica;}
 .modal-dialog{
@@ -30,25 +33,25 @@ body{font-family:"微软雅黑",Helvetica;}
   }
   .pagination-sm>li:first-child>a, .pagination-sm>li:first-child>span{
     border-radius: 14px;
-    border-color: #c256fc;
-    color: #c256fc;
+    border-color: $smbg;
+    color: $smbg;
   }
   .pagination-sm>li:last-child>a, .pagination-sm>li:last-child>span {
     border-radius: 14px;
-    border-color: #c256fc;
-    color: #c256fc;
+    border-color: $smbg;
+    color: $smbg;
   }
   .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{
-    background-color:#c256fc;
-    border-color: #c256fc;
+    background-color:$smbg;
+    border-color: $smbg;
     color: #fff;
   }
   .pagination>li>a, .pagination>li>span{
-    color: #c256fc;
+    color: $smbg;
   }
   .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
-    background-color:#c256fc;
-    border-color: #c256fc;
+    background-color:$smbg;
+    border-color: $smbg;
     color: #fff;
   }
 }
@@ -166,7 +169,7 @@ body {
 }
 
 .navbar-oc .navbar-nav > li > a{
-  color: #333;
+  color: $titcolor;
   font-size: 16px;
   font-weight: normal;
   padding-top:30px;padding-bottom:30px;padding-left:20px;padding-right:20px;
@@ -190,7 +193,7 @@ body {
 .navbar-form{border-left:1px solid #dfdfdf;margin:0;padding-top:28px;padding-bottom:26px;margin-left:40px;padding-left:30px;margin-top:1px;margin-bottom:1px;}
 
 .set_text_ellipsis{white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;overflow: hidden;}
-.console_name p{margin-bottom:0;font-size:16px;color:#333;display:block;width:100px;}
+.console_name p{margin-bottom:0;font-size:16px;color:$titcolor;display:block;width:100px;}
 /****************头部********************/
 .navbar-header .brand{
   color: #666;
@@ -577,7 +580,7 @@ table a{
   line-height: 30px;
   text-align: center;
   color: #fff;
-  background: #c256fc;
+  background: $smbg;
   border-radius: 20px;
   cursor: pointer;
   margin-right:20px;
@@ -597,7 +600,7 @@ table a{
     margin-top:30px;
   .select-title{
     width: 100%;
-    display: inline-block;font-size:14px;color:#333;padding-left:9px;background:#fff;
+    display: inline-block;font-size:14px;color:$titcolor;padding-left:9px;background:#fff;
   }
     .dropdown{
       height: 28px;
@@ -606,7 +609,7 @@ table a{
       display: inline-block;
       width: 100%;
       line-height:28px;
-      color:#333
+      color:$titcolor
 
     }
     label{
@@ -622,7 +625,7 @@ table a{
       width: 475px;
       min-height: 120px;
       border-color:#eaeaea;
-      color:#333;padding:10px;font-size:14px;word-break:break-all;border:1px solid #eaeaea;
+      color:$titcolor;padding:10px;font-size:14px;word-break:break-all;border:1px solid #eaeaea;
     }
     .error_block_tit p{
       margin:5px;
@@ -708,8 +711,8 @@ a:focus{ outline: 0; }
 cursor:pointer;padding:14px;}
 .clear{clear:both;overflow:hidden;height:0;}
 /*弹出框公共样式*/
-.modal_name{font-size:16px;colo:#333;}
-.confirm-con .con-wrop .modal_input{width:100%;padding:4px 9px;border:0;font-size:14px;color:#333;}
+.modal_name{font-size:16px;color:$titcolor;}
+.confirm-con .con-wrop .modal_input{width:100%;padding:4px 9px;border:0;font-size:14px;color:$titcolor;}
 .modal_select{width:58%;}
 .confirm-select{border:1px solid #eaeaea;}
 .modal_red{color:#fa273f;display:inline-block;vertical-align:middle;}

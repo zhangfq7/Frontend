@@ -1,3 +1,4 @@
+$smbg:#c256fc!default;
 .nav-tenant{
   :focus{
     outline : none;
@@ -137,7 +138,7 @@
           line-height:30px;
           color: #fff;
           text-align: center;
-          background: #c256fc;
+          background: $smbg;
           display: inline-block;
           border-radius: 24px;
           font-size: 14px;
@@ -159,10 +160,10 @@
             a{
               padding:5px 15px;
               border-radius: 14px;
-              color: #c256fc;
+              color: $smbg;
             }
             a:hover{
-              background: #c256fc;
+              background:$smbg;
               color:#fff;
             }
           }
