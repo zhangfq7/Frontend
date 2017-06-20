@@ -20,7 +20,7 @@ angular.module('basic.resource', ['ngResource'])
     return service;
   }])
   .factory('broker', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var broker = $resource(GLOBAL.host + 'service/broker', {
+    var broker = $resource(GLOBAL.host + '/service/broker', {
 
     }, {
       create: {method: 'POST'}
