@@ -14,4 +14,20 @@ angular.module('basic')
     }, function (err) {
       console.log('err', err);
     })
+
+    //图片预加载
+    var images = new Array()
+    function preload() {
+      for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image()
+        images[i].src = arguments[i]
+      }
+    };
+    preload(
+      "img/home_tenant.png",
+      "img/home_orange.png",
+      "img/home_genplum.png",
+      "img/home_mongo.png"
+    );
+
   }]);
