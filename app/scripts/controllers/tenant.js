@@ -102,28 +102,7 @@ angular.module('basic')
 
         });
         tenantbsi.query({id:id}, function (bsis) {
-          //$scope.bsis=bsis
-          $scope.bsis=[
-            {
-              "id": "e45783a5-5240-11e7-8905-fa163efdbea8",
-              "instanceName": "1111",
-              "serviceTypeId": "",
-              "serviceTypeName": "ETCD",
-              "tenantId": "zhaoyim"
-            },{
-              "id": "e45783a5-5240-11e7-8905-fa163efdbea8",
-              "instanceName": "2222",
-              "serviceTypeId": "",
-              "serviceTypeName": "ETCD",
-              "tenantId": "zhaoyim"
-            },{
-              "id": "e45783a5-5240-11e7-8905-fa163efdbea8",
-              "instanceName": "3333",
-              "serviceTypeId": "",
-              "serviceTypeName": "ETCD",
-              "tenantId": "zhaoyim"
-            }
-          ]
+          $scope.bsis=bsis;
           $scope.grid.bsitotal = $scope.bsis.length;
           refresh(1);
 
@@ -157,12 +136,12 @@ angular.module('basic')
         showChildnode: false,//展示子项目列表
         roleTitle:tree[1].name
       };
-      $scope.roleDemoList=['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
+      var roleDemoList=['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
         'a1149421-524a-11e7-9dbb-fa163ed7d0ae',
         'a12a84d0-524a-11e7-9dbb-fa163ed7d0ae',
         'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
       ]
-
+      $scope.roleDemoList = roleDemoList.slice(0,1)
       ///访问信息
       $scope.checkInfo = function () {
         newconfirm.open();
@@ -189,7 +168,7 @@ angular.module('basic')
           nodeId:$scope.nodeId
         })
       }
-
+      $scope.treeId = 1;
       // 左侧导航切换
       $scope.showSelected = function (node) {
         $scope.grid.roleTitle = node.name;
@@ -197,7 +176,6 @@ angular.module('basic')
         getUserInfo(node.id);
         console.log('1111',$scope.nodeId);
         if (node.children.length > 0&&node.parentId) {
-
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
@@ -205,6 +183,7 @@ angular.module('basic')
           $('.right-content>li').eq(1).show().siblings().hide();
 
         }else if(node.children.length > 0){
+          $scope.roleDemoList = roleDemoList.slice(1,2)
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
@@ -212,6 +191,7 @@ angular.module('basic')
           $('.right-content>li').eq(0).show().siblings().hide();
 
         } else {
+          $scope.roleDemoList = roleDemoList.slice(2)
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = true;
