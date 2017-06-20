@@ -114,7 +114,7 @@ angular.module('basic.services', ['ngResource'])
 
           $scope.ok = function () {
             if($scope.isAdd){
-              cGtenantuser.post({id:nameobj.nodeId},{
+              cGtenantuser.put({id:nameobj.nodeId},{
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {

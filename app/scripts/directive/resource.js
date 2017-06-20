@@ -40,7 +40,7 @@ angular.module('basic.resource', ['ngResource'])
     return tenantuser;
   }])
   .factory('cGtenantuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var tenantuser = $resource(GLOBAL.host + '/tenant/{id}/user/role/assignment', {id:'@id',userId:"@userId"}, {
+    var tenantuser = $resource(GLOBAL.host + '/tenant/:id/user/role/assignment', {id:'@id',userId:"@userId"}, {
       post: {method: "POST"},
       put: {method: "put"}
     });
