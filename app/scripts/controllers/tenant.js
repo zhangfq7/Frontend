@@ -105,8 +105,13 @@ angular.module('basic')
         tenantbsi.query({id: id}, function (bsis) {
           $scope.bsis = bsis;
           if (bsis[0] && bsis[0].instanceName) {
-            bsidata.get({id: $scope.nodeId, name: bsis[0].instanceName}, function (sdata) {
-              console.log('sbsi', bsis);
+            //bsidata.get({id: $scope.nodeId, name: bsis[0].instanceName}, function (sdata) {
+            //  console.log('sbsi', bsis);
+            //}, function (err) {
+            //  console.log('sbsierr', err);
+            //})
+             bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
+              console.log('sbsi', sdata);
             }, function (err) {
               console.log('sbsierr', err);
             })
