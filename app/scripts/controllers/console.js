@@ -4,10 +4,9 @@
  * Main Controller
  */
 angular.module('basic')
-  .controller('ConsoleCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('ConsoleCtrl',['$rootScope', '$scope','sso', function ($rootScope, $scope,sso) {
+    //$rootScope.tab = "service";
+    //sso.get({}, function (data) {
+    //  console.log('ssodata', data);
+    //})
+  }]);

@@ -24,7 +24,7 @@ angular.module('basic.router', ['ui.router'])
         url: '/home',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
-        abstract: true,
+        abstract: true
       })
       .state('home.platform', {
         url: '/platform',

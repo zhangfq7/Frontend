@@ -20,7 +20,7 @@ angular.module('basic.resource', ['ngResource'])
     return service;
   }])
   .factory('broker', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var broker = $resource(GLOBAL.host + 'service/broker', {
+    var broker = $resource(GLOBAL.host + '/service/broker', {
 
     }, {
       create: {method: 'POST'}
@@ -68,6 +68,17 @@ angular.module('basic.resource', ['ngResource'])
     var tenantbsi = $resource(GLOBAL.host + '/tenant/:id/service/instances', {id:'@id'}, {
     });
     return tenantbsi;
+  }])
+  .factory('sso', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var sso = $resource(GLOBAL.host + '/sso/user', {}, {
+    });
+    return sso;
+  }])
+
+  .factory('bsidata', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var bsidata = $resource(GLOBAL.bdxhost + '/namespaces/:id/instances/:name', {id:'@id',name:'@name'}, {
+    });
+    return bsidata;
   }])
 
 
