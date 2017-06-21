@@ -147,7 +147,8 @@ angular.module('basic')
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
-        roleTitle: tree[1].name
+        roleTitle:tree[1].name,
+        treeId : ''
       };
       var roleDemoList = ['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
         'a1149421-524a-11e7-9dbb-fa163ed7d0ae',
@@ -181,22 +182,23 @@ angular.module('basic')
           nodeId: $scope.nodeId
         })
       }
-      $scope.treeId = 1;
       // 左侧导航切换
       $scope.showSelected = function (node) {
         $scope.grid.roleTitle = node.name;
+        $scope.nodeIf = node;
         $scope.nodeId = node.id;
         getUserInfo(node.id);
-        console.log('1111', $scope.nodeId);
-        if (node.children.length > 0 && node.parentId) {
+        console.log('1111',node);
+        if (node.children.length > 0&&node.parentId) {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(1).show().siblings().hide();
 
-        } else if (node.children.length > 0) {
-          $scope.roleDemoList = roleDemoList.slice(1, 2)
+        }else if(node.children.length > 0){
+          $scope.grid.treeId = 2
+          $scope.roleDemoList = roleDemoList.slice(1,2)
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
