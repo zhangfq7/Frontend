@@ -88,11 +88,9 @@ angular.module('basic')
           refreshuser(newVal);
         }
       });
-      /////获取租户信息
-      var getUserInfo = function(id){
+      // 获取租户下用户列表
+      var gettenantuser = function(id){
         $scope.users=[];
-        $scope.bsis=[];
-        $scope.childrens=[];
         tenantuser.query({id:id}, function (users) {
           console.log('user', users);
           $scope.users=users;
@@ -101,6 +99,13 @@ angular.module('basic')
         }, function (err) {
 
         });
+      }
+      /////获取租户信息
+      var getUserInfo = function(id){
+
+        $scope.bsis=[];
+        $scope.childrens=[];
+        gettenantuser(id)
         tenantbsi.query({id:id}, function (bsis) {
           $scope.bsis=bsis;
           $scope.grid.bsitotal = $scope.bsis.length;
@@ -126,10 +131,10 @@ angular.module('basic')
 
       $scope.grid = {
         userpage: 1,
-        usersize: 1,
+        usersize: 10,
         usertotal: 0,
         bsipage: 1,
-        bsisize: 1,
+        bsisize: 10,
         bsitotal:0,
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
@@ -156,7 +161,11 @@ angular.module('basic')
           description: '',
           isAdd:true,
           nodeId:$scope.nodeId
-        })
+        }).then(
+          function(){
+            gettenantuser($scope.nodeId)
+          }
+        )
       }
       //修改用户授权
       $scope.updataUser = function (item) {
@@ -213,7 +222,11 @@ angular.module('basic')
       })
       // 删除用户
       $scope.delUser = function (userId) {
-        delconfirm.open('用户', $scope.nodeId,userId)
+        delconfirm.open('用户', $scope.nodeId,userId).then(
+          function(){
+            gettenantuser($scope.nodeId)
+          }
+        )
       }
       var subTitle =
           '<span style="color:#ff304a; font-size:16px;">' + "20%"+ '</span>'
