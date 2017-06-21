@@ -42,6 +42,7 @@ angular.module('basic', [
 ]).constant('GLOBAL', {
     size: 10,
     host: './ocmanager/v1/api',
+    bdxhost: './sapi/v1',
     host_k8s: './api/v1',
     host_repos: './v1/repos',
     host_registry: './registry/api',

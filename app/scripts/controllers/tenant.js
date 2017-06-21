@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree','tenantuser','tenantbsi',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree,tenantuser,tenantbsi) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata) {
       var thisheight = $(window).height() - 80;
       $('.tree-light').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -23,6 +23,7 @@ angular.module('basic')
           labelSelected: "a8"
         }
       }
+
       //$scope.dataForTheTree =
       //  [
       //    {
@@ -62,20 +63,20 @@ angular.module('basic')
         }
       })
 
-      var refresh = function(page) {
+      var refresh = function (page) {
         var skip = (page - 1) * $scope.grid.bsisize;
         if ($scope.bsis.length) {
           $scope.bsisitem = $scope.bsis.slice(skip, skip + $scope.grid.bsisize);
-        }else {
-          $scope.bsisitem=[];
+        } else {
+          $scope.bsisitem = [];
         }
       };
-      var refreshuser = function(page) {
+      var refreshuser = function (page) {
         var skip = (page - 1) * $scope.grid.usersize;
         if ($scope.users.length) {
           $scope.useritem = $scope.users.slice(skip, skip + $scope.grid.usersize);
-        }else {
-          $scope.useritem=[];
+        } else {
+          $scope.useritem = [];
         }
       };
       $scope.$watch('grid.bsipage', function (newVal, oldVal) {
@@ -93,7 +94,7 @@ angular.module('basic')
         $scope.users=[];
         tenantuser.query({id:id}, function (users) {
           console.log('user', users);
-          $scope.users=users;
+          $scope.users = users;
           $scope.grid.usertotal = $scope.users.length;
           refreshuser(1)
         }, function (err) {
@@ -108,6 +109,18 @@ angular.module('basic')
         gettenantuser(id)
         tenantbsi.query({id:id}, function (bsis) {
           $scope.bsis=bsis;
+          if (bsis[0] && bsis[0].instanceName) {
+            //bsidata.get({id: $scope.nodeId, name: bsis[0].instanceName}, function (sdata) {
+            //  console.log('sbsi', bsis);
+            //}, function (err) {
+            //  console.log('sbsierr', err);
+            //})
+            bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
+              console.log('sbsi', sdata);
+            }, function (err) {
+              console.log('sbsierr', err);
+            })
+          }
           $scope.grid.bsitotal = $scope.bsis.length;
           refresh(1);
 
@@ -115,9 +128,9 @@ angular.module('basic')
         }, function (err) {
 
         })
-        tenantchild.query({id:id}, function (childrens) {
+        tenantchild.query({id: id}, function (childrens) {
           console.log('child', childrens);
-          $scope.childrens =childrens
+          $scope.childrens = childrens
         }, function (err) {
 
         })
@@ -142,22 +155,22 @@ angular.module('basic')
         roleTitle:tree[1].name,
         treeId : ''
       };
-      var roleDemoList=['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
+      var roleDemoList = ['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
         'a1149421-524a-11e7-9dbb-fa163ed7d0ae',
         'a12a84d0-524a-11e7-9dbb-fa163ed7d0ae',
         'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
       ]
-      $scope.roleDemoList = roleDemoList.slice(0,1)
+      $scope.roleDemoList = roleDemoList.slice(0, 1)
       ///访问信息
       $scope.checkInfo = function () {
         newconfirm.open();
       }
       //用户授权
       $scope.userAuthorize = function () {
-        Confirm.open($scope.users,$scope.roleDemoList, {
+        Confirm.open($scope.users, $scope.roleDemoList, {
           oldUser: '',
           oldRole: $scope.roleDemoList[0],
-          oldUserId :$scope.users[0].userId,
+          oldUserId: $scope.users[0].userId,
           description: '',
           isAdd:true,
           nodeId:$scope.nodeId
@@ -229,7 +242,7 @@ angular.module('basic')
         )
       }
       var subTitle =
-          '<span style="color:#ff304a; font-size:16px;">' + "20%"+ '</span>'
+          '<span style="color:#ff304a; font-size:16px;">' + "20%" + '</span>'
         ;
       $scope.charts = {
         options: {
@@ -259,7 +272,7 @@ angular.module('basic')
           colors: ['#c6c6c6', '#ff304a'],
           data: [
             ['已用', 50],
-            ['未使用', 100-50]
+            ['未使用', 100 - 50]
           ],
           dataLabels: {
             enabled: false
@@ -275,21 +288,21 @@ angular.module('basic')
           //setup some logic for the chart
         }
       }
-      $scope.testlist= [[{m: 'a'}],[{m: 'b'},{m: 'c'}]]
-      $scope.test = function(pIdx,idx){
+      $scope.testlist = [[{m: 'a'}], [{m: 'b'}, {m: 'c'}]]
+      $scope.test = function (pIdx, idx) {
         console.log(pIdx);
         console.log(idx);
-        if($scope.testlist[pIdx][idx].isshow){
+        if ($scope.testlist[pIdx][idx].isshow) {
           $scope.testlist[pIdx][idx].isshow = false;
-        }else{
-          $scope.testlist[pIdx][idx].isshow =true;
+        } else {
+          $scope.testlist[pIdx][idx].isshow = true;
         }
       }
-      $scope.toggle = function(idx){
-        if($scope.testlist[idx].isshow){
+      $scope.toggle = function (idx) {
+        if ($scope.testlist[idx].isshow) {
           $scope.testlist[idx].isshow = false;
-        }else{
-          $scope.testlist[idx].isshow =true;
+        } else {
+          $scope.testlist[idx].isshow = true;
         }
       }
     }]);
