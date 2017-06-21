@@ -24,7 +24,12 @@ angular.module('basic.router', ['ui.router'])
         url: '/home',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
-        abstract: true,
+        abstract: true
+        //resolve:{
+        //  ssoed: ['sso', function(sso){
+        //    return sso.get().$promise;
+        //  }]
+        //}
       })
       .state('home.platform', {
         url: '/platform',

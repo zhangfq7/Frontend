@@ -70,5 +70,15 @@ angular.module('basic.resource', ['ngResource'])
     return tenantbsi;
   }])
 
+  .factory('bsidata', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var bsidata = $resource(GLOBAL.bdxhost + '/namespaces/:id/instances/:name', {id:'@id',name:'@name'}, {
+    });
+    return bsidata;
+  }])
+  .factory('sso', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var sso = $resource(GLOBAL.host + '/sso/user', {}, {});
+    return sso;
+  }])
+
 
 
