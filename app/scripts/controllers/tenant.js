@@ -89,12 +89,10 @@ angular.module('basic')
           refreshuser(newVal);
         }
       });
-      /////获取租户信息
-      var getUserInfo = function (id) {
-        $scope.users = [];
-        $scope.bsis = [];
-        $scope.childrens = [];
-        tenantuser.query({id: id}, function (users) {
+      // 获取租户下用户列表
+      var gettenantuser = function(id){
+        $scope.users=[];
+        tenantuser.query({id:id}, function (users) {
           console.log('user', users);
           $scope.users = users;
           $scope.grid.usertotal = $scope.users.length;
@@ -102,21 +100,27 @@ angular.module('basic')
         }, function (err) {
 
         });
-        tenantbsi.query({id: id}, function (bsis) {
-          $scope.bsis = bsis;
+      }
+      /////获取租户信息
+      var getUserInfo = function(id){
+
+        $scope.bsis=[];
+        $scope.childrens=[];
+        gettenantuser(id)
+        tenantbsi.query({id:id}, function (bsis) {
+          $scope.bsis=bsis;
           if (bsis[0] && bsis[0].instanceName) {
             //bsidata.get({id: $scope.nodeId, name: bsis[0].instanceName}, function (sdata) {
             //  console.log('sbsi', bsis);
             //}, function (err) {
             //  console.log('sbsierr', err);
             //})
-             bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
+            bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
               console.log('sbsi', sdata);
             }, function (err) {
               console.log('sbsierr', err);
             })
           }
-
           $scope.grid.bsitotal = $scope.bsis.length;
           refresh(1);
 
@@ -137,13 +141,14 @@ angular.module('basic')
       //console.log('$scope.sidebar', $scope.sidebar);
 
 
+
       $scope.grid = {
         userpage: 1,
-        usersize: 1,
+        usersize: 10,
         usertotal: 0,
         bsipage: 1,
-        bsisize: 1,
-        bsitotal: 0,
+        bsisize: 10,
+        bsitotal:0,
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
@@ -167,19 +172,23 @@ angular.module('basic')
           oldRole: $scope.roleDemoList[0],
           oldUserId: $scope.users[0].userId,
           description: '',
-          isAdd: true,
-          nodeId: $scope.nodeId
-        })
+          isAdd:true,
+          nodeId:$scope.nodeId
+        }).then(
+          function(){
+            gettenantuser($scope.nodeId)
+          }
+        )
       }
       //修改用户授权
       $scope.updataUser = function (item) {
-        Confirm.open($scope.users, $scope.roleDemoList, {
+        Confirm.open($scope.users,$scope.roleDemoList, {
           oldUser: item.userName,
-          oldRole: item.roleId,
-          oldUserId: item.userId,
+          oldRole:  item.roleId,
+          oldUserId :item.userId,
           description: item.userDescription,
-          isAdd: false,
-          nodeId: $scope.nodeId
+          isAdd:false,
+          nodeId:$scope.nodeId
         })
       }
       // 左侧导航切换
@@ -226,7 +235,11 @@ angular.module('basic')
       })
       // 删除用户
       $scope.delUser = function (userId) {
-        delconfirm.open('用户', $scope.nodeId, userId)
+        delconfirm.open('用户', $scope.nodeId,userId).then(
+          function(){
+            gettenantuser($scope.nodeId)
+          }
+        )
       }
       var subTitle =
           '<span style="color:#ff304a; font-size:16px;">' + "20%" + '</span>'
