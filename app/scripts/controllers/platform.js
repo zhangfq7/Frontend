@@ -24,10 +24,10 @@ angular.module('basic')
       }
     };
     preload(
-      "img/home_tenant.png",
-      "img/home_orange.png",
-      "img/home_genplum.png",
-      "img/home_mongo.png"
+      "images/home_tenant.png",
+      "images/home_orange.png",
+      "images/home_genplum.png",
+      "images/home_mongo.png"
     );
 
   }]);
