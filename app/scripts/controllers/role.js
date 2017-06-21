@@ -21,10 +21,10 @@ angular.module('basic')
       }
     };
     preload(
-      "img/role_system.png",
-      "img/role_company.png",
-      "img/role_item.png",
-      "img/role_team.png"
+      "images/role_system.png",
+      "images/role_company.png",
+      "images/role_item.png",
+      "images/role_team.png"
     );
 
   }]);
