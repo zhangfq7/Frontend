@@ -114,21 +114,21 @@ angular.module('basic.services', ['ngResource'])
 
           $scope.ok = function () {
             if($scope.isAdd){
-              cGtenantuser.put({id:nameobj.nodeId},{
+              cGtenantuser.post({id:nameobj.nodeId},{
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
-                $uibModalInstance.dismiss();
+                res.userName = $scope.newUser;
+                $uibModalInstance.close(res);
               })
             }else{
               cGtenantuser.put({id:nameobj.nodeId},{
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
-                $uibModalInstance.dismiss();
+                $uibModalInstance.close(res);
               })
             }
-            $uibModalInstance.close(true);
           };
           // 选择用户
           $scope.changeUser = function (name,id) {
@@ -183,7 +183,7 @@ angular.module('basic.services', ['ngResource'])
           };
           $scope.ok = function () {
             deltenantuser.delete({id:roleId,userId:userId},{}, function (res) {
-              $uibModalInstance.dismiss();
+              $uibModalInstance.close(res);
             })
           };
         }]
