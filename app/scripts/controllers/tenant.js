@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata','user',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata,user) {
       var thisheight = $(window).height() - 80;
       $('.tree-light').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -23,23 +23,6 @@ angular.module('basic')
           labelSelected: "a8"
         }
       }
-
-      //$scope.dataForTheTree =
-      //  [
-      //    {
-      //      "name": "中信集团", "children": [{
-      //      "name": "中信银行", "children": [
-      //        {"name": "项目一", "age": "32", "children": []},
-      //        {"name": "项目二", "age": "34", "children": []},
-      //        {"name": "项目三", "age": "34", "children": []}
-      //      ]
-      //    }
-      //    ]
-      //    },
-      //    {"name": "Albert", "age": "33", "children": []},
-      //    {"name": "Ron", "age": "29", "children": []}
-      //  ];
-      //console.log('tree', tree);
       $scope.dataForTheTree = [];
       $scope.treemap = {};
 
@@ -89,6 +72,24 @@ angular.module('basic')
           refreshuser(newVal);
         }
       });
+      //获取所有用户列表
+      user.query(function (data) {
+        $scope.allUsers = data;
+      }, function (err) {
+        console.log('err', err);
+      })
+      ////筛选可授权用户
+      var checkUsers = function(alluser,onlyUser){
+        for(var i = 0 ;i < alluser.length;i++){
+          for(var z = 0 ; z < onlyUser.length;z++){
+            if(alluser[i].id == onlyUser[z].userId){
+              alluser.splice(i,1);
+            }
+          }
+        }
+        return alluser;
+      }
+
       // 获取租户下用户列表
       var gettenantuser = function(id){
         $scope.users=[];
@@ -116,7 +117,7 @@ angular.module('basic')
             //  console.log('sbsierr', err);
             //})
             bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
-              console.log('sbsi', sdata);
+              //console.log('sbsi', sdata);
             }, function (err) {
               console.log('sbsierr', err);
             })
@@ -167,16 +168,21 @@ angular.module('basic')
       }
       //用户授权
       $scope.userAuthorize = function () {
-        Confirm.open($scope.users, $scope.roleDemoList, {
-          oldUser: '',
+       var thisuser = checkUsers($scope.allUsers,$scope.users);
+        Confirm.open(thisuser, $scope.roleDemoList, {
+          oldUser: thisuser[0].username,
           oldRole: $scope.roleDemoList[0],
           oldUserId: $scope.users[0].userId,
           description: '',
           isAdd:true,
           nodeId:$scope.nodeId
         }).then(
-          function(){
-            gettenantuser($scope.nodeId)
+          function(res){
+
+            console.log('21312321',res);
+            $scope.users.push(res);
+
+              refreshuser(1);
           }
         )
       }
@@ -189,7 +195,16 @@ angular.module('basic')
           description: item.userDescription,
           isAdd:false,
           nodeId:$scope.nodeId
-        })
+        }).then(
+          function(res){
+            console.log('res',res);
+            angular.forEach($scope.users,function(item,i){
+              if(item.userId == res.userId){
+                item.roleId = res.roleId;
+              }
+            })
+          }
+        )
       }
       // 左侧导航切换
       $scope.showSelected = function (node) {
@@ -197,7 +212,6 @@ angular.module('basic')
         $scope.nodeIf = node;
         $scope.nodeId = node.id;
         getUserInfo(node.id);
-        console.log('1111',node);
         if (node.children.length > 0&&node.parentId) {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
@@ -236,8 +250,13 @@ angular.module('basic')
       // 删除用户
       $scope.delUser = function (userId) {
         delconfirm.open('用户', $scope.nodeId,userId).then(
-          function(){
-            gettenantuser($scope.nodeId)
+          function(res){
+            angular.forEach($scope.users,function(item,i){
+              if(item.userId == res.message){
+                $scope.users.splice(i,1);
+              }
+            })
+            refreshuser(1);
           }
         )
       }
