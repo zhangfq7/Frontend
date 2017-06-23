@@ -20,4 +20,5 @@ users.dat
 .tmp/
 OCManagerWeb.war
 .DS_Store
+server/app.js
 
