@@ -30,12 +30,12 @@ angular.module('basic.services', ['ngResource'])
     };
     return {
       request: function (config) {
-        if (/^\/login/.test(config.url)) {
-          return config;
-        }
-        if (/^\/signin/.test(config.url)) {
-          return config;
-        }
+        //if (/^\/login/.test(config.url)) {
+        //  return config;
+        //}
+        //if (/^\/signin/.test(config.url)) {
+        //  return config;
+        //}
         //$rootScope.region=
         //var tokens = Cookie.get('df_access_token');
         //var regions = Cookie.get('region');
@@ -61,7 +61,11 @@ angular.module('basic.services', ['ngResource'])
         //  //console.log('token错误');
         //}
         //console.log(tokens,token, regions);
-        //if (config.headers && token) {
+        if (config.headers) {
+          config.headers["tenantId"] = "8cc70907-6c60-4149-946c-b73868f082d9";
+          config.headers["username"] = "admin";
+        }
+        // if (config.headers) {
         //  config.headers["Authorization"] = "Bearer " + token;
         //}
         //
