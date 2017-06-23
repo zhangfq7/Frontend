@@ -66,7 +66,7 @@
             <div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
             <div class="col-md-2">配额&nbsp;:&nbsp;{{bsi.quota}}</div>
             <div class="col-md-2">文件数&nbsp;:&nbsp;1000</div>
-            <div class="col-md-2"><a ng-click="checkInfo()" href="javascript:void(0);">访问信息</a></div>
+            <div class="col-md-2"><a ng-click="checkInfo(bsi.tenantId,bsi.instanceName)" href="javascript:void(0);">访问信息</a></div>
           </li>
         </ul>
         <div class="page-style" ng-if="grid.bsitotal>10">

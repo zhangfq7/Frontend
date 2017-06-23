@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata','user',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata,user) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata','user','serveinfo','Alert',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata,user,serveinfo,Alert) {
       var thisheight = $(window).height() - 80;
       $('.tree-light').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -163,8 +163,19 @@ angular.module('basic')
       ]
       $scope.roleDemoList = roleDemoList.slice(0, 1)
       ///访问信息
-      $scope.checkInfo = function () {
-        newconfirm.open();
+
+      $scope.checkInfo = function (id,name) {
+        serveinfo.get({tenantId: id,serviceInstanceName:name}, function (res) {
+          if(res.status.phase == 'Active'){
+            newconfirm.open(res);
+          }else{
+            Alert.open('正在创建！');
+          }
+
+        }, function (err) {
+
+        });
+
       }
       //用户授权
       $scope.userAuthorize = function () {
@@ -178,10 +189,7 @@ angular.module('basic')
           nodeId:$scope.nodeId
         }).then(
           function(res){
-
-            console.log('21312321',res);
             $scope.users.push(res);
-
               refreshuser(1);
           }
         )

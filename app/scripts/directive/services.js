@@ -193,6 +193,23 @@ angular.module('basic.services', ['ngResource'])
         }]
       }).result;
     };
+  }]).service('Alert', ['$uibModal', function ($uibModal) {
+    this.open = function (con) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/Alert.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+          $scope.con = con
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.dismiss();
+          };
+        }]
+      }).result;
+    };
   }])
   //用户管理 -  添加用户
   .service('user_Confirm', ['$uibModal', function ($uibModal) {
