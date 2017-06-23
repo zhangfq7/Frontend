@@ -80,6 +80,11 @@ angular.module('basic.resource', ['ngResource'])
     });
     return bsidata;
   }])
+  .factory('serveinfo', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var serveinfo = $resource(GLOBAL.host + '/tenant/:tenantId/service/instance/:serviceInstanceName/access/info', {tenantId:'@tenantId',serviceInstanceName:'@serviceInstanceName'}, {
+    });
+    return serveinfo;
+  }])
 
 
 
