@@ -8,5 +8,5 @@ module.exports = {
     dist: 'dist',
     port: 9000
   },
-  env: "prod"
+  env: "dev"
 };

@@ -22,6 +22,7 @@ RUN apk add --update nginx nodejs git nodejs-npm && \
 EXPOSE 9000
 #test
 #ENTRYPOINT ["nginx", "-g", "daemon off;"]
-CMD ["gulp", "serve"]
+#CMD ["gulp", "serve"]
+CMD ["./localstart.sh"]
 
 
