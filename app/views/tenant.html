@@ -96,22 +96,22 @@
                       <div>
                         <div class="row resource-top" style="padding:20px;">
                           <div class="col-md-6" style="text-align: left;font-size: 16px;">{{arr.instanceName}}{{timeIndex}}</div>
-                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index)"></sapn></div>
+                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)"></sapn></div>
                         </div>
                         <div class="list-con" ng-if="arr.isshow">
                           <div class="row">
-                            <div class="col-md-5">
-                              <highchart config="charts"></highchart>
-                              <div class="chart-title">分配计算容量{{arr}}</div>
+                            <div class="col-md-3" ng-repeat="charsarr in  charsArr">
+                              <highchart config="charsarr"></highchart>
+                              <div class="chart-title">分配计算容量</div>
                             </div>
-                            <div class="col-md-3">
-                              <highchart config="charts"></highchart>
-                              <div class="chart-title">已使用计算容量</div>
-                            </div>
-                            <div class="col-md-4" style="text-align: right">
-                              <div class="run-num">15</div>
-                              <div class="chart-title">正在运行作业数</div>
-                            </div>
+                            <!--<div class="col-md-3">-->
+                              <!--<highchart config="charts"></highchart>-->
+                              <!--<div class="chart-title">已使用计算容量</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-4" style="text-align: right">-->
+                              <!--<div class="run-num">15</div>-->
+                              <!--<div class="chart-title">正在运行作业数</div>-->
+                            <!--</div>-->
                           </div>
                         </div>
                       </div>
