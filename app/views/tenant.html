@@ -86,17 +86,17 @@
         </div>
       </li>
       <li>
-        <div class="resource-wrop"  ng-repeat="(timeIndex,item) in testlist">
+        <div class="resource-wrop"  ng-repeat="(timeIndex,item) in newServeArr">
               <div >
                 <div class="row resource-top">
-                  <div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce计算资源配置{{item[timeIndex]['m']}}</div>
-                  <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}" ng-click="toggle($index)"></sapn></div>
+                  <div class="col-md-6" style="text-align: left;font-size: 16px;">{{item.serviceTypeName}}</div>
+                  <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}" ng-click="toggleServe($index)"></sapn></div>
                 </div>
-                <div class="resource-list" ng-repeat="arr in item" ng-if="item.isshow">
-                      <div ng-if="arr['m']== 'a'">
+                <div class="resource-list" ng-repeat="arr in item.servesList" ng-if="item.isshow">
+                      <div>
                         <div class="row resource-top" style="padding:20px;">
-                          <div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce服务实例{{arr.m}}{{timeIndex}}</div>
-                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="test(timeIndex,$index)"></sapn></div>
+                          <div class="col-md-6" style="text-align: left;font-size: 16px;">{{arr.instanceName}}{{timeIndex}}</div>
+                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index)"></sapn></div>
                         </div>
                         <div class="list-con" ng-if="arr.isshow">
                           <div class="row">
@@ -115,36 +115,36 @@
                           </div>
                         </div>
                       </div>
-                      <!---->
-                      <div ng-if="arr['m']== 'b'">
-                        <div class="row resource-top" style="padding:20px;">
-                          <div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce服务实例1</div>
-                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="test(timeIndex,$index)"></sapn></div>
-                        </div>
-                        <div class="list-con" ng-if="arr.isshow">
-                          <div class="row">
-                            <div class="col-md-3">
-                              <highchart config="charts"></highchart>
-                              <div class="chart-title">分配计算容量</div>
-                            </div>
-                            <div class="col-md-3">
-                              <highchart config="charts"></highchart>
-                              <div class="chart-title">已使用计算容量</div>
-                            </div>
-                            <div class="col-md-3">
-                              <div class="run-num" style="text-align: center">15</div>
-                              <div class="chart-title" style="padding: 0">正在运行作业数</div>
-                            </div>
-                            <div class="col-md-3" style="text-align: right">
-                              <div class="run-num">15</div>
-                              <div class="chart-title">正在运行作业数</div>
-                            </div>
-                          </div>
-                        </div>
+                      <!--&lt;!&ndash;&ndash;&gt;-->
+                      <!--<div ng-if="arr['m']== 'b'">-->
+                        <!--<div class="row resource-top" style="padding:20px;">-->
+                          <!--<div class="col-md-6" style="text-align: left;font-size: 16px;">MapReduce服务实例1</div>-->
+                          <!--<div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="test(timeIndex,$index)"></sapn></div>-->
+                        <!--</div>-->
+                        <!--<div class="list-con" ng-if="arr.isshow">-->
+                          <!--<div class="row">-->
+                            <!--<div class="col-md-3">-->
+                              <!--<highchart config="charts"></highchart>-->
+                              <!--<div class="chart-title">分配计算容量</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-3">-->
+                              <!--<highchart config="charts"></highchart>-->
+                              <!--<div class="chart-title">已使用计算容量</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-3">-->
+                              <!--<div class="run-num" style="text-align: center">15</div>-->
+                              <!--<div class="chart-title" style="padding: 0">正在运行作业数</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-3" style="text-align: right">-->
+                              <!--<div class="run-num">15</div>-->
+                              <!--<div class="chart-title">正在运行作业数</div>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                        <!--</div>-->
 
 
-                      </div>
-                      <!---->
+                      <!--</div>-->
+                      <!--&lt;!&ndash;&ndash;&gt;-->
                 </div>
               </div>
         </div>
