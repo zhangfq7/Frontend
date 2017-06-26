@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata','user','serveinfo','Alert',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata,user,serveinfo,Alert) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata','user','serveinfo','Alert','service',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata,user,serveinfo,Alert,service) {
       var thisheight = $(window).height() - 80;
       $('.tree-light').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -25,8 +25,6 @@ angular.module('basic')
       }
       $scope.dataForTheTree = [];
       $scope.treemap = {};
-
-
       angular.forEach(tree, function (item, i) {
         $scope.treemap[item.id] = item
         $scope.treemap[item.id].children = [];
@@ -102,33 +100,60 @@ angular.module('basic')
 
         });
       }
-      /////获取租户信息
-      var getUserInfo = function(id){
-
+      /// 获取租户下的服务
+      var getTenantServe = function(id){
         $scope.bsis=[];
-        $scope.childrens=[];
-        gettenantuser(id)
         tenantbsi.query({id:id}, function (bsis) {
           $scope.bsis=bsis;
-          if (bsis[0] && bsis[0].instanceName) {
-            //bsidata.get({id: $scope.nodeId, name: bsis[0].instanceName}, function (sdata) {
-            //  console.log('sbsi', bsis);
-            //}, function (err) {
-            //  console.log('sbsierr', err);
-            //})
-            bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
-              //console.log('sbsi', sdata);
-            }, function (err) {
-              console.log('sbsierr', err);
-            })
-          }
+          //if (bsis[0] && bsis[0].instanceName) {
+          //  bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
+          //    //console.log('sbsi', sdata);
+          //  }, function (err) {
+          //    console.log('sbsierr', err);
+          //  })
+          //}
           $scope.grid.bsitotal = $scope.bsis.length;
+          checkServe($scope.servesArr,$scope.bsis);
           refresh(1);
-
           console.log('bsi', bsis);
         }, function (err) {
 
         })
+      }
+      // 得到所有服务类型
+      var loadserve = function (id) {
+        service.query(function (data) {
+          $scope.servesArr = [];
+          angular.forEach(data,function(item,i){
+            var  thisobj = {serviceTypeName:item.servicename,servesList:[]};
+            $scope.servesArr.push(thisobj);
+
+          });
+          getTenantServe(id);
+        }, function (err) {
+          console.log('err', err);
+        })
+      }
+      var checkServe = function(allserve,onlyserve){
+        $scope.newServeArr = [];
+        angular.forEach(allserve,function(item,i){
+          angular.forEach(onlyserve,function(list,z){
+            if(item.serviceTypeName == list.serviceTypeName){
+              item.servesList.push(list);
+            }
+          })
+        });
+        angular.forEach($scope.servesArr,function(item,i){
+          if(item.servesList.length > 0){
+            $scope.newServeArr.push(item);
+          }
+        });
+        console.log('$scope.newServeArr',$scope.newServeArr);
+        console.log('$scope.servesArr',$scope.servesArr);
+      }
+      /// 获取租户下子公司列表
+      var gerTenantChild = function(id){
+        $scope.childrens=[];
         tenantchild.query({id: id}, function (childrens) {
           console.log('child', childrens);
           $scope.childrens = childrens
@@ -136,13 +161,20 @@ angular.module('basic')
 
         })
       }
-      //console.log('$scope.treemap', $scope.dataForTheTree[0].id);
-      //getUserInfo($scope.dataForTheTree[0].id);
+      ///页面初次加载;
+      var fristLoad = function(id){
+        gettenantuser(id);
+        loadserve(id);
+        gerTenantChild(id);
+      }
+      fristLoad($scope.dataForTheTree[0].id);
+      /////获取租户信息
+      var getUserInfo = function(id){
+        gettenantuser(id);
+        getTenantServe(id);
+        gerTenantChild(id);
 
-      //console.log('$scope.sidebar', $scope.sidebar);
-
-
-
+      }
       $scope.grid = {
         userpage: 1,
         usersize: 10,
@@ -214,6 +246,7 @@ angular.module('basic')
           }
         )
       }
+
       // 左侧导航切换
       $scope.showSelected = function (node) {
         $scope.grid.roleTitle = node.name;
@@ -245,7 +278,6 @@ angular.module('basic')
           $('.right-content>li').eq(2).show().siblings().hide();
         }
       }
-      $scope.showSelected($scope.dataForTheTree[0]);
       //右侧tabel切换
       $(function () {
         $('.right-nav>li').click(function () {
@@ -315,21 +347,21 @@ angular.module('basic')
           //setup some logic for the chart
         }
       }
-      $scope.testlist = [[{m: 'a'}], [{m: 'b'}, {m: 'c'}]]
-      $scope.test = function (pIdx, idx) {
+
+      $scope.toggleServeList = function (pIdx, idx) {
         console.log(pIdx);
         console.log(idx);
-        if ($scope.testlist[pIdx][idx].isshow) {
-          $scope.testlist[pIdx][idx].isshow = false;
+        if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
+          $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
-          $scope.testlist[pIdx][idx].isshow = true;
+          $scope.newServeArr[pIdx].servesList[idx].isshow = true;
         }
       }
-      $scope.toggle = function (idx) {
-        if ($scope.testlist[idx].isshow) {
-          $scope.testlist[idx].isshow = false;
+      $scope.toggleServe = function (idx) {
+        if ($scope.newServeArr[idx].isshow) {
+          $scope.newServeArr[idx].isshow = false;
         } else {
-          $scope.testlist[idx].isshow = true;
+          $scope.newServeArr[idx].isshow = true;
         }
       }
     }]);
