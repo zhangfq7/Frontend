@@ -4,8 +4,10 @@
  * Controller of the operation
  */
 angular.module('basic')
-  .controller('ServiceCtrl',['$rootScope', '$scope','service','service_Confirm','service_change_Confirm','service_del_Confirm', function ($rootScope, $scope,service,service_Confirm,service_change_Confirm,service_del_Confirm) {
+  .controller('ServiceCtrl',['$rootScope', '$scope','service','service_Confirm','service_change_Confirm','service_del_Confirm','colsso', function ($rootScope, $scope,service,service_Confirm,service_change_Confirm,service_del_Confirm,colsso) {
     //$rootScope.tab = "service";
+    $rootScope.isadmin=colsso.admin
+    console.log('$scope.isadmin',colsso.admin);
     function loaduser() {
       service.query(function (data) {
         console.log('data', data);

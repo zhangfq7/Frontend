@@ -65,6 +65,10 @@ angular.module('basic.services', ['ngResource'])
           config.headers["tenantId"] = "8cc70907-6c60-4149-946c-b73868f082d9";
           config.headers["username"] = "admin";
         }
+        if (config.headers) {
+          config.headers["http_x_proxy_cas_loginname"] = "aaa";
+          config.headers["http_x_proxy_cas_username"] = "aaa";
+        }
         // if (config.headers) {
         //  config.headers["Authorization"] = "Bearer " + token;
         //}
