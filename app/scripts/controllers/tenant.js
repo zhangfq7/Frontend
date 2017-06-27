@@ -105,13 +105,6 @@ angular.module('basic')
         $scope.bsis=[];
         tenantbsi.query({id:id}, function (bsis) {
           $scope.bsis=bsis;
-          //if (bsis[0] && bsis[0].instanceName) {
-          //  bsidata.get({id: 'datafoundry', name: 'rmq-instance'}, function (sdata) {
-          //    //console.log('sbsi', sdata);
-          //  }, function (err) {
-          //    console.log('sbsierr', err);
-          //  })
-          //}
           $scope.grid.bsitotal = $scope.bsis.length;
           checkServe($scope.servesArr,$scope.bsis);
           refresh(1);
@@ -137,6 +130,9 @@ angular.module('basic')
       var checkServe = function(allserve,onlyserve){
         $scope.newServeArr = [];
         angular.forEach(allserve,function(item,i){
+          if(item.servesList.length>0){
+            item.servesList = [];
+          }
           angular.forEach(onlyserve,function(list,z){
             if(item.serviceTypeName == list.serviceTypeName){
               item.servesList.push(list);
@@ -252,6 +248,7 @@ angular.module('basic')
         $scope.grid.roleTitle = node.name;
         $scope.nodeIf = node;
         $scope.nodeId = node.id;
+        $scope.newServeArr = [];
         getUserInfo(node.id);
         if (node.children.length > 0&&node.parentId) {
           $scope.grid.showCompany = false;
@@ -300,60 +297,95 @@ angular.module('basic')
           }
         )
       }
-      var subTitle =
-          '<span style="color:#ff304a; font-size:16px;">' + "20%" + '</span>'
-        ;
-      $scope.charts = {
-        options: {
-          title: {
-            text: ''
-          },
-          tooltip: {
-            enabled: false
-          },
-          credits: {
-            enabled: false
-          },
-          subtitle: {
-            text: subTitle,
-            style: {
-              lineHeight: '20px'
+
+
+      var chartsFun = function(size,used,pIdx,idx){
+        var chartsobj = {
+          options: {
+            title: {
+              text: ''
             },
-            align: 'center',
-            verticalAlign: 'middle',
-            x: 0,
-            y: 5
+            tooltip: {
+              enabled: false
+            },
+            credits: {
+              enabled: false
+            },
+            subtitle: {
+              text: '<span style="color:#ff304a; font-size:16px;">' + size/used + '</span>',
+              style: {
+                lineHeight: '20px'
+              },
+              align: 'center',
+              verticalAlign: 'middle',
+              x: 0,
+              y: 5
 
-          }
-        },
-        series: [{
-          type: 'pie',
-          colors: ['#c6c6c6', '#ff304a'],
-          data: [
-            ['已用', 50],
-            ['未使用', 100 - 50]
-          ],
-          dataLabels: {
-            enabled: false
+            }
           },
-          innerSize: '80%'
-        }],
-        size: {
-          height: 150,
-          width: 150
-        },
+          series: [{
+            type: 'pie',
+            colors: ['#c6c6c6', '#ff304a'],
+            data: [
+              ['已用', used],
+              ['未使用', used-size]
+            ],
+            dataLabels: {
+              enabled: false
+            },
+            innerSize: '80%'
+          }],
+          size: {
+            height: 150,
+            width: 150
+          },
 
-        func: function (chart) {
-          //setup some logic for the chart
+          func: function (chart) {
+            //setup some logic for the chart
+          }
         }
+        //$scope.charsArr.push(chartsobj);
+        $scope.newServeArr[pIdx].servesList[idx].charsArr.push(chartsobj);
       }
+      $scope.toggleServeList = function (pIdx, idx,serveObj) {
 
-      $scope.toggleServeList = function (pIdx, idx) {
         console.log(pIdx);
         console.log(idx);
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
+          bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
+            $scope.newServeArr[pIdx].servesList[idx].charsArr = [];
+            for(var  i = 0; i < sdata.items.length; i++){
+              chartsFun(sdata.items[i].used,sdata.items[i].size,pIdx,idx)
+            }
+            console.log('sbsi', sdata);
+          }, function (err) {
+            console.log('sbsierr', err);
+          })
+          //var sdata = {
+          //  "items":[
+          //    {
+          //      "name": "volume",
+          //      "used": idx,
+          //      "size": 50
+          //    },
+          //    {
+          //      "name": "rabbitmq",
+          //      "used": idx,
+          //      "size": 100,
+          //      "desc": "faked response from container."
+          //    },
+          //    {
+          //      "name": "datafoundry",
+          //      "used": idx,
+          //      "size": 80,
+          //      "desc": "faked response."
+          //    }
+          //  ]
+          //}
+          //$scope.charsArr = [];
+
           $scope.newServeArr[pIdx].servesList[idx].isshow = true;
         }
       }
