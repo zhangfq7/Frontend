@@ -130,6 +130,9 @@ angular.module('basic')
       var checkServe = function(allserve,onlyserve){
         $scope.newServeArr = [];
         angular.forEach(allserve,function(item,i){
+          if(item.servesList.length>0){
+            item.servesList = [];
+          }
           angular.forEach(onlyserve,function(list,z){
             if(item.serviceTypeName == list.serviceTypeName){
               item.servesList.push(list);
@@ -245,6 +248,7 @@ angular.module('basic')
         $scope.grid.roleTitle = node.name;
         $scope.nodeIf = node;
         $scope.nodeId = node.id;
+        $scope.newServeArr = [];
         getUserInfo(node.id);
         if (node.children.length > 0&&node.parentId) {
           $scope.grid.showCompany = false;
@@ -295,7 +299,7 @@ angular.module('basic')
       }
 
 
-      var chartsFun = function(size,used){
+      var chartsFun = function(size,used,pIdx,idx){
         var chartsobj = {
           options: {
             title: {
@@ -340,7 +344,8 @@ angular.module('basic')
             //setup some logic for the chart
           }
         }
-        $scope.charsArr.push(chartsobj);
+        //$scope.charsArr.push(chartsobj);
+        $scope.newServeArr[pIdx].servesList[idx].charsArr.push(chartsobj);
       }
       $scope.toggleServeList = function (pIdx, idx,serveObj) {
 
@@ -349,36 +354,38 @@ angular.module('basic')
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
-          //bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
-          //  console.log('sbsi', sdata);
-          //}, function (err) {
-          //  console.log('sbsierr', err);
-          //})
-          var sdata = {
-            "items":[
-              {
-                "name": "volume",
-                "used": 30,
-                "size": 50
-              },
-              {
-                "name": "rabbitmq",
-                "used": 30,
-                "size": 100,
-                "desc": "faked response from container."
-              },
-              {
-                "name": "datafoundry",
-                "used": 30,
-                "size": 80,
-                "desc": "faked response."
-              }
-            ]
-          }
-          $scope.charsArr = [];
-          for(var  i = 0; i < sdata.items.length; i++){
-            chartsFun(sdata.items[i].used,sdata.items[i].size)
-          }
+          bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
+            $scope.newServeArr[pIdx].servesList[idx].charsArr = [];
+            for(var  i = 0; i < sdata.items.length; i++){
+              chartsFun(sdata.items[i].used,sdata.items[i].size,pIdx,idx)
+            }
+            console.log('sbsi', sdata);
+          }, function (err) {
+            console.log('sbsierr', err);
+          })
+          //var sdata = {
+          //  "items":[
+          //    {
+          //      "name": "volume",
+          //      "used": idx,
+          //      "size": 50
+          //    },
+          //    {
+          //      "name": "rabbitmq",
+          //      "used": idx,
+          //      "size": 100,
+          //      "desc": "faked response from container."
+          //    },
+          //    {
+          //      "name": "datafoundry",
+          //      "used": idx,
+          //      "size": 80,
+          //      "desc": "faked response."
+          //    }
+          //  ]
+          //}
+          //$scope.charsArr = [];
+
           $scope.newServeArr[pIdx].servesList[idx].isshow = true;
         }
       }
