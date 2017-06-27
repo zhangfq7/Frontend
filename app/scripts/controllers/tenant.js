@@ -299,7 +299,10 @@ angular.module('basic')
       }
 
 
-      var chartsFun = function(size,used,pIdx,idx){
+      var chartsFun = function(sdata,pIdx,idx){
+        var used = parseInt(sdata.used);
+        var size = parseInt(sdata.size);
+        var num = parseInt(used/size)*100;
         var chartsobj = {
           options: {
             title: {
@@ -312,7 +315,7 @@ angular.module('basic')
               enabled: false
             },
             subtitle: {
-              text: '<span style="color:#ff304a; font-size:16px;">' + size/used + '</span>',
+              text: '<span style="color:#ff304a; font-size:16px;">' + num + '%</span>',
               style: {
                 lineHeight: '20px'
               },
@@ -325,10 +328,10 @@ angular.module('basic')
           },
           series: [{
             type: 'pie',
-            colors: ['#c6c6c6', '#ff304a'],
+            colors: ['#ff304a','#c6c6c6'],
             data: [
               ['已用', used],
-              ['未使用', used-size]
+              ['未使用', size-used]
             ],
             dataLabels: {
               enabled: false
@@ -344,47 +347,22 @@ angular.module('basic')
             //setup some logic for the chart
           }
         }
-        //$scope.charsArr.push(chartsobj);
-        $scope.newServeArr[pIdx].servesList[idx].charsArr.push(chartsobj);
+        $scope.newServeArr[pIdx].servesList[idx].charsArr.push({'chartsobj':chartsobj,'name':sdata.name});
       }
       $scope.toggleServeList = function (pIdx, idx,serveObj) {
-
-        console.log(pIdx);
-        console.log(idx);
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
           bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
+          //bsidata.get({id: 'san', name: 'n4j'}, function (sdata) {
             $scope.newServeArr[pIdx].servesList[idx].charsArr = [];
             for(var  i = 0; i < sdata.items.length; i++){
-              chartsFun(sdata.items[i].used,sdata.items[i].size,pIdx,idx)
+              chartsFun(sdata.items[i],pIdx,idx)
             }
-            console.log('sbsi', sdata);
           }, function (err) {
             console.log('sbsierr', err);
           })
-          //var sdata = {
-          //  "items":[
-          //    {
-          //      "name": "volume",
-          //      "used": idx,
-          //      "size": 50
-          //    },
-          //    {
-          //      "name": "rabbitmq",
-          //      "used": idx,
-          //      "size": 100,
-          //      "desc": "faked response from container."
-          //    },
-          //    {
-          //      "name": "datafoundry",
-          //      "used": idx,
-          //      "size": 80,
-          //      "desc": "faked response."
-          //    }
-          //  ]
-          //}
-          //$scope.charsArr = [];
+
 
           $scope.newServeArr[pIdx].servesList[idx].isshow = true;
         }
