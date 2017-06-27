@@ -249,6 +249,11 @@ $smbg:#c256fc!default;
             .chart-title{
               padding-left:30px;
               color: #999;
+              text-align: center;
+            }
+            .highcharts-container{
+              left: 50%;
+              margin-left:-75px;
             }
             .run-num{
               font-size: 40px;
