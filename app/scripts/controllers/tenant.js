@@ -7,7 +7,7 @@ angular.module('basic')
   .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi',
     function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi) {
       var thisheight = $(window).height() - 80;
-      $('.tree-light').height(thisheight);
+      $('.tree-classic').height(thisheight);
       $scope.nodeId = tree[0].id;
       $scope.treeOptions = {
         nodeChildren: "children",
