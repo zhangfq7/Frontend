@@ -18,7 +18,7 @@ if (env === 'dev') {
 app.use('/ocmanager', proxy({target: process.env.ADAPTER_API_SERVER, changeOrigin: true}));
 //app.use('/ocmanager', proxy({target: 'http://10.1.236.113:9090', changeOrigin: true}));
 //app.use('/oapi/', proxy({target: 'https://10.1.130.134:8443', changeOrigin: true, secure: false}));
-app.use('/sapi/', proxy({target: 'http://svc-amount.app-dacp.dataos.io', changeOrigin: true}));
+app.use('/sapi/', proxy({target: 'http://svc-amount.dev-citic.dataos.io', changeOrigin: true}));
 
 app.use(express.static(config[env].dist));
 app.use(favicon(path.join(__dirname, '../', config[env].dist, '/favicon.ico')));
