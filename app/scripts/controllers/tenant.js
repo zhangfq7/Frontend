@@ -302,7 +302,7 @@ angular.module('basic')
       var chartsFun = function(sdata,pIdx,idx){
         var used = parseInt(sdata.used);
         var size = parseInt(sdata.size);
-        var num = parseInt(used/size)*100;
+        var num = parseInt(used/size*100);
         var chartsobj = {
           options: {
             title: {
