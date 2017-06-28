@@ -5,7 +5,7 @@
   </div>
 <div class="set_mange">
   <div class="set_ser_btn">
-    <p ng-click="addservice()">添加服务</p></div>
+    <p ng-click="addservice()" ng-show="isadmin">添加服务</p></div>
   <ul class="role_mange_list">
     <li class="role_li" ng-repeat="item in items" ng-show="items">
       <div class="role_block">

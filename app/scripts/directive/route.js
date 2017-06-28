@@ -16,6 +16,12 @@ angular.module('basic.router', ['ui.router'])
         resolve:{
           tree: ['tenant', function(tenant){
             return tenant.query().$promise;
+          }],
+          absi: ['allbsi', function(allbsi){
+            return allbsi.query().$promise;
+          }],
+          colsso: ['sso', function(sso){
+            return sso.get().$promise;
           }]
         }
 
@@ -24,7 +30,12 @@ angular.module('basic.router', ['ui.router'])
         url: '/home',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
-        abstract: true
+        abstract: true,
+        resolve:{
+          homesso: ['sso', function(sso){
+            return sso.get().$promise;
+          }]
+        }
       })
       .state('home.platform', {
         url: '/platform',

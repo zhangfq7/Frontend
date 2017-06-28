@@ -4,16 +4,21 @@
  * Controller of the operation
  */
 angular.module('basic')
-  .controller('HomeCtrl',['$rootScope', '$scope','sso', function ($rootScope, $scope,sso) {
+  .controller('HomeCtrl', ['$rootScope', '$scope', 'homesso','sso',
+    function ($rootScope, $scope, homesso,sso) {
     //$rootScope.tab = "service";
-    sso.get(function (data) {
-      if (data['http_x_proxy_cas_loginname']) {
-        $scope.loginname=data['http_x_proxy_cas_loginname']
-        console.log('ssodata', data);
-              }
-
-
-    }, function (err) {
-      console.log('ssodata', err);
-    })
+      console.log('homesso', homesso);
+      $scope.loginname = homesso['http_x_proxy_cas_loginname']
+      $rootScope.isadmin = homesso.admin;
+    //  sso.get(function (data) {
+    //  if (data['http_x_proxy_cas_loginname']) {
+    //    $scope.loginname = data['http_x_proxy_cas_loginname']
+    //    console.log('ssodata', data);
+    //    $rootScope.isadmin = data.admin;
+    //  }
+    //
+    //
+    //}, function (err) {
+    //  console.log('ssodata', err);
+    //})
   }]);

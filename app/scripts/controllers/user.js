@@ -4,7 +4,9 @@
  * Main Controller
  */
 angular.module('basic')
-  .controller('UserCtrl', ['$rootScope', '$scope', 'user', 'user_Confirm', 'user_change_Confirm', 'user_del_Confirm', function ($rootScope, $scope, user, user_Confirm, user_change_Confirm, user_del_Confirm) {
+  .controller('UserCtrl', ['$rootScope', '$scope', 'user', 'user_Confirm', 'user_change_Confirm', 'user_del_Confirm','colsso',
+    function ($rootScope, $scope, user, user_Confirm, user_change_Confirm, user_del_Confirm,colsso) {
+    $rootScope.isadmin=colsso.admin
     function loaduser() {
       user.query(function (data) {
         console.log('data', data);
