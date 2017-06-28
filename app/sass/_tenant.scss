@@ -80,6 +80,15 @@ $smbg:#c256fc!default;
       ul{
         font-size: 14px;
         background: #f3f3f2;
+        li{
+          div{
+            padding-left:80px !important;
+
+          }
+          i{
+            left:45px !important;
+          }
+        }
       }
     }
 
@@ -240,6 +249,11 @@ $smbg:#c256fc!default;
             .chart-title{
               padding-left:30px;
               color: #999;
+              text-align: center;
+            }
+            .highcharts-container{
+              left: 50%;
+              margin-left:-75px;
             }
             .run-num{
               font-size: 40px;
