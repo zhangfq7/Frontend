@@ -41,7 +41,7 @@ $smbg:#c256fc!default;
 
   padding: 0;
   margin: 0;
-  .tree-light{
+  .tree-classic{
     background: #ebebe9;
     font-size: 16px;
     padding:0;
@@ -89,6 +89,13 @@ $smbg:#c256fc!default;
             left:45px !important;
           }
         }
+      }
+    }
+    li.tree-leaf{
+      i.tree-leaf-head{
+        -webkit-background-size:20px!important;
+        background-size:20px!important;
+        background-position: 0px -2px!important;
       }
     }
 
