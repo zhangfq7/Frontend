@@ -69,6 +69,11 @@ angular.module('basic.resource', ['ngResource'])
     });
     return tenantbsi;
   }])
+  .factory('allbsi', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var allbsi = $resource(GLOBAL.host + '/service/instances', {id:'@id'}, {
+    });
+    return allbsi;
+  }])
   .factory('sso', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var sso = $resource(GLOBAL.host + '/sso/user', {}, {
     });

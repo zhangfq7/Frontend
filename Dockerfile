@@ -23,6 +23,6 @@ EXPOSE 9000
 #test
 #ENTRYPOINT ["nginx", "-g", "daemon off;"]
 #CMD ["gulp", "serve"]
-CMD ["./localstart.sh"]
+CMD ["./citicstart.sh"]
 
 

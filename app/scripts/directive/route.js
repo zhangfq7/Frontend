@@ -17,6 +17,9 @@ angular.module('basic.router', ['ui.router'])
           tree: ['tenant', function(tenant){
             return tenant.query().$promise;
           }],
+          absi: ['allbsi', function(allbsi){
+            return allbsi.query().$promise;
+          }],
           colsso: ['sso', function(sso){
             return sso.get().$promise;
           }]

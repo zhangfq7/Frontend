@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata','user','serveinfo','Alert','service',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata,user,serveinfo,Alert,service) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi) {
       var thisheight = $(window).height() - 80;
       $('.tree-light').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -25,11 +25,21 @@ angular.module('basic')
       }
       $scope.dataForTheTree = [];
       $scope.treemap = {};
+      angular.forEach(tree, function (tre, i) {
+        //console.log('tre', tre);
+        tre.bsis=[];
+        angular.forEach(absi, function (bsi, j) {
+          if (tre.id === bsi.tenantId) {
+            tre.bsis.push(bsi)
+          }
+        })
+      })
       angular.forEach(tree, function (item, i) {
         $scope.treemap[item.id] = item
         $scope.treemap[item.id].children = [];
       })
-      //console.log('$scope.treemap', $scope.treemap);
+
+
       angular.forEach(tree, function (item, i) {
         if (item.parentId) {
           //console.log('$scope.treemap[item.parentId]', $scope.treemap[item.parentId]);
@@ -43,7 +53,19 @@ angular.module('basic')
           $scope.dataForTheTree.push($scope.treemap[item.id])
         }
       })
+      angular.forEach($scope.dataForTheTree, function (tree,i) {
+        cinf(tree)
+      })
+      function cinf(father){
+        angular.forEach(father.children, function (child,i) {
+          cinf(child)
+          angular.forEach(child.bsis, function (bsi,j) {
+            father.bsis.push(bsi)
+          })
+        })
 
+      }
+      console.log('$scope.dataForTheTree', $scope.dataForTheTree);
       var refresh = function (page) {
         var skip = (page - 1) * $scope.grid.bsisize;
         if ($scope.bsis.length) {
@@ -77,11 +99,11 @@ angular.module('basic')
         console.log('err', err);
       })
       ////筛选可授权用户
-      var checkUsers = function(alluser,onlyUser){
-        for(var i = 0 ;i < alluser.length;i++){
-          for(var z = 0 ; z < onlyUser.length;z++){
-            if(alluser[i].id == onlyUser[z].userId){
-              alluser.splice(i,1);
+      var checkUsers = function (alluser, onlyUser) {
+        for (var i = 0; i < alluser.length; i++) {
+          for (var z = 0; z < onlyUser.length; z++) {
+            if (alluser[i].id == onlyUser[z].userId) {
+              alluser.splice(i, 1);
             }
           }
         }
@@ -89,9 +111,9 @@ angular.module('basic')
       }
 
       // 获取租户下用户列表
-      var gettenantuser = function(id){
-        $scope.users=[];
-        tenantuser.query({id:id}, function (users) {
+      var gettenantuser = function (id) {
+        $scope.users = [];
+        tenantuser.query({id: id}, function (users) {
           console.log('user', users);
           $scope.users = users;
           $scope.grid.usertotal = $scope.users.length;
@@ -101,12 +123,12 @@ angular.module('basic')
         });
       }
       /// 获取租户下的服务
-      var getTenantServe = function(id){
-        $scope.bsis=[];
-        tenantbsi.query({id:id}, function (bsis) {
-          $scope.bsis=bsis;
+      var getTenantServe = function (id) {
+        $scope.bsis = [];
+        tenantbsi.query({id: id}, function (bsis) {
+          $scope.bsis = bsis;
           $scope.grid.bsitotal = $scope.bsis.length;
-          checkServe($scope.servesArr,$scope.bsis);
+          checkServe($scope.servesArr, $scope.bsis);
           refresh(1);
           console.log('bsi', bsis);
         }, function (err) {
@@ -117,8 +139,8 @@ angular.module('basic')
       var loadserve = function (id) {
         service.query(function (data) {
           $scope.servesArr = [];
-          angular.forEach(data,function(item,i){
-            var  thisobj = {serviceTypeName:item.servicename,servesList:[]};
+          angular.forEach(data, function (item, i) {
+            var thisobj = {serviceTypeName: item.servicename, servesList: []};
             $scope.servesArr.push(thisobj);
 
           });
@@ -127,29 +149,29 @@ angular.module('basic')
           console.log('err', err);
         })
       }
-      var checkServe = function(allserve,onlyserve){
+      var checkServe = function (allserve, onlyserve) {
         $scope.newServeArr = [];
-        angular.forEach(allserve,function(item,i){
-          if(item.servesList.length>0){
+        angular.forEach(allserve, function (item, i) {
+          if (item.servesList.length > 0) {
             item.servesList = [];
           }
-          angular.forEach(onlyserve,function(list,z){
-            if(item.serviceTypeName == list.serviceTypeName){
+          angular.forEach(onlyserve, function (list, z) {
+            if (item.serviceTypeName == list.serviceTypeName) {
               item.servesList.push(list);
             }
           })
         });
-        angular.forEach($scope.servesArr,function(item,i){
-          if(item.servesList.length > 0){
+        angular.forEach($scope.servesArr, function (item, i) {
+          if (item.servesList.length > 0) {
             $scope.newServeArr.push(item);
           }
         });
-        console.log('$scope.newServeArr',$scope.newServeArr);
-        console.log('$scope.servesArr',$scope.servesArr);
+        console.log('$scope.newServeArr', $scope.newServeArr);
+        console.log('$scope.servesArr', $scope.servesArr);
       }
       /// 获取租户下子公司列表
-      var gerTenantChild = function(id){
-        $scope.childrens=[];
+      var gerTenantChild = function (id) {
+        $scope.childrens = [];
         tenantchild.query({id: id}, function (childrens) {
           console.log('child', childrens);
           $scope.childrens = childrens
@@ -158,14 +180,14 @@ angular.module('basic')
         })
       }
       ///页面初次加载;
-      var fristLoad = function(id){
+      var fristLoad = function (id) {
         gettenantuser(id);
         loadserve(id);
         gerTenantChild(id);
       }
       fristLoad($scope.dataForTheTree[0].id);
       /////获取租户信息
-      var getUserInfo = function(id){
+      var getUserInfo = function (id) {
         gettenantuser(id);
         getTenantServe(id);
         gerTenantChild(id);
@@ -177,12 +199,12 @@ angular.module('basic')
         usertotal: 0,
         bsipage: 1,
         bsisize: 10,
-        bsitotal:0,
+        bsitotal: 0,
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
-        roleTitle:tree[1].name,
-        treeId : ''
+        roleTitle: tree[1].name,
+        treeId: ''
       };
       var roleDemoList = ['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
         'a1149421-524a-11e7-9dbb-fa163ed7d0ae',
@@ -192,11 +214,11 @@ angular.module('basic')
       $scope.roleDemoList = roleDemoList.slice(0, 1)
       ///访问信息
 
-      $scope.checkInfo = function (id,name) {
-        serveinfo.get({tenantId: id,serviceInstanceName:name}, function (res) {
-          if(res.status.phase == 'Active'){
+      $scope.checkInfo = function (id, name) {
+        serveinfo.get({tenantId: id, serviceInstanceName: name}, function (res) {
+          if (res.status.phase == 'Active') {
             newconfirm.open(res);
-          }else{
+          } else {
             Alert.open('正在创建！');
           }
 
@@ -207,35 +229,35 @@ angular.module('basic')
       }
       //用户授权
       $scope.userAuthorize = function () {
-       var thisuser = checkUsers($scope.allUsers,$scope.users);
+        var thisuser = checkUsers($scope.allUsers, $scope.users);
         Confirm.open(thisuser, $scope.roleDemoList, {
           oldUser: thisuser[0].username,
           oldRole: $scope.roleDemoList[0],
           oldUserId: $scope.users[0].userId,
           description: '',
-          isAdd:true,
-          nodeId:$scope.nodeId
+          isAdd: true,
+          nodeId: $scope.nodeId
         }).then(
-          function(res){
+          function (res) {
             $scope.users.push(res);
-              refreshuser(1);
+            refreshuser(1);
           }
         )
       }
       //修改用户授权
       $scope.updataUser = function (item) {
-        Confirm.open($scope.users,$scope.roleDemoList, {
+        Confirm.open($scope.users, $scope.roleDemoList, {
           oldUser: item.userName,
-          oldRole:  item.roleId,
-          oldUserId :item.userId,
+          oldRole: item.roleId,
+          oldUserId: item.userId,
           description: item.userDescription,
-          isAdd:false,
-          nodeId:$scope.nodeId
+          isAdd: false,
+          nodeId: $scope.nodeId
         }).then(
-          function(res){
-            console.log('res',res);
-            angular.forEach($scope.users,function(item,i){
-              if(item.userId == res.userId){
+          function (res) {
+            console.log('res', res);
+            angular.forEach($scope.users, function (item, i) {
+              if (item.userId == res.userId) {
                 item.roleId = res.roleId;
               }
             })
@@ -250,16 +272,16 @@ angular.module('basic')
         $scope.nodeId = node.id;
         $scope.newServeArr = [];
         getUserInfo(node.id);
-        if (node.children.length > 0&&node.parentId) {
+        if (node.children.length > 0 && node.parentId) {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(1).show().siblings().hide();
 
-        }else if(node.children.length > 0){
+        } else if (node.children.length > 0) {
           $scope.grid.treeId = 2
-          $scope.roleDemoList = roleDemoList.slice(1,2)
+          $scope.roleDemoList = roleDemoList.slice(1, 2)
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
@@ -286,11 +308,11 @@ angular.module('basic')
       })
       // 删除用户
       $scope.delUser = function (userId) {
-        delconfirm.open('用户', $scope.nodeId,userId).then(
-          function(res){
-            angular.forEach($scope.users,function(item,i){
-              if(item.userId == res.message){
-                $scope.users.splice(i,1);
+        delconfirm.open('用户', $scope.nodeId, userId).then(
+          function (res) {
+            angular.forEach($scope.users, function (item, i) {
+              if (item.userId == res.message) {
+                $scope.users.splice(i, 1);
               }
             })
             refreshuser(1);
@@ -299,10 +321,10 @@ angular.module('basic')
       }
 
 
-      var chartsFun = function(sdata,pIdx,idx){
+      var chartsFun = function (sdata, pIdx, idx) {
         var used = parseInt(sdata.used);
         var size = parseInt(sdata.size);
-        var num = parseInt(used/size*100);
+        var num = parseInt(used / size * 100);
         var chartsobj = {
           options: {
             title: {
@@ -328,10 +350,10 @@ angular.module('basic')
           },
           series: [{
             type: 'pie',
-            colors: ['#ff304a','#c6c6c6'],
+            colors: ['#ff304a', '#c6c6c6'],
             data: [
               ['已用', used],
-              ['未使用', size-used]
+              ['未使用', size - used]
             ],
             dataLabels: {
               enabled: false
@@ -347,17 +369,17 @@ angular.module('basic')
             //setup some logic for the chart
           }
         }
-        $scope.newServeArr[pIdx].servesList[idx].charsArr.push({'chartsobj':chartsobj,'name':sdata.name});
+        $scope.newServeArr[pIdx].servesList[idx].charsArr.push({'chartsobj': chartsobj, 'name': sdata.name});
       }
-      $scope.toggleServeList = function (pIdx, idx,serveObj) {
+      $scope.toggleServeList = function (pIdx, idx, serveObj) {
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
-          bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
-          //bsidata.get({id: 'san', name: 'n4j'}, function (sdata) {
+          //bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
+          bsidata.get({id: 'san', name: 'n4j'}, function (sdata) {
             $scope.newServeArr[pIdx].servesList[idx].charsArr = [];
-            for(var  i = 0; i < sdata.items.length; i++){
-              chartsFun(sdata.items[i],pIdx,idx)
+            for (var i = 0; i < sdata.items.length; i++) {
+              chartsFun(sdata.items[i], pIdx, idx)
             }
           }, function (err) {
             console.log('sbsierr', err);
