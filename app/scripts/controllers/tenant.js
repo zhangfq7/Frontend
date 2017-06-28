@@ -65,7 +65,7 @@ angular.module('basic')
         })
 
       }
-      console.log('$scope.dataForTheTree', $scope.dataForTheTree);
+      //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
       var refresh = function (page) {
         var skip = (page - 1) * $scope.grid.bsisize;
         if ($scope.bsis.length) {
@@ -123,6 +123,7 @@ angular.module('basic')
         });
       }
       /// 获取租户下的服务
+
       var getTenantServe = function (id) {
         $scope.bsis = [];
         tenantbsi.query({id: id}, function (bsis) {
@@ -149,6 +150,7 @@ angular.module('basic')
           console.log('err', err);
         })
       }
+
       var checkServe = function (allserve, onlyserve) {
         $scope.newServeArr = [];
         angular.forEach(allserve, function (item, i) {
@@ -187,8 +189,10 @@ angular.module('basic')
       }
       fristLoad($scope.dataForTheTree[0].id);
       /////获取租户信息
-      var getUserInfo = function (id) {
+      var getUserInfo = function (id,node) {
         gettenantuser(id);
+        console.log(node);
+
         getTenantServe(id);
         gerTenantChild(id);
 
@@ -271,7 +275,7 @@ angular.module('basic')
         $scope.nodeIf = node;
         $scope.nodeId = node.id;
         $scope.newServeArr = [];
-        getUserInfo(node.id);
+        getUserInfo(node.id,node);
         if (node.children.length > 0 && node.parentId) {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
