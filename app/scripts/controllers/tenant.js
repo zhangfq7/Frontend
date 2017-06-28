@@ -126,26 +126,26 @@ angular.module('basic')
       /// 获取租户下的服务
 
       var getTenantServe = function (id, node) {
-        if (!node) {
-          $scope.bsis = [];
-
-          tenantbsi.query({id: id}, function (bsis) {
-            $scope.bsis = bsis;
-            $scope.grid.bsitotal = $scope.bsis.length;
-            checkServe($scope.servesArr, $scope.bsis);
-            refresh(1);
-            //console.log('bsi', bsis);
-          }, function (err) {
-
-          })
-        }else {
+        //if (!node) {
+        //  $scope.bsis = [];
+        //
+        //  tenantbsi.query({id: id}, function (bsis) {
+        //    $scope.bsis = bsis;
+        //    $scope.grid.bsitotal = $scope.bsis.length;
+        //    checkServe($scope.servesArr, $scope.bsis);
+        //    refresh(1);
+        //    //console.log('bsi', bsis);
+        //  }, function (err) {
+        //
+        //  })
+        //}else {
           //alert(1)
           $scope.bsis=node.bsis;
           $scope.grid.bsitotal = $scope.bsis.length;
           checkServe($scope.servesArr, $scope.bsis);
           refresh(1);
           //console.log('bsi', bsis);
-        }
+        //}
 
       }
       // 得到所有服务类型
