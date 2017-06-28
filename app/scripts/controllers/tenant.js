@@ -125,7 +125,7 @@ angular.module('basic')
       }
       /// 获取租户下的服务
 
-      var getTenantServe = function (id, node) {
+      var getTenantServe = function (node) {
         //if (!node) {
         //  $scope.bsis = [];
         //
@@ -157,7 +157,7 @@ angular.module('basic')
             $scope.servesArr.push(thisobj);
 
           });
-          getTenantServe(id,node);
+          getTenantServe(node);
         }, function (err) {
           console.log('err', err);
         })
@@ -205,7 +205,7 @@ angular.module('basic')
         gettenantuser(id);
         //console.log(node);
 
-        getTenantServe(id, node);
+        getTenantServe(node);
         gerTenantChild(id);
 
       }
