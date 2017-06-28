@@ -70,7 +70,7 @@ angular.module('basic.resource', ['ngResource'])
     return tenantbsi;
   }])
   .factory('allbsi', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var allbsi = $resource(GLOBAL.host + '/service/instances', {id:'@id'}, {
+    var allbsi = $resource(GLOBAL.host + '/service/all/instances', {id:'@id'}, {
     });
     return allbsi;
   }])
