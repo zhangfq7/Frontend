@@ -222,7 +222,7 @@ angular.module('basic')
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
-        roleTitle: tree[1].name,
+        roleTitle: tree[0].name,
         treeId: ''
       };
       var roleDemoList = ['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
