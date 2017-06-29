@@ -4,9 +4,11 @@
  * Main Controller
  */
 angular.module('basic')
-  .controller('ConsoleCtrl',['$rootScope', '$scope','sso','colsso', function ($rootScope, $scope,sso,colsso) {
+  .controller('ConsoleCtrl',['$rootScope', '$scope','sso','colsso','Cookie',
+    function ($rootScope, $scope,sso,colsso,Cookie) {
     //$rootScope.tab = "service";
-    console.log('homesso', colsso);
+    //console.log('homesso', colsso);
+    Cookie.set('username', colsso['http_x_proxy_cas_loginname'],  24 * 3600 * 1000);
     $scope.loginname = colsso['http_x_proxy_cas_loginname']
     $rootScope.isadmin = colsso.admin;
     //sso.get(function (data) {
