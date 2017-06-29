@@ -8,7 +8,7 @@ angular.module('basic')
     function ($rootScope, $scope, homesso,sso,Cookie) {
     //$rootScope.tab = "service";
     //  console.log('homesso', homesso);
-      Cookie.set('username', colsso['http_x_proxy_cas_loginname'],  24 * 3600 * 1000);
+      Cookie.set('username', homesso['http_x_proxy_cas_loginname'],  24 * 3600 * 1000);
       $scope.loginname = homesso['http_x_proxy_cas_loginname']
       $rootScope.isadmin = homesso.admin;
     //  sso.get(function (data) {
