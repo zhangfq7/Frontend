@@ -226,14 +226,12 @@ angular.module('basic.services', ['ngResource'])
         backdrop: 'static',
         templateUrl: 'views/tpl/user_Confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance', 'user', function ($scope, $uibModalInstance, user) {
+        controller: ['$scope', '$uibModalInstance', 'user','putuser',
+          function ($scope, $uibModalInstance, user,putuser) {
           if (item) {
             $scope.isupdata = true
-            $scope.input = {
-              username: item.username,
-              email: item.email,
-              description: item.description
-            }
+
+            $scope.input = item
           } else {
             $scope.isupdata = false
             $scope.input = {
@@ -282,7 +280,7 @@ angular.module('basic.services', ['ngResource'])
             }
             //console.log('$scope.input', $scope.input);
             if ($scope.isupdata) {
-              user.updata($scope.input, function (data) {
+              putuser.updata($scope.input, function (data) {
                 $uibModalInstance.close(true);
               }, function (err) {
 
