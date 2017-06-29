@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi','Cookie',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi,Cookie) {
       var thisheight = $(window).height() - 80;
       $('.tree-classic').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -196,6 +196,7 @@ angular.module('basic')
       }
       ///页面初次加载;
       var fristLoad = function (id,node) {
+        Cookie.set('tenantId', id,  24 * 3600 * 1000);
         gettenantuser(id);
         loadserve(id,node);
         gerTenantChild(id);
@@ -203,6 +204,7 @@ angular.module('basic')
       fristLoad($scope.dataForTheTree[0].id,$scope.dataForTheTree[0]);
       /////获取租户信息
       var getUserInfo = function (id, node) {
+
         gettenantuser(id);
         //console.log(node);
 
@@ -284,6 +286,8 @@ angular.module('basic')
 
       // 左侧导航切换
       $scope.showSelected = function (node) {
+        //console.log('node.id',node.id);
+        Cookie.set('tenantId', node.id,  24 * 3600 * 1000);
         $scope.grid.roleTitle = node.name;
         $scope.nodeIf = node;
         $scope.nodeId = node.id;

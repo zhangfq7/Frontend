@@ -21,97 +21,101 @@ angular.module('basic.services', ['ngResource'])
       this.set(key, "", -1);
     };
   }])
-  .factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', function ($rootScope, $q, AUTH_EVENTS) {
-    var CODE_MAPPING = {
-      401: AUTH_EVENTS.loginNeeded,
-      403: AUTH_EVENTS.httpForbidden,
-      419: AUTH_EVENTS.loginNeeded,
-      440: AUTH_EVENTS.loginNeeded
-    };
-    return {
-      request: function (config) {
-        //if (/^\/login/.test(config.url)) {
-        //  return config;
-        //}
-        //if (/^\/signin/.test(config.url)) {
-        //  return config;
-        //}
-        //$rootScope.region=
-        //var tokens = Cookie.get('df_access_token');
-        //var regions = Cookie.get('region');
-        //var token = '';
-        ////console.log(tokens);
-        //
-        //if (tokens && regions) {
-        //  var tokenarr = tokens.split(',');
-        //  var region = regions.split('-')[2];
-        //  //if (/^\/lapi\/v1\/orgs/.test(config.url)) {
-        //  //    console.log(config.url);
-        //  //}
-        //
-        //  if (/^\/lapi\/v1\/orgs/.test(config.url) || /^\/oapi/.test(config.url) || /^\/api/.test(config.url) || /^\/payment/.test(config.url) || /^\/v1\/repos/.test(config.url)) {
-        //
-        //    token = tokenarr[region - 1];
-        //  } else {
-        //    token = tokenarr[0];
-        //  }
-        //
-        //  //console.log('tokenarr', tokenarr[region-1]);
-        //} else {
-        //  //console.log('token错误');
-        //}
-        //console.log(tokens,token, regions);
-        if (config.headers) {
-          config.headers["tenantId"] = "8cc70907-6c60-4149-946c-b73868f082d9";
-          config.headers["username"] = "admin";
+  .factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', 'Cookie',
+    function ($rootScope, $q, AUTH_EVENTS, Cookie) {
+      var CODE_MAPPING = {
+        401: AUTH_EVENTS.loginNeeded,
+        403: AUTH_EVENTS.httpForbidden,
+        419: AUTH_EVENTS.loginNeeded,
+        440: AUTH_EVENTS.loginNeeded
+      };
+      return {
+        request: function (config) {
+          //if (/^\/login/.test(config.url)) {
+          //  return config;
+          //}
+          //if (/^\/signin/.test(config.url)) {
+          //  return config;
+          //}
+          //$rootScope.region=
+          //var tokens = Cookie.get('df_access_token');
+          //var regions = Cookie.get('region');
+          //var token = '';
+          ////console.log(tokens);
+          //
+          //if (tokens && regions) {
+          //  var tokenarr = tokens.split(',');
+          //  var region = regions.split('-')[2];
+          //  //if (/^\/lapi\/v1\/orgs/.test(config.url)) {
+          //  //    console.log(config.url);
+          //  //}
+          //
+          //  if (/^\/lapi\/v1\/orgs/.test(config.url) || /^\/oapi/.test(config.url) || /^\/api/.test(config.url) || /^\/payment/.test(config.url) || /^\/v1\/repos/.test(config.url)) {
+          //
+          //    token = tokenarr[region - 1];
+          //  } else {
+          //    token = tokenarr[0];
+          //  }
+          //
+          //  //console.log('tokenarr', tokenarr[region-1]);
+          //} else {
+          //  //console.log('token错误');
+          //}
+          //console.log(tokens,token, regions);
+          var tenantId = Cookie.get('tenantId');
+          var username = Cookie.get('username');
+          //console.log('username', username);
+          if (config.headers) {
+            config.headers["tenantId"] = tenantId
+            config.headers["username"] = username;
+          }
+          if (config.headers) {
+            config.headers["http_x_proxy_cas_loginname"] = "aaa";
+            config.headers["http_x_proxy_cas_username"] = "aaa";
+          }
+          // if (config.headers) {
+          //  config.headers["Authorization"] = "Bearer " + token;
+          //}
+          //
+          //if (/^\/hawkular/.test(config.url)) {
+          //  config.headers["Hawkular-Tenant"] = $rootScope.namespace;
+          //}
+          //if (/^\/registry/.test(config.url)) {
+          //  var Auth = localStorage.getItem("Auth")
+          //  config.headers["Authorization"] = "Basic " + Auth;
+          //}
+          //if (config.method == 'PATCH') {
+          //  config.headers["Content-Type"] = "application/merge-patch+json";
+          //}
+          //console.log('config.url', config.url);
+          $rootScope.loading = true;
+          return config;
+        },
+        requestError: function (rejection) {
+          $rootScope.loading = false;
+          return $q.reject(rejection);
+        },
+        response: function (res) {
+          $rootScope.loading = false;
+          return res;
+        },
+        responseError: function (response) {
+          //alert(11)
+          $rootScope.loading = false;
+          var val = CODE_MAPPING[response.status];
+          if (val) {
+            $rootScope.$broadcast(val, response);
+          }
+          return $q.reject(response);
         }
-        if (config.headers) {
-          config.headers["http_x_proxy_cas_loginname"] = "aaa";
-          config.headers["http_x_proxy_cas_username"] = "aaa";
-        }
-        // if (config.headers) {
-        //  config.headers["Authorization"] = "Bearer " + token;
-        //}
-        //
-        //if (/^\/hawkular/.test(config.url)) {
-        //  config.headers["Hawkular-Tenant"] = $rootScope.namespace;
-        //}
-        //if (/^\/registry/.test(config.url)) {
-        //  var Auth = localStorage.getItem("Auth")
-        //  config.headers["Authorization"] = "Basic " + Auth;
-        //}
-        //if (config.method == 'PATCH') {
-        //  config.headers["Content-Type"] = "application/merge-patch+json";
-        //}
-        //console.log('config.url', config.url);
-        $rootScope.loading = true;
-        return config;
-      },
-      requestError: function (rejection) {
-        $rootScope.loading = false;
-        return $q.reject(rejection);
-      },
-      response: function (res) {
-        $rootScope.loading = false;
-        return res;
-      },
-      responseError: function (response) {
-        //alert(11)
-        $rootScope.loading = false;
-        var val = CODE_MAPPING[response.status];
-        if (val) {
-          $rootScope.$broadcast(val, response);
-        }
-        return $q.reject(response);
-      }
-    };
-  }])
+      };
+    }])
   .service('Confirm', ['$uibModal', function ($uibModal) {
     this.open = function (userList, roleList, nameobj) {
       return $uibModal.open({
         templateUrl: 'views/tpl/confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance','cGtenantuser', function ($scope, $uibModalInstance,cGtenantuser) {
+        controller: ['$scope', '$uibModalInstance', 'cGtenantuser', function ($scope, $uibModalInstance, cGtenantuser) {
           $scope.userList = userList;
           $scope.roleList = roleList;
           $scope.newUser = nameobj.oldUser;
@@ -121,16 +125,16 @@ angular.module('basic.services', ['ngResource'])
           $scope.isAdd = nameobj.isAdd;
 
           $scope.ok = function () {
-            if($scope.isAdd){
-              cGtenantuser.post({id:nameobj.nodeId},{
+            if ($scope.isAdd) {
+              cGtenantuser.post({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
                 res.userName = $scope.newUser;
                 $uibModalInstance.close(res);
               })
-            }else{
-              cGtenantuser.put({id:nameobj.nodeId},{
+            } else {
+              cGtenantuser.put({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
@@ -139,7 +143,7 @@ angular.module('basic.services', ['ngResource'])
             }
           };
           // 选择用户
-          $scope.changeUser = function (name,id) {
+          $scope.changeUser = function (name, id) {
             $scope.newUser = name;
             $scope.newUserId = id;
           }
@@ -175,29 +179,29 @@ angular.module('basic.services', ['ngResource'])
       }).result;
     };
   }]).service('delconfirm', ['$uibModal', function ($uibModal) {
-    this.open = function (title,roleId, userId) {
-      return $uibModal.open({
-        backdrop: 'static',
-        templateUrl: 'views/tpl/delConfirm.html',
-        size: 'default',
-        controller: ['$scope', '$uibModalInstance','deltenantuser', function ($scope, $uibModalInstance,deltenantuser) {
+  this.open = function (title, roleId, userId) {
+    return $uibModal.open({
+      backdrop: 'static',
+      templateUrl: 'views/tpl/delConfirm.html',
+      size: 'default',
+      controller: ['$scope', '$uibModalInstance', 'deltenantuser', function ($scope, $uibModalInstance, deltenantuser) {
 
 
-          $scope.title = title;
-          $scope.userId = userId;
+        $scope.title = title;
+        $scope.userId = userId;
 
-          $scope.cancel = function () {
-            $uibModalInstance.dismiss();
-          };
-          $scope.ok = function () {
-            deltenantuser.delete({id:roleId,userId:userId},{}, function (res) {
-              $uibModalInstance.close(res);
-            })
-          };
-        }]
-      }).result;
-    };
-  }]).service('Alert', ['$uibModal', function ($uibModal) {
+        $scope.cancel = function () {
+          $uibModalInstance.dismiss();
+        };
+        $scope.ok = function () {
+          deltenantuser.delete({id: roleId, userId: userId}, {}, function (res) {
+            $uibModalInstance.close(res);
+          })
+        };
+      }]
+    }).result;
+  };
+}]).service('Alert', ['$uibModal', function ($uibModal) {
     this.open = function (con) {
       return $uibModal.open({
         backdrop: 'static',
@@ -217,22 +221,33 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  添加用户
   .service('user_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (datacon) {
+    this.open = function (item) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_Confirm.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', 'user', function ($scope, $uibModalInstance, user) {
-          $scope.input = {
-            username: '',
-            email: '',
-            description: ''
+          if (item) {
+            $scope.isupdata = true
+            $scope.input = {
+              username: item.username,
+              email: item.email,
+              description: item.description
+            }
+          } else {
+            $scope.isupdata = false
+            $scope.input = {
+              username: '',
+              email: '',
+              description: ''
+            }
           }
+
           $scope.error = {
             namenull: false,
             emailnull: false
           }
-          $scope.con = datacon;
+          //$scope.con = datacon;
           $scope.$watch('input', function (n, o) {
             if (n === o) {
               return
@@ -266,11 +281,22 @@ angular.module('basic.services', ['ngResource'])
               return
             }
             //console.log('$scope.input', $scope.input);
-            user.create($scope.input, function (data) {
-              $uibModalInstance.close(true);
-            }, function (err) {
+            if ($scope.isupdata) {
+              user.updata($scope.input, function (data) {
+                $uibModalInstance.close(true);
+              }, function (err) {
 
-            })
+              })
+            }else {
+              user.create($scope.input, function (data) {
+                $uibModalInstance.close(true);
+              }, function (err) {
+
+              })
+            }
+
+
+
 
           };
         }]
@@ -279,20 +305,23 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  修改
   .service('user_change_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (datacon) {
+    this.open = function (item) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_change_Confirm.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
-
-          $scope.con = datacon;
+          //console.log('item', item);
+          $scope.username = item.username;
+          $scope.email = item.email;
+          $scope.description = item.description;
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
+
             $uibModalInstance.close(true);
           };
         }]
@@ -301,12 +330,12 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  删除
   .service('user_del_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (name,id) {
+    this.open = function (name, id) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_del_Confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance','user', function ($scope, $uibModalInstance,user) {
+        controller: ['$scope', '$uibModalInstance', 'user', function ($scope, $uibModalInstance, user) {
 
 
           $scope.con = name;
@@ -316,7 +345,7 @@ angular.module('basic.services', ['ngResource'])
           };
           $scope.ok = function () {
             console.log('id', id);
-            user.delete({id:id}, function (data) {
+            user.delete({id: id}, function (data) {
 
               $uibModalInstance.close(true);
             }, function (err) {
@@ -339,16 +368,16 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
           $scope.input = {
             servicename: '',
-            serviceuser:'',
-            servicepassword:'',
-            serviceurl:''
+            serviceuser: '',
+            servicepassword: '',
+            serviceurl: ''
 
           }
           $scope.error = {
             servicenamenull: false,
-            serviceusernull:false,
-            servicepasswordnull:false,
-            serviceurlnull:false
+            serviceusernull: false,
+            servicepasswordnull: false,
+            serviceurlnull: false
           }
 
           $scope.con = datacon;
@@ -405,15 +434,7 @@ angular.module('basic.services', ['ngResource'])
             $uibModalInstance.close(true);
 
 
-
-
-
           };
-
-
-
-
-
 
 
         }]
