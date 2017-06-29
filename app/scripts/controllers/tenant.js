@@ -7,7 +7,7 @@ angular.module('basic')
   .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi','Cookie',
     function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi,Cookie) {
       var thisheight = $(window).height() - 80;
-      $('.tree-light').height(thisheight);
+      $('.tree-classic').height(thisheight);
       $scope.nodeId = tree[0].id;
       $scope.treeOptions = {
         nodeChildren: "children",
@@ -23,6 +23,7 @@ angular.module('basic')
           labelSelected: "a8"
         }
       }
+      $scope.selected = tree[0];
       $scope.dataForTheTree = [];
       $scope.treemap = {};
       angular.forEach(tree, function (tre, i) {
