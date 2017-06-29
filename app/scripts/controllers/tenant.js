@@ -23,6 +23,7 @@ angular.module('basic')
           labelSelected: "a8"
         }
       }
+      $scope.selected = tree[0];
       $scope.dataForTheTree = [];
       $scope.treemap = {};
       angular.forEach(tree, function (tre, i) {
