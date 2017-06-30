@@ -57,7 +57,7 @@ angular.module('basic')
       angular.forEach($scope.dataForTheTree, function (tree, i) {
         cinf(tree)
       })
-      console.log('$scope.dataForTheTree', $scope.dataForTheTree);
+      //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
       function cinf(father) {
         angular.forEach(father.children, function (child, i) {
           cinf(child)
@@ -98,11 +98,13 @@ angular.module('basic')
       //获取所有用户列表
       user.query(function (data) {
         $scope.allUsers = data;
+
       }, function (err) {
         console.log('err', err);
       })
       ////筛选可授权用户
-      var checkUsers = function (alluser, onlyUser) {
+      var checkUsers = function (allusers, onlyUser) {
+        var alluser=angular.copy(allusers);
         for (var i = 0; i < alluser.length; i++) {
           for (var z = 0; z < onlyUser.length; z++) {
             if (alluser[i].id == onlyUser[z].userId) {
@@ -117,7 +119,7 @@ angular.module('basic')
       var gettenantuser = function (id) {
         $scope.users = [];
         tenantuser.query({id: id}, function (users) {
-          console.log('user', users);
+          //console.log('user', users);
           $scope.users = users;
           $scope.grid.usertotal = $scope.users.length;
           refreshuser(1)
@@ -161,11 +163,12 @@ angular.module('basic')
           });
           getTenantServe(node);
         }, function (err) {
-          console.log('err', err);
+          //console.log('err', err);
         })
       }
 
       var checkServe = function (allserve, onlyserve) {
+
         $scope.newServeArr = [];
         angular.forEach(allserve, function (item, i) {
           if (item.servesList.length > 0) {
@@ -174,7 +177,7 @@ angular.module('basic')
           angular.forEach(onlyserve, function (list, z) {
             //stringVar.tolocaleUpperCase( )
 
-            console.log(item.serviceTypeName, list.serviceTypeName);
+            //console.log(item.serviceTypeName, list.serviceTypeName);
             if (item.serviceTypeName.toUpperCase() == list.serviceTypeName.toUpperCase()) {
               item.servesList.push(list);
             }
@@ -185,14 +188,14 @@ angular.module('basic')
             $scope.newServeArr.push(item);
           }
         });
-        console.log('$scope.newServeArr', $scope.newServeArr);
-        console.log('$scope.servesArr', $scope.servesArr);
+        //console.log('$scope.newServeArr', $scope.newServeArr);
+        //console.log('$scope.servesArr', $scope.servesArr);
       }
       /// 获取租户下子公司列表
       var gerTenantChild = function (id) {
         $scope.childrens = [];
         tenantchild.query({id: id}, function (childrens) {
-          console.log('child', childrens);
+          //console.log('child', childrens);
           $scope.childrens = childrens
         }, function (err) {
 
@@ -245,8 +248,9 @@ angular.module('basic')
       }
       //用户授权
       $scope.userAuthorize = function () {
+        //console.log($scope.allUsers, $scope.users);
         var thisuser = checkUsers($scope.allUsers, $scope.users);
-        console.log('thisuser', thisuser);
+        //console.log('thisuser', thisuser);
         if (thisuser[0]) {
           Confirm.open(thisuser, $scope.roleDemoList, {
             oldUser: thisuser[0].username,
@@ -275,7 +279,7 @@ angular.module('basic')
           nodeId: $scope.nodeId
         }).then(
           function (res) {
-            console.log('res', res);
+            //console.log('res', res);
             angular.forEach($scope.users, function (item, i) {
               if (item.userId == res.userId) {
                 item.roleId = res.roleId;
@@ -289,7 +293,7 @@ angular.module('basic')
       //右侧tabel切换
       $(function () {
         $('.right-nav>li').click(function () {
-          console.log($(this).index())
+          //console.log($(this).index())
           var idx = $(this).index();
           $('.right-nav>li').eq(idx).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(idx).show().siblings().hide();
@@ -361,7 +365,7 @@ angular.module('basic')
         $scope.newServeArr[pIdx].servesList[idx].charsArr.push({'chartsobj': chartsobj, 'name': sdata.name});
       }
       $scope.toggleServeList = function (pIdx, idx, serveObj) {
-        console.log('$scope.newServeArr', $scope.newServeArr);
+        //console.log('$scope.newServeArr', $scope.newServeArr);
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
