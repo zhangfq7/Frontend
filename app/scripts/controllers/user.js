@@ -49,8 +49,10 @@ angular.module('basic')
       })
     };
 //用户管理-修改
-    $scope.changeuser = function () {
-      user_change_Confirm.open();
+    $scope.changeuser = function (item) {
+      user_Confirm.open(item).then(function () {
+        loaduser()
+      })
     };
 //用户管理-删除
     $scope.deluser = function (name,id) {
