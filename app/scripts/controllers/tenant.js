@@ -329,8 +329,8 @@ angular.module('basic')
         })
       })
       // 删除用户
-      $scope.delUser = function (userId) {
-        delconfirm.open('用户', $scope.nodeId, userId).then(
+      $scope.delUser = function (userId,username) {
+        delconfirm.open('用户', $scope.nodeId, userId,username).then(
           function (res) {
             angular.forEach($scope.users, function (item, i) {
               if (item.userId == res.message) {
