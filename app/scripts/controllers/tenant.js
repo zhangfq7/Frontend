@@ -26,6 +26,7 @@ angular.module('basic')
       $scope.selected = tree[0];
       $scope.dataForTheTree = [];
       $scope.treemap = {};
+      $scope.ismember = true
       angular.forEach(tree, function (tre, i) {
         //console.log('tre', tre);
         tre.bsis = [];
