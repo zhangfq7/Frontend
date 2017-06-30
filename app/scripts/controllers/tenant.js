@@ -249,10 +249,11 @@ angular.module('basic')
       //用户授权
       $scope.userAuthorize = function () {
         var thisuser = checkUsers($scope.allUsers, $scope.users);
+        console.log('balabalabala',thisuser);
         Confirm.open(thisuser, $scope.roleDemoList, {
           oldUser: thisuser[0].username,
           oldRole: $scope.roleDemoList[0],
-          oldUserId: $scope.users[0].userId,
+          oldUserId:thisuser[0].id,
           description: '',
           isAdd: true,
           nodeId: $scope.nodeId
