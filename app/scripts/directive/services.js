@@ -181,7 +181,7 @@ angular.module('basic.services', ['ngResource'])
       }).result;
     };
   }]).service('delconfirm', ['$uibModal', function ($uibModal) {
-  this.open = function (title, roleId, userId) {
+  this.open = function (title, roleId, userId,username) {
     return $uibModal.open({
       backdrop: 'static',
       templateUrl: 'views/tpl/delConfirm.html',
@@ -191,6 +191,7 @@ angular.module('basic.services', ['ngResource'])
 
         $scope.title = title;
         $scope.userId = userId;
+        $scope.username = username;
 
         $scope.cancel = function () {
           $uibModalInstance.dismiss();
