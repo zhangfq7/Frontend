@@ -118,6 +118,7 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', 'cGtenantuser', function ($scope, $uibModalInstance, cGtenantuser) {
           $scope.userList = userList;
           $scope.roleList = roleList;
+
           $scope.newUser = nameobj.oldUser;
           $scope.newRole = nameobj.oldRole;
           $scope.newUserId = nameobj.oldUserId;
@@ -126,6 +127,7 @@ angular.module('basic.services', ['ngResource'])
 
           $scope.ok = function () {
             if ($scope.isAdd) {
+              console.log('nameobj.newUserId', $scope.newUserId);
               cGtenantuser.post({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
@@ -179,7 +181,7 @@ angular.module('basic.services', ['ngResource'])
       }).result;
     };
   }]).service('delconfirm', ['$uibModal', function ($uibModal) {
-  this.open = function (title, roleId, userId) {
+  this.open = function (title, roleId, userId,username) {
     return $uibModal.open({
       backdrop: 'static',
       templateUrl: 'views/tpl/delConfirm.html',
@@ -189,6 +191,7 @@ angular.module('basic.services', ['ngResource'])
 
         $scope.title = title;
         $scope.userId = userId;
+        $scope.username = username;
 
         $scope.cancel = function () {
           $uibModalInstance.dismiss();
