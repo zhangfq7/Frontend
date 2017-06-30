@@ -113,7 +113,7 @@ angular.module('basic.services', ['ngResource'])
   .service('Confirm', ['$uibModal', function ($uibModal) {
     this.open = function (userList, roleList, nameobj) {
       return $uibModal.open({
-        templateUrl: 'views/tpl/confirm.html',
+        templateUrl: 'views/tpl/Confirm.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', 'cGtenantuser', function ($scope, $uibModalInstance, cGtenantuser) {
           $scope.userList = userList;
