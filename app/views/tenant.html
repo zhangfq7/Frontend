@@ -107,13 +107,12 @@
                           </div>
                         </div>
                       </div>
-
                 </div>
               </div>
         </div>
       </li>
       <li>
-        <div class="user-authorize" ng-if="useritem.length>0"><span ng-click="userAuthorize()">用户授权</span></div>
+        <div class="user-authorize" ng-if="!ismember"><span ng-click="userAuthorize()">用户授权</span></div>
         <ul class="tenant-serve-list">
           <li class="row" ng-repeat="item in useritem">
             <div class="col-md-1"><img src="./images/user-listicon.png" alt=""></div>

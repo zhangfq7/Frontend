@@ -91,6 +91,14 @@ angular.module('basic.resource', ['ngResource'])
     });
     return bsidata;
   }])
+  .factory('userole', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var userole = $resource(GLOBAL.host + '/tenant/:id/user/:name/role', {
+      id:'@id',
+      name:'@name'
+    }, {
+    });
+    return userole;
+  }])
   .factory('serveinfo', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var serveinfo = $resource(GLOBAL.host + '/tenant/:tenantId/service/instance/:serviceInstanceName/access/info', {tenantId:'@tenantId',serviceInstanceName:'@serviceInstanceName'}, {
     });

@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole) {
       var thisheight = $(window).height() - 80;
       $('.tree-classic').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -104,7 +104,7 @@ angular.module('basic')
       })
       ////筛选可授权用户
       var checkUsers = function (allusers, onlyUser) {
-        var alluser=angular.copy(allusers);
+        var alluser = angular.copy(allusers);
         for (var i = 0; i < alluser.length; i++) {
           for (var z = 0; z < onlyUser.length; z++) {
             if (alluser[i].id == onlyUser[z].userId) {
@@ -261,6 +261,7 @@ angular.module('basic')
             nodeId: $scope.nodeId
           }).then(
             function (res) {
+              ischengyuan($scope.nodeId)
               $scope.users.push(res);
               refreshuser(1);
             }
@@ -280,6 +281,7 @@ angular.module('basic')
         }).then(
           function (res) {
             //console.log('res', res);
+            ischengyuan($scope.nodeId)
             angular.forEach($scope.users, function (item, i) {
               if (item.userId == res.userId) {
                 item.roleId = res.roleId;
@@ -300,8 +302,8 @@ angular.module('basic')
         })
       })
       // 删除用户
-      $scope.delUser = function (userId,username) {
-        delconfirm.open('用户', $scope.nodeId, userId,username).then(
+      $scope.delUser = function (userId, username) {
+        delconfirm.open('用户', $scope.nodeId, userId, username).then(
           function (res) {
             angular.forEach($scope.users, function (item, i) {
               if (item.userId == res.message) {
@@ -390,9 +392,22 @@ angular.module('basic')
           $scope.newServeArr[idx].isshow = true;
         }
       }
+      function ischengyuan(id){
+        userole.get({id: id, name: 'u1'}, function (data) {
+          if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+            $scope.ismember = false
+          } else {
+            $scope.ismember = true
+          }
+          //console.log(data);
+        })
+      }
       // 左侧导航切换
+
       $scope.showSelected = function (node) {
         //console.log('node.id',node.id);
+
+        ischengyuan(node.id)
         Cookie.set('tenantId', node.id, 24 * 3600 * 1000);
         $scope.grid.roleTitle = node.name;
         $scope.nodeIf = node;
