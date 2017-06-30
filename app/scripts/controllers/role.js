@@ -6,11 +6,6 @@
 angular.module('basic')
   .controller('RoleCtrl',['$rootScope', '$scope', function ($rootScope, $scope) {
     //$rootScope.tab = "role";
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 
     //图片预加载
     var images = new Array()
