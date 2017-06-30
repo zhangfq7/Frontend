@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi','Cookie',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi,Cookie) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie) {
       var thisheight = $(window).height() - 80;
       $('.tree-classic').height(thisheight);
       $scope.nodeId = tree[0].id;
@@ -57,6 +57,7 @@ angular.module('basic')
       angular.forEach($scope.dataForTheTree, function (tree, i) {
         cinf(tree)
       })
+      console.log('$scope.dataForTheTree', $scope.dataForTheTree);
       function cinf(father) {
         angular.forEach(father.children, function (child, i) {
           cinf(child)
@@ -140,17 +141,17 @@ angular.module('basic')
         //
         //  })
         //}else {
-          //alert(1)
-          $scope.bsis=node.bsis;
-          $scope.grid.bsitotal = $scope.bsis.length;
-          checkServe($scope.servesArr, $scope.bsis);
-          refresh(1);
-          //console.log('bsi', bsis);
+        //alert(1)
+        $scope.bsis = node.bsis;
+        $scope.grid.bsitotal = $scope.bsis.length;
+        checkServe($scope.servesArr, $scope.bsis);
+        refresh(1);
+        //console.log('bsi', bsis);
         //}
 
       }
       // 得到所有服务类型
-      var loadserve = function (id,node) {
+      var loadserve = function (id, node) {
         service.query(function (data) {
           $scope.servesArr = [];
           angular.forEach(data, function (item, i) {
@@ -171,7 +172,10 @@ angular.module('basic')
             item.servesList = [];
           }
           angular.forEach(onlyserve, function (list, z) {
-            if (item.serviceTypeName == list.serviceTypeName) {
+            //stringVar.tolocaleUpperCase( )
+
+            console.log(item.serviceTypeName, list.serviceTypeName);
+            if (item.serviceTypeName.toUpperCase() == list.serviceTypeName.toUpperCase()) {
               item.servesList.push(list);
             }
           })
@@ -194,24 +198,6 @@ angular.module('basic')
 
         })
       }
-      ///页面初次加载;
-      var fristLoad = function (id,node) {
-        Cookie.set('tenantId', id,  24 * 3600 * 1000);
-        gettenantuser(id);
-        loadserve(id,node);
-        gerTenantChild(id);
-      }
-      fristLoad($scope.dataForTheTree[0].id,$scope.dataForTheTree[0]);
-      /////获取租户信息
-      var getUserInfo = function (id, node) {
-
-        gettenantuser(id);
-        //console.log(node);
-
-        getTenantServe(node);
-        gerTenantChild(id);
-
-      }
       $scope.grid = {
         userpage: 1,
         usersize: 10,
@@ -225,6 +211,17 @@ angular.module('basic')
         roleTitle: tree[0].name,
         treeId: ''
       };
+
+      function getUserInfo(id, node) {
+
+        gettenantuser(id);
+        //console.log(node);
+
+        getTenantServe(node);
+        gerTenantChild(id);
+
+      }
+
       var roleDemoList = ['a10170cb-524a-11e7-9dbb-fa163ed7d0ae',
         'a1149421-524a-11e7-9dbb-fa163ed7d0ae',
         'a12a84d0-524a-11e7-9dbb-fa163ed7d0ae',
@@ -235,7 +232,7 @@ angular.module('basic')
 
       $scope.checkInfo = function (id, name) {
         serveinfo.get({tenantId: id, serviceInstanceName: name}, function (res) {
-          if (res.status.phase == 'Active') {
+          if (res.status.phase !== 'Provisioning') {
             newconfirm.open(res);
           } else {
             Alert.open('正在创建！');
@@ -249,19 +246,23 @@ angular.module('basic')
       //用户授权
       $scope.userAuthorize = function () {
         var thisuser = checkUsers($scope.allUsers, $scope.users);
-        Confirm.open(thisuser, $scope.roleDemoList, {
-          oldUser: thisuser[0].username,
-          oldRole: $scope.roleDemoList[0],
-          oldUserId: $scope.users[0].userId,
-          description: '',
-          isAdd: true,
-          nodeId: $scope.nodeId
-        }).then(
-          function (res) {
-            $scope.users.push(res);
-            refreshuser(1);
-          }
-        )
+        console.log('thisuser', thisuser);
+        if (thisuser[0]) {
+          Confirm.open(thisuser, $scope.roleDemoList, {
+            oldUser: thisuser[0].username,
+            oldRole: $scope.roleDemoList[0],
+            oldUserId: thisuser[0].id,
+            description: '',
+            isAdd: true,
+            nodeId: $scope.nodeId
+          }).then(
+            function (res) {
+              $scope.users.push(res);
+              refreshuser(1);
+            }
+          )
+        }
+
       }
       //修改用户授权
       $scope.updataUser = function (item) {
@@ -284,40 +285,7 @@ angular.module('basic')
         )
       }
 
-      // 左侧导航切换
-      $scope.showSelected = function (node) {
-        //console.log('node.id',node.id);
-        Cookie.set('tenantId', node.id,  24 * 3600 * 1000);
-        $scope.grid.roleTitle = node.name;
-        $scope.nodeIf = node;
-        $scope.nodeId = node.id;
-        $scope.newServeArr = [];
-        getUserInfo(node.id, node);
-        if (node.children.length > 0 && node.parentId) {
-          $scope.grid.showCompany = false;
-          $scope.grid.showProject = true;
-          $scope.grid.showChildnode = false;
-          $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
-          $('.right-content>li').eq(1).show().siblings().hide();
 
-        } else if (node.children.length > 0) {
-          $scope.grid.treeId = 2
-          $scope.roleDemoList = roleDemoList.slice(1, 2)
-          $scope.grid.showCompany = true;
-          $scope.grid.showProject = false;
-          $scope.grid.showChildnode = false;
-          $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
-          $('.right-content>li').eq(0).show().siblings().hide();
-
-        } else {
-          $scope.roleDemoList = roleDemoList.slice(2)
-          $scope.grid.showCompany = false;
-          $scope.grid.showProject = false;
-          $scope.grid.showChildnode = true;
-          $('.right-nav>li').eq(2).addClass('active').siblings().removeClass('active');
-          $('.right-content>li').eq(2).show().siblings().hide();
-        }
-      }
       //右侧tabel切换
       $(function () {
         $('.right-nav>li').click(function () {
@@ -393,6 +361,7 @@ angular.module('basic')
         $scope.newServeArr[pIdx].servesList[idx].charsArr.push({'chartsobj': chartsobj, 'name': sdata.name});
       }
       $scope.toggleServeList = function (pIdx, idx, serveObj) {
+        console.log('$scope.newServeArr', $scope.newServeArr);
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
@@ -417,4 +386,48 @@ angular.module('basic')
           $scope.newServeArr[idx].isshow = true;
         }
       }
+      // 左侧导航切换
+      $scope.showSelected = function (node) {
+        //console.log('node.id',node.id);
+        Cookie.set('tenantId', node.id, 24 * 3600 * 1000);
+        $scope.grid.roleTitle = node.name;
+        $scope.nodeIf = node;
+        $scope.nodeId = node.id;
+        $scope.newServeArr = [];
+        getUserInfo(node.id, node);
+        if (node.children.length > 0 && node.parentId) {
+          $scope.grid.showCompany = false;
+          $scope.grid.showProject = true;
+          $scope.grid.showChildnode = false;
+          $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
+          $('.right-content>li').eq(1).show().siblings().hide();
+
+        } else if (node.children.length > 0) {
+          $scope.grid.treeId = 2
+          $scope.roleDemoList = roleDemoList.slice(1, 2)
+          $scope.grid.showCompany = true;
+          $scope.grid.showProject = false;
+          $scope.grid.showChildnode = false;
+          $('.right-nav>li').eq(0).addClass('active').siblings().removeClass('active');
+          $('.right-content>li').eq(0).show().siblings().hide();
+
+        } else {
+          $scope.roleDemoList = roleDemoList.slice(2)
+          $scope.grid.showCompany = false;
+          $scope.grid.showProject = false;
+          $scope.grid.showChildnode = true;
+          $('.right-nav>li').eq(2).addClass('active').siblings().removeClass('active');
+          $('.right-content>li').eq(2).show().siblings().hide();
+        }
+      }
+      ///页面初次加载;
+      var fristLoad = function (id, node) {
+        Cookie.set('tenantId', id, 24 * 3600 * 1000);
+        $scope.showSelected(node)
+        gettenantuser(id);
+        loadserve(id, node);
+        gerTenantChild(id);
+      }
+      fristLoad($scope.dataForTheTree[0].id, $scope.dataForTheTree[0]);
+      /////获取租户信息
     }]);
