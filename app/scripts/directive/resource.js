@@ -35,6 +35,12 @@ angular.module('basic.resource', ['ngResource'])
     });
     return user;
   }])
+  .factory('putuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var putuser = $resource(GLOBAL.host + '/user', {}, {
+      updata: {method: 'PUT'}
+    });
+    return putuser;
+  }])
   .factory('tenant', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var tenant = $resource(GLOBAL.host + '/tenant/:id', {id:'@id'}, {
     });
