@@ -393,7 +393,7 @@ angular.module('basic')
         }
       }
       function ischengyuan(id){
-        userole.get({id: id, name: 'u1'}, function (data) {
+        userole.get({id: id, name: Cookie.get('username')}, function (data) {
           if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
             $scope.ismember = false
           } else {
