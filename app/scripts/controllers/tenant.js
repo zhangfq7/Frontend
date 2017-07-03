@@ -26,7 +26,7 @@ angular.module('basic')
       $scope.selected = tree[0];
       $scope.dataForTheTree = [];
       $scope.treemap = {};
-      $scope.ismember = true
+      $scope.ismember = true;
       angular.forEach(tree, function (tre, i) {
         //console.log('tre', tre);
         tre.bsis = [];
@@ -395,7 +395,8 @@ angular.module('basic')
       }
       function ischengyuan(id){
         userole.get({id: id, name: Cookie.get('username')}, function (data) {
-          if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+          console.log('data.roleId', data.roleId);
+          if (data.roleId&&data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
             $scope.ismember = false
           } else {
             $scope.ismember = true
