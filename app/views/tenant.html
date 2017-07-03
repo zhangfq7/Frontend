@@ -96,13 +96,16 @@
                       <div>
                         <div class="row resource-top" style="padding:20px;">
                           <div class="col-md-6" style="text-align: left;font-size: 16px;">{{arr.instanceName}}{{timeIndex}}</div>
-                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)"></sapn></div>
+                          <div class="col-md-6" style="text-align: right;font-size: 16px;">
+                            <sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)">
+
+                            </sapn></div>
                         </div>
                         <div class="list-con" ng-show="arr.isshow">
                           <div class="row">
-                            <div class="col-md-3 " ng-repeat="charsarr in  arr.charsArr">
-                              <highchart config="charsarr.chartsobj"></highchart>
-                              <div class="chart-title">{{charsarr.name}}</div>
+                            <div class="col-md-3 " ng-repeat="used in  arr.showused">
+                              <div class="used">{{used.used}}</div>
+                              <div class="chart-title">{{used.name}}</div>
                             </div>
                           </div>
                         </div>
