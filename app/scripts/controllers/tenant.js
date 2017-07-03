@@ -231,7 +231,7 @@ angular.module('basic')
         'a12a84d0-524a-11e7-9dbb-fa163ed7d0ae',
         'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
       ]
-      $scope.roleDemoList = roleDemoList.slice(0, 1)
+      $scope.roleDemoList = roleDemoList.slice(0, 1);
       ///访问信息
 
       $scope.checkInfo = function (id, name) {
@@ -249,7 +249,7 @@ angular.module('basic')
       }
       //用户授权
       $scope.userAuthorize = function () {
-        //console.log($scope.allUsers, $scope.users);
+        console.log('$scope.roleDemoList1111', $scope.roleDemoList);
         var thisuser = checkUsers($scope.allUsers, $scope.users);
         //console.log('thisuser', thisuser);
         if (thisuser[0]) {
@@ -406,8 +406,6 @@ angular.module('basic')
       // 左侧导航切换
 
       $scope.showSelected = function (node) {
-        //console.log('node.id',node.id);
-
         ischengyuan(node.id)
         Cookie.set('tenantId', node.id, 24 * 3600 * 1000);
         $scope.grid.roleTitle = node.name;
@@ -415,16 +413,16 @@ angular.module('basic')
         $scope.nodeId = node.id;
         $scope.newServeArr = [];
         getUserInfo(node.id, node);
-        if (node.children.length > 0 && node.parentId) {
+        if (node.level == 2) {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(1).show().siblings().hide();
-
-        } else if (node.children.length > 0) {
+          $scope.roleDemoList = roleDemoList.slice(1, 2);
+        } else if (node.level == 1) {
           $scope.grid.treeId = 2
-          $scope.roleDemoList = roleDemoList.slice(1, 2)
+          $scope.roleDemoList = roleDemoList.slice(0, 1);
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = false;
@@ -432,7 +430,8 @@ angular.module('basic')
           $('.right-content>li').eq(0).show().siblings().hide();
 
         } else {
-          $scope.roleDemoList = roleDemoList.slice(2)
+          $scope.roleDemoList = roleDemoList.slice(2);
+          console.log('bbbbb');
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = true;
