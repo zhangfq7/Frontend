@@ -26,7 +26,7 @@ angular.module('basic')
       $scope.selected = tree[0];
       $scope.dataForTheTree = [];
       $scope.treemap = {};
-      $scope.ismember = true
+      $scope.ismember = true;
       angular.forEach(tree, function (tre, i) {
         //console.log('tre', tre);
         tre.bsis = [];
@@ -36,6 +36,14 @@ angular.module('basic')
           }
         })
       })
+      angular.forEach(absi, function (bsi, j) {
+        if (bsi.quota) {
+          //var obj = angular.copy(bsi.quota)
+          bsi.quota = JSON.parse(bsi.quota)
+
+        }
+      })
+      console.log('absi', absi);
       angular.forEach(tree, function (item, i) {
         $scope.treemap[item.id] = item
         $scope.treemap[item.id].children = [];
@@ -393,9 +401,10 @@ angular.module('basic')
           $scope.newServeArr[idx].isshow = true;
         }
       }
-      function ischengyuan(id){
+      function ischengyuan(id) {
         userole.get({id: id, name: Cookie.get('username')}, function (data) {
-          if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+          console.log('data.roleId', data.roleId);
+          if (data.roleId && data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
             $scope.ismember = false
           } else {
             $scope.ismember = true
@@ -403,6 +412,7 @@ angular.module('basic')
           //console.log(data);
         })
       }
+
       // 左侧导航切换
 
       $scope.showSelected = function (node) {
