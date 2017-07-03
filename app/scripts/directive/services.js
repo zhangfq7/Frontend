@@ -124,8 +124,9 @@ angular.module('basic.services', ['ngResource'])
           $scope.newUserId = nameobj.oldUserId;
           $scope.description = nameobj.description;
           $scope.isAdd = nameobj.isAdd;
-
+          $scope.isOK=true;
           $scope.ok = function () {
+            $scope.isOK=false;
             if ($scope.isAdd) {
               console.log('nameobj.newUserId', $scope.newUserId);
               cGtenantuser.post({id: nameobj.nodeId}, {

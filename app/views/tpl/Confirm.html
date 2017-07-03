@@ -55,6 +55,7 @@
     </div>
 </div>
 <div class="modal-footer"   style="text-align: right">
-  <span class="btn-newst" ng-click="ok()">确认</span>
+  <span class="btn-newst" ng-click="ok()"  ng-show="isOK">确认</span>
+  <span class="btn-newst next_one_load" ng-click="ok()"  ng-show="!isOK"><i></i>加载中</span>
 </div>
 
