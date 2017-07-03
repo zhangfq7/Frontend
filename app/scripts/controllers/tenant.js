@@ -177,7 +177,7 @@ angular.module('basic')
       }
 
       var checkServe = function (allserve, onlyserve) {
-
+        //console.log(allserve);
         $scope.newServeArr = [];
         angular.forEach(allserve, function (item, i) {
           if (item.servesList.length > 0) {
@@ -197,8 +197,9 @@ angular.module('basic')
             $scope.newServeArr.push(item);
           }
         });
-        //console.log('$scope.newServeArr', $scope.newServeArr);
-        //console.log('$scope.servesArr', $scope.servesArr);
+
+        console.log('$scope.newServeArr', $scope.newServeArr);
+        //console.log('$scope.servesArr', $scope.servesList);
       }
       /// 获取租户下子公司列表
       var gerTenantChild = function (id) {
@@ -380,9 +381,14 @@ angular.module('basic')
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
-          //bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
-          bsidata.get({id: 'san', name: 'n4j'}, function (sdata) {
+          bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
+          //bsidata.get({id: 'san', name: 'n4j'}, function (sdata) {
+
             $scope.newServeArr[pIdx].servesList[idx].charsArr = [];
+
+            $scope.newServeArr[pIdx].servesList[idx].showused =sdata.items;
+
+            console.log('sdata',sdata);
             for (var i = 0; i < sdata.items.length; i++) {
               chartsFun(sdata.items[i], pIdx, idx)
             }
