@@ -5,11 +5,6 @@ angular.module('basic.resource', ['ngResource'])
     });
     return role;
   }])
-  .factory('service', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var service = $resource(GLOBAL.host + '/service', {}, {
-    });
-    return service;
-  }])
 ///ocmanager/v1/api/service
   .factory('service', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var service = $resource(GLOBAL.host + '/service', {
@@ -90,6 +85,14 @@ angular.module('basic.resource', ['ngResource'])
     var bsidata = $resource(GLOBAL.bdxhost + '/namespaces/:id/instances/:name', {id:'@id',name:'@name'}, {
     });
     return bsidata;
+  }])
+  .factory('userole', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var userole = $resource(GLOBAL.host + '/tenant/:id/user/:name/role', {
+      id:'@id',
+      name:'@name'
+    }, {
+    });
+    return userole;
   }])
   .factory('serveinfo', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var serveinfo = $resource(GLOBAL.host + '/tenant/:tenantId/service/instance/:serviceInstanceName/access/info', {tenantId:'@tenantId',serviceInstanceName:'@serviceInstanceName'}, {
