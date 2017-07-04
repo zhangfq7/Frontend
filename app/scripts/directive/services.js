@@ -210,7 +210,7 @@ angular.module('basic.services', ['ngResource'])
         $scope.ok = function () {
           deltenantuser.delete({id: roleId, userId: userId}, {}, function (res) {
             $uibModalInstance.close(res);
-        }，function(err){
+        },function(err){
             $scope.delfail=true;
         })
         };
