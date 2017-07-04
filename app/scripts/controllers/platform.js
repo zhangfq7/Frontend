@@ -17,6 +17,7 @@ angular.module('basic')
       })
       $scope.toconsole = function () {
         user.query(function (data) {
+          $rootScope.users=data;
           //ui-sref="console.tenant"
           var ishas = false
           angular.forEach(data, function (use, i) {
