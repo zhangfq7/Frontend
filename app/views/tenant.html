@@ -62,10 +62,10 @@
         <ul class="tenant-serve-list">
           <li class="row" ng-repeat="bsi in bsisitem">
             <div class="col-md-1"><img src="./images/serviceimg/{{bsi.serviceTypeName}}.png" onerror="javascript:this.src='./images/serviceimg/default.png'" alt=""></div>
-            <div class="col-md-2"><span>服务名</span>&nbsp;&nbsp;{{bsi.instanceName}}</div>
-            <div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>
-            <div class="col-md-2">配额&nbsp;:&nbsp;{{bsi.quota}}</div>
-            <div class="col-md-2">文件数&nbsp;:&nbsp;1000</div>
+            <div class="col-md-3"><span>服务名</span>&nbsp;&nbsp;{{bsi.instanceName}}</div>
+            <!--<div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>-->
+            <div class="col-md-6"><span ng-repeat="(key,val) in bsi.quota">{{key+'&nbsp;:&nbsp;'+val}}&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+            <!--<div class="col-md-2">{{}}</div>-->
             <div class="col-md-2"><a ng-click="checkInfo(bsi.tenantId,bsi.instanceName)" href="javascript:void(0);">访问信息</a></div>
           </li>
         </ul>
@@ -96,13 +96,16 @@
                       <div>
                         <div class="row resource-top" style="padding:20px;">
                           <div class="col-md-6" style="text-align: left;font-size: 16px;">{{arr.instanceName}}{{timeIndex}}</div>
-                          <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)"></sapn></div>
+                          <div class="col-md-6" style="text-align: right;font-size: 16px;">
+                            <sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)">
+
+                            </sapn></div>
                         </div>
                         <div class="list-con" ng-show="arr.isshow">
                           <div class="row">
-                            <div class="col-md-3 " ng-repeat="charsarr in  arr.charsArr">
-                              <highchart config="charsarr.chartsobj"></highchart>
-                              <div class="chart-title">{{charsarr.name}}</div>
+                            <div class="col-md-3 " ng-repeat="used in  arr.showused">
+                              <div class="used">{{used.used}}</div>
+                              <div class="chart-title">{{used.name}}</div>
                             </div>
                           </div>
                         </div>
