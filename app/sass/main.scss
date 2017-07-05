@@ -732,6 +732,12 @@ input:focus,textarea:focus{border-color: #c9c9c9!important;}
   margin-left:-30px;
   margin-top:-30px;
 }
+//按钮加载中
+.next_one_load{text-indent:-5px;}
+.next_one_load i{background:url(../images/loading.png) no-repeat;width:16px;height:16px;display:inline-block;float:left;
+  margin-top:8px;margin-left:8px;
+  -webkit-animation:rotate 1s linear infinite;-moz-animation:rotate 1s linear infinite;animation:rotate 1s linear infinite;}
+
 .new-loading img{-webkit-animation:rotate 1s linear infinite;-moz-animation:rotate 1s linear infinite;animation:rotate 1s linear infinite;}
 @-webkit-keyframes rotate{
   0%{ -webkit-transform:rotate(0deg) translateZ(0);}
@@ -745,3 +751,6 @@ input:focus,textarea:focus{border-color: #c9c9c9!important;}
   0%{ -webkit-transform:rotate(0deg) translateZ(0);}
   100%{ -webkit-transform:rotate(360deg) translateZ(0);}
 }
+
+
+

@@ -352,6 +352,9 @@ $smbg: #c256fc !default;
     }
   }
 }
+//资源报告显示
+.tenant_main{display:-moz-box;display:-webkit-box;display: flex;}
+.tenant_block{-webkit-box-flex:1;-moz-box-flex:1;flex:1;}
 
 
 
