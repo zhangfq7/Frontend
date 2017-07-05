@@ -33,9 +33,7 @@ font-size:14px;text-align:center;line-height:30px;margin:0 auto;color:#fff;curso
 .role_block_detail{margin-top:65px;color:#fff;font-size:14px;text-align:justify;}
 .h_set{height:130px;clear:both;overflow:hidden;}
 @media (min-width: 1800px) {
-  //.role_mange_list li{margin-right:84px;}
-  //.role_mange_list li:nth-child(4n){margin-right:84px;}
-  //.role_mange_list li:nth-child(5n){margin-right:0px;}
+  .role_mange_list li{margin:0 18px;margin-bottom:30px;}
 }
 /**************角色管理、服务管理**************/
 

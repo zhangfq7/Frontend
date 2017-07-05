@@ -6,8 +6,18 @@
 angular.module('basic')
   .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole',
     function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole) {
-      var thisheight = $(window).height() - 80;
-      $('.tree-classic').height(thisheight);
+      //左边导航自动变化
+      var left_by_block = function(){
+        var thisheight = $(window).height()-80;
+        $('.tree-classic').height(thisheight);
+      };
+      $(window).resize(function(){
+        left_by_block();
+      });
+      $(function(){
+        left_by_block();
+      });
+
       $scope.nodeId = tree[0].id;
       $scope.treeOptions = {
         nodeChildren: "children",
