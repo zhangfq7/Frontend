@@ -37,7 +37,7 @@ angular.module('basic')
         })
       })
       angular.forEach(absi, function (bsi, j) {
-          //console.log("sssssssss",bsi.quota)
+          console.log("sssssssss",bsi.quota)
         if (typeof bsi.quota =="string") {
           //var obj = angular.copy(bsi.quota)
           bsi.quota = JSON.parse(bsi.quota)
@@ -117,7 +117,8 @@ angular.module('basic')
         var alluser = angular.copy(allusers);
         for (var i = 0; i < alluser.length; i++) {
           for (var z = 0; z < onlyUser.length; z++) {
-            if (alluser[i].id == onlyUser[z].userId) {
+
+            if (alluser[i]&&alluser[i].id == onlyUser[z].userId) {
               alluser.splice(i, 1);
             }
           }
