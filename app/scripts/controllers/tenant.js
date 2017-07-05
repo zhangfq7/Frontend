@@ -37,7 +37,8 @@ angular.module('basic')
         })
       })
       angular.forEach(absi, function (bsi, j) {
-        if (bsi.quota) {
+          //console.log("sssssssss",bsi.quota)
+        if (typeof bsi.quota =="string") {
           //var obj = angular.copy(bsi.quota)
           bsi.quota = JSON.parse(bsi.quota)
 

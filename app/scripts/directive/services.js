@@ -124,9 +124,13 @@ angular.module('basic.services', ['ngResource'])
           $scope.newUserId = nameobj.oldUserId;
           $scope.description = nameobj.description;
           $scope.isAdd = nameobj.isAdd;
-          $scope.isOK=true;
+          $scope.isUserOk=false;
           $scope.ok = function () {
-            $scope.isOK=false;
+            if($scope.isUserOk==true){
+                return;
+            }
+            $scope.isUserOk=true;
+
             if ($scope.isAdd) {
               console.log('nameobj.newUserId', $scope.newUserId);
               cGtenantuser.post({id: nameobj.nodeId}, {
@@ -135,14 +139,18 @@ angular.module('basic.services', ['ngResource'])
               }, function (res) {
                 res.userName = $scope.newUser;
                 $uibModalInstance.close(res);
-              })
+            },function(err){
+                $scope.isUserOk=false;
+            })
             } else {
               cGtenantuser.put({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
                 $uibModalInstance.close(res);
-              })
+            },function(err){
+                $scope.isUserOk=false;
+            })
             }
           };
           // 选择用户
@@ -196,11 +204,15 @@ angular.module('basic.services', ['ngResource'])
 
         $scope.cancel = function () {
           $uibModalInstance.dismiss();
+          $scope.delfail=false;
         };
+        $scope.delfail=false;
         $scope.ok = function () {
           deltenantuser.delete({id: roleId, userId: userId}, {}, function (res) {
             $uibModalInstance.close(res);
-          })
+        },function(err){
+            $scope.delfail=true;
+        })
         };
       }]
     }).result;
@@ -267,19 +279,26 @@ angular.module('basic.services', ['ngResource'])
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
-
+          $scope.isOk=false;
           $scope.ok = function () {
+            if($scope.isOk==true){
+                return;
+            }
+            $scope.isOk=true;
             if ($scope.input.username === '' && $scope.input.email === '') {
               $scope.error.namenull = true;
               $scope.error.emailnull = true;
+              $scope.isOk=false;
               return
             }
             if ($scope.input.username === '') {
               $scope.error.namenull = true;
+              $scope.isOk=false;
               return
             }
             if ($scope.input.email === '') {
               $scope.error.emailnull = true;
+              $scope.isOk=false;
               return
             }
             //console.log('$scope.input', $scope.input);
@@ -287,19 +306,16 @@ angular.module('basic.services', ['ngResource'])
               putuser.updata($scope.input, function (data) {
                 $uibModalInstance.close(true);
               }, function (err) {
-
+                  $scope.isOk=false;
               })
             }else {
               user.create($scope.input, function (data) {
                 $uibModalInstance.close(true);
               }, function (err) {
+                  $scope.isOk=false;
 
               })
             }
-
-
-
-
           };
         }]
       }).result;
