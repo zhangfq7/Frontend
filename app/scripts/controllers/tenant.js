@@ -32,7 +32,7 @@ angular.module('basic')
           label: "a6",
           labelSelected: "a8"
         }
-      }
+      };
       $scope.selected = tree[0];
       $scope.dataForTheTree = [];
       $scope.treemap = {};
@@ -42,10 +42,10 @@ angular.module('basic')
         tre.bsis = [];
         angular.forEach(absi, function (bsi, j) {
           if (tre.id === bsi.tenantId) {
-            tre.bsis.push(bsi)
+            tre.bsis.push(bsi);
           }
-        })
-      })
+        });
+      });
 
       angular.forEach(absi, function (bsi, j) {
         //console.log('bsi', bsi);
@@ -61,39 +61,39 @@ angular.module('basic')
           }
 
         }
-      })
+      });
 
       console.log('absi', absi);
       angular.forEach(tree, function (item, i) {
-        $scope.treemap[item.id] = item
+        $scope.treemap[item.id] = item;
         $scope.treemap[item.id].children = [];
-      })
+      });
 
 
       angular.forEach(tree, function (item, i) {
         if (item.parentId) {
           //console.log('$scope.treemap[item.parentId]', $scope.treemap[item.parentId]);
           if ($scope.treemap[item.parentId]) {
-            $scope.treemap[item.parentId].children.push(item)
+            $scope.treemap[item.parentId].children.push(item);
           } else {
-            delete $scope.treemap[item.id].parentId
-            $scope.dataForTheTree.push($scope.treemap[item.id])
+            delete $scope.treemap[item.id].parentId;
+            $scope.dataForTheTree.push($scope.treemap[item.id]);
           }
         } else {
-          $scope.dataForTheTree.push($scope.treemap[item.id])
+          $scope.dataForTheTree.push($scope.treemap[item.id]);
         }
-      })
+      });
       angular.forEach($scope.dataForTheTree, function (tree, i) {
-        cinf(tree)
-      })
+        cinf(tree);
+      });
       //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
       function cinf(father) {
         angular.forEach(father.children, function (child, i) {
-          cinf(child)
+          cinf(child);
           angular.forEach(child.bsis, function (bsi, j) {
-            father.bsis.push(bsi)
-          })
-        })
+            father.bsis.push(bsi);
+          });
+        });
 
       }
 
@@ -130,7 +130,7 @@ angular.module('basic')
 
       }, function (err) {
         console.log('err', err);
-      })
+      });
       ////筛选可授权用户
       var checkUsers = function (allusers, onlyUser) {
         var alluser = angular.copy(allusers);
@@ -143,7 +143,7 @@ angular.module('basic')
           }
         }
         return alluser;
-      }
+      };
 
       // 获取租户下用户列表
       var gettenantuser = function (id) {
@@ -152,11 +152,11 @@ angular.module('basic')
           //console.log('user', users);
           $scope.users = users;
           $scope.grid.usertotal = $scope.users.length;
-          refreshuser(1)
+          refreshuser(1);
         }, function (err) {
 
         });
-      }
+      };
       /// 获取租户下的服务
 
       var getTenantServe = function (node) {
@@ -181,7 +181,7 @@ angular.module('basic')
         //console.log('bsi', bsis);
         //}
 
-      }
+      };
       // 得到所有服务类型
       var loadserve = function (id, node) {
         service.query(function (data) {
@@ -194,8 +194,8 @@ angular.module('basic')
           getTenantServe(node);
         }, function (err) {
           //console.log('err', err);
-        })
-      }
+        });
+      };
 
       var checkServe = function (allserve, onlyserve) {
         //console.log(allserve);
@@ -211,7 +211,7 @@ angular.module('basic')
             if (item.serviceTypeName.toUpperCase() == list.serviceTypeName.toUpperCase()) {
               item.servesList.push(list);
             }
-          })
+          });
         });
         angular.forEach($scope.servesArr, function (item, i) {
           if (item.servesList.length > 0) {
@@ -221,7 +221,7 @@ angular.module('basic')
 
         console.log('$scope.newServeArr', $scope.newServeArr);
         //console.log('$scope.servesArr', $scope.servesList);
-      }
+      };
       /// 获取租户下子公司列表
       var gerTenantChild = function (id) {
         $scope.childrens = [];
@@ -230,7 +230,7 @@ angular.module('basic')
           $scope.childrens = childrens
         }, function (err) {
 
-        })
+        });
       }
       $scope.grid = {
         userpage: 1,

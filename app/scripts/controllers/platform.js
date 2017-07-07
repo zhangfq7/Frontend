@@ -14,40 +14,40 @@ angular.module('basic')
         console.log('data', data);
       }, function (err) {
         console.log('err', err);
-      })
+      });
       $scope.toconsole = function () {
         user.query(function (data) {
           $rootScope.users=data;
           //ui-sref="console.tenant"
-          var ishas = false
+          var ishas = false;
           angular.forEach(data, function (use, i) {
 
             if (homesso['http_x_proxy_cas_loginname'] === use.username) {
               ishas = true;
 
             }
-          })
+          });
           if (ishas) {
-            $state.go('console.tenant')
+            $state.go('console.tenant');
           }else {
-            $state.go('home.permission')
+            $state.go('home.permission');
 
           }
         }, function (err) {
 
-        })
+        });
 
-      }
+      };
 
       //图片预加载
-      var images = new Array()
+      var images = new Array();
 
       function preload() {
         for (var i = 0; i < arguments.length; i++) {
-          images[i] = new Image()
-          images[i].src = arguments[i]
+          images[i] = new Image();
+          images[i].src = arguments[i];
         }
-      };
+      }
       preload(
         "images/home_tenant.png",
         "images/home_orange.png",

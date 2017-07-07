@@ -75,28 +75,28 @@ angular.module('basic', [
   .run(['$rootScope', '$state', 'user', 'Cookie',
     function ($rootScope, $state, user, Cookie) {
       function statego(data){
-        var ishas = false
+        var ishas = false;
         angular.forEach(data, function (use, i) {
           if (Cookie.get('username') === use.username) {
             ishas = true;
           }
-        })
+        });
         if (!ishas) {
-          $state.go('home.permission')
+          $state.go('home.permission');
         }
       }
       if (!$rootScope.users) {
         $rootScope.$on('$stateChangeStart', function (event, toState) {
           user.query(function (data) {
             $rootScope.users = data;
-            statego($rootScope.users)
+            statego($rootScope.users);
           }, function (err) {
-          })
+          });
           $rootScope.tab = toState.name;
           //console.log('$rootScope.tab', $rootScope.tab);
         });
       }else {
-        statego($rootScope.users)
+        statego($rootScope.users);
       }
 
 
