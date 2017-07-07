@@ -20,7 +20,7 @@ angular.module('basic')
           $rootScope.users=data;
           //ui-sref="console.tenant"
           var ishas = false;
-          angular.forEach(data, function (use, i) {
+          angular.forEach(data, function (use) {
 
             if (homesso['http_x_proxy_cas_loginname'] === use.username) {
               ishas = true;
@@ -33,8 +33,6 @@ angular.module('basic')
             $state.go('home.permission');
 
           }
-        }, function (err) {
-
         });
 
       };

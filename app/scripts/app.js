@@ -76,7 +76,7 @@ angular.module('basic', [
     function ($rootScope, $state, user, Cookie) {
       function statego(data){
         var ishas = false;
-        angular.forEach(data, function (use, i) {
+        angular.forEach(data, function (use) {
           if (Cookie.get('username') === use.username) {
             ishas = true;
           }
@@ -90,7 +90,6 @@ angular.module('basic', [
           user.query(function (data) {
             $rootScope.users = data;
             statego($rootScope.users);
-          }, function (err) {
           });
           $rootScope.tab = toState.name;
           //console.log('$rootScope.tab', $rootScope.tab);
