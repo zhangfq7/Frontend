@@ -46,14 +46,23 @@ angular.module('basic')
           }
         })
       })
+
       angular.forEach(absi, function (bsi, j) {
-          console.log("sssssssss",bsi.quota)
-        if (typeof bsi.quota =="string") {
-          //var obj = angular.copy(bsi.quota)
-          bsi.quota = JSON.parse(bsi.quota)
+        //console.log('bsi', bsi);
+        //console.log("sssssssss",bsi.quota,typeof bsi.quota);
+        if (bsi.quota && typeof bsi.quota ==="string") {
+          //console.log('bsi', bsi.quota);
+          try {
+            bsi.quota = JSON.parse(bsi.quota);
+
+          } catch(e) {
+            //console.log(e);
+            //return false;
+          }
 
         }
       })
+
       console.log('absi', absi);
       angular.forEach(tree, function (item, i) {
         $scope.treemap[item.id] = item
