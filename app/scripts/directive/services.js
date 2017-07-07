@@ -62,12 +62,12 @@ angular.module('basic.services', ['ngResource'])
           //  //console.log('token错误');
           //}
           //console.log(tokens,token, regions);
-          var tenantId = Cookie.get('tenantId');
-          var username = Cookie.get('username');
+          var tenantId = Cookie.get("tenantId");
+          var username = Cookie.get("username");
           //console.log('username', username);
           if (config.headers) {
-            config.headers["tenantId"] = tenantId;
-            config.headers["username"] = username;
+            config.headers.tenantId = tenantId;
+            config.headers.username = username;
           }
           if (config.headers) {
             config.headers["http_x_proxy_cas_loginname"] = "aaa";
@@ -126,7 +126,7 @@ angular.module('basic.services', ['ngResource'])
           $scope.isAdd = nameobj.isAdd;
           $scope.isUserOk=false;
           $scope.ok = function () {
-            if($scope.isUserOk==true){
+            if($scope.isUserOk===true){
                 return;
             }
             $scope.isUserOk=true;
@@ -139,7 +139,7 @@ angular.module('basic.services', ['ngResource'])
               }, function (res) {
                 res.userName = $scope.newUser;
                 $uibModalInstance.close(res);
-            },function(err){
+            },function(){
                 $scope.isUserOk=false;
             });
             } else {
@@ -148,7 +148,7 @@ angular.module('basic.services', ['ngResource'])
                 "roleId": $scope.newRole
               }, function (res) {
                 $uibModalInstance.close(res);
-            },function(err){
+            },function(){
                 $scope.isUserOk=false;
             });
             }
@@ -210,7 +210,7 @@ angular.module('basic.services', ['ngResource'])
         $scope.ok = function () {
           deltenantuser.delete({id: roleId, userId: userId}, {}, function (res) {
             $uibModalInstance.close(res);
-        },function(err){
+        },function(){
             $scope.delfail=true;
         });
         };
@@ -281,7 +281,7 @@ angular.module('basic.services', ['ngResource'])
           };
           $scope.isOk=false;
           $scope.ok = function () {
-            if($scope.isOk==true){
+            if($scope.isOk===true){
                 return;
             }
             $scope.isOk=true;
@@ -303,15 +303,15 @@ angular.module('basic.services', ['ngResource'])
             }
             //console.log('$scope.input', $scope.input);
             if ($scope.isupdata) {
-              putuser.updata($scope.input, function (data) {
+              putuser.updata($scope.input, function () {
                 $uibModalInstance.close(true);
-              }, function (err) {
+              }, function () {
                   $scope.isOk=false;
               });
             }else {
-              user.create($scope.input, function (data) {
+              user.create($scope.input, function () {
                 $uibModalInstance.close(true);
-              }, function (err) {
+              }, function () {
                   $scope.isOk=false;
 
               });
@@ -363,11 +363,9 @@ angular.module('basic.services', ['ngResource'])
           };
           $scope.ok = function () {
             console.log('id', id);
-            user.delete({id: id}, function (data) {
+            user.delete({id: id}, function () {
 
               $uibModalInstance.close(true);
-            }, function (err) {
-
             });
 
           };

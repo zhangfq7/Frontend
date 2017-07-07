@@ -8,6 +8,14 @@ angular.module('basic')
     //$rootScope.tab = "service";
     $rootScope.isadmin=colsso.admin;
     console.log('$scope.isadmin',colsso.admin);
+
+    var refresh = function(page) {
+      $(document.body).animate({
+        scrollTop: 0
+      }, 200);
+      var skip = (page - 1) * $scope.grid.size;
+      $scope.items = $scope.serves.slice(skip, skip + $scope.grid.size);
+    };
     function loaduser() {
       service.query(function (data) {
         console.log('data', data);
@@ -30,18 +38,12 @@ angular.module('basic')
 
 
     $scope.$watch('grid.page', function(newVal, oldVal){
-      if (newVal != oldVal) {
+      if (newVal !== oldVal) {
         refresh(newVal);
       }
     });
 
-    var refresh = function(page) {
-      $(document.body).animate({
-        scrollTop: 0
-      }, 200);
-      var skip = (page - 1) * $scope.grid.size;
-      $scope.items = $scope.serves.slice(skip, skip + $scope.grid.size);
-    };
+
 
 
     //服务管理-添加

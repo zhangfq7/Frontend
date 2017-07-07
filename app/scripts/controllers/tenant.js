@@ -37,17 +37,17 @@ angular.module('basic')
       $scope.dataForTheTree = [];
       $scope.treemap = {};
       $scope.ismember = true;
-      angular.forEach(tree, function (tre, i) {
+      angular.forEach(tree, function (tre) {
         //console.log('tre', tre);
         tre.bsis = [];
-        angular.forEach(absi, function (bsi, j) {
+        angular.forEach(absi, function (bsi) {
           if (tre.id === bsi.tenantId) {
             tre.bsis.push(bsi);
           }
         });
       });
 
-      angular.forEach(absi, function (bsi, j) {
+      angular.forEach(absi, function (bsi) {
         //console.log('bsi', bsi);
         //console.log("sssssssss",bsi.quota,typeof bsi.quota);
         if (bsi.quota && typeof bsi.quota ==="string") {
@@ -64,13 +64,13 @@ angular.module('basic')
       });
 
       console.log('absi', absi);
-      angular.forEach(tree, function (item, i) {
+      angular.forEach(tree, function (item) {
         $scope.treemap[item.id] = item;
         $scope.treemap[item.id].children = [];
       });
 
 
-      angular.forEach(tree, function (item, i) {
+      angular.forEach(tree, function (item) {
         if (item.parentId) {
           //console.log('$scope.treemap[item.parentId]', $scope.treemap[item.parentId]);
           if ($scope.treemap[item.parentId]) {
@@ -83,19 +83,21 @@ angular.module('basic')
           $scope.dataForTheTree.push($scope.treemap[item.id]);
         }
       });
-      angular.forEach($scope.dataForTheTree, function (tree, i) {
-        cinf(tree);
-      });
+
       //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
-      function cinf(father) {
-        angular.forEach(father.children, function (child, i) {
+     var cinf= function(father) {
+        angular.forEach(father.children, function (child) {
           cinf(child);
-          angular.forEach(child.bsis, function (bsi, j) {
+          angular.forEach(child.bsis, function (bsi) {
             father.bsis.push(bsi);
           });
         });
 
-      }
+      };
+
+      angular.forEach($scope.dataForTheTree, function (tree) {
+        cinf(tree);
+      });
 
       //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
       var refresh = function (page) {
@@ -115,12 +117,12 @@ angular.module('basic')
         }
       };
       $scope.$watch('grid.bsipage', function (newVal, oldVal) {
-        if (newVal != oldVal) {
+        if (newVal !== oldVal) {
           refresh(newVal);
         }
       });
       $scope.$watch('grid.userpage', function (newVal, oldVal) {
-        if (newVal != oldVal) {
+        if (newVal !== oldVal) {
           refreshuser(newVal);
         }
       });
@@ -137,7 +139,7 @@ angular.module('basic')
         for (var i = 0; i < alluser.length; i++) {
           for (var z = 0; z < onlyUser.length; z++) {
 
-            if (alluser[i]&&alluser[i].id == onlyUser[z].userId) {
+            if (alluser[i]&&alluser[i].id === onlyUser[z].userId) {
               alluser.splice(i, 1);
             }
           }
@@ -153,9 +155,33 @@ angular.module('basic')
           $scope.users = users;
           $scope.grid.usertotal = $scope.users.length;
           refreshuser(1);
-        }, function (err) {
-
         });
+      };
+
+      var checkServe = function (allserve, onlyserve) {
+        //console.log(allserve);
+        $scope.newServeArr = [];
+        angular.forEach(allserve, function (item) {
+          if (item.servesList.length > 0) {
+            item.servesList = [];
+          }
+          angular.forEach(onlyserve, function (list) {
+            //stringVar.tolocaleUpperCase( )
+
+            //console.log(item.serviceTypeName, list.serviceTypeName);
+            if (item.serviceTypeName.toUpperCase() === list.serviceTypeName.toUpperCase()) {
+              item.servesList.push(list);
+            }
+          });
+        });
+        angular.forEach($scope.servesArr, function (item) {
+          if (item.servesList.length > 0) {
+            $scope.newServeArr.push(item);
+          }
+        });
+
+        console.log('$scope.newServeArr', $scope.newServeArr);
+        //console.log('$scope.servesArr', $scope.servesList);
       };
       /// 获取租户下的服务
 
@@ -186,52 +212,24 @@ angular.module('basic')
       var loadserve = function (id, node) {
         service.query(function (data) {
           $scope.servesArr = [];
-          angular.forEach(data, function (item, i) {
+          angular.forEach(data, function (item) {
             var thisobj = {serviceTypeName: item.servicename, servesList: []};
             $scope.servesArr.push(thisobj);
 
           });
           getTenantServe(node);
-        }, function (err) {
-          //console.log('err', err);
         });
       };
 
-      var checkServe = function (allserve, onlyserve) {
-        //console.log(allserve);
-        $scope.newServeArr = [];
-        angular.forEach(allserve, function (item, i) {
-          if (item.servesList.length > 0) {
-            item.servesList = [];
-          }
-          angular.forEach(onlyserve, function (list, z) {
-            //stringVar.tolocaleUpperCase( )
 
-            //console.log(item.serviceTypeName, list.serviceTypeName);
-            if (item.serviceTypeName.toUpperCase() == list.serviceTypeName.toUpperCase()) {
-              item.servesList.push(list);
-            }
-          });
-        });
-        angular.forEach($scope.servesArr, function (item, i) {
-          if (item.servesList.length > 0) {
-            $scope.newServeArr.push(item);
-          }
-        });
-
-        console.log('$scope.newServeArr', $scope.newServeArr);
-        //console.log('$scope.servesArr', $scope.servesList);
-      };
       /// 获取租户下子公司列表
       var gerTenantChild = function (id) {
         $scope.childrens = [];
         tenantchild.query({id: id}, function (childrens) {
           //console.log('child', childrens);
-          $scope.childrens = childrens
-        }, function (err) {
-
+          $scope.childrens = childrens;
         });
-      }
+      };
       $scope.grid = {
         userpage: 1,
         usersize: 10,
@@ -260,7 +258,7 @@ angular.module('basic')
         'a1149421-524a-11e7-9dbb-fa163ed7d0ae',
         'a12a84d0-524a-11e7-9dbb-fa163ed7d0ae',
         'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
-      ]
+      ];
       $scope.roleDemoList = roleDemoList.slice(0, 1);
       ///访问信息
 
@@ -272,11 +270,21 @@ angular.module('basic')
             Alert.open('正在创建！');
           }
 
-        }, function (err) {
-
         });
 
-      }
+      };
+      var ischengyuan=function(id) {
+        userole.get({id: id, name: Cookie.get('username')}, function (data) {
+          console.log('data.roleId', data.roleId);
+          if (data.roleId && data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+            $scope.ismember = false;
+          } else {
+            $scope.ismember = true;
+          }
+          //console.log(data);
+        });
+      };
+
       //用户授权
       $scope.userAuthorize = function () {
         console.log('$scope.roleDemoList1111', $scope.roleDemoList);
@@ -292,14 +300,14 @@ angular.module('basic')
             nodeId: $scope.nodeId
           }).then(
             function (res) {
-              ischengyuan($scope.nodeId)
+              ischengyuan($scope.nodeId);
               $scope.users.push(res);
               refreshuser(1);
             }
-          )
+          );
         }
 
-      }
+      };
       //修改用户授权
       $scope.updataUser = function (item) {
         Confirm.open($scope.users, $scope.roleDemoList, {
@@ -312,15 +320,15 @@ angular.module('basic')
         }).then(
           function (res) {
             //console.log('res', res);
-            ischengyuan($scope.nodeId)
-            angular.forEach($scope.users, function (item, i) {
-              if (item.userId == res.userId) {
+            ischengyuan($scope.nodeId);
+            angular.forEach($scope.users, function (item) {
+              if (item.userId === res.userId) {
                 item.roleId = res.roleId;
               }
-            })
+            });
           }
-        )
-      }
+        );
+      };
 
 
       //右侧tabel切换
@@ -330,21 +338,21 @@ angular.module('basic')
           var idx = $(this).index();
           $('.right-nav>li').eq(idx).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(idx).show().siblings().hide();
-        })
-      })
+        });
+      });
       // 删除用户
       $scope.delUser = function (userId, username) {
         delconfirm.open('用户', $scope.nodeId, userId, username).then(
           function (res) {
             angular.forEach($scope.users, function (item, i) {
-              if (item.userId == res.message) {
+              if (item.userId === res.message) {
                 $scope.users.splice(i, 1);
               }
-            })
+            });
             refreshuser(1);
           }
-        )
-      }
+        );
+      };
 
 
       var chartsFun = function (sdata, pIdx, idx) {
@@ -389,14 +397,12 @@ angular.module('basic')
           size: {
             height: 150,
             width: 150
-          },
-
-          func: function (chart) {
-            //setup some logic for the chart
           }
-        }
+
+
+        };
         $scope.newServeArr[pIdx].servesList[idx].charsArr.push({'chartsobj': chartsobj, 'name': sdata.name});
-      }
+      };
       $scope.toggleServeList = function (pIdx, idx, serveObj) {
         //console.log('$scope.newServeArr', $scope.newServeArr);
         if ($scope.newServeArr[pIdx].servesList[idx].isshow) {
@@ -411,54 +417,44 @@ angular.module('basic')
 
             console.log('sdata',sdata);
             for (var i = 0; i < sdata.items.length; i++) {
-              chartsFun(sdata.items[i], pIdx, idx)
+              chartsFun(sdata.items[i], pIdx, idx);
             }
           }, function (err) {
             console.log('sbsierr', err);
-          })
+          });
 
 
           $scope.newServeArr[pIdx].servesList[idx].isshow = true;
         }
-      }
+      };
       $scope.toggleServe = function (idx) {
         if ($scope.newServeArr[idx].isshow) {
           $scope.newServeArr[idx].isshow = false;
         } else {
           $scope.newServeArr[idx].isshow = true;
         }
-      }
-      function ischengyuan(id) {
-        userole.get({id: id, name: Cookie.get('username')}, function (data) {
-          console.log('data.roleId', data.roleId);
-          if (data.roleId && data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
-            $scope.ismember = false
-          } else {
-            $scope.ismember = true
-          }
-          //console.log(data);
-        })
-      }
+      };
+
 
       // 左侧导航切换
 
       $scope.showSelected = function (node) {
-        ischengyuan(node.id)
+        ischengyuan(node.id);
         Cookie.set('tenantId', node.id, 24 * 3600 * 1000);
         $scope.grid.roleTitle = node.name;
         $scope.nodeIf = node;
         $scope.nodeId = node.id;
         $scope.newServeArr = [];
         getUserInfo(node.id, node);
-        if (node.level == 2) {
+        if (node.level === 2) {
           $scope.grid.showCompany = false;
           $scope.grid.showProject = true;
           $scope.grid.showChildnode = false;
           $('.right-nav>li').eq(1).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(1).show().siblings().hide();
           $scope.roleDemoList = roleDemoList.slice(1, 2);
-        } else if (node.level == 1) {
-          $scope.grid.treeId = 2
+        } else if (node.level === 1) {
+          $scope.grid.treeId = 2;
           $scope.roleDemoList = roleDemoList.slice(0, 1);
           $scope.grid.showCompany = true;
           $scope.grid.showProject = false;
@@ -475,15 +471,15 @@ angular.module('basic')
           $('.right-nav>li').eq(2).addClass('active').siblings().removeClass('active');
           $('.right-content>li').eq(2).show().siblings().hide();
         }
-      }
+      };
       ///页面初次加载;
       var fristLoad = function (id, node) {
         Cookie.set('tenantId', id, 24 * 3600 * 1000);
-        $scope.showSelected(node)
+        $scope.showSelected(node);
         gettenantuser(id);
         loadserve(id, node);
         gerTenantChild(id);
-      }
+      };
       fristLoad($scope.dataForTheTree[0].id, $scope.dataForTheTree[0]);
       /////获取租户信息
     }]);
