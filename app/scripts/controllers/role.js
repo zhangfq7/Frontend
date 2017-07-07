@@ -8,13 +8,13 @@ angular.module('basic')
     //$rootScope.tab = "role";
 
     //图片预加载
-    var images = new Array()
+    var images = new Array();
     function preload() {
       for (var i = 0; i < arguments.length; i++) {
-        images[i] = new Image()
-        images[i].src = arguments[i]
+        images[i] = new Image();
+        images[i].src = arguments[i];
       }
-    };
+    }
     preload(
       "images/role_system.png",
       "images/role_company.png",

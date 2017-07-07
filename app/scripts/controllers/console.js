@@ -9,7 +9,7 @@ angular.module('basic')
     //$rootScope.tab = "service";
     //console.log('homesso', colsso);
     Cookie.set('username', colsso['http_x_proxy_cas_loginname'],  24 * 3600 * 1000);
-    $scope.loginname = colsso['http_x_proxy_cas_loginname']
+    $scope.loginname = colsso['http_x_proxy_cas_loginname'];
     $rootScope.isadmin = colsso.admin;
     //sso.get(function (data) {
     //  if (data['http_x_proxy_cas_loginname']) {

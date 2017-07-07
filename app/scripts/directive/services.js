@@ -66,7 +66,7 @@ angular.module('basic.services', ['ngResource'])
           var username = Cookie.get('username');
           //console.log('username', username);
           if (config.headers) {
-            config.headers["tenantId"] = tenantId
+            config.headers["tenantId"] = tenantId;
             config.headers["username"] = username;
           }
           if (config.headers) {
@@ -141,7 +141,7 @@ angular.module('basic.services', ['ngResource'])
                 $uibModalInstance.close(res);
             },function(err){
                 $scope.isUserOk=false;
-            })
+            });
             } else {
               cGtenantuser.put({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
@@ -150,18 +150,18 @@ angular.module('basic.services', ['ngResource'])
                 $uibModalInstance.close(res);
             },function(err){
                 $scope.isUserOk=false;
-            })
+            });
             }
           };
           // 选择用户
           $scope.changeUser = function (name, id) {
             $scope.newUser = name;
             $scope.newUserId = id;
-          }
+          };
           // 选择角色
           $scope.changeRole = function (id) {
             $scope.newRole = id;
-          }
+          };
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
@@ -212,7 +212,7 @@ angular.module('basic.services', ['ngResource'])
             $uibModalInstance.close(res);
         },function(err){
             $scope.delfail=true;
-        })
+        });
         };
       }]
     }).result;
@@ -224,7 +224,7 @@ angular.module('basic.services', ['ngResource'])
         templateUrl: 'views/tpl/Alert.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-          $scope.con = con
+          $scope.con = con;
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
@@ -245,37 +245,37 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', 'user','putuser',
           function ($scope, $uibModalInstance, user,putuser) {
           if (item) {
-            $scope.isupdata = true
+            $scope.isupdata = true;
 
-            $scope.input = item
+            $scope.input = item;
           } else {
-            $scope.isupdata = false
+            $scope.isupdata = false;
             $scope.input = {
               username: '',
               email: '',
               description: ''
-            }
+            };
           }
 
           $scope.error = {
             namenull: false,
             emailnull: false
-          }
+          };
           //$scope.con = datacon;
           $scope.$watch('input', function (n, o) {
             if (n === o) {
-              return
+              return;
             }
             if (n.username && n.username.length > 0) {
               console.log('n', n);
-              $scope.error.namenull = false
+              $scope.error.namenull = false;
             }
             if (n.email && n.email.length > 0) {
               //console.log('n', n);
-              $scope.error.emailnull = false
+              $scope.error.emailnull = false;
             }
 
-          }, true)
+          }, true);
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
@@ -289,17 +289,17 @@ angular.module('basic.services', ['ngResource'])
               $scope.error.namenull = true;
               $scope.error.emailnull = true;
               $scope.isOk=false;
-              return
+              return;
             }
             if ($scope.input.username === '') {
               $scope.error.namenull = true;
               $scope.isOk=false;
-              return
+              return;
             }
             if ($scope.input.email === '') {
               $scope.error.emailnull = true;
               $scope.isOk=false;
-              return
+              return;
             }
             //console.log('$scope.input', $scope.input);
             if ($scope.isupdata) {
@@ -307,14 +307,14 @@ angular.module('basic.services', ['ngResource'])
                 $uibModalInstance.close(true);
               }, function (err) {
                   $scope.isOk=false;
-              })
+              });
             }else {
               user.create($scope.input, function (data) {
                 $uibModalInstance.close(true);
               }, function (err) {
                   $scope.isOk=false;
 
-              })
+              });
             }
           };
         }]
@@ -368,7 +368,7 @@ angular.module('basic.services', ['ngResource'])
               $uibModalInstance.close(true);
             }, function (err) {
 
-            })
+            });
 
           };
         }]
@@ -390,37 +390,37 @@ angular.module('basic.services', ['ngResource'])
             servicepassword: '',
             serviceurl: ''
 
-          }
+          };
           $scope.error = {
             servicenamenull: false,
             serviceusernull: false,
             servicepasswordnull: false,
             serviceurlnull: false
-          }
+          };
 
           $scope.con = datacon;
           $scope.$watch('input', function (n, o) {
             if (n === o) {
-              return
+              return;
             }
             if (n.servicename && n.servicename.length > 0) {
               console.log('n', n);
-              $scope.error.servicenamenull = false
+              $scope.error.servicenamenull = false;
             }
             if (n.serviceuser && n.serviceuser.length > 0) {
               console.log('n', n);
-              $scope.error.serviceusernull = false
+              $scope.error.serviceusernull = false;
             }
             if (n.servicepassword && n.servicepassword.length > 0) {
               console.log('n', n);
-              $scope.error.servicepasswordnull = false
+              $scope.error.servicepasswordnull = false;
             }
             if (n.serviceurl && n.serviceurl.length > 0) {
               console.log('n', n);
-              $scope.error.serviceurlnull = false
+              $scope.error.serviceurlnull = false;
             }
 
-          }, true)
+          }, true);
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
@@ -431,23 +431,23 @@ angular.module('basic.services', ['ngResource'])
               $scope.error.serviceusernull = true;
               $scope.error.servicepasswordnull = true;
               $scope.error.serviceurlnull = true;
-              return
+              return;
             }
             if ($scope.input.servicename === '') {
               $scope.error.servicenamenull = true;
-              return
+              return;
             }
             if ($scope.input.serviceuser === '') {
               $scope.error.serviceusernull = true;
-              return
+              return;
             }
             if ($scope.input.servicepassword === '') {
               $scope.error.servicepasswordnull = true;
-              return
+              return;
             }
             if ($scope.input.serviceurl === '') {
               $scope.error.serviceurlnull = true;
-              return
+              return;
             }
             $uibModalInstance.close(true);
 
@@ -504,4 +504,4 @@ angular.module('basic.services', ['ngResource'])
         }]
       }).result;
     };
-  }])
+  }]);

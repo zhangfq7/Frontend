@@ -6,19 +6,19 @@
 angular.module('basic')
   .controller('ServiceCtrl',['$rootScope', '$scope','service','service_Confirm','service_change_Confirm','service_del_Confirm','colsso', function ($rootScope, $scope,service,service_Confirm,service_change_Confirm,service_del_Confirm,colsso) {
     //$rootScope.tab = "service";
-    $rootScope.isadmin=colsso.admin
+    $rootScope.isadmin=colsso.admin;
     console.log('$scope.isadmin',colsso.admin);
     function loaduser() {
       service.query(function (data) {
         console.log('data', data);
-        $scope.serves = data
+        $scope.serves = data;
         $scope.grid.total = data.length;
-        refresh(1)
+        refresh(1);
       }, function (err) {
         console.log('err', err);
-      })
+      });
     }
-    loaduser()
+    loaduser();
 
     $scope.grid = {
       st:null,
@@ -47,8 +47,8 @@ angular.module('basic')
     //服务管理-添加
     $scope.addservice = function () {
       service_Confirm.open().then(function () {
-        loaduser()
-      })
+        loaduser();
+      });
     };
     //服务管理-修改
     $scope.changeservice = function () {
@@ -57,8 +57,8 @@ angular.module('basic')
     //服务管理-删除
     $scope.delservice = function (name,id) {
       service_del_Confirm.open(name,id).then(function () {
-        loaduser()
-      })
+        loaduser();
+      });
     };
 
 
