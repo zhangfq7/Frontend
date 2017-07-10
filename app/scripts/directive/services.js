@@ -296,6 +296,7 @@ angular.module('basic.services', ['ngResource'])
           };
           $scope.isOk=false;
           $scope.ok = function () {
+
             if($scope.isOk===true){
                 return;
             }
@@ -311,9 +312,11 @@ angular.module('basic.services', ['ngResource'])
               $scope.isOk=false;
               return;
             }
-            if(!$scope.error.namenull || !$scope.error.emailnull){
+
+            if($scope.error.namenull || $scope.error.emailnull){
                return;
             }
+
             //console.log('$scope.input', $scope.input);
             if ($scope.isupdata) {
               putuser.updata($scope.input, function () {
@@ -322,6 +325,7 @@ angular.module('basic.services', ['ngResource'])
                   $scope.isOk=false;
               });
             }else {
+              console.log('111');
               user.create($scope.input, function () {
                 $uibModalInstance.close(true);
               }, function () {
