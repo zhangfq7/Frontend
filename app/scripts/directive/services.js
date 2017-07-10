@@ -237,19 +237,23 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  添加用户
   .service('user_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (item) {
+    this.open = function (item,userArr) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_Confirm.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', 'user','putuser',
           function ($scope, $uibModalInstance, user,putuser) {
+          $scope.userErrInfo = '用户名不能为空';
+          $scope.thisTitle = '';
           if (item) {
             $scope.isupdata = true;
-
             $scope.input = item;
+            $scope.thisTitle = '修改用户';
           } else {
             $scope.isupdata = false;
+            $scope.userArr = userArr;
+            $scope.thisTitle = '添加用户';
             $scope.input = {
               username: '',
               email: '',
@@ -261,19 +265,30 @@ angular.module('basic.services', ['ngResource'])
             namenull: false,
             emailnull: false
           };
-          //$scope.con = datacon;
+
           $scope.$watch('input', function (n, o) {
             if (n === o) {
               return;
             }
             if (n.username && n.username.length > 0) {
-              console.log('n', n);
               $scope.error.namenull = false;
+              if ($scope.userArr) {
+                angular.forEach($scope.userArr, function (user, i) {
+                  if (user.username === n.username) {
+                    $scope.error.namenull = true;
+                    $scope.userErrInfo = '用户名已存在';
+                  }
+                })
+              }
+            }else{
+              $scope.error.namenull = true;
+              $scope.userErrInfo = '用户名不能为空';
             }
             if (n.email && n.email.length > 0) {
               //console.log('n', n);
               $scope.error.emailnull = false;
             }
+
 
           }, true);
           $scope.cancel = function () {
@@ -285,14 +300,9 @@ angular.module('basic.services', ['ngResource'])
                 return;
             }
             $scope.isOk=true;
-            if ($scope.input.username === '' && $scope.input.email === '') {
-              $scope.error.namenull = true;
-              $scope.error.emailnull = true;
-              $scope.isOk=false;
-              return;
-            }
             if ($scope.input.username === '') {
               $scope.error.namenull = true;
+              $scope.userErrInfo = '用户名不能为空';
               $scope.isOk=false;
               return;
             }
@@ -300,6 +310,9 @@ angular.module('basic.services', ['ngResource'])
               $scope.error.emailnull = true;
               $scope.isOk=false;
               return;
+            }
+            if(!$scope.error.namenull || !$scope.error.emailnull){
+               return;
             }
             //console.log('$scope.input', $scope.input);
             if ($scope.isupdata) {
@@ -323,7 +336,7 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  修改
   .service('user_change_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (item) {
+    this.open = function (item,userArr) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_change_Confirm.html',
@@ -356,16 +369,21 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', 'user', function ($scope, $uibModalInstance, user) {
 
 
-          $scope.con = name;
-
+          $scope.con = '确认删除'+name;
+          var closeConf = function(){
+            $uibModalInstance.close()
+          }
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
             console.log('id', id);
             user.delete({id: id}, function () {
-
-              $uibModalInstance.close(true);
+              $scope.con = '删除成功';
+              window.setTimeout(closeConf,1500);
+            },function(){
+              $scope.con = '删除失败';
+              window.setTimeout(closeConf,1500);
             });
 
           };

@@ -44,13 +44,13 @@ angular.module('basic')
 
     //用户管理-添加
     $scope.adduser = function () {
-      user_Confirm.open().then(function () {
+      user_Confirm.open('',$scope.users).then(function () {
         loaduser();
       });
     };
 //用户管理-修改
     $scope.changeuser = function (item) {
-      user_Confirm.open(item).then(function () {
+      user_Confirm.open(item,'').then(function () {
         loaduser();
       });
     };

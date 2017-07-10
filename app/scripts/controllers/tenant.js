@@ -265,7 +265,7 @@ angular.module('basic')
       $scope.checkInfo = function (id, name) {
         serveinfo.get({tenantId: id, serviceInstanceName: name}, function (res) {
           if (res.status.phase !== 'Provisioning') {
-            newconfirm.open(res);
+            newconfirm.open(res.spec.provisioning.credentials);
           } else {
             Alert.open('正在创建！');
           }
