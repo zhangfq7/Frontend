@@ -6,14 +6,15 @@ WORKDIR /data/mainline
 
 # Install nginx & node
 
-RUN bower install
+RUN bower install && \
+   gulp
 
-ENV ADAPTER_API_SERVER=localhost SVCAMOUNT_API_SERVER=localhost
+ENV ADAPTER_API_SERVER=localhost SVCAMOUNT_API_SERVER=localhost RELEASE_EDITION='prod'
 
 EXPOSE 9000
 
 #ENTRYPOINT ["nginx", "-g", "daemon off;"]
-CMD ["gulp", "start:server"]
+CMD ["gulp", "serve"]
 
 
 
