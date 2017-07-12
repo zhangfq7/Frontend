@@ -85,7 +85,7 @@ angular.module('basic')
       });
 
       //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
-     var cinf= function(father) {
+      var cinf= function(father) {
         angular.forEach(father.children, function (child) {
           cinf(child);
           angular.forEach(child.bsis, function (bsi) {
@@ -409,7 +409,7 @@ angular.module('basic')
           $scope.newServeArr[pIdx].servesList[idx].isshow = false;
         } else {
           bsidata.get({id: serveObj.tenantId, name: serveObj.instanceName}, function (sdata) {
-          //bsidata.get({id: 'san', name: 'n4j'}, function (sdata) {
+            //bsidata.get({id: 'san', name: 'n4j'}, function (sdata) {
 
             $scope.newServeArr[pIdx].servesList[idx].charsArr = [];
 
