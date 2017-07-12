@@ -411,7 +411,7 @@ table a{
 .affix + .container-fluid {
   padding-top: 70px;
 }
-.container-fluid{padding-left:0;padding-right:0;}
+.container-fluid{padding-left:0;padding-right:0;min-width:1200px;}
 
 .navbar-brand.logo {
   padding: 20px 15px;height:auto;overflow:hidden;margin-left:0px!important;
