@@ -14,15 +14,16 @@ angular.module('basic.router', ['ui.router'])
         controller: 'ConsoleCtrl',
         abstract: true,
         resolve:{
-          tree: ['tenant', function(tenant){
-            return tenant.query().$promise;
-          }],
+
           absi: ['allbsi', function(allbsi){
             return allbsi.query().$promise;
           }],
           colsso: ['sso', function(sso){
             return sso.get().$promise;
-          }]
+          }],
+          tree: ['tenantname','Cookie', function(tenantname,Cookie){
+            return tenantname.query({name:Cookie.get('username')}).$promise;
+          }],
         }
 
       })
