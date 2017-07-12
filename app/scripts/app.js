@@ -74,7 +74,7 @@ angular.module('basic', [
   }])
   .run(['$rootScope', '$state', 'user', 'Cookie',
     function ($rootScope, $state, user, Cookie) {
-      function statego(data){
+      function statego(data) {
         var ishas = false;
         angular.forEach(data, function (use) {
           if (Cookie.get('username') === use.username) {
@@ -85,18 +85,23 @@ angular.module('basic', [
           $state.go('home.permission');
         }
       }
-      if (!$rootScope.users) {
-        $rootScope.$on('$stateChangeStart', function (event, toState) {
-          user.query(function (data) {
-            $rootScope.users = data;
+
+      $rootScope.$on('$stateChangeStart', function (event, toState) {
+        console.log('toState', toState.name);
+        if (toState.name && toState.name !== "home.platform"&&toState.name !== "home.permission") {
+          if (!$rootScope.users) {
+            user.query(function (data) {
+              $rootScope.users = data;
+              statego($rootScope.users);
+            });
+            $rootScope.tab = toState.name;
+          } else {
             statego($rootScope.users);
-          });
-          $rootScope.tab = toState.name;
-          //console.log('$rootScope.tab', $rootScope.tab);
-        });
-      }else {
-        statego($rootScope.users);
-      }
+          }
+        }
+
+        //console.log('$rootScope.tab', $rootScope.tab);
+      });
 
 
       //$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
