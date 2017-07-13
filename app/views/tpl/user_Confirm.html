@@ -1,6 +1,6 @@
 <div class="modal-header" style="padding:14px 14px;background: #f2f2f1;border-bottom:0;">
   <h5 class="modal-title">
-    <span class="modal_name">添加用户</span>
+    <span class="modal_name">{{thisTitle}}</span>
     <a ng-click="cancel()" href="javascript:;" class="modal-close" style="margin-top:4px;">
     </a>
   </h5>
@@ -13,7 +13,7 @@
       <input type="text" class="modal_input" ng-show="isupdata" ng-readonly="isupdata" style="background:#eaeaea;color:#999;font-size:14px;cursor:not-allowed;" ng-model="input.username">
     </div>
     <div class="error_block_tit" ng-if="error.namenull">
-      <p style="margin:0;">服务名称不能为空</p>
+      <p style="margin:0;">{{userErrInfo}}</p>
     </div>
   </div>
   <div class="con-wrop">

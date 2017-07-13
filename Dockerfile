@@ -8,7 +8,7 @@ WORKDIR /data/mainline
 
 RUN bower install
 
-ENV ADAPTER_API_SERVER=localhost SVCAMOUNT_API_SERVER=localhost
+ENV ADAPTER_API_SERVER=localhost SVCAMOUNT_API_SERVER=localhost RELEASE_EDITION='dev'
 
 EXPOSE 9000
 

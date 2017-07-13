@@ -103,7 +103,7 @@ angular.module('basic.resource', ['ngResource'])
     var serveinfo = $resource(GLOBAL.host + '/tenant/:tenantId/service/instance/:serviceInstanceName/access/info', {tenantId:'@tenantId',serviceInstanceName:'@serviceInstanceName'}, {
     });
     return serveinfo;
-  }])
+  }]);
 
 
 

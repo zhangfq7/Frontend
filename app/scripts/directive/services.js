@@ -62,16 +62,16 @@ angular.module('basic.services', ['ngResource'])
           //  //console.log('token错误');
           //}
           //console.log(tokens,token, regions);
-          var tenantId = Cookie.get('tenantId');
-          var username = Cookie.get('username');
+          var tenantId = Cookie.get("tenantId");
+          var username = Cookie.get("username");
           //console.log('username', username);
           if (config.headers) {
-            config.headers["tenantId"] = tenantId
-            config.headers["username"] = username;
+            config.headers.tenantId = tenantId;
+            config.headers.username = username;
           }
           if (config.headers) {
-            config.headers["http_x_proxy_cas_loginname"] = "like@citic.com";
-            config.headers["http_x_proxy_cas_username"] = "like@citic.com";
+            config.headers["http_x_proxy_cas_loginname"] = "admin";
+            config.headers["http_x_proxy_cas_username"] = "admin";
           }
           // if (config.headers) {
           //  config.headers["Authorization"] = "Bearer " + token;
@@ -126,7 +126,7 @@ angular.module('basic.services', ['ngResource'])
           $scope.isAdd = nameobj.isAdd;
           $scope.isUserOk=false;
           $scope.ok = function () {
-            if($scope.isUserOk==true){
+            if($scope.isUserOk===true){
                 return;
             }
             $scope.isUserOk=true;
@@ -139,29 +139,29 @@ angular.module('basic.services', ['ngResource'])
               }, function (res) {
                 res.userName = $scope.newUser;
                 $uibModalInstance.close(res);
-            },function(err){
+            },function(){
                 $scope.isUserOk=false;
-            })
+            });
             } else {
               cGtenantuser.put({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
               }, function (res) {
                 $uibModalInstance.close(res);
-            },function(err){
+            },function(){
                 $scope.isUserOk=false;
-            })
+            });
             }
           };
           // 选择用户
           $scope.changeUser = function (name, id) {
             $scope.newUser = name;
             $scope.newUserId = id;
-          }
+          };
           // 选择角色
           $scope.changeRole = function (id) {
             $scope.newRole = id;
-          }
+          };
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
@@ -210,9 +210,9 @@ angular.module('basic.services', ['ngResource'])
         $scope.ok = function () {
           deltenantuser.delete({id: roleId, userId: userId}, {}, function (res) {
             $uibModalInstance.close(res);
-        },function(err){
+        },function(){
             $scope.delfail=true;
-        })
+        });
         };
       }]
     }).result;
@@ -224,7 +224,7 @@ angular.module('basic.services', ['ngResource'])
         templateUrl: 'views/tpl/Alert.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-          $scope.con = con
+          $scope.con = con;
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
@@ -237,84 +237,101 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  添加用户
   .service('user_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (item) {
+    this.open = function (item,userArr) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_Confirm.html',
         size: 'default',
         controller: ['$scope', '$uibModalInstance', 'user','putuser',
           function ($scope, $uibModalInstance, user,putuser) {
+          $scope.userErrInfo = '用户名不能为空';
+          $scope.thisTitle = '';
           if (item) {
-            $scope.isupdata = true
-
-            $scope.input = item
+            $scope.isupdata = true;
+            $scope.input = item;
+            $scope.thisTitle = '修改用户';
           } else {
-            $scope.isupdata = false
+            $scope.isupdata = false;
+            $scope.userArr = userArr;
+            $scope.thisTitle = '添加用户';
             $scope.input = {
               username: '',
               email: '',
               description: ''
-            }
+            };
           }
 
           $scope.error = {
             namenull: false,
             emailnull: false
-          }
-          //$scope.con = datacon;
+          };
+
           $scope.$watch('input', function (n, o) {
             if (n === o) {
-              return
+              return;
             }
             if (n.username && n.username.length > 0) {
-              console.log('n', n);
-              $scope.error.namenull = false
+              $scope.error.namenull = false;
+              if ($scope.userArr) {
+                angular.forEach($scope.userArr, function (user, i) {
+                  if (user.username === n.username) {
+                    $scope.error.namenull = true;
+                    $scope.userErrInfo = '用户名已存在';
+                  }
+                })
+              }
+            }else{
+              $scope.error.namenull = true;
+              $scope.userErrInfo = '用户名不能为空';
             }
             if (n.email && n.email.length > 0) {
               //console.log('n', n);
-              $scope.error.emailnull = false
+              $scope.error.emailnull = false;
             }
 
-          }, true)
+
+          }, true);
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
           $scope.isOk=false;
           $scope.ok = function () {
-            if($scope.isOk==true){
+
+            if($scope.isOk===true){
                 return;
             }
             $scope.isOk=true;
-            if ($scope.input.username === '' && $scope.input.email === '') {
-              $scope.error.namenull = true;
-              $scope.error.emailnull = true;
-              $scope.isOk=false;
-              return
-            }
             if ($scope.input.username === '') {
               $scope.error.namenull = true;
+              $scope.userErrInfo = '用户名不能为空';
               $scope.isOk=false;
-              return
+              return;
             }
             if ($scope.input.email === '') {
               $scope.error.emailnull = true;
               $scope.isOk=false;
-              return
+              return;
             }
+
+            if($scope.error.namenull || $scope.error.emailnull){
+               return;
+            }
+
             //console.log('$scope.input', $scope.input);
             if ($scope.isupdata) {
-              putuser.updata($scope.input, function (data) {
+              putuser.updata($scope.input, function () {
                 $uibModalInstance.close(true);
-              }, function (err) {
+              }, function () {
                   $scope.isOk=false;
-              })
+              });
             }else {
-              user.create($scope.input, function (data) {
+              console.log('111');
+              user.create($scope.input, function () {
                 $uibModalInstance.close(true);
-              }, function (err) {
+              }, function () {
                   $scope.isOk=false;
 
-              })
+              });
             }
           };
         }]
@@ -323,7 +340,7 @@ angular.module('basic.services', ['ngResource'])
   }])
   //用户管理 -  修改
   .service('user_change_Confirm', ['$uibModal', function ($uibModal) {
-    this.open = function (item) {
+    this.open = function (item,userArr) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/user_change_Confirm.html',
@@ -356,19 +373,22 @@ angular.module('basic.services', ['ngResource'])
         controller: ['$scope', '$uibModalInstance', 'user', function ($scope, $uibModalInstance, user) {
 
 
-          $scope.con = name;
-
+          $scope.con = '确认删除'+name;
+          var closeConf = function(){
+            $uibModalInstance.close()
+          }
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
           $scope.ok = function () {
             console.log('id', id);
-            user.delete({id: id}, function (data) {
-
-              $uibModalInstance.close(true);
-            }, function (err) {
-
-            })
+            user.delete({id: id}, function () {
+              $scope.con = '删除成功';
+              window.setTimeout(closeConf,1500);
+            },function(){
+              $scope.con = '删除失败';
+              window.setTimeout(closeConf,1500);
+            });
 
           };
         }]
@@ -390,37 +410,37 @@ angular.module('basic.services', ['ngResource'])
             servicepassword: '',
             serviceurl: ''
 
-          }
+          };
           $scope.error = {
             servicenamenull: false,
             serviceusernull: false,
             servicepasswordnull: false,
             serviceurlnull: false
-          }
+          };
 
           $scope.con = datacon;
           $scope.$watch('input', function (n, o) {
             if (n === o) {
-              return
+              return;
             }
             if (n.servicename && n.servicename.length > 0) {
               console.log('n', n);
-              $scope.error.servicenamenull = false
+              $scope.error.servicenamenull = false;
             }
             if (n.serviceuser && n.serviceuser.length > 0) {
               console.log('n', n);
-              $scope.error.serviceusernull = false
+              $scope.error.serviceusernull = false;
             }
             if (n.servicepassword && n.servicepassword.length > 0) {
               console.log('n', n);
-              $scope.error.servicepasswordnull = false
+              $scope.error.servicepasswordnull = false;
             }
             if (n.serviceurl && n.serviceurl.length > 0) {
               console.log('n', n);
-              $scope.error.serviceurlnull = false
+              $scope.error.serviceurlnull = false;
             }
 
-          }, true)
+          }, true);
 
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
@@ -431,23 +451,23 @@ angular.module('basic.services', ['ngResource'])
               $scope.error.serviceusernull = true;
               $scope.error.servicepasswordnull = true;
               $scope.error.serviceurlnull = true;
-              return
+              return;
             }
             if ($scope.input.servicename === '') {
               $scope.error.servicenamenull = true;
-              return
+              return;
             }
             if ($scope.input.serviceuser === '') {
               $scope.error.serviceusernull = true;
-              return
+              return;
             }
             if ($scope.input.servicepassword === '') {
               $scope.error.servicepasswordnull = true;
-              return
+              return;
             }
             if ($scope.input.serviceurl === '') {
               $scope.error.serviceurlnull = true;
-              return
+              return;
             }
             $uibModalInstance.close(true);
 
@@ -504,4 +524,4 @@ angular.module('basic.services', ['ngResource'])
         }]
       }).result;
     };
-  }])
+  }]);
