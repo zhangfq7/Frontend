@@ -262,7 +262,7 @@ gulp.task('copy:fonts', function () {
 });
 
 gulp.task('build', ['clean:dist', 'clean:server', 'clean:client'], function (cb) {
-  runSequence(['config', 'lib', 'images', 'favicon', 'copy:extras', 'copy:fonts', 'client:rename', 'pageNotFound'], cb);
+  runSequence(['config', 'lib', 'images', 'favicon',  'copy:fonts', 'client:rename', 'pageNotFound'], cb);
 });
 
 gulp.task('war', ['build'], () => {
