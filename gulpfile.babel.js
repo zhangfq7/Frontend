@@ -79,7 +79,7 @@ gulp.task('start:client', ['start:server'], function () {
   openURL("http://localhost:9000","chrome");
 });
 
-gulp.task('start:server', ['styles', 'es6:frontend', 'es6:server', 'bower'], function(cb) {
+gulp.task('start:server', ['styles', 'es6:frontend', 'es6:server', 'bower','build'], function(cb) {
   let started = false;
   return $.nodemon({
     script: 'build-server/app.js',
@@ -224,11 +224,11 @@ gulp.task('html', function () {
 
 gulp.task('images', function () {
   return gulp.src(yeoman.app + '/images/**/*')
-    .pipe($.imagemin({
-      optimizationLevel: 5,
-      progressive: true,
-      interlaced: true
-    }))
+    //.pipe($.imagemin({
+    //  optimizationLevel: 5,
+    //  progressive: true,
+    //  interlaced: true
+    //}))
     .pipe(gulp.dest(yeoman.dist + '/images'));
 });
 
