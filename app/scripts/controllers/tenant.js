@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole','$state',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole,$state) {
       //左边导航自动变化
       var left_by_block = function () {
         var thisheight = $(window).height() - 80;
@@ -20,7 +20,11 @@ angular.module('basic')
       if (tree[0] && tree[0].id) {
         $scope.nodeId = tree[0].id;
       }
+      console.log('tree', tree);
+      if (tree&&tree.length === 0) {
 
+        $state.go('home.permission');
+      }
       $scope.treeOptions = {
         nodeChildren: "children",
         dirSelectable: true,
