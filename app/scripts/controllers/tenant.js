@@ -7,18 +7,20 @@ angular.module('basic')
   .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole',
     function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole) {
       //左边导航自动变化
-      var left_by_block = function(){
-        var thisheight = $(window).height()-80;
+      var left_by_block = function () {
+        var thisheight = $(window).height() - 80;
         $('.tree-classic').height(thisheight);
       };
-      $(window).resize(function(){
+      $(window).resize(function () {
         left_by_block();
       });
-      $(function(){
+      $(function () {
         left_by_block();
       });
+      if (tree[0] && tree[0].id) {
+        $scope.nodeId = tree[0].id;
+      }
 
-      $scope.nodeId = tree[0].id;
       $scope.treeOptions = {
         nodeChildren: "children",
         dirSelectable: true,
@@ -50,12 +52,12 @@ angular.module('basic')
       angular.forEach(absi, function (bsi) {
         //console.log('bsi', bsi);
         //console.log("sssssssss",bsi.quota,typeof bsi.quota);
-        if (bsi.quota && typeof bsi.quota ==="string") {
+        if (bsi.quota && typeof bsi.quota === "string") {
           //console.log('bsi', bsi.quota);
           try {
             bsi.quota = JSON.parse(bsi.quota);
 
-          } catch(e) {
+          } catch (e) {
             //console.log(e);
             //return false;
           }
@@ -85,7 +87,7 @@ angular.module('basic')
       });
 
       //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
-      var cinf= function(father) {
+      var cinf = function (father) {
         angular.forEach(father.children, function (child) {
           cinf(child);
           angular.forEach(child.bsis, function (bsi) {
@@ -139,7 +141,7 @@ angular.module('basic')
         for (var i = 0; i < alluser.length; i++) {
           for (var z = 0; z < onlyUser.length; z++) {
 
-            if (alluser[i]&&alluser[i].id === onlyUser[z].userId) {
+            if (alluser[i] && alluser[i].id === onlyUser[z].userId) {
               alluser.splice(i, 1);
             }
           }
@@ -240,7 +242,7 @@ angular.module('basic')
         showCompany: true,//展示子公司列表
         showProject: false,//展示子项目列表
         showChildnode: false,//展示子项目列表
-        roleTitle: tree[0].name,
+        roleTitle: tree[0] ? tree[0].name : '',
         treeId: ''
       };
 
@@ -273,7 +275,7 @@ angular.module('basic')
         });
 
       };
-      var ischengyuan=function(id) {
+      var ischengyuan = function (id) {
         userole.get({id: id, name: Cookie.get('username')}, function (data) {
           console.log('data.roleId', data.roleId);
           if (data.roleId && data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
@@ -413,9 +415,9 @@ angular.module('basic')
 
             $scope.newServeArr[pIdx].servesList[idx].charsArr = [];
 
-            $scope.newServeArr[pIdx].servesList[idx].showused =sdata.items;
+            $scope.newServeArr[pIdx].servesList[idx].showused = sdata.items;
 
-            console.log('sdata',sdata);
+            console.log('sdata', sdata);
             for (var i = 0; i < sdata.items.length; i++) {
               chartsFun(sdata.items[i], pIdx, idx);
             }
@@ -480,6 +482,10 @@ angular.module('basic')
         loadserve(id, node);
         gerTenantChild(id);
       };
-      fristLoad($scope.dataForTheTree[0].id, $scope.dataForTheTree[0]);
+      if ($scope.dataForTheTree[0] && $scope.dataForTheTree[0].id) {
+        fristLoad($scope.dataForTheTree[0].id, $scope.dataForTheTree[0]);
+      }
+
+
       /////获取租户信息
     }]);
