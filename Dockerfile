@@ -13,7 +13,7 @@ ENV ADAPTER_API_SERVER=localhost SVCAMOUNT_API_SERVER=localhost RELEASE_EDITION=
 EXPOSE 9000
 
 #ENTRYPOINT ["nginx", "-g", "daemon off;"]
-CMD ["gulp", "serve"]
+CMD ["gulp", "start:server"]
 
 
 
