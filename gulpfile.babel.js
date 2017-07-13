@@ -252,7 +252,7 @@ gulp.task('lib', ()=> {
 });
 
 gulp.task('copy:extras', function () {
-  return gulp.src(yeoman.app + '/*/.*', { dot: true })
+  return gulp.src(yeoman.app + '/*/.*')
     .pipe(gulp.dest(yeoman.dist));
 });
 
