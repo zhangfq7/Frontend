@@ -115,7 +115,8 @@ angular.module('basic.services', ['ngResource'])
       return $uibModal.open({
         templateUrl: 'views/tpl/Confirm.html',
         size: 'default',
-        controller: ['$scope', '$uibModalInstance', 'cGtenantuser', function ($scope, $uibModalInstance, cGtenantuser) {
+        controller: ['$scope', '$uibModalInstance', 'cGtenantuser',
+          function ($scope, $uibModalInstance, cGtenantuser) {
           $scope.userList = userList;
           $scope.roleList = roleList;
 

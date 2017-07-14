@@ -4,14 +4,14 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole','$state',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole,$state) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole', '$state',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole, $state) {
       //左边导航自动变化
       var left_by_block = function () {
         var thisheight = $(window).height() - 80;
         //$('.tree-classic').height(thisheight);
         //$('.tree-classic').css('overflow-y','auto');
-        $('.tree-classic').css('min-height',thisheight);
+        $('.tree-classic').css('min-height', thisheight);
       };
       $(window).resize(function () {
         left_by_block();
@@ -23,7 +23,7 @@ angular.module('basic')
         $scope.nodeId = tree[0].id;
       }
       console.log('tree', tree);
-      if (tree&&tree.length === 0) {
+      if (tree && tree.length === 0) {
 
         $state.go('home.permission');
       }
@@ -51,7 +51,7 @@ angular.module('basic')
           allbsi.push(bsi)
         }
       })
-      absi=angular.copy(allbsi)
+      absi = angular.copy(allbsi)
       angular.forEach(tree, function (tre) {
         //console.log('tre', tre);
         tre.bsis = [];
@@ -78,12 +78,12 @@ angular.module('basic')
         }
       });
 
-      angular.forEach(absi,function(bsi){
-        if(bsi.quota){
-          angular.forEach(bsi.quota,function(quota,k){
-            if(k && k==='instance_id'){
-                bsi.instance_id = quota
-                delete bsi.quota[k];
+      angular.forEach(absi, function (bsi) {
+        if (bsi.quota) {
+          angular.forEach(bsi.quota, function (quota, k) {
+            if (k && k === 'instance_id') {
+              bsi.instance_id = quota
+              delete bsi.quota[k];
             }
           })
         }
@@ -141,6 +141,7 @@ angular.module('basic')
         } else {
           $scope.useritem = [];
         }
+        $(window).scrollTop(0);
       };
       $scope.$watch('grid.bsipage', function (newVal, oldVal) {
         if (newVal !== oldVal) {
@@ -161,16 +162,30 @@ angular.module('basic')
       });
       ////筛选可授权用户
       var checkUsers = function (allusers, onlyUser) {
-        var alluser = angular.copy(allusers);
-        for (var i = 0; i < alluser.length; i++) {
-          for (var z = 0; z < onlyUser.length; z++) {
 
-            if (alluser[i] && alluser[i].id === onlyUser[z].userId) {
-              alluser.splice(i, 1);
+        var alluser = angular.copy(allusers);
+        var canadd = []
+        angular.forEach(alluser, function (auser, i) {
+          angular.forEach(onlyUser, function (ouser, k) {
+            if (auser.id === ouser.userId) {
+              auser.canadd=true;
             }
+          })
+        })
+        angular.forEach(alluser, function (auser, i) {
+          if (!auser.canadd) {
+            canadd.push(auser)
           }
-        }
-        return alluser;
+        })
+        //for (var i = 0; i < alluser.length; i++) {
+        //  for (var z = 0; z < onlyUser.length; z++) {
+        //
+        //    if (alluser[i] && alluser[i].id === onlyUser[z].userId) {
+        //      alluser.splice(i, 1);
+        //    }
+        //  }
+        //}
+        return canadd;
       };
 
       // 获取租户下用户列表
@@ -328,6 +343,8 @@ angular.module('basic')
             function (res) {
               ischengyuan($scope.nodeId);
               $scope.users.push(res);
+              $scope.grid.usertotal = $scope.users.length;
+              console.log('$scope.grid.usertotaladd', $scope.grid.usertotal);
               refreshuser(1);
             }
           );
@@ -375,6 +392,8 @@ angular.module('basic')
                 $scope.users.splice(i, 1);
               }
             });
+            console.log('$scope.grid.usertotaldel', $scope.grid.usertotal);
+            $scope.grid.usertotal = $scope.users.length;
             refreshuser(1);
           }
         );
