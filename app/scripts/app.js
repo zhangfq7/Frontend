@@ -88,13 +88,14 @@ angular.module('basic', [
 
       $rootScope.$on('$stateChangeStart', function (event, toState) {
         console.log('toState', toState.name);
+        $rootScope.tab = toState.name;
         if (toState.name && toState.name !== "home.platform"&&toState.name !== "home.permission") {
           if (!$rootScope.users) {
             user.query(function (data) {
               $rootScope.users = data;
               statego($rootScope.users);
             });
-            $rootScope.tab = toState.name;
+
           } else {
             statego($rootScope.users);
           }

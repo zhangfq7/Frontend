@@ -60,7 +60,7 @@
       </li>
       <li>
         <ul class="tenant-serve-list">
-          <li class="row" ng-repeat="bsi in bsisitem">
+          <li class="row"  ng-repeat="bsi in bsisitem">{{bsi.status}}
             <div class="col-md-1 lscn"><img src="./images/serviceimg/{{bsi.serviceTypeName}}.png" onerror="javascript:this.src='./images/serviceimg/default.png'" alt=""></div>
             <div class="col-md-3 lscn" uib-tooltip="{{bsi.instanceName}}"><span>服务名</span>&nbsp;&nbsp;{{bsi.instanceName}}</div>
             <!--<div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>-->
