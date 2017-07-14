@@ -57,7 +57,7 @@ angular.module('basic')
         //console.log('bsi', bsi);
         //console.log("sssssssss",bsi.quota,typeof bsi.quota);
         if (bsi.quota && typeof bsi.quota === "string") {
-          //console.log('bsi', bsi.quota);
+          console.log('bsi', bsi.quota);
           try {
             bsi.quota = JSON.parse(bsi.quota);
 
@@ -68,6 +68,16 @@ angular.module('basic')
 
         }
       });
+      angular.forEach(absi,function(bsi){
+        if(bsi.quota){
+          angular.forEach(bsi.quota,function(quota,k){
+            console.log('1212121',k);
+            if(k && k==='instance_id'){
+                delete bsi.quota[k];
+            }
+          })
+        }
+      })
 
       console.log('absi', absi);
       angular.forEach(tree, function (item) {
