@@ -133,6 +133,7 @@ angular.module('basic')
         } else {
           $scope.bsisitem = [];
         }
+        $(window).scrollTop(0);
       };
       var refreshuser = function (page) {
         var skip = (page - 1) * $scope.grid.usersize;
