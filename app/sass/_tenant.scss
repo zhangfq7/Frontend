@@ -189,6 +189,8 @@ $smbg: #c256fc !default;
           overflow: hidden;
           width: 100%;
           height: 60px;
+          line-height: 60px;
+          white-space: nowrap;
           background: #f7f7f7;
           margin-top: 30px;
           .lscn {
@@ -199,15 +201,25 @@ $smbg: #c256fc !default;
             white-space:nowrap;
             overflow: hidden;
             text-overflow:ellipsis;
-            a {
-              padding: 5px 15px;
-              border-radius: 14px;
-              color: $smbg;
-            }
-            a:hover {
-              background: $smbg;
-              color: #fff;
-            }
+
+          }
+          .tooltip{
+            text-overflow: clip;
+            white-space:normal;
+            line-height: 24px;
+          }
+          .tentusername{
+            overflow: hidden;
+            text-overflow:ellipsis;
+          }
+          a {
+            padding: 5px 15px;
+            border-radius: 14px;
+            color: $smbg;
+          }
+          a:hover {
+            background: $smbg;
+            color: #fff;
           }
           label {
             color: #999;
