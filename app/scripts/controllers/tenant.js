@@ -9,7 +9,9 @@ angular.module('basic')
       //左边导航自动变化
       var left_by_block = function () {
         var thisheight = $(window).height() - 80;
-        $('.tree-classic').height(thisheight);
+        //$('.tree-classic').height(thisheight);
+        //$('.tree-classic').css('overflow-y','auto');
+        $('.tree-classic').css('min-height',thisheight);
       };
       $(window).resize(function () {
         left_by_block();
@@ -71,15 +73,15 @@ angular.module('basic')
       angular.forEach(absi,function(bsi){
         if(bsi.quota){
           angular.forEach(bsi.quota,function(quota,k){
-            console.log('1212121',k);
             if(k && k==='instance_id'){
+                bsi.instance_id = quota
                 delete bsi.quota[k];
             }
           })
         }
       })
 
-      console.log('absi', absi);
+      console.log('absi1212121', absi);
       angular.forEach(tree, function (item) {
         $scope.treemap[item.id] = item;
         $scope.treemap[item.id].children = [];

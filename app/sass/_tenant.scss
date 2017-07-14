@@ -224,6 +224,7 @@ $smbg: #c256fc !default;
           label {
             color: #999;
             white-space:nowrap;
+            font-weight: normal;
           }
         }
         li:hover {
@@ -324,6 +325,7 @@ $smbg: #c256fc !default;
 }
 
 .nav-tenant {
+  height: 100%;
   .right-content {
     > li {
       .basic_block {
