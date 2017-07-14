@@ -130,7 +130,9 @@ angular.module('basic.services', ['ngResource'])
                 return;
             }
             $scope.isUserOk=true;
-
+            var closeConf = function(){
+              $uibModalInstance.close();
+            }
             if ($scope.isAdd) {
               console.log('nameobj.newUserId', $scope.newUserId);
               cGtenantuser.post({id: nameobj.nodeId}, {
@@ -150,6 +152,7 @@ angular.module('basic.services', ['ngResource'])
                 $uibModalInstance.close(res);
             },function(){
                 $scope.isUserOk=false;
+                window.setTimeout(closeConf,1500);
             });
             }
           };
