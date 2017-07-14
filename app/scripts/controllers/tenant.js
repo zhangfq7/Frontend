@@ -43,6 +43,13 @@ angular.module('basic')
       $scope.dataForTheTree = [];
       $scope.treemap = {};
       $scope.ismember = true;
+      var allbsi = [];
+      angular.forEach(absi, function (bsi) {
+        if (bsi.status !== 'Failure') {
+          allbsi.push(bsi)
+        }
+      })
+      absi=angular.copy(allbsi)
       angular.forEach(tree, function (tre) {
         //console.log('tre', tre);
         tre.bsis = [];
@@ -52,7 +59,7 @@ angular.module('basic')
           }
         });
       });
-
+//console.log('absi', absi);
       angular.forEach(absi, function (bsi) {
         //console.log('bsi', bsi);
         //console.log("sssssssss",bsi.quota,typeof bsi.quota);
@@ -68,6 +75,7 @@ angular.module('basic')
 
         }
       });
+
       angular.forEach(absi,function(bsi){
         if(bsi.quota){
           angular.forEach(bsi.quota,function(quota,k){
