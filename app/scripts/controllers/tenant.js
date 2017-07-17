@@ -196,6 +196,7 @@ angular.module('basic')
           //console.log('user', users);
           $scope.users = users;
           $scope.grid.usertotal = $scope.users.length;
+          $scope.grid.userpage = 1;
           refreshuser(1);
         });
       };
@@ -345,6 +346,7 @@ angular.module('basic')
               ischengyuan($scope.nodeId);
               $scope.users.push(res);
               $scope.grid.usertotal = $scope.users.length;
+              $scope.grid.userpage = 1;
               console.log('$scope.grid.usertotaladd', $scope.grid.usertotal);
               refreshuser(1);
             }
@@ -386,8 +388,7 @@ angular.module('basic')
       });
       // 删除用户
       $scope.delUser = function (userId, username) {
-        delconfirm.open('用户', $scope.nodeId, userId, username).then(
-          function (res) {
+        delconfirm.open('用户', $scope.nodeId, userId, username).then(function (res) {
             angular.forEach($scope.users, function (item, i) {
               if (item.userId === res.message) {
                 $scope.users.splice(i, 1);
@@ -395,6 +396,7 @@ angular.module('basic')
             });
             console.log('$scope.grid.usertotaldel', $scope.grid.usertotal);
             $scope.grid.usertotal = $scope.users.length;
+            $scope.grid.userpage = 1;
             refreshuser(1);
           }
         );
