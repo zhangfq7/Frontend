@@ -66,7 +66,7 @@ angular.module('basic')
         //console.log('bsi', bsi);
         //console.log("sssssssss",bsi.quota,typeof bsi.quota);
         if (bsi.quota && typeof bsi.quota === "string") {
-          console.log('bsi', bsi.quota);
+          //console.log('bsi', bsi.quota);
           try {
             bsi.quota = JSON.parse(bsi.quota);
 
@@ -89,7 +89,7 @@ angular.module('basic')
         }
       })
 
-      console.log('absi1212121', absi);
+      //console.log('absi1212121', absi);
       angular.forEach(tree, function (item) {
         $scope.treemap[item.id] = item;
         $scope.treemap[item.id].children = [];
@@ -169,7 +169,7 @@ angular.module('basic')
         angular.forEach(alluser, function (auser, i) {
           angular.forEach(onlyUser, function (ouser, k) {
             if (auser.id === ouser.userId) {
-              auser.canadd=true;
+              auser.canadd = true;
             }
           })
         })
@@ -316,11 +316,27 @@ angular.module('basic')
         });
 
       };
-      var ischengyuan = function (id) {
+      var ischengyuan = function (id, level) {
         userole.get({id: id, name: Cookie.get('username')}, function (data) {
-          console.log('data.roleId', data.roleId);
-          if (data.roleId && data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
-            $scope.ismember = false;
+          //console.log('data.roleId', data.roleId);
+          //if (data.roleId) {
+          //  $scope.userroleid =data.roleId
+          //}
+          //if (level === 1) {
+          //
+          //}a1149421-524a-11e7-9dbb-fa163ed7d0ae
+          //data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
+          if (data.roleId) {
+            if (level === 2) {
+              if (data.roleId === 'a1149421-524a-11e7-9dbb-fa163ed7d0ae') {
+                $scope.ismember = true;
+              }
+            } else if (level === 3) {
+              if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+                $scope.ismember = false;
+              }
+            }
+
           } else {
             $scope.ismember = true;
           }
@@ -487,7 +503,9 @@ angular.module('basic')
       // 左侧导航切换
 
       $scope.showSelected = function (node) {
-        ischengyuan(node.id);
+        ischengyuan(node.id, node.level);
+        //console.log(node.level, $scope.userroleid);
+
         Cookie.set('tenantId', node.id, 24 * 3600 * 1000);
         $scope.grid.roleTitle = node.name;
         $scope.nodeIf = node;
