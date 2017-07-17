@@ -41,7 +41,7 @@ angular.module('basic')
           labelSelected: "a8"
         }
       };
-      $scope.selected = tree[0];
+      // $scope.selected = tree[0];
       $scope.dataForTheTree = [];
       $scope.treemap = {};
       $scope.ismember = true;
@@ -109,7 +109,7 @@ angular.module('basic')
           $scope.dataForTheTree.push($scope.treemap[item.id]);
         }
       });
-
+      $scope.selected = $scope.dataForTheTree[0];
       //console.log('$scope.dataForTheTree', $scope.dataForTheTree);
       var cinf = function (father) {
         angular.forEach(father.children, function (child) {
