@@ -70,8 +70,8 @@ angular.module('basic.services', ['ngResource'])
             config.headers.username = username;
           }
           if (config.headers) {
-            config.headers["http_x_proxy_cas_loginname"] = "zxzgpm1";
-            config.headers["http_x_proxy_cas_username"] = "zxzgpm1";
+            config.headers["http_x_proxy_cas_loginname"] = "admin";
+            config.headers["http_x_proxy_cas_username"] = "admin";
           }
           // if (config.headers) {
           //  config.headers["Authorization"] = "Bearer " + token;
