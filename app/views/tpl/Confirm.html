@@ -13,20 +13,21 @@
       <label>选择用户</label>
       <input type="text"
              ng-model="selected"
-             uib-typeahead="n.username as n.username for n in userList  | filter:$viewValue "
+             uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"
+             typeahead-focus-first="false"
              class="form-control">
       <div class="confirm-select">
         <div ng-if="isAdd" uib-dropdown on-toggle="toggled(open)">
-          <a href="javascript:void(0);" class="" uib-dropdown-toggle>
-            <span class="select-title" title={{newUser}}>{{newUser}}</span>
-            <b class="ser_bg_btn"></b>
-          </a>
-          <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
-            <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.username,item.id)">
-              <a href="javascript:void(0);">
-                <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.username}}">{{item.username}}</span>
-              </a></li>
-          </ul>
+          <!--<a href="javascript:void(0);" class="" uib-dropdown-toggle>-->
+            <!--<span class="select-title" title={{newUser}}>{{newUser}}</span>-->
+            <!--<b class="ser_bg_btn"></b>-->
+          <!--</a>-->
+          <!--<ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">-->
+            <!--<li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.username,item.id)">-->
+              <!--<a href="javascript:void(0);">-->
+                <!--<span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.username}}">{{item.username}}</span>-->
+              <!--</a></li>-->
+          <!--</ul>-->
 
         </div>
         <input class="update" ng-if="!isAdd" type="text" value={{newUser}} disabled="disabled"
