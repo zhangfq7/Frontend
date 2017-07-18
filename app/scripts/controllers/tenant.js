@@ -318,6 +318,11 @@ angular.module('basic')
       };
       var ischengyuan = function (id, level) {
         userole.get({id: id, name: Cookie.get('username')}, function (data) {
+          if (data.roleId && data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+            $scope.ismember = false;
+          } else {
+            $scope.ismember = true;
+          }
           //console.log('data.roleId', data.roleId);
           //if (data.roleId) {
           //  $scope.userroleid =data.roleId
@@ -326,20 +331,20 @@ angular.module('basic')
           //
           //}a1149421-524a-11e7-9dbb-fa163ed7d0ae
           //data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
-          if (data.roleId) {
-            if (level === 2) {
-              if (data.roleId === 'a1149421-524a-11e7-9dbb-fa163ed7d0ae') {
-                $scope.ismember = true;
-              }
-            } else if (level === 3) {
-              if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
-                $scope.ismember = false;
-              }
-            }
-
-          } else {
-            $scope.ismember = true;
-          }
+          //if (data.roleId) {
+          //  if (level === 2) {
+          //    if (data.roleId === 'a1149421-524a-11e7-9dbb-fa163ed7d0ae') {
+          //      $scope.ismember = true;
+          //    }
+          //  } else if (level === 3) {
+          //    if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+          //      $scope.ismember = false;
+          //    }
+          //  }
+          //
+          //} else {
+          //  $scope.ismember = true;
+          //}
           //console.log(data);
         });
       };
