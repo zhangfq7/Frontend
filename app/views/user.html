@@ -5,7 +5,27 @@
   </div>
 <div class="set_mange">
   <div class="set_ser_btn">
-    <p ng-click="adduser()">添加用户</p></div>
+    <div class="row">
+      <div class="col-sm-4">
+        <p ng-click="adduser()" class="">添加用户</p>
+      </div>
+
+      <div class="input-group col-sm-4 col-sm-offset-8">
+        <input type="text"
+               class="form-control"
+               placeholder="搜索用户名称"
+               ng-model="grid.txt"
+               ng-keyup=usersearch()>
+        <!--ng-model="txt" ng-focus="showTip=true;" -->
+        <span class="search_public_btn"></span>
+        <!--<span class="input-group-btn">-->
+        <!--<a class="btn" ng-click="buildsearch('search')"></a>-->
+        <!--</span>-->
+      </div>
+    </div>
+
+    </div>
+
   <ul class="role_mange_list">
     <li class="role_li" ng-repeat="item in items" ng-show="items">
       <div class="role_block">
@@ -30,7 +50,7 @@
   </ul>
 </div>
 
-  <div class="page-style" >
+  <div class="page-style" ng-if="grid.total > 12">
     <div uib-pagination
          ng-model="grid.page"
          total-items="grid.total"

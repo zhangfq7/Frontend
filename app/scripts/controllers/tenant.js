@@ -16,6 +16,8 @@ angular.module('basic')
       $(window).resize(function () {
         left_by_block();
       });
+      var out = ["hdfs", "hbase", "hive", "mapreduce", "spark", "kafka"];
+
       $(function () {
         left_by_block();
       });
@@ -47,6 +49,7 @@ angular.module('basic')
       $scope.ismember = true;
       var allbsi = [];
       angular.forEach(absi, function (bsi) {
+        console.log('bsi', bsi);
         if (bsi.status !== 'Failure') {
           allbsi.push(bsi)
         }
@@ -307,7 +310,9 @@ angular.module('basic')
 
       $scope.checkInfo = function (id, name) {
         serveinfo.get({tenantId: id, serviceInstanceName: name}, function (res) {
+          console.log('res', res.spec.provisioning.backingservice_name);
           if (res.status.phase !== 'Provisioning') {
+
             newconfirm.open(res.spec.provisioning.credentials);
           } else {
             Alert.open('正在创建！');
@@ -318,6 +323,11 @@ angular.module('basic')
       };
       var ischengyuan = function (id, level) {
         userole.get({id: id, name: Cookie.get('username')}, function (data) {
+          if (data.roleId && data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+            $scope.ismember = false;
+          } else {
+            $scope.ismember = true;
+          }
           //console.log('data.roleId', data.roleId);
           //if (data.roleId) {
           //  $scope.userroleid =data.roleId
@@ -326,20 +336,20 @@ angular.module('basic')
           //
           //}a1149421-524a-11e7-9dbb-fa163ed7d0ae
           //data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'
-          if (data.roleId) {
-            if (level === 2) {
-              if (data.roleId === 'a1149421-524a-11e7-9dbb-fa163ed7d0ae') {
-                $scope.ismember = true;
-              }
-            } else if (level === 3) {
-              if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
-                $scope.ismember = false;
-              }
-            }
-
-          } else {
-            $scope.ismember = true;
-          }
+          //if (data.roleId) {
+          //  if (level === 2) {
+          //    if (data.roleId === 'a1149421-524a-11e7-9dbb-fa163ed7d0ae') {
+          //      $scope.ismember = true;
+          //    }
+          //  } else if (level === 3) {
+          //    if (data.roleId !== 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae') {
+          //      $scope.ismember = false;
+          //    }
+          //  }
+          //
+          //} else {
+          //  $scope.ismember = true;
+          //}
           //console.log(data);
         });
       };

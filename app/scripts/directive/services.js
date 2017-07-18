@@ -70,8 +70,8 @@ angular.module('basic.services', ['ngResource'])
             config.headers.username = username;
           }
           if (config.headers) {
-            config.headers["http_x_proxy_cas_loginname"] = "a1";
-            config.headers["http_x_proxy_cas_username"] = "a1";
+            config.headers["http_x_proxy_cas_loginname"] = "admin";
+            config.headers["http_x_proxy_cas_username"] = "admin";
           }
           // if (config.headers) {
           //  config.headers["Authorization"] = "Bearer " + token;
@@ -119,7 +119,6 @@ angular.module('basic.services', ['ngResource'])
           function ($scope, $uibModalInstance, cGtenantuser) {
           $scope.userList = userList;
           $scope.roleList = roleList;
-
           $scope.newUser = nameobj.oldUser;
           $scope.newRole = nameobj.oldRole;
           $scope.newUserId = nameobj.oldUserId;
@@ -135,7 +134,7 @@ angular.module('basic.services', ['ngResource'])
               $uibModalInstance.close();
             }
             if ($scope.isAdd) {
-              console.log('nameobj.newUserId', $scope.newUserId);
+              console.log('nameobj.newUser', $scope.newUser);
               cGtenantuser.post({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
@@ -158,9 +157,9 @@ angular.module('basic.services', ['ngResource'])
             }
           };
           // 选择用户
-          $scope.changeUser = function (name, id) {
-            $scope.newUser = name;
-            $scope.newUserId = id;
+          $scope.changeUser = function (item, e) {
+            $scope.newUser = item.username;
+            $scope.newUserId = item.id;
           };
           // 选择角色
           $scope.changeRole = function (id) {
