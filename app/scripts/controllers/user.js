@@ -21,6 +21,8 @@ angular.module('basic')
           $scope.users = data;
           $scope.copyusers=angular.copy(data);
           $scope.grid.total = data.length;
+          $scope.grid.page = 1;
+
           refresh(1);
         }, function (err) {
           console.log('err', err);
@@ -95,6 +97,7 @@ angular.module('basic')
 
         user_del_Confirm.open(name, id).then(function () {
           loaduser();
+
         });
       };
     }]);

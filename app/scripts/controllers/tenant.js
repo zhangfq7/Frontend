@@ -16,6 +16,8 @@ angular.module('basic')
       $(window).resize(function () {
         left_by_block();
       });
+      var out = ["hdfs", "hbase", "hive", "mapreduce", "spark", "kafka"];
+
       $(function () {
         left_by_block();
       });
@@ -47,6 +49,7 @@ angular.module('basic')
       $scope.ismember = true;
       var allbsi = [];
       angular.forEach(absi, function (bsi) {
+        console.log('bsi', bsi);
         if (bsi.status !== 'Failure') {
           allbsi.push(bsi)
         }
@@ -307,7 +310,9 @@ angular.module('basic')
 
       $scope.checkInfo = function (id, name) {
         serveinfo.get({tenantId: id, serviceInstanceName: name}, function (res) {
+          console.log('res', res.spec.provisioning.backingservice_name);
           if (res.status.phase !== 'Provisioning') {
+
             newconfirm.open(res.spec.provisioning.credentials);
           } else {
             Alert.open('正在创建！');
