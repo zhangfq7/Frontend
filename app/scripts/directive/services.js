@@ -388,9 +388,16 @@ angular.module('basic.services', ['ngResource'])
             user.delete({id: id}, function () {
               $scope.con = '删除成功';
               window.setTimeout(closeConf,1500);
-            },function(){
-              $scope.con = '删除失败';
-              window.setTimeout(closeConf,1500);
+            },function(res){
+              // console.log('111',res);
+              if(res.data.resCodel == 4002){
+                $scope.con = '删除失败,您不是创建者!';
+              }else if(res.data.resCodel == 4001){
+                $scope.con = '删除失败,该用户已绑定租户!';
+              }else{
+                $scope.con = '删除失败!';
+              }
+              window.setTimeout(closeConf,2000);
             });
 
           };
