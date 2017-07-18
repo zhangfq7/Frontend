@@ -49,7 +49,7 @@ angular.module('basic')
       $scope.ismember = true;
       var allbsi = [];
       angular.forEach(absi, function (bsi) {
-        console.log('bsi', bsi);
+        //console.log('bsi', bsi);
         if (bsi.status !== 'Failure') {
           allbsi.push(bsi)
         }
@@ -310,10 +310,22 @@ angular.module('basic')
 
       $scope.checkInfo = function (id, name) {
         serveinfo.get({tenantId: id, serviceInstanceName: name}, function (res) {
-          console.log('res', res.spec.provisioning.backingservice_name);
+          //console.log('res', res.spec.provisioning.backingservice_name.toLocaleLowerCase());
           if (res.status.phase !== 'Provisioning') {
+            var isout = false;
+            angular.forEach(out, function (item) {
+              //console.log('item', item);
+              if (item === res.spec.provisioning.backingservice_name.toLocaleLowerCase()) {
+                isout = true
+              }
+            })
+            console.log('isout', isout);
+            if (!isout) {
+              newconfirm.open(res.spec.provisioning.credentials);
+            }else {
+              newconfirm.open(res.spec.binding[0].credentials);
+            }
 
-            newconfirm.open(res.spec.provisioning.credentials);
           } else {
             Alert.open('正在创建！');
           }
