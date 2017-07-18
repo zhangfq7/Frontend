@@ -47,7 +47,7 @@ angular.module('basic.resource', ['ngResource'])
     return tenantname;
   }])
   .factory('tenantchild', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
-    var tenantchild = $resource(GLOBAL.host + '/tenant/:id/children', {id:'@id'}, {
+    var tenantchild = $resource(GLOBAL.host + '/user/name/:name/tenant/:id/children/tenants', {name:'@name',id:'@id'}, {
     });
     return tenantchild;
   }])

@@ -271,7 +271,7 @@ angular.module('basic')
       /// 获取租户下子公司列表
       var gerTenantChild = function (id) {
         $scope.childrens = [];
-        tenantchild.query({id: id}, function (childrens) {
+        tenantchild.query({name:Cookie.get("username"),id: id}, function (childrens) {
           //console.log('child', childrens);
           $scope.childrens = childrens;
         });
