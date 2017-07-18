@@ -23,7 +23,6 @@
                  style="border:none;height: 28px;"
                  ng-model="newUser"
                  uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"
-                 typeahead-focus-first="false"
                  typeahead-on-select="changeUser($item,$event)"
                  class="confirm-select select-title">
           <!--<a href="javascript:void(0);" class="" uib-dropdown-toggle>-->
