@@ -368,7 +368,7 @@ angular.module('basic')
 
       //用户授权
       $scope.userAuthorize = function () {
-        console.log('$scope.roleDemoList1111', $scope.roleDemoList);
+        //console.log('$scope.roleDemoList1111', $scope.roleDemoList);
         var thisuser = checkUsers($scope.allUsers, $scope.users);
         //console.log('thisuser', thisuser);
         if (thisuser[0]) {
@@ -382,11 +382,7 @@ angular.module('basic')
           }).then(
             function (res) {
               ischengyuan($scope.nodeId);
-              $scope.users.push(res);
-              $scope.grid.usertotal = $scope.users.length;
-              $scope.grid.userpage = 1;
-              console.log('$scope.grid.usertotaladd', $scope.grid.usertotal);
-              refreshuser(1);
+              gettenantuser($scope.nodeId)
             }
           );
         }
