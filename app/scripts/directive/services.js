@@ -134,7 +134,7 @@ angular.module('basic.services', ['ngResource'])
               $uibModalInstance.close();
             }
             if ($scope.isAdd) {
-              console.log('nameobj.newUserId', $scope.newUserId);
+              console.log('nameobj.newUser', $scope.newUser);
               cGtenantuser.post({id: nameobj.nodeId}, {
                 "userId": $scope.newUserId,
                 "roleId": $scope.newRole
@@ -157,9 +157,9 @@ angular.module('basic.services', ['ngResource'])
             }
           };
           // 选择用户
-          $scope.changeUser = function (name, id) {
-            $scope.newUser = name;
-            $scope.newUserId = id;
+          $scope.changeUser = function (item, e) {
+            $scope.newUser = item.username;
+            $scope.newUserId = item.id;
           };
           // 选择角色
           $scope.changeRole = function (id) {

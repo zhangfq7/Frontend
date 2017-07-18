@@ -11,13 +11,21 @@
 <div class="modal-body confirm-con" style="padding:30px 20px 30px 20px;background: #fafafa;">
     <div class="con-wrop" style="margin-top:0px;">
       <label>选择用户</label>
-      <input type="text"
-             ng-model="selected"
-             uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"
-             typeahead-focus-first="false"
-             class="form-control">
+      <!--<input type="text"-->
+             <!--ng-model="selected"-->
+             <!--uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"-->
+             <!--typeahead-focus-first="false"-->
+             <!--class="confirm-select">-->
       <div class="confirm-select">
-        <div ng-if="isAdd" uib-dropdown on-toggle="toggled(open)">
+        <!--<div ng-if="isAdd" uib-dropdown on-toggle="toggled(open)">-->
+        <div ng-if="isAdd" class="meunu-wrop">
+          <input type="text"
+                 style="border:none;height: 28px;"
+                 ng-model="newUser"
+                 uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"
+                 typeahead-focus-first="false"
+                 typeahead-on-select="changeUser($item,$event)"
+                 class="confirm-select select-title">
           <!--<a href="javascript:void(0);" class="" uib-dropdown-toggle>-->
             <!--<span class="select-title" title={{newUser}}>{{newUser}}</span>-->
             <!--<b class="ser_bg_btn"></b>-->
