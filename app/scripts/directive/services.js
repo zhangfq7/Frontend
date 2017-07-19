@@ -268,7 +268,10 @@ angular.module('basic.services', ['ngResource'])
             namenull: false,
             emailnull: false
           };
-
+          $scope.resErr = {
+            info : '',
+            status : false
+          }
           $scope.$watch('input', function (n, o) {
             if (n === o) {
               return;
@@ -298,6 +301,9 @@ angular.module('basic.services', ['ngResource'])
             $uibModalInstance.dismiss();
           };
           $scope.isOk=false;
+            var closeConf = function(){
+              $uibModalInstance.close();
+            }
           $scope.ok = function () {
 
             if($scope.isOk===true){
@@ -324,15 +330,29 @@ angular.module('basic.services', ['ngResource'])
             if ($scope.isupdata) {
               putuser.updata($scope.input, function () {
                 $uibModalInstance.close(true);
-              }, function () {
-                  $scope.isOk=false;
+              }, function (res) {
+                if(res.data.resCodel == 4004){
+                  $scope.resErr.info = '该用户并非由您创建，您无权编辑该用户信息';
+                }else{
+                  $scope.resErr.info = '修改失败！';
+                }
+                $scope.resErr.status = true;
+                window.setTimeout(closeConf,2000);
+                $scope.isOk=false;
               });
             }else {
               console.log('111');
               user.create($scope.input, function () {
                 $uibModalInstance.close(true);
-              }, function () {
-                  $scope.isOk=false;
+              }, function (res) {
+                if(res.data.resCodel == 4003){
+                  $scope.resErr.info = '您没有权限添加用户！';
+                }else{
+                  $scope.resErr.info = '添加失败！';
+                }
+                $scope.resErr.status = true;
+                window.setTimeout(closeConf,2000);
+                $scope.isOk=false;
 
               });
             }
