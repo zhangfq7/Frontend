@@ -34,6 +34,18 @@
       </div>
     </div>
   </div>
+  <div class="con-wrop" ng-show="isupdata">
+    <label>所属租户</label>
+    <div class="confirm-select modal_select">
+      <input type="text" class="modal_input" value="所属租户" ng-readonly="isupdata" style="background:#eaeaea;color:#999;font-size:14px;cursor:not-allowed;">
+    </div>
+  </div>
+  <div class="con-wrop" ng-show="isupdata">
+    <label>创建者</label>
+    <div class="confirm-select modal_select"  >
+      <input type="text" class="modal_input" ng-readonly="isupdata" style="background:#eaeaea;color:#999;font-size:14px;cursor:not-allowed;" ng-model="input.createdUser">
+    </div>
+  </div>
   <div class="con-wrop">
     <label>邮箱<i class="modal_red">*</i></label>
     <div class="confirm-select modal_select" ng-class="{modal_select_red:error.emailnull}">
@@ -49,6 +61,7 @@
   </div>
 </div>
 <div class="modal-footer"   style="text-align: right">
+  <span ng-if="resErr.status" style="color: red;margin-right: 25px;">{{resErr.info}}</span>
   <span class="btn-newst" ng-show="!isOk" ng-click="ok()">确认</span>
   <span class="btn-newst next_one_load" ng-show="isOk"><i></i>加载中</span>
 
