@@ -30,6 +30,11 @@ angular.module('basic.resource', ['ngResource'])
     });
     return user;
   }])
+  .factory('newUser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var newUser = $resource(GLOBAL.host + '/user/with/tenants', {}, {
+    });
+    return newUser;
+  }])
   .factory('putuser', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var putuser = $resource(GLOBAL.host + '/user', {}, {
       updata: {method: 'PUT'}
