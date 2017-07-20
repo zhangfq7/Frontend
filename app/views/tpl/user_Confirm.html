@@ -51,7 +51,7 @@
   </div>
   <div class="con-wrop" ng-show="isupdata" >
     <label>所属组织</label>
-    <div class="confirm-select modal_select" style="min-height: 30px;background:#eaeaea;color:#999;font-size:14px;cursor:not-allowed; height: auto" >
+    <div class="confirm-select modal_select" style="min-height: 30px;background:#eaeaea;color:#999;font-size:14px;cursor:not-allowed; height: 93px;overflow-y:auto;" >
       <p ng-repeat="arr in input.urv" style="margin:0;line-height: 30px;">{{arr.parentTenantName || ""}}  <span ng-if="arr.parentTenantName">-</span>  {{arr.tenantName}}</p>
     </div>
   </div>

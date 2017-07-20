@@ -623,9 +623,14 @@ table a{
     }
     textarea{
       width: 475px;
-      min-height: 120px;
+      height: 60px;
       border-color:#eaeaea;
-      color:$titcolor;padding:10px;font-size:14px;word-break:break-all;border:1px solid #eaeaea;
+      color:$titcolor;
+      padding:10px;
+      font-size:14px;
+      word-break:break-all;
+      border:1px solid #eaeaea;
+      overflow-y: auto;
     }
     .error_block_tit p{
       margin:5px;
