@@ -96,15 +96,15 @@
               <div class="resource-wrop"  ng-repeat="(timeIndex,item) in newServeArr">
                 <div >
                   <div class="row resource-top">
-                    <div class="col-md-6" style="text-align: left;font-size: 16px;">{{item.serviceTypeName}}</div>
-                    <div class="col-md-6" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}" ng-click="toggleServe($index)"></sapn></div>
+                    <div class="col-md-10" style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">{{item.serviceTypeName}}</div>
+                    <div class="col-md-2" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}" ng-click="toggleServe($index)"></sapn></div>
                   </div>
                   <div class="resource-list" ng-repeat="arr in item.servesList" ng-if="item.isshow">
                     <div>
                       <div class="row resource-top" style="padding:20px;">
-                        <div class="col-md-6" style="text-align: left;font-size: 16px;">
+                        <div class="col-md-10" style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
                           {{arr.instanceName}}</div>
-                        <div class="col-md-6" style="text-align: right;font-size: 16px;">
+                        <div class="col-md-2" style="text-align: right;font-size: 16px;">
                           <sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)">
 
                           </sapn></div>
