@@ -41,7 +41,7 @@
                      typeahead-on-select="xuanze($item, $model, $label, $event)"
                      class="confirm-select select-title">
               <!--<span class="select-title" title={{newUser}}>{{newUser}}</span>-->
-              <b class="ser_bg_btn" uib-dropdown-toggle></b>
+            <div class="ser-btn-wrop" uib-dropdown-toggle><b class="that-btn" style="display: inline-block"></b></div>
             <!--</a>-->
             <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
               <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.username,item.id)">
