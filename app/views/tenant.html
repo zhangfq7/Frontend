@@ -102,7 +102,8 @@
                   <div class="resource-list" ng-repeat="arr in item.servesList" ng-if="item.isshow">
                     <div>
                       <div class="row resource-top" style="padding:20px;">
-                        <div class="col-md-6" style="text-align: left;font-size: 16px;">{{arr.instanceName}}</div>
+                        <div class="col-md-6" style="text-align: left;font-size: 16px;">
+                          {{arr.instanceName}}</div>
                         <div class="col-md-6" style="text-align: right;font-size: 16px;">
                           <sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)">
 
@@ -128,8 +129,14 @@
                   <div class="col-md-1"><img src="./images/user-listicon.png" alt=""></div>
                   <div class="col-md-2 tentusername" uib-tooltip="{{item.userName}}"><span>用户名</span>&nbsp;&nbsp;{{item.userName}}</div>
                   <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;{{item.roleId | phaseFilter}}</div>
-                  <div class="col-md-4 tentusername" uib-tooltip="{{item.userDescription}}"><span>用户描述</span>&nbsp;:&nbsp;{{item.userDescription}}</div>
-                  <div class="col-md-2" ng-if="!ismember&&item.userName!=='admin'"><a href="javascript:void(0);" ng-click="updataUser(item)">修改</a><a href="javascript:void(0);" ng-click="delUser(item.userId,item.userName)">删除</a></div>
+                  <div class="col-md-3 tentusername" uib-tooltip="{{item.userDescription}}"><span>用户描述</span>&nbsp;:&nbsp;{{item.userDescription}}</div>
+                  <div class="col-md-1">
+                    <a href="javascript:void(0);" ng-click="looklog(item.userName)">日志</a>
+                  </div>
+                  <div class="col-md-2" ng-if="!ismember&&item.userName!=='admin'">
+                    <a href="javascript:void(0);" ng-click="updataUser(item)">修改</a>
+                    <a href="javascript:void(0);" ng-click="delUser(item.userId,item.userName)">删除</a>
+                  </div>
 
                 </li>
               </ul>

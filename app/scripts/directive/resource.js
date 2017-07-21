@@ -104,6 +104,14 @@ angular.module('basic.resource', ['ngResource'])
     });
     return userole;
   }])
+  .factory('userinfo', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var userinfo = $resource(GLOBAL.host + '/user/name/:name/tenant/:id/assignments/info', {
+      name:'@name',
+      id:'@id'
+    }, {
+    });
+    return userinfo;
+  }])
   .factory('serveinfo', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
     var serveinfo = $resource(GLOBAL.host + '/tenant/:tenantId/service/instance/:serviceInstanceName/access/info', {tenantId:'@tenantId',serviceInstanceName:'@serviceInstanceName'}, {
     });
