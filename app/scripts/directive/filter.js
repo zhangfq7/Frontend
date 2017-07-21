@@ -14,4 +14,11 @@ angular.module('basic.filter', [])
         return phase || "-";
       }
     };
-  }]);
+  }])
+.filter('lowerCase', [function() {
+  return function(res) {
+
+    return res.toLowerCase()
+  }
+
+}]);

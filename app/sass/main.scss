@@ -593,6 +593,22 @@ table a{
   .ser_bg_btn{position:absolute;right:10px;top:10px;width:6px;height:6px;border:solid #a3a3a4;border-width:1px 1px 0 0;
     -webkit-transform:rotate(135deg);-moz-transform:rotate(135deg);transform:rotate(135deg);-webkit-transition:all 0.3s;-moz-transition:all 0.3s;transition:all 0.3s}
   .open .ser_bg_btn{-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);transform:rotate(-45deg);top:12px;}
+  .that-btn{
+    width:6px;height:6px;border:solid #a3a3a4;border-width:1px 1px 0 0;
+    -webkit-transform:rotate(135deg);-moz-transform:rotate(135deg);transform:rotate(135deg);-webkit-transition:all 0.3s;-moz-transition:all 0.3s;transition:all 0.3s
+  }
+  .ser-btn-wrop{
+    position:absolute;
+    right:10px;
+    top:0px;
+    cursor: pointer;
+    text-align: right;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+  }
+
 }
 .confirm-con{
   .con-wrop{
