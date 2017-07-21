@@ -172,15 +172,16 @@ angular.module('basic.services', ['ngResource'])
                 console.log('n', n);
               }
             })
-            $scope.xuanze= function (a,b,c,d) {
-              console.log(a, b, c, d);
+            $scope.xuanze = function (a, b, c, d) {
+              //console.log(a, b, c, d);
               $scope.newUser.name = b;
-            }
+              $scope.newUserId = a.id;
+            };
             // 选择用户
             $scope.changeUser = function (item, e) {
-              console.log('item.username', item);
+              //console.log('item.username', item);
               $scope.newUser.name = item;
-              $scope.newUserId = item.id;
+              $scope.newUserId = e;
             };
             // 选择角色
             $scope.changeRole = function (id) {
