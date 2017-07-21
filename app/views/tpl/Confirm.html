@@ -19,22 +19,39 @@
       <div class="confirm-select">
         <!--<div ng-if="isAdd" uib-dropdown on-toggle="toggled(open)">-->
         <div ng-if="isAdd" class="meunu-wrop">
-          <input type="text"
-                 style="border:none;height: 28px;"
-                 ng-model="newUser"
-                 uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"
-                 typeahead-on-select="changeUser($item,$event)"
-                 class="confirm-select select-title">
-          <!--<a href="javascript:void(0);" class="" uib-dropdown-toggle>-->
-            <!--<span class="select-title" title={{newUser}}>{{newUser}}</span>-->
-            <!--<b class="ser_bg_btn"></b>-->
-          <!--</a>-->
-          <!--<ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">-->
-            <!--<li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.username,item.id)">-->
-              <!--<a href="javascript:void(0);">-->
-                <!--<span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.username}}">{{item.username}}</span>-->
-              <!--</a></li>-->
-          <!--</ul>-->
+          <!--<input type="text" ng-model="selected"  uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}" -->
+                 <!--typeahead-no-results="noResults" class="form-control">-->
+          <!--<i class="glyphicon glyphicon-refresh"></i>-->
+          <div ng-show="noResults">
+            <i class="glyphicon glyphicon-remove"></i> No Results Found
+          </div>
+          <!--<input type="text"-->
+                 <!--style="border:none;height: 28px;"-->
+                 <!--ng-model="newUser"-->
+                 <!--uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"-->
+                 <!--typeahead-on-select="changeUser($item,$event)"-->
+                 <!--class="confirm-select select-title">-->
+          <div uib-dropdown on-toggle="toggled(open)">
+            <!--<a href="javascript:void(0);" class="" >-->
+              <input type="text"
+
+                     style="border:none;height: 28px;"
+                     ng-model="newUser.name"
+                     uib-typeahead="n.username as n.username for n in userList  | filter:{'username':$viewValue}"
+                     typeahead-on-select="xuanze($item, $model, $label, $event)"
+                     class="confirm-select select-title">
+              <!--<span class="select-title" title={{newUser}}>{{newUser}}</span>-->
+              <b class="ser_bg_btn" uib-dropdown-toggle></b>
+            <!--</a>-->
+            <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
+              <li class="zx_active" ng-repeat="item in userList" ng-click="changeUser(item.username,item.id)">
+                <a href="javascript:void(0);">
+                  <span class="drop_name_tit two_tab_ellipsis" ng-class="" title="{{item.username}}">{{item.username}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
 
         </div>
         <input class="update" ng-if="!isAdd" type="text" value={{newUser}} disabled="disabled"
