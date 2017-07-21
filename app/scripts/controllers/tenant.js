@@ -4,8 +4,8 @@
  * Controller of the dashboard
  */
 angular.module('basic')
-  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole', '$state','userinfo','infoconfirm',
-    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole, $state,userinfo,infoconfirm) {
+  .controller('TenantCtrl', ['$rootScope', '$scope', 'Confirm', 'newconfirm', 'tenant', 'delconfirm', 'tenantchild', 'tree', 'tenantuser', 'tenantbsi', 'bsidata', 'user', 'serveinfo', 'Alert', 'service', 'absi', 'Cookie', 'userole', '$state', 'userinfo', 'infoconfirm',
+    function ($rootScope, $scope, Confirm, newconfirm, tenant, delconfirm, tenantchild, tree, tenantuser, tenantbsi, bsidata, user, serveinfo, Alert, service, absi, Cookie, userole, $state, userinfo, infoconfirm) {
       //左边导航自动变化
       var left_by_block = function () {
         var thisheight = $(window).height() - 80;
@@ -13,8 +13,8 @@ angular.module('basic')
         //$('.tree-classic').css('overflow-y','auto');
         $('.tree-classic').css('min-height', thisheight);
       };
-      $scope.looklog= function (name) {
-        userinfo.query({name:name,id:Cookie.get('tenantId')}, function (res) {
+      $scope.looklog = function (name) {
+        userinfo.query({name: name, id: Cookie.get('tenantId')}, function (res) {
           console.log('resinfo', res);
           infoconfirm.open(res)
         })
@@ -277,7 +277,7 @@ angular.module('basic')
       /// 获取租户下子公司列表
       var gerTenantChild = function (id) {
         $scope.childrens = [];
-        tenantchild.query({name:Cookie.get("username"),id: id}, function (childrens) {
+        tenantchild.query({name: Cookie.get("username"), id: id}, function (childrens) {
           //console.log('child', childrens);
           $scope.childrens = childrens;
         });
@@ -327,9 +327,14 @@ angular.module('basic')
             })
             console.log('isout', isout);
             if (!isout) {
-              newconfirm.open(res.spec.provisioning.credentials,res.status.phase);
-            }else {
-              newconfirm.open(res.spec.binding[0].credentials,res.status.phase);
+              newconfirm.open(res.spec.provisioning.credentials, res.status.phase);
+            } else {
+              if (res.spec.binding) {
+                newconfirm.open(res.spec.binding[0].credentials, res.status.phase);
+              }else {
+                Alert.open('没有绑定！');
+              }
+
             }
 
           } else {
@@ -345,6 +350,11 @@ angular.module('basic')
             $scope.ismember = false;
           } else {
             $scope.ismember = true;
+          }
+          if (data.roleId) {
+            $scope.isrold = true;
+          } else {
+            $scope.isrold = false;
           }
           //console.log('data.roleId', data.roleId);
           //if (data.roleId) {
@@ -503,12 +513,12 @@ angular.module('basic')
 
             $scope.newServeArr[pIdx].servesList[idx].showused = sdata.items;
 
-            console.log('sdata', sdata);
+            //console.log('sdata', sdata);
             for (var i = 0; i < sdata.items.length; i++) {
               chartsFun(sdata.items[i], pIdx, idx);
             }
           }, function (err) {
-            console.log('sbsierr', err);
+            //console.log('sbsierr', err);
           });
 
 
@@ -554,7 +564,7 @@ angular.module('basic')
 
         } else {
           $scope.roleDemoList = roleDemoList.slice(2);
-          console.log('bbbbb');
+          //console.log('bbbbb');
           $scope.grid.showCompany = false;
           $scope.grid.showProject = false;
           $scope.grid.showChildnode = true;
