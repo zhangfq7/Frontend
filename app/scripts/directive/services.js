@@ -173,7 +173,7 @@ angular.module('basic.services', ['ngResource'])
     };
   }])
   .service('newconfirm', ['$uibModal', function ($uibModal) {
-    this.open = function (datacon) {
+    this.open = function (datacon,status) {
       return $uibModal.open({
         backdrop: 'static',
         templateUrl: 'views/tpl/newconfirm.html',
@@ -182,7 +182,7 @@ angular.module('basic.services', ['ngResource'])
 
 
           $scope.con = datacon;
-
+          $scope.status =status;
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
