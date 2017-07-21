@@ -70,8 +70,8 @@ angular.module('basic.services', ['ngResource'])
             config.headers.username = username;
           }
           if (config.headers) {
-            config.headers["http_x_proxy_cas_loginname"] = "admin";
-            config.headers["http_x_proxy_cas_username"] = "admin";
+            config.headers["http_x_proxy_cas_loginname"] = "222";
+            config.headers["http_x_proxy_cas_username"] = "222";
           }
           // if (config.headers) {
           //  config.headers["Authorization"] = "Bearer " + token;
@@ -410,9 +410,9 @@ angular.module('basic.services', ['ngResource'])
               window.setTimeout(closeConf,1500);
             },function(res){
               // console.log('111',res);
-              if(res.data.resCodel == 4002){
+              if(res.data.resCodel == 4001){
                 $scope.con = '该用户并非由您创建，您无权删除该用户!';
-              }else if(res.data.resCodel == 4001){
+              }else if(res.data.resCodel ==4002 ){
                 $scope.con = '该用户已被绑定角色，请解绑后再进行删除!';
               }else{
                 $scope.con = '删除失败!';
