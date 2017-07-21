@@ -92,7 +92,7 @@
                 </uib-pagination>
               </div>
             </li>
-            <li>
+            <li  ng-show="isrold">
               <div class="resource-wrop"  ng-repeat="(timeIndex,item) in newServeArr">
                 <div >
                   <div class="row resource-top">
@@ -122,7 +122,7 @@
                 </div>
               </div>
             </li>
-            <li>
+            <li ng-show="isrold">
               <div class="user-authorize" ng-if="!ismember"><span ng-click="userAuthorize()">用户授权</span></div>
               <ul class="tenant-serve-list">
                 <li class="row" ng-repeat="item in useritem">
