@@ -321,9 +321,9 @@ angular.module('basic')
             })
             console.log('isout', isout);
             if (!isout) {
-              newconfirm.open(res.spec.provisioning.credentials);
+              newconfirm.open(res.spec.provisioning.credentials,res.status.phase);
             }else {
-              newconfirm.open(res.spec.binding[0].credentials);
+              newconfirm.open(res.spec.binding[0].credentials,res.status.phase);
             }
 
           } else {
