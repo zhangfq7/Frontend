@@ -70,8 +70,8 @@ angular.module('basic.services', ['ngResource'])
             config.headers.username = username;
           }
           if (config.headers) {
-            config.headers["http_x_proxy_cas_loginname"] = "222";
-            config.headers["http_x_proxy_cas_username"] = "222";
+            config.headers["http_x_proxy_cas_loginname"] = "admin";
+            config.headers["http_x_proxy_cas_username"] = "admin";
           }
           // if (config.headers) {
           //  config.headers["Authorization"] = "Bearer " + token;
@@ -182,7 +182,10 @@ angular.module('basic.services', ['ngResource'])
 
 
           $scope.con = datacon;
-          $scope.status =status;
+          if (status) {
+            $scope.status =status;
+          }
+
           $scope.cancel = function () {
             $uibModalInstance.dismiss();
           };
@@ -192,7 +195,30 @@ angular.module('basic.services', ['ngResource'])
         }]
       }).result;
     };
-  }]).service('delconfirm', ['$uibModal', function ($uibModal) {
+  }])
+  .service('infoconfirm', ['$uibModal', function ($uibModal) {
+    this.open = function (datacon) {
+      return $uibModal.open({
+        backdrop: 'static',
+        templateUrl: 'views/tpl/infoconfirm.html',
+        size: 'default',
+        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
+
+
+          $scope.con = datacon;
+
+
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+          };
+          $scope.ok = function () {
+            $uibModalInstance.close(true);
+          };
+        }]
+      }).result;
+    };
+  }])
+  .service('delconfirm', ['$uibModal', function ($uibModal) {
   this.open = function (title, roleId, userId,username) {
     return $uibModal.open({
       backdrop: 'static',
