@@ -54,7 +54,7 @@
 
 
         </div>
-        <input class="update" ng-if="!isAdd" type="text" value={{newUser}} disabled="disabled"
+        <input class="update" ng-if="!isAdd" type="text" value={{newUser.name}} disabled="disabled"
           style="width: 100%;border: none;height: 28px;padding-left:9px;line-height: 28px;background:#eaeaea;cursor: not-allowed;"
         />
       </div>
@@ -64,7 +64,7 @@
       <div class="confirm-select">
         <div uib-dropdown on-toggle="toggled(open)">
           <a href="javascript:void(0);" class="" uib-dropdown-toggle>
-            <span class="select-title" title={{newRole|| roleList[0] | phaseFilter}}>{{newRole || roleList[0] | phaseFilter}}</span>
+            <span class="select-title" title={{newRole||roleList[0]|phaseFilter}}>{{newRole || roleList[0] | phaseFilter}}</span>
             <b class="ser_bg_btn"></b>
           </a>
           <ul class="service_drop service_drop_gj" uib-dropdown-menu aria-labelledby="user-menu">
