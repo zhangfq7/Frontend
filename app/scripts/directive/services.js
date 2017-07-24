@@ -120,6 +120,7 @@ angular.module('basic.services', ['ngResource'])
             $scope.userList = userList;
             $scope.roleList = roleList;
             $scope.newUser={}
+            //console.log(userList, roleList, nameobj);
             $scope.newUser.name = nameobj.oldUser;
             $scope.newRole = nameobj.oldRole;
             $scope.newUserId = nameobj.oldUserId;
