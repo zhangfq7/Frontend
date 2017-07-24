@@ -38,6 +38,7 @@ angular.module('basic')
       $scope.treeOptions = {
         nodeChildren: "children",
         dirSelectable: true,
+        allowDeselect:false,
         injectClasses: {
           ul: "a1",
           li: "a2",
