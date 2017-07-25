@@ -37,7 +37,7 @@ angular.module('basic')
         auto: null,
         page: 1,
         txt:'',
-        size: 20,
+        size: 24,
       };
       $scope.usersearch = function () {
 
