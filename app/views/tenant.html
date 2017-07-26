@@ -68,7 +68,7 @@
                   <div class="col-md-1 lscn"><img src="./images/serviceimg/{{bsi.serviceTypeName | lowerCase}}.png" onerror="javascript:this.src='./images/serviceimg/default.png'" alt=""></div>
                   <div class="col-md-3 lscn" uib-tooltip="{{bsi.instanceName}}"><span>服务名</span>&nbsp;&nbsp;{{bsi.instanceName}}</div>
                   <!--<div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>-->
-                  <div class="col-md-6 lscn" style="line-height: 14px;margin-top:12px;color: #999;overflow: hidden;text-overflow:ellipsis;">
+                  <div class="col-md-6" style="line-height: 17px;margin-top:12px;color: #999;overflow: hidden;text-overflow:ellipsis;">
                     <p>instance_id&nbsp;:&nbsp;{{bsi.instance_id}}</p>
                     <label ng-repeat="(key,val) in bsi.quota">{{key+'&nbsp;:&nbsp;'+val}}&nbsp;&nbsp;</label>
                   </div>
