@@ -38,7 +38,7 @@ angular.module('basic')
       $scope.treeOptions = {
         nodeChildren: "children",
         dirSelectable: true,
-        allowDeselect:false,
+        allowDeselect: false,
         injectClasses: {
           ul: "a1",
           li: "a2",
@@ -328,11 +328,27 @@ angular.module('basic')
             })
             console.log('isout', isout);
             if (!isout) {
+
               newconfirm.open(res.spec.provisioning.credentials, res.status.phase);
             } else {
               if (res.spec.binding) {
-                newconfirm.open(res.spec.binding[0].credentials, res.status.phase);
-              }else {
+                if ($scope.isroleId&&res.spec.binding.length>0) {
+                  if ($scope.isroleId === 'a13dd087-524a-11e7-9dbb-fa163ed7d0ae'||$scope.isroleId === 'a12a84d0-524a-11e7-9dbb-fa163ed7d0ae') {
+                    angular.forEach(res.spec.binding, function (item,i) {
+                      console.log(item.bind_hadoop_user);
+                      if (item.bind_hadoop_user === Cookie.get("username")) {
+                        newconfirm.open(res.spec.binding[i].credentials, res.status.phase);
+                      }
+
+                    })
+                  }else if($scope.isroleId === 'a1149421-524a-11e7-9dbb-fa163ed7d0ae'||$scope.isroleId === 'a10170cb-524a-11e7-9dbb-fa163ed7d0ae') {
+                    newconfirm.open(res.spec.binding[0].credentials, res.status.phase);
+                  }
+
+
+                }
+
+              } else {
                 Alert.open('没有绑定！');
               }
 
@@ -352,7 +368,9 @@ angular.module('basic')
           } else {
             $scope.ismember = true;
           }
+
           if (data.roleId) {
+            $scope.isroleId = data.roleId
             $scope.isrold = true;
           } else {
             $scope.isrold = false;
