@@ -4,12 +4,12 @@
   <table style="width: 100%;height: 100%;">
     <tr>
       <td class="leftBox" style="width: 20%;background: #ebebe9;vertical-align:top;">
-        <div  treecontrol class="tree-classic"
-              tree-model="dataForTheTree"
-              options="treeOptions"
-              on-selection="showSelected(node)"
-              selected-node="selected"
-              style="margin-top:-2px;">
+        <div treecontrol class="tree-classic"
+             tree-model="dataForTheTree"
+             options="treeOptions"
+             on-selection="showSelected(node)"
+             selected-node="selected"
+             style="margin-top:-2px;">
           {{node.name}}
         </div>
       </td>
@@ -17,11 +17,11 @@
         <div class="" style="margin:0;padding:0;margin-top:-2px;">
           <div class="right-top">{{grid.roleTitle}}</div>
           <ul class="right-nav">
-            <li  class="active" ng-show="grid.showCompany" ng-click="changeCon()"><span>子公司列表</span></li>
+            <li class="active" ng-show="grid.showCompany" ng-click="changeCon()"><span>子公司列表</span></li>
             <li ng-show="grid.showProject" ng-click="changeCon()"><span>项目列表</span></li>
             <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>基本信息</span></li>
             <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>服务列表</span></li>
-            <li ng-click="changeCon()"><span>资源报告</span></li>
+            <!--<li ng-click="changeCon()"><span>资源报告</span></li>-->
             <li ng-click="changeCon()"><span>用户列表</span></li>
           </ul>
           <ol class="right-content">
@@ -37,7 +37,7 @@
             </li>
             <li>
               <div class="row project-list">
-                <div class="col-md-3"  ng-repeat="child in childrens">
+                <div class="col-md-3" ng-repeat="child in childrens">
                   <div>
                     <img src="./images/role_company.png" alt="">
                     <p>{{child.name}}</p>
@@ -65,15 +65,21 @@
             <li>
               <ul class="tenant-serve-list">
                 <li class="row" ng-repeat="bsi in bsisitem">
-                  <div class="col-md-1 lscn"><img src="./images/serviceimg/{{bsi.serviceTypeName | lowerCase}}.png" onerror="javascript:this.src='./images/serviceimg/default.png'" alt=""></div>
-                  <div class="col-md-3 lscn" uib-tooltip="{{bsi.instanceName}}"><span>服务名</span>&nbsp;&nbsp;{{bsi.instanceName}}</div>
+                  <div class="col-md-1 lscn"><img src="./images/serviceimg/{{bsi.serviceTypeName | lowerCase}}.png"
+                                                  onerror="javascript:this.src='./images/serviceimg/default.png'"
+                                                  alt=""></div>
+                  <div class="col-md-3 lscn" uib-tooltip="{{bsi.instanceName}}"><span>服务名</span>&nbsp;&nbsp;{{bsi.instanceName}}
+                  </div>
                   <!--<div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>-->
-                  <div class="col-md-6 lscn" style="line-height: 14px;margin-top:12px;color: #999;overflow: hidden;text-overflow:ellipsis;">
+                  <div class="col-md-6 lscn"
+                       style="line-height: 14px;margin-top:12px;color: #999;overflow: hidden;text-overflow:ellipsis;">
                     <p>instance_id&nbsp;:&nbsp;{{bsi.instance_id}}</p>
                     <label ng-repeat="(key,val) in bsi.quota">{{key+'&nbsp;:&nbsp;'+val}}&nbsp;&nbsp;</label>
                   </div>
                   <!--<div class="col-md-2">{{}}</div>-->
-                  <div class="col-md-2 lscn" style="text-align: right"><a style="margin-right: 15px;" ng-click="checkInfo(bsi.tenantId,bsi.instanceName)" href="javascript:void(0);">访问信息</a></div>
+                  <div class="col-md-2 lscn" style="text-align: right"><a style="margin-right: 15px;"
+                                                                          ng-click="checkInfo(bsi.tenantId,bsi.instanceName)"
+                                                                          href="javascript:void(0);">访问信息</a></div>
                 </li>
               </ul>
               <div class="page-style" ng-if="grid.bsitotal>10">
@@ -92,44 +98,56 @@
                 </uib-pagination>
               </div>
             </li>
-            <li  ng-show="isrold">
-              <div class="resource-wrop"  ng-repeat="(timeIndex,item) in newServeArr">
-                <div >
-                  <div class="row resource-top">
-                    <div class="col-md-10" style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">{{item.serviceTypeName}}</div>
-                    <div class="col-md-2" style="text-align: right;font-size: 16px;"><sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}" ng-click="toggleServe($index)"></sapn></div>
-                  </div>
-                  <div class="resource-list" ng-repeat="arr in item.servesList" ng-if="item.isshow">
-                    <div>
-                      <div class="row resource-top" style="padding:20px;">
-                        <div class="col-md-10" style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
-                          {{arr.instanceName}}</div>
-                        <div class="col-md-2" style="text-align: right;font-size: 16px;">
-                          <sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}" ng-click="toggleServeList(timeIndex,$index,arr)">
+            <!--<li ng-show="isrold">-->
+              <!--<div class="resource-wrop" ng-repeat="(timeIndex,item) in newServeArr">-->
+                <!--<div>-->
+                  <!--<div class="row resource-top">-->
+                    <!--<div class="col-md-10"-->
+                         <!--style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">-->
+                      <!--{{item.serviceTypeName}}-->
+                    <!--</div>-->
+                    <!--<div class="col-md-2" style="text-align: right;font-size: 16px;">-->
+                      <!--<sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}"-->
+                            <!--ng-click="toggleServe($index)"></sapn>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="resource-list" ng-repeat="arr in item.servesList" ng-if="item.isshow">-->
+                    <!--<div>-->
+                      <!--<div class="row resource-top" style="padding:20px;">-->
+                        <!--<div class="col-md-10"-->
+                             <!--style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">-->
+                          <!--{{arr.instanceName}}-->
+                        <!--</div>-->
+                        <!--<div class="col-md-2" style="text-align: right;font-size: 16px;">-->
+                          <!--<sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}"-->
+                                <!--ng-click="toggleServeList(timeIndex,$index,arr)">-->
 
-                          </sapn></div>
-                      </div>
-                      <div class="list-con" ng-show="arr.isshow">
-                        <div class="row tenant_main">
-                          <div class="col-md-3 tenant_block" ng-repeat="used in  arr.showused">
-                            <div class="used">{{used.used}}</div>
-                            <div class="chart-title">{{used.name}}</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
+                          <!--</sapn>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="list-con" ng-show="arr.isshow">-->
+                        <!--<div class="row tenant_main">-->
+                          <!--<div class="col-md-3 tenant_block" ng-repeat="used in  arr.showused">-->
+                            <!--<div class="used">{{used.used}}</div>-->
+                            <!--<div class="chart-title">{{used.name}}</div>-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</li>-->
             <li ng-show="isrold">
               <div class="user-authorize" ng-if="!ismember"><span ng-click="userAuthorize()">用户授权</span></div>
               <ul class="tenant-serve-list">
                 <li class="row" ng-repeat="item in useritem">
                   <div class="col-md-1"><img src="./images/user-listicon.png" alt=""></div>
-                  <div class="col-md-2 tentusername" uib-tooltip="{{item.userName}}"><span>用户名</span>&nbsp;&nbsp;{{item.userName}}</div>
+                  <div class="col-md-2 tentusername" uib-tooltip="{{item.userName}}"><span>用户名</span>&nbsp;&nbsp;{{item.userName}}
+                  </div>
                   <div class="col-md-3"><span>用户角色</span>&nbsp;&nbsp;{{item.roleId | phaseFilter}}</div>
-                  <div class="col-md-3 tentusername" uib-tooltip="{{item.userDescription}}"><span>用户描述</span>&nbsp;:&nbsp;{{item.userDescription}}</div>
+                  <div class="col-md-3 tentusername" uib-tooltip="{{item.userDescription}}"><span>用户描述</span>&nbsp;:&nbsp;{{item.userDescription}}
+                  </div>
 
                   <div class="col-md-3" ng-if="!ismember&&item.userName!=='admin'">
                     <a href="javascript:void(0);" ng-click="looklog(item.userName)">日志</a>
@@ -160,8 +178,6 @@
       </td>
     </tr>
   </table>
-
-
 
 
 </div>
