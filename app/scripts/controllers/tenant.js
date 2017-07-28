@@ -420,6 +420,8 @@ angular.module('basic')
               gettenantuser($scope.nodeId)
             }
           );
+        }else {
+          Alert.open('所有用户已授权！');
         }
 
       };

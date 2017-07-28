@@ -21,7 +21,7 @@
             <li ng-show="grid.showProject" ng-click="changeCon()"><span>项目列表</span></li>
             <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>基本信息</span></li>
             <li ng-show="grid.showChildnode" ng-click="changeCon()"><span>服务列表</span></li>
-            <!--<li ng-click="changeCon()"><span>资源报告</span></li>-->
+            <li ng-click="changeCon()"><span>资源报告</span></li>
             <li ng-click="changeCon()"><span>用户列表</span></li>
           </ul>
           <ol class="right-content">
@@ -97,46 +97,46 @@
                 </uib-pagination>
               </div>
             </li>
-            <!--<li ng-show="isrold">-->
-              <!--<div class="resource-wrop" ng-repeat="(timeIndex,item) in newServeArr">-->
-                <!--<div>-->
-                  <!--<div class="row resource-top">-->
-                    <!--<div class="col-md-10"-->
-                         <!--style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">-->
-                      <!--{{item.serviceTypeName}}-->
-                    <!--</div>-->
-                    <!--<div class="col-md-2" style="text-align: right;font-size: 16px;">-->
-                      <!--<sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}"-->
-                            <!--ng-click="toggleServe($index)"></sapn>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--<div class="resource-list" ng-repeat="arr in item.servesList" ng-if="item.isshow">-->
-                    <!--<div>-->
-                      <!--<div class="row resource-top" style="padding:20px;">-->
-                        <!--<div class="col-md-10"-->
-                             <!--style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">-->
-                          <!--{{arr.instanceName}}-->
-                        <!--</div>-->
-                        <!--<div class="col-md-2" style="text-align: right;font-size: 16px;">-->
-                          <!--<sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}"-->
-                                <!--ng-click="toggleServeList(timeIndex,$index,arr)">-->
+            <li ng-show="isrold">
+              <div class="resource-wrop" ng-repeat="(timeIndex,item) in newServeArr">
+                <div>
+                  <div class="row resource-top">
+                    <div class="col-md-10"
+                         style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
+                      {{item.serviceTypeName}}
+                    </div>
+                    <div class="col-md-2" style="text-align: right;font-size: 16px;">
+                      <sapn ng-class="{'rotate':!item.isshow, 'check-btn': item.isshow}"
+                            ng-click="toggleServe($index)"></sapn>
+                    </div>
+                  </div>
+                  <div class="resource-list" ng-repeat="arr in item.servesList" ng-if="item.isshow">
+                    <div>
+                      <div class="row resource-top" style="padding:20px;">
+                        <div class="col-md-10"
+                             style="text-align: left;font-size: 16px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
+                          {{arr.instanceName}}
+                        </div>
+                        <div class="col-md-2" style="text-align: right;font-size: 16px;">
+                          <sapn ng-class="{'rotate':!arr.isshow, 'check-btn': arr.isshow}"
+                                ng-click="toggleServeList(timeIndex,$index,arr)">
 
-                          <!--</sapn>-->
-                        <!--</div>-->
-                      <!--</div>-->
-                      <!--<div class="list-con" ng-show="arr.isshow">-->
-                        <!--<div class="row tenant_main">-->
-                          <!--<div class="col-md-3 tenant_block" ng-repeat="used in  arr.showused">-->
-                            <!--<div class="used">{{used.used}}</div>-->
-                            <!--<div class="chart-title">{{used.name}}</div>-->
-                          <!--</div>-->
-                        <!--</div>-->
-                      <!--</div>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</li>-->
+                          </sapn>
+                        </div>
+                      </div>
+                      <div class="list-con" ng-show="arr.isshow">
+                        <div class="row tenant_main">
+                          <div class="col-md-3 tenant_block" ng-repeat="used in  arr.showused">
+                            <div class="used">{{used.used}}</div>
+                            <div class="chart-title">{{used.name}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
             <li ng-show="isrold">
               <div class="user-authorize" ng-if="!ismember"><span ng-click="userAuthorize()">用户授权</span></div>
               <ul class="tenant-serve-list">
