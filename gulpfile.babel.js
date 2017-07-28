@@ -79,7 +79,7 @@ gulp.task('start:client', ['start:server'], function () {
   openURL("http://localhost:9000","chrome");
 });
 
-gulp.task('start:server', ['styles', 'es6:frontend', 'es6:server', 'bower','build'], function(cb) {
+gulp.task('start:server', ['styles', 'es6:frontend', 'es6:server', 'bower'], function(cb) {
   let started = false;
   return $.nodemon({
     script: 'build-server/app.js',
