@@ -32,6 +32,12 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li>
+              <a ng-click="download()"  target="_self">
+                <!--<span class="glyphicon glyphicon-picture"></span>-->
+                <span>下载keytab文件</span>
+              </a>
+            </li>
+            <li>
               <a ng-class="{true:'active'}[tab === 'console.tenant']" ui-sref="console.tenant">
                 <!--<span class="glyphicon glyphicon-picture"></span>-->
                 <span>租户管理</span>

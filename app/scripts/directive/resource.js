@@ -116,6 +116,11 @@ angular.module('basic.resource', ['ngResource'])
     var serveinfo = $resource(GLOBAL.host + '/tenant/:tenantId/service/instance/:serviceInstanceName/access/info', {tenantId:'@tenantId',serviceInstanceName:'@serviceInstanceName'}, {
     });
     return serveinfo;
+  }])
+  .factory('downloadkeytab', ['$resource', 'GLOBAL', function ($resource, GLOBAL) {
+    var downloadkeytab = $resource(GLOBAL.host + '/kerberos/getkeytab/:tenantId/:username', {tenantId:'@tenantId',username:'@username'}, {
+    });
+    return downloadkeytab;
   }]);
 
 
