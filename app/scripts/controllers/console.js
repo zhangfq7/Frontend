@@ -4,13 +4,26 @@
  * Main Controller
  */
 angular.module('basic')
-  .controller('ConsoleCtrl',['$rootScope', '$scope','sso','colsso','Cookie',
-    function ($rootScope, $scope,sso,colsso,Cookie) {
+  .controller('ConsoleCtrl',['$rootScope', '$scope','sso','colsso','Cookie','downloadkeytab','Alert',
+    function ($rootScope, $scope,sso,colsso,Cookie,downloadkeytab,Alert) {
     //$rootScope.tab = "service";
     //console.log('homesso', colsso);
     Cookie.set('username', colsso['http_x_proxy_cas_loginname'],  24 * 3600 * 1000);
     $scope.loginname = colsso['http_x_proxy_cas_loginname'];
     $rootScope.isadmin = colsso.admin;
+    $scope.download = function () {
+      downloadkeytab.get({tenantId:Cookie.get('tenantId'),username:Cookie.get('username')},function (data) {
+        if(data.message){
+          Alert.open(data.message)
+        }else{
+          location.href=data;
+        }
+
+      },function(data){
+
+        }
+      )
+    }
     //sso.get(function (data) {
     //  if (data['http_x_proxy_cas_loginname']) {
     //    $scope.loginname=data['http_x_proxy_cas_loginname']
