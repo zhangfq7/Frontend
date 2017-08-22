@@ -12,20 +12,21 @@ angular.module('basic')
     $scope.loginname = colsso['http_x_proxy_cas_loginname'];
     $rootScope.isadmin = colsso.admin;
     $scope.download = function () {
-      var durl =location.origin+'/ocmanager/v1/api/kerberos/getkeytab/'+Cookie.get('tenantId') +'/'+Cookie.get('username');
-      console.log('url', durl);
-      location.href=durl
-      // downloadkeytab.get({tenantId:Cookie.get('tenantId'),username:Cookie.get('username')},function (data) {
-      //   if(data.message){
-      //     Alert.open(data.message)
-      //   }else{
-      //     location.href=data;
-      //   }
-      //
-      // },function(data){
-      //
-      //   }
-      // )
+
+       downloadkeytab.get({tenantId:Cookie.get('tenantId'),username:Cookie.get('username')},function (data) {
+         if(data&&data.message){
+           Alert.open(data.message)
+         }else{
+           var durl =location.origin+'/ocmanager/v1/api/kerberos/getkeytab/'+Cookie.get('tenantId') +'/'+Cookie.get('username');
+           //console.log('url', durl);
+           location.href=durl;
+           //location.href=data;
+         }
+
+       },function(data){
+
+         }
+       )
     }
     //sso.get(function (data) {
     //  if (data['http_x_proxy_cas_loginname']) {
