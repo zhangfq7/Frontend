@@ -15,8 +15,14 @@ angular.module('basic')
       downloadkeytab.get({tenantId:Cookie.get('tenantId'),username:Cookie.get('username')},function (data) {
           console.log(data);
           if(data&&data.code==200){
-            var durl =location.origin+'/ocmanager/v1/api/kerberos/getFile/'+Cookie.get('tenantId') +'/'+Cookie.get('username');
+            if (location.pathname) {
+              var path = location.pathname
+            }else {
+              var path = ''
+            }
+            var durl =location.origin+path+'/ocmanager/v1/api/kerberos/getFile/'+Cookie.get('tenantId') +'/'+Cookie.get('username');
             console.log('durl', durl);
+            console.log('location', location);
             location.href=durl;
 
          }else{
