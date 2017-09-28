@@ -210,6 +210,7 @@ $smbg: #c256fc !default;
           .tentusername{
             overflow: hidden;
             text-overflow:ellipsis;
+            word-break: break-all;
           }
           a {
             padding: 5px 15px;
