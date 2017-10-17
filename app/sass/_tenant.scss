@@ -211,6 +211,7 @@ $smbg: #c256fc !default;
             overflow: hidden;
             text-overflow:ellipsis;
             word-break: break-all;
+            white-space: nowrap;
           }
           a {
             padding: 5px 15px;
