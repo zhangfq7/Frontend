@@ -20,5 +20,17 @@ angular.module('basic.filter', [])
 
     return res.toLowerCase()
   }
-
+}])
+.filter('filterkey', [function() {
+  return function(res) {
+    var arr=["yarnQueueQuota","volumeSize","partitionSize","topicQuota","storageSpaceQuota","nameSpaceQuota","maximumRegionsQuota","maximumTablesQuota"];
+    var obj={};
+    for(var key in res){
+      if(arr.contains(key)){
+        obj[key]=res[key];
+      }
+    }
+    return obj
+  }
 }]);
+

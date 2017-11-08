@@ -73,7 +73,7 @@
                   <!--<div class="col-md-3"><span>用户容量</span>&nbsp;&nbsp;路径&nbsp;:&nbsp;/usr/zhongxin/balbala;</div>-->
                   <div class="col-md-6" style="line-height: 17px;margin-top:12px;color: #999;overflow: hidden;text-overflow:ellipsis;">
                     <p>instance_id&nbsp;:&nbsp;{{bsi.instance_id}}</p>
-                    <label ng-repeat="(key,val) in bsi.quota" ng-show="key!='is_auto_renewal'">{{key+'&nbsp;:&nbsp;'+val}}&nbsp;&nbsp;</label>
+                    <label ng-repeat="(key,val) in bsi.quota | filterkey" ng-show="key!='is_auto_renewal'">{{key+'&nbsp;:&nbsp;'+val}}&nbsp;&nbsp;</label>
                   </div>
                   <!--<div class="col-md-2">{{}}</div>-->
                   <div class="col-md-2 lscn" style="text-align: right"><a style="margin-right: 15px;"
