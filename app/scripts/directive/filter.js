@@ -26,8 +26,10 @@ angular.module('basic.filter', [])
     var arr=["yarnQueueQuota","volumeSize","partitionSize","topicQuota","storageSpaceQuota","nameSpaceQuota","maximumRegionsQuota","maximumTablesQuota"];
     var obj={};
     for(var key in res){
-      if(arr.contains(key)){
-        obj[key]=res[key];
+      for(var i = 0; i < arr.length; i++){
+        if(key === arr[i]){
+          obj[key]=res[key];
+        }
       }
     }
     return obj
