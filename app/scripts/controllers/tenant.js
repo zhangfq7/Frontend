@@ -337,12 +337,13 @@ angular.module('basic')
                     angular.forEach(res.spec.binding, function (item,i) {
                       console.log(item.bind_hadoop_user);
                       if (item.bind_hadoop_user === Cookie.get("username")) {
-                          var cre = res.spec.binding[i].credentials;
-                          for(var j=0;j<cre.length;j++){
-                            if(!cre[j]==="YARN Queue"){
-                              newconfirm.open(cre[j], res.status.phase);
+                        var obj={};
+                          angular.forEach(res.spec.binding[i].credentials[j],function (item,j) {
+                            if(!j === "YARN Queue"){
+                              obj[j]=res[j];
                             }
-                          }
+                          })
+                        newconfirm.open(obj, res.status.phase);
                         // newconfirm.open(res.spec.binding[i].credentials, res.status.phase);
                       }
                     })
