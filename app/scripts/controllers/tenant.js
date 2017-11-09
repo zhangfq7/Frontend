@@ -337,9 +337,13 @@ angular.module('basic')
                     angular.forEach(res.spec.binding, function (item,i) {
                       console.log(item.bind_hadoop_user);
                       if (item.bind_hadoop_user === Cookie.get("username")) {
-                        newconfirm.open(res.spec.binding[i].credentials, res.status.phase);
+                        for(var key in res.spec.binding[i].credentials){
+                          if(!key === "YARN Queue"){
+                            newconfirm.open(res.spec.binding[i].credentials, res.status.phase);
+                          }
+                        }
+                        // newconfirm.open(res.spec.binding[i].credentials, res.status.phase);
                       }
-
                     })
                   }else if($scope.isroleId === 'a1149421-524a-11e7-9dbb-fa163ed7d0ae'||$scope.isroleId === 'a10170cb-524a-11e7-9dbb-fa163ed7d0ae') {
                     newconfirm.open(res.spec.binding[0].credentials, res.status.phase);
